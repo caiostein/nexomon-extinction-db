@@ -1,0 +1,330 @@
+{
+    "Name": "#005 – Sulphlo",
+    "Sprites": {
+        "Regular": "https://static.wikia.nocookie.net/nexomon/images/2/2c/Sulphlo.png/revision/latest/scale-to-width-down/350?cb=20200905225632",
+        "Cosmic": "https://static.wikia.nocookie.net/nexomon/images/a/ad/Sulphlo_Cosmic.png/revision/latest/scale-to-width-down/350?cb=20240809230502"
+    },
+    "Element": "FireFire",
+    "Rarity": "Common",
+    "Stats": {
+        "HP": "25",
+        "Stamina": "8",
+        "Attack": "20",
+        "Defense": "17",
+        "Speed": "9"
+    },
+    "BST": "79",
+    "Loved Food": [
+        "Taco",
+        "Canele",
+        "Pincho"
+    ],
+    "Locations": [
+        {
+            "Region": {
+                "text": "New Ignitia",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/9/99/New_IgnitiaWarp.png/revision/latest/scale-to-width-down/200?cb=20240326012857"
+            },
+            "Maps": "Ignitia Tyrant Bones, Ignitia Southeastern Entrance, Ignitia Southern Cave Outside, Ignitia Drill Vehicle Northwest, Ignitia Drill Vehicle Southwest, Ignitia Frozen Lava South, Ignitia Frozen Lava, Ignitia Fona's Tomb, Ignitia Lone House."
+        }
+    ],
+    "Evolution": [
+        {
+            "Kolphur": {
+                "text": "Base",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/4/48/Kolphur.png/revision/latest/scale-to-width-down/120?cb=20200905224747"
+            },
+            "Sulphlo": {
+                "text": "Level 14",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/2/2c/Sulphlo.png/revision/latest/scale-to-width-down/120?cb=20200905225632"
+            },
+            "Moltano": {
+                "text": "Level 33",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/3/32/Moltano.png/revision/latest/scale-to-width-down/120?cb=20200905225951"
+            }
+        }
+    ],
+    "Skill Tree": [
+        {
+            "Level": "1",
+            "Skill": {
+                "text": "Flame",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/9/9b/Flame_EX_SkillIcon.png/revision/latest/scale-to-width-down/50?cb=20240806172254"
+            },
+            "Type": {
+                "text": "Fire Type",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/c/c2/Fire_Type_Icon.png/revision/latest/scale-to-width-down/24?cb=20231115152738"
+            },
+            "Power": "50",
+            "Acc": "90%",
+            "STA": "5",
+            "Speed": "54",
+            "Crit %": "15%",
+            "Effect": "-"
+        },
+        {
+            "Level": "8",
+            "Skill": {
+                "text": "Flame Column",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/1/15/Flame_Column_EX_SkillIcon.png/revision/latest/scale-to-width-down/50?cb=20240806172341"
+            },
+            "Type": {
+                "text": "Fire Type",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/c/c2/Fire_Type_Icon.png/revision/latest/scale-to-width-down/24?cb=20231115152738"
+            },
+            "Power": "55",
+            "Acc": "85%",
+            "STA": "10",
+            "Speed": "13",
+            "Crit %": "15%",
+            "Effect": {
+                "text": "Bind (Status)",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/7/7d/Bind_Status_Icon.png/revision/latest/scale-to-width-down/23?cb=20231202202419"
+            }
+        },
+        {
+            "Level": "9",
+            "Skill": {
+                "text": "Combustion",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/1/1e/Combustion_EX_SkillIcon.png/revision/latest/scale-to-width-down/50?cb=20240806172756"
+            },
+            "Type": {
+                "text": "Fire Type",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/c/c2/Fire_Type_Icon.png/revision/latest/scale-to-width-down/24?cb=20231115152738"
+            },
+            "Power": "0",
+            "Acc": "100%",
+            "STA": "10",
+            "Speed": "89",
+            "Crit %": "0%",
+            "Effect": "-"
+        },
+        {
+            "Level": "14",
+            "Skill": {
+                "text": "Blaze",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/4/46/Blaze_EX_SkillIcon.png/revision/latest/scale-to-width-down/50?cb=20231213223325"
+            },
+            "Type": {
+                "text": "Fire Type",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/c/c2/Fire_Type_Icon.png/revision/latest/scale-to-width-down/24?cb=20231115152738"
+            },
+            "Power": "80",
+            "Acc": "75%",
+            "STA": "10",
+            "Speed": "52",
+            "Crit %": "20%",
+            "Effect": "-"
+        },
+        {
+            "Level": "20",
+            "Skill": {
+                "text": "Pyro Bomb",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/4/4e/Pyro_Bomb_EX_SkillIcon.png/revision/latest/scale-to-width-down/50?cb=20231220030525"
+            },
+            "Type": {
+                "text": "Fire Type",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/c/c2/Fire_Type_Icon.png/revision/latest/scale-to-width-down/24?cb=20231115152738"
+            },
+            "Power": "35",
+            "Acc": "90%",
+            "STA": "10",
+            "Speed": "17",
+            "Crit %": "10%",
+            "Effect": "-"
+        },
+        {
+            "Level": "24",
+            "Skill": {
+                "text": "Fire Cage",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/2/29/Fire_Cage_EX_SkillIcon.png/revision/latest/scale-to-width-down/50?cb=20231221075320"
+            },
+            "Type": {
+                "text": "Fire Type",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/c/c2/Fire_Type_Icon.png/revision/latest/scale-to-width-down/24?cb=20231115152738"
+            },
+            "Power": "0",
+            "Acc": "100%",
+            "STA": "10",
+            "Speed": "59",
+            "Crit %": "0%",
+            "Effect": {
+                "text": "Bind (Status)",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/7/7d/Bind_Status_Icon.png/revision/latest/scale-to-width-down/23?cb=20231202202419"
+            }
+        },
+        {
+            "Level": "25",
+            "Skill": {
+                "text": "X Slash",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/7/7f/X_Slash_EX_SkillIcon.png/revision/latest/scale-to-width-down/50?cb=20240806165832"
+            },
+            "Type": {
+                "text": "Normal Type",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/e/e7/Normal_Type_Icon.png/revision/latest/scale-to-width-down/24?cb=20231115152653"
+            },
+            "Power": "40",
+            "Acc": "95%",
+            "STA": "5",
+            "Speed": "71",
+            "Crit %": "5%",
+            "Effect": "-"
+        },
+        {
+            "Level": "32",
+            "Skill": {
+                "text": "Palm Flurry",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/a/af/Palm_Flurry_EX_SkillIcon.png/revision/latest/scale-to-width-down/50?cb=20240806165927"
+            },
+            "Type": {
+                "text": "Normal Type",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/e/e7/Normal_Type_Icon.png/revision/latest/scale-to-width-down/24?cb=20231115152653"
+            },
+            "Power": "115",
+            "Acc": "80%",
+            "STA": "20",
+            "Speed": "19",
+            "Crit %": "15%",
+            "Effect": "-"
+        },
+        {
+            "Level": "35",
+            "Skill": {
+                "text": "Incinerate",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/6/6b/Incinerate_EX_SkillIcon.png/revision/latest/scale-to-width-down/50?cb=20231213222203"
+            },
+            "Type": {
+                "text": "Fire Type",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/c/c2/Fire_Type_Icon.png/revision/latest/scale-to-width-down/24?cb=20231115152738"
+            },
+            "Power": "120",
+            "Acc": "95%",
+            "STA": "20",
+            "Speed": "25",
+            "Crit %": "5%",
+            "Effect": {
+                "text": "Burn (Status)",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/e/e7/Burn_Status_Icon.png/revision/latest/scale-to-width-down/19?cb=20231202202436"
+            }
+        },
+        {
+            "Level": "38",
+            "Skill": {
+                "text": "Heal",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/2/20/Heal_EX_SkillIcon.png/revision/latest/scale-to-width-down/50?cb=20231202021044"
+            },
+            "Type": {
+                "text": "Normal Type",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/e/e7/Normal_Type_Icon.png/revision/latest/scale-to-width-down/24?cb=20231115152653"
+            },
+            "Power": "0",
+            "Acc": "100%",
+            "STA": "25",
+            "Speed": "100",
+            "Crit %": "0%",
+            "Effect": "-"
+        },
+        {
+            "Level": "44",
+            "Skill": {
+                "text": "Super Punch",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/4/46/Super_Punch_EX_SkillIcon.png/revision/latest/scale-to-width-down/50?cb=20240806164620"
+            },
+            "Type": {
+                "text": "Normal Type",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/e/e7/Normal_Type_Icon.png/revision/latest/scale-to-width-down/24?cb=20231115152653"
+            },
+            "Power": "90",
+            "Acc": "85%",
+            "STA": "10",
+            "Speed": "40",
+            "Crit %": "10%",
+            "Effect": "-"
+        },
+        {
+            "Level": "45",
+            "Skill": {
+                "text": "Headbutt",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/4/40/Headbutt_EX_SkillIcon.png/revision/latest/scale-to-width-down/50?cb=20231223063144"
+            },
+            "Type": {
+                "text": "Normal Type",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/e/e7/Normal_Type_Icon.png/revision/latest/scale-to-width-down/24?cb=20231115152653"
+            },
+            "Power": "100",
+            "Acc": "85%",
+            "STA": "15",
+            "Speed": "23",
+            "Crit %": "25%",
+            "Effect": "-"
+        },
+        {
+            "Level": "49",
+            "Skill": {
+                "text": "Fire Barrier",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/0/03/Fire_Barrier_EX_SkillIcon.png/revision/latest/scale-to-width-down/50?cb=20240806172133"
+            },
+            "Type": {
+                "text": "Fire Type",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/c/c2/Fire_Type_Icon.png/revision/latest/scale-to-width-down/24?cb=20231115152738"
+            },
+            "Power": "0",
+            "Acc": "100%",
+            "STA": "15",
+            "Speed": "80",
+            "Crit %": "0%",
+            "Effect": "-"
+        },
+        {
+            "Level": "56",
+            "Skill": {
+                "text": "Disintegrate",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/6/65/Disintegrate_EX_SkillIcon.png/revision/latest/scale-to-width-down/50?cb=20240806172706"
+            },
+            "Type": {
+                "text": "Fire Type",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/c/c2/Fire_Type_Icon.png/revision/latest/scale-to-width-down/24?cb=20231115152738"
+            },
+            "Power": "0",
+            "Acc": "85%",
+            "STA": "15",
+            "Speed": "82",
+            "Crit %": "0%",
+            "Effect": "-"
+        },
+        {
+            "Level": "59",
+            "Skill": {
+                "text": "Fire Will",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/d/dd/Fire_Will_EX_SkillIcon.png/revision/latest/scale-to-width-down/50?cb=20240806172609"
+            },
+            "Type": {
+                "text": "Fire Type",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/c/c2/Fire_Type_Icon.png/revision/latest/scale-to-width-down/24?cb=20231115152738"
+            },
+            "Power": "0",
+            "Acc": "100%",
+            "STA": "10",
+            "Speed": "92",
+            "Crit %": "0%",
+            "Effect": "-"
+        },
+        {
+            "Level": "63",
+            "Skill": {
+                "text": "Suncore",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/4/4f/Suncore_EX_SkillIcon.png/revision/latest/scale-to-width-down/50?cb=20240806172909"
+            },
+            "Type": {
+                "text": "Fire Type",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/c/c2/Fire_Type_Icon.png/revision/latest/scale-to-width-down/24?cb=20231115152738"
+            },
+            "Power": "110",
+            "Acc": "95%",
+            "STA": "15",
+            "Speed": "44",
+            "Crit %": "8%",
+            "Effect": "-"
+        }
+    ]
+}

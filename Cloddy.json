@@ -1,0 +1,356 @@
+{
+    "Name": "#001 – Cloddy",
+    "Sprites": {
+        "Regular": "https://static.wikia.nocookie.net/nexomon/images/1/11/Cloddy.png/revision/latest/scale-to-width-down/350?cb=20200905221122",
+        "Cosmic": "https://static.wikia.nocookie.net/nexomon/images/7/75/Cloddy_Cosmic.png/revision/latest/scale-to-width-down/350?cb=20240809225432"
+    },
+    "Element": "NormalNormal",
+    "Rarity": "Uncommon",
+    "Stats": {
+        "HP": "15",
+        "Stamina": "7",
+        "Attack": "4",
+        "Defense": "11",
+        "Speed": "8"
+    },
+    "BST": "45",
+    "Loved Food": [
+        "Green Pear",
+        "Banana",
+        "Cream Puff"
+    ],
+    "Locations": [
+        {
+            "Region": {
+                "text": "The Orphanage",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/6/62/The_OrphanageWarp.png/revision/latest/scale-to-width-down/200?cb=20240617210612"
+            },
+            "Maps": "Orphanage South, Hero's Tomb - North, Training Woods East, Salem's Labyrinth, Orphanage East."
+        },
+        {
+            "Region": {
+                "text": "The Drake Isles",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/b/be/The_Drake_IslesWarp.png/revision/latest/scale-to-width-down/200?cb=20240326012146"
+            },
+            "Maps": "Drake Isles Tower Ruins, Drake Isles City Ruins, Drake Isles Laboratory - Entrance, Drake Isles Laboratory - Dragons, Drake Isles Laboratory - F0 West, Drake Isles Laboratory - F1 West, Drake Isles Laboratory - F2 West, Drake Isles Laboratory - F0 East, Drake Isles Laboratory - F1 East, Drake Isles Laboratory - F2 East, Drake Isles Laboratory - F3 East."
+        },
+        {
+            "Region": {
+                "text": "Lateria",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/4/45/LateriaWarp.png/revision/latest/scale-to-width-down/200?cb=20240325232133"
+            },
+            "Maps": "Desert Tyrant Bones."
+        }
+    ],
+    "Evolution": [
+        {
+            "Cloddy": {
+                "text": "Base",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/1/11/Cloddy.png/revision/latest/scale-to-width-down/120?cb=20200905221122"
+            },
+            "Cubdy": {
+                "text": "Level 13",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/1/18/Cubdy.png/revision/latest/scale-to-width-down/120?cb=20200905224105"
+            },
+            "Lukuma": {
+                "text": "Level 30",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/9/91/Lukuma.png/revision/latest/scale-to-width-down/120?cb=20200905224341"
+            }
+        }
+    ],
+    "Skill Tree": [
+        {
+            "Level": "1",
+            "Skill": {
+                "text": "Scratch",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/b/b1/Scratch_EX_SkillIcon.png/revision/latest/scale-to-width-down/50?cb=20231218171931"
+            },
+            "Type": {
+                "text": "Normal Type",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/e/e7/Normal_Type_Icon.png/revision/latest/scale-to-width-down/24?cb=20231115152653"
+            },
+            "Power": "40",
+            "Acc": "95%",
+            "STA": "5",
+            "Speed": "55",
+            "Crit %": "10%",
+            "Effect": "-"
+        },
+        {
+            "Level": "7",
+            "Skill": {
+                "text": "Sandstorm",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/e/e9/Sandstorm_EX_SkillIcon.png/revision/latest/scale-to-width-down/50?cb=20231202020957"
+            },
+            "Type": {
+                "text": "Mineral Type",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/5/58/Mineral_Type_Icon.png/revision/latest/scale-to-width-down/24?cb=20231115153536"
+            },
+            "Power": "65",
+            "Acc": "85%",
+            "STA": "10",
+            "Speed": "15",
+            "Crit %": "15%",
+            "Effect": {
+                "text": "Confusion (Status)",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/9/9d/Confusion_Status_Icon.png/revision/latest/scale-to-width-down/27?cb=20231202021705"
+            }
+        },
+        {
+            "Level": "10",
+            "Skill": {
+                "text": "Battle Roar",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/7/74/Battle_Roar_EX_SkillIcon.png/revision/latest/scale-to-width-down/50?cb=20231202021209"
+            },
+            "Type": {
+                "text": "Normal Type",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/e/e7/Normal_Type_Icon.png/revision/latest/scale-to-width-down/24?cb=20231115152653"
+            },
+            "Power": "0",
+            "Acc": "30%",
+            "STA": "10",
+            "Speed": "67",
+            "Crit %": "0%",
+            "Effect": {
+                "text": "Demotivated (Status)",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/d/d4/Demotivated_Status_Icon.png/revision/latest/scale-to-width-down/27?cb=20231202021646"
+            }
+        },
+        {
+            "Level": "16",
+            "Skill": {
+                "text": "Recover",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/0/07/Recover_EX_SkillIcon.png/revision/latest/scale-to-width-down/50?cb=20240806164730"
+            },
+            "Type": {
+                "text": "Normal Type",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/e/e7/Normal_Type_Icon.png/revision/latest/scale-to-width-down/24?cb=20231115152653"
+            },
+            "Power": "0",
+            "Acc": "100%",
+            "STA": "5",
+            "Speed": "10",
+            "Crit %": "0%",
+            "Effect": {
+                "text": "Recovery (Status)",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/1/1c/Recover_Status_Icon.png/revision/latest/scale-to-width-down/25?cb=20231202202331"
+            }
+        },
+        {
+            "Level": "18",
+            "Skill": {
+                "text": "Plasma",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/2/25/Plasma_EX_SkillIcon.png/revision/latest/scale-to-width-down/50?cb=20240806171225"
+            },
+            "Type": {
+                "text": "Normal Type",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/e/e7/Normal_Type_Icon.png/revision/latest/scale-to-width-down/24?cb=20231115152653"
+            },
+            "Power": "60",
+            "Acc": "85%",
+            "STA": "5",
+            "Speed": "56",
+            "Crit %": "10%",
+            "Effect": "-"
+        },
+        {
+            "Level": "24",
+            "Skill": {
+                "text": "X Slash",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/7/7f/X_Slash_EX_SkillIcon.png/revision/latest/scale-to-width-down/50?cb=20240806165832"
+            },
+            "Type": {
+                "text": "Normal Type",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/e/e7/Normal_Type_Icon.png/revision/latest/scale-to-width-down/24?cb=20231115152653"
+            },
+            "Power": "40",
+            "Acc": "95%",
+            "STA": "5",
+            "Speed": "71",
+            "Crit %": "5%",
+            "Effect": "-"
+        },
+        {
+            "Level": "26",
+            "Skill": {
+                "text": "Double Slash",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/8/80/Double_Slash_EX_SkillIcon.png/revision/latest/scale-to-width-down/50?cb=20240806165051"
+            },
+            "Type": {
+                "text": "Normal Type",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/e/e7/Normal_Type_Icon.png/revision/latest/scale-to-width-down/24?cb=20231115152653"
+            },
+            "Power": "105",
+            "Acc": "85%",
+            "STA": "20",
+            "Speed": "24",
+            "Crit %": "10%",
+            "Effect": {
+                "text": "Demotivated (Status)",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/d/d4/Demotivated_Status_Icon.png/revision/latest/scale-to-width-down/27?cb=20231202021646"
+            }
+        },
+        {
+            "Level": "32",
+            "Skill": {
+                "text": "Elemental Up",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/8/8c/Elemental_Up_EX_SkillIcon.png/revision/latest/scale-to-width-down/50?cb=20240806163850"
+            },
+            "Type": {
+                "text": "Normal Type",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/e/e7/Normal_Type_Icon.png/revision/latest/scale-to-width-down/24?cb=20231115152653"
+            },
+            "Power": "0",
+            "Acc": "100%",
+            "STA": "10",
+            "Speed": "91",
+            "Crit %": "0%",
+            "Effect": "-"
+        },
+        {
+            "Level": "35",
+            "Skill": {
+                "text": "Drill",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/d/dc/Drill_EX_SkillIcon.png/revision/latest/scale-to-width-down/50?cb=20231202021347"
+            },
+            "Type": {
+                "text": "Mineral Type",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/5/58/Mineral_Type_Icon.png/revision/latest/scale-to-width-down/24?cb=20231115153536"
+            },
+            "Power": "100",
+            "Acc": "100%",
+            "STA": "15",
+            "Speed": "44",
+            "Crit %": "5%",
+            "Effect": "-"
+        },
+        {
+            "Level": "37",
+            "Skill": {
+                "text": "Pummel",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/e/e8/Pummel_EX_SkillIcon.png/revision/latest/scale-to-width-down/50?cb=20231202020714"
+            },
+            "Type": {
+                "text": "Normal Type",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/e/e7/Normal_Type_Icon.png/revision/latest/scale-to-width-down/24?cb=20231115152653"
+            },
+            "Power": "80",
+            "Acc": "85%",
+            "STA": "15",
+            "Speed": "20",
+            "Crit %": "15%",
+            "Effect": {
+                "text": "Demotivated (Status)",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/d/d4/Demotivated_Status_Icon.png/revision/latest/scale-to-width-down/27?cb=20231202021646"
+            }
+        },
+        {
+            "Level": "41",
+            "Skill": {
+                "text": "Raging Focus",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/3/30/Raging_Focus_EX_SkillIcon.png/revision/latest/scale-to-width-down/50?cb=20240806163920"
+            },
+            "Type": {
+                "text": "Normal Type",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/e/e7/Normal_Type_Icon.png/revision/latest/scale-to-width-down/24?cb=20231115152653"
+            },
+            "Power": "0",
+            "Acc": "100%",
+            "STA": "5",
+            "Speed": "86",
+            "Crit %": "0%",
+            "Effect": "-"
+        },
+        {
+            "Level": "46",
+            "Skill": {
+                "text": "Seismic Move",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/7/70/Seismic_Move_EX_SkillIcon.png/revision/latest/scale-to-width-down/50?cb=20240807115848"
+            },
+            "Type": {
+                "text": "Mineral Type",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/5/58/Mineral_Type_Icon.png/revision/latest/scale-to-width-down/24?cb=20231115153536"
+            },
+            "Power": "70",
+            "Acc": "95%",
+            "STA": "10",
+            "Speed": "16",
+            "Crit %": "5%",
+            "Effect": {
+                "text": "Confusion (Status)",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/9/9d/Confusion_Status_Icon.png/revision/latest/scale-to-width-down/27?cb=20231202021705"
+            }
+        },
+        {
+            "Level": "52",
+            "Skill": {
+                "text": "Mud Attack",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/c/c6/Mud_Attack_EX_SkillIcon.png/revision/latest/scale-to-width-down/50?cb=20240807115800"
+            },
+            "Type": {
+                "text": "Mineral Type",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/5/58/Mineral_Type_Icon.png/revision/latest/scale-to-width-down/24?cb=20231115153536"
+            },
+            "Power": "20",
+            "Acc": "85%",
+            "STA": "10",
+            "Speed": "73",
+            "Crit %": "15%",
+            "Effect": "-"
+        },
+        {
+            "Level": "54",
+            "Skill": {
+                "text": "Snake Eyes",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/7/72/Snake_Eyes_EX_SkillIcon.png/revision/latest/scale-to-width-down/50?cb=20240806164513"
+            },
+            "Type": {
+                "text": "Normal Type",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/e/e7/Normal_Type_Icon.png/revision/latest/scale-to-width-down/24?cb=20231115152653"
+            },
+            "Power": "0",
+            "Acc": "100%",
+            "STA": "10",
+            "Speed": "80",
+            "Crit %": "0%",
+            "Effect": "-"
+        },
+        {
+            "Level": "60",
+            "Skill": {
+                "text": "Sonic Scream",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/a/a4/Sonic_Scream_EX_SkillIcon.png/revision/latest/scale-to-width-down/50?cb=20240806165604"
+            },
+            "Type": {
+                "text": "Normal Type",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/e/e7/Normal_Type_Icon.png/revision/latest/scale-to-width-down/24?cb=20231115152653"
+            },
+            "Power": "85",
+            "Acc": "85%",
+            "STA": "15",
+            "Speed": "21",
+            "Crit %": "15%",
+            "Effect": {
+                "text": "Sleep (Status)",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/4/42/Sleep_Status_Icon.png/revision/latest/scale-to-width-down/20?cb=20231202202207"
+            }
+        },
+        {
+            "Level": "63",
+            "Skill": {
+                "text": "Corrupted Mineral",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/5/52/Corrupted_Mineral_EX_SkillIcon.png/revision/latest/scale-to-width-down/50?cb=20240807115921"
+            },
+            "Type": {
+                "text": "Mineral Type",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/5/58/Mineral_Type_Icon.png/revision/latest/scale-to-width-down/24?cb=20231115153536"
+            },
+            "Power": "0",
+            "Acc": "100%",
+            "STA": "15",
+            "Speed": "76",
+            "Crit %": "0%",
+            "Effect": "-"
+        }
+    ]
+}

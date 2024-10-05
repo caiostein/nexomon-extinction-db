@@ -65,7 +65,11 @@ def scrape_table(soup, span_id):
     table = header.find_next('table', {'class': 'wikitable'})
 
     # Extract the header row for the column names
-    headers = [th.text.strip() for th in table.find_all('th')]
+    headers = []
+    for th in table.find_all('th'):
+       header_text = th.text.strip()
+       colspan = int(th.get('colspan', 1))  # Get the colspan if present, default to 1
+       headers.append({'header': header_text, 'colspan': colspan})
 
     # Extract the rows from the table
     rows = table.find_all('tr')[1:]  # Skip the header row
@@ -87,19 +91,28 @@ def scrape_table(soup, span_id):
                 columns.append(td.text.strip())
 
         # Create a dictionary using the headers and corresponding column values
-        row_data = {headers[i]: columns[i] for i in range(len(headers))}
+        known = False
+        row_data = {}
+
+        for i in range(len(headers)):
+            if headers[i]['colspan'] == 2:                
+                row_data[headers[i]['header']] = columns[i]
+                row_data[headers[i]['header']]['text'] = columns[i+1]
+                known = True
+            elif known:
+                row_data[headers[i]['header']] = columns[i+1]
+            else:
+                row_data[headers[i]['header']] = columns[i]
 
         table_data.append(row_data)
 
     return table_data
 
 # Example: Scraping the Cloddy page
-nexomon_url = 'https://nexomon.fandom.com/wiki/Cloddy'
-cloddy_data = scrape_nexomon_details(nexomon_url)
+nexomon_url = input('Input Nexomon Wiki Url: ') or 'https://nexomon.fandom.com/wiki/Cloddy'
+nexomon_data = scrape_nexomon_details(nexomon_url)
+file_name = nexomon_url.split('/')[-1]
 
 # Export extracted data to JSON file
-with open('cloddy_data.json', 'w', encoding='utf-8') as json_file:
-    json.dump(cloddy_data, json_file, ensure_ascii=False, indent=4)  # Write to JSON
-
-# Print extracted data
-print(cloddy_data)
+with open(f'{file_name}.json', 'w', encoding='utf-8') as json_file:
+    json.dump(nexomon_data, json_file, ensure_ascii=False, indent=4)  # Write to JSON
