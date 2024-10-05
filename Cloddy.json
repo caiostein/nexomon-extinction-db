@@ -1,10 +1,11 @@
 {
-    "Name": "#001 – Cloddy",
+    "Number": "#001",
+    "Name": "Cloddy",
     "Sprites": {
         "Regular": "https://static.wikia.nocookie.net/nexomon/images/1/11/Cloddy.png/revision/latest/scale-to-width-down/350?cb=20200905221122",
         "Cosmic": "https://static.wikia.nocookie.net/nexomon/images/7/75/Cloddy_Cosmic.png/revision/latest/scale-to-width-down/350?cb=20240809225432"
     },
-    "Element": "NormalNormal",
+    "Element": "Normal",
     "Rarity": "Uncommon",
     "Stats": {
         "HP": "15",
@@ -15,9 +16,18 @@
     },
     "BST": "45",
     "Loved Food": [
-        "Green Pear",
-        "Banana",
-        "Cream Puff"
+        {
+            "name": "Green Pear",
+            "image": "https://static.wikia.nocookie.net/nexomon/images/5/55/Green-Pear.png/revision/latest/scale-to-width-down/50?cb=20231115125230"
+        },
+        {
+            "name": "Banana",
+            "image": "https://static.wikia.nocookie.net/nexomon/images/6/69/Banana.png/revision/latest/scale-to-width-down/50?cb=20231115125108"
+        },
+        {
+            "name": "Cream Puff",
+            "image": "https://static.wikia.nocookie.net/nexomon/images/3/38/Cream-Puff.png/revision/latest/scale-to-width-down/50?cb=20231115124920"
+        }
     ],
     "Locations": [
         {

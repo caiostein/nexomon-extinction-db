@@ -7,8 +7,11 @@ def scrape_nexomon_details(nexomon_url):
     response = requests.get(nexomon_url)
     soup = BeautifulSoup(response.content, 'html.parser')
     
-    # Nexomon Name
-    name = soup.find('h2', class_='pi-title').get_text()
+    # Nexomon Name and Number
+    title = soup.find('h2', class_='pi-title').get_text()
+
+    number = title.split()[0]
+    name = title.split()[2]
 
     # Sprites
     regular_sprite = soup.find('img', alt='Regular')['src']
@@ -16,6 +19,8 @@ def scrape_nexomon_details(nexomon_url):
 
     # Element and Rarity
     element = soup.find('td', {'data-source': 'element'}).get_text(strip=True)
+    element = element[:len(element) // 2]
+
     rarity = soup.find('td', {'data-source': 'rarity'}).get_text(strip=True)
 
     # Base Stats
@@ -29,7 +34,13 @@ def scrape_nexomon_details(nexomon_url):
     bst = soup.find('td', {'data-source': 'BST'}).get_text(strip=True)
 
     # Loved Food
-    food_items = [food.find('img')['alt'] for food in soup.find_all('div', {'data-source': lambda x: x and 'food' in x})]
+    food_items = [
+    {
+        'name': food.find('img')['alt'],
+        'image': food.find('img')['data-src']
+    } 
+    for food in soup.find_all('div', {'data-source': lambda x: x and 'food' in x})
+]
 
     # Locations
     locations = scrape_table(soup, 'Locations')
@@ -43,6 +54,7 @@ def scrape_nexomon_details(nexomon_url):
 
     # Output all collected data
     nexomon_data = {
+        'Number': number,
         'Name': name,
         'Sprites': {'Regular': regular_sprite, 'Cosmic': cosmic_sprite},
         'Element': element,
