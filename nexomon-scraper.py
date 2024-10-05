@@ -1,3 +1,4 @@
+import json
 import requests
 from bs4 import BeautifulSoup
 
@@ -31,7 +32,14 @@ def scrape_nexomon_details(nexomon_url):
     food_items = [food.find('img')['alt'] for food in soup.find_all('div', {'data-source': lambda x: x and 'food' in x})]
 
     # Locations
-    locations = scrape_locations(soup)
+    locations = scrape_table(soup, 'Locations')
+
+    # Evolutions
+    evolutions = scrape_table(soup, 'Evolution')
+
+    #Skill Tree
+
+    skill_tree = scrape_table(soup, 'Skill_Tree')
 
     # Output all collected data
     nexomon_data = {
@@ -42,39 +50,56 @@ def scrape_nexomon_details(nexomon_url):
         'Stats': {'HP': hp, 'Stamina': stamina, 'Attack': attack, 'Defense': defense, 'Speed': speed},
         'BST': bst,
         'Loved Food': food_items,
-        'Locations': locations
+        'Locations': locations,
+        'Evolution': evolutions,
+        'Skill Tree': skill_tree
     }
 
     return nexomon_data
 
-def scrape_locations(soup):
-    # Find the span element with id 'Locations'
-    locations_header = soup.find('span', {'id': 'Locations'}).parent
+def scrape_table(soup, span_id):
+    # Find the span element with the given ID
+    header = soup.find('span', {'id': span_id}).parent
 
-    # Find the first table that follows the 'Locations' h2 element
-    location_table = locations_header.find_next('table', {'class': 'wikitable'})
+    # Find the first table that follows the header element
+    table = header.find_next('table', {'class': 'wikitable'})
 
-    # Extract rows from the table
-    rows = location_table.find_all('tr')[1:]  # Skip the header row
+    # Extract the header row for the column names
+    headers = [th.text.strip() for th in table.find_all('th')]
 
-    nexomon_locations = []
+    # Extract the rows from the table
+    rows = table.find_all('tr')[1:]  # Skip the header row
+
+    table_data = []
 
     for row in rows:
-        # Extract the region
-        region = row.find_all('td')[0].text.strip()
+        # Extract the values for each column
+        columns = []
+        for td in row.find_all('td'):
+            # Check if the column has an image
+            img = td.find('img')
+            if img:
+                # Extract image URL
+                img_url = img['data-src']
+                columns.append({'text': td.text.strip(), 'image': img_url})
+            else:
+                # Extract only text if no image
+                columns.append(td.text.strip())
 
-        # Extract the maps, splitting by commas
-        maps = row.find_all('td')[1].text.strip().split(", ")
+        # Create a dictionary using the headers and corresponding column values
+        row_data = {headers[i]: columns[i] for i in range(len(headers))}
 
-        nexomon_locations.append({
-            'Region': region,
-            'Maps': maps
-        })
-    return nexomon_locations
+        table_data.append(row_data)
+
+    return table_data
 
 # Example: Scraping the Cloddy page
 nexomon_url = 'https://nexomon.fandom.com/wiki/Cloddy'
 cloddy_data = scrape_nexomon_details(nexomon_url)
+
+# Export extracted data to JSON file
+with open('cloddy_data.json', 'w', encoding='utf-8') as json_file:
+    json.dump(cloddy_data, json_file, ensure_ascii=False, indent=4)  # Write to JSON
 
 # Print extracted data
 print(cloddy_data)
