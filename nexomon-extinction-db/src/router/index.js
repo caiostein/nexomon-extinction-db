@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import NexomonDetails from '@/components/NexomonDetails.vue'
+import NexomonList from '@/components/NexomonList.vue'
+import NexomonDetails from '@/components/NexomonDetails'
 
 const routes = [
   {
@@ -11,7 +12,13 @@ const routes = [
   {
     path: '/dex',
     name: 'dex',
-    component: NexomonDetails
+    component: NexomonList
+  },
+  {
+    path: '/nexomon/:number',
+    name: 'NexomonDetails',
+    component: NexomonDetails, // Nexomon details page
+    props: true, // Allow route params as props
   },
   {
     path: '/about',

@@ -1,52 +1,124 @@
+<!-- src/components/NexomonDetails.vue -->
 <template>
-  <div>
-    <h1>Nexomon Database</h1>
-    <div class="nexomon-grid">
-      <div class="nexomon-card" v-for="nexomon in nexomons" :key="nexomon.Name">
-        <h3>{{ nexomon.Name }}</h3>
-        <img :src="nexomon.Sprites.Thumbnail" alt="Sprite" />
-      </div>
+  <div v-if="nexomon" class="details-container">
+    <h1>{{ nexomon.Name }}</h1>
+    <img class="nexomon-sprite" :src="getImage(nexomon.Name, false)" />
+    <img class="nexomon-sprite" v-if="nexomon.Sprites.Cosmic" :src="getImage(nexomon.Name, true)" alt="Cosmic Sprite" />
+
+    <div class="element-info">
+      <h3>Element:</h3>
+      <img :src="getImage(nexomon.Element + '_Type_Icon')" alt="Element Image" class="element-image" />
+      <span>{{ nexomon.Element }}</span>
     </div>
+
+    <h3>Rarity: {{ nexomon.Rarity }}</h3>
+
+    <!-- Add more details as needed -->
+
+    <div class="navigation-buttons">
+      <button @click="goToNexomon(parseInt(nexomon.Number) - 1)" :disabled="!hasPrevious">Previous</button>
+      <button @click="goToNexomon(parseInt(nexomon.Number) + 1)" :disabled="!hasNext">Next</button>
+    </div>
+
+    <button @click="goBack">Back</button>
   </div>
 </template>
+
+
 
 <script>
 import data from '../../../python-scripts/assets/nexomon_extinction_database.json';
 
 export default {
+  props: ['number'],
   data() {
     return {
-      nexomons: data // Load your JSON data here
+      nexomons: data,
     };
+  },
+  computed: {
+  nexomon() {      
+    return this.nexomons.find(n => parseInt(n.Number) === parseInt(this.number));
+  },
+  hasPrevious() {
+    return this.nexomon && parseInt(this.nexomon.Number) > 1;
+  },
+  hasNext() {
+    return this.nexomon && parseInt(this.nexomon.Number) < this.nexomons.length; // Adjust this if needed
+  }
+},
+  methods: {
+    goBack() {
+      this.$router.push({ name: 'dex', params: { } });
+    },
+    
+    goToNexomon(number) {
+    this.$router.push({ name: 'NexomonDetails', params: { number } });
+    },
+
+    getImage(imageName, isCosmic) {
+      if (isCosmic) {
+        try {
+          return require(`@/assets/downloaded_images/${imageName}_Cosmic.png`);
+        } catch (error) {
+          try {
+            return require(`@/assets/downloaded_images/${imageName}2_Cosmic.png`);
+          } catch (error) {
+            console.warn(`Neither ${imageName}_Cosmic.png nor ${imageName}2_Cosmic.png were found.`);
+          }
+        }
+      } else {
+        try {
+          return require(`@/assets/downloaded_images/${imageName}.png`);
+        } catch (error) {
+          try {
+            return require(`@/assets/downloaded_images/${imageName}2.png`);
+          } catch (error) {
+            console.warn(`Neither ${imageName}.png nor ${imageName}2.png were found.`);
+          }
+        }
+      }
+    }
   }
 };
 </script>
 
 <style scoped>
-.nexomon-grid {
-  display: flex;
-  flex-wrap: wrap; /* Allows the items to wrap to the next line */
-  justify-content: space-between; /* Space between items */
-}
-
-.nexomon-card {
-  width: calc(20% - 10px); /* 5 cards across, accounting for margins */
-  margin-bottom: 20px; /* Space below each card */
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+.details-container {
   text-align: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow for depth */
+  /* Center-align all text in the container */
 }
 
-.nexomon-card img {
-  max-width: 30%; /* Make images responsive */
+.element-info {
+  display: flex;
+  justify-content: center;
+  /* Center the elements horizontally */
+  align-items: center;
+  /* Align items vertically center */
+  margin: 10px 0;
+  /* Add some space above and below */
+}
+
+.element-image {
+  width: 30px;
+  height: 30px;
+  margin-left: 10px;
+  margin-right: 5px
+}
+
+.nexomon-sprite {
+  width: 18%;
   height: auto;
 }
 
-/* On hover, darken the card and add a slight scale effect */
-.nexomon-card:hover {
-  background-color: rgba(0, 0, 0, 0.1); /* Slightly darken the background */
-  transform: scale(1.02); /* Slightly increase the size for emphasis */
+.navigation-buttons {
+  margin: 20px 0;
 }
+
+button {
+  margin: 0 10px;
+  padding: 10px;
+  font-size: 16px;
+}
+
 </style>
