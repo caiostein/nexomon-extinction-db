@@ -31,9 +31,12 @@
 
     <div v-if="nexomon.Evolution && nexomon.Evolution.length" class="evolution-container">
       <h3>Evolution Line:</h3>
-      <div class="evolution-stage" v-for="(details, nexomonName) in nexomonEvolution" :key="nexomonName">
+      <div>
+        <router-link class="evolution-stage" v-for="(details, nexomonName) in nexomonEvolution" :key="nexomonName" :to="goToEvolution(nexomonName)"
+        >
         <img :src="getImage(nexomonName)" :alt="nexomonName" class="evolution-image" />
         <span>{{ nexomonName }} - {{ details.text }}</span>
+        </router-link>
       </div>
     </div>
 
@@ -66,7 +69,6 @@ export default {
     },
     nexomonEvolution() {
       if (this.nexomon && this.nexomon.Evolution && this.nexomon.Evolution.length > 0) {
-        // Return the first (and likely only) item in the Evolution array
         return this.nexomon.Evolution[0];
       }
       return {};
@@ -85,6 +87,11 @@ export default {
 
     goToNexomon(number) {
       this.$router.push({ name: 'NexomonDetails', params: { number } });
+    },
+
+    goToEvolution(nexomonName) {
+      let evolvedNexomon = this.nexomons.find(n => n.Name == nexomonName);
+      return `/nexomon/${evolvedNexomon.Number}`
     },
 
     getImage(imageName, showCosmic) {
