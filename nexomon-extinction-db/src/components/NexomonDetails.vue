@@ -1,7 +1,7 @@
 <!-- src/components/NexomonDetails.vue -->
 <template>
   <div v-if="nexomon" class="details-container">
-    <h1>{{ nexomon.Name }}</h1>
+    <h1>{{nexomon.Number}} - {{ nexomon.Name }}</h1>
     <img class="nexomon-sprite" :src="getImage(nexomon.Name, false)" />
     <img class="nexomon-sprite" v-if="nexomon.Sprites.Cosmic" :src="getImage(nexomon.Name, true)" alt="Cosmic Sprite" />
 
