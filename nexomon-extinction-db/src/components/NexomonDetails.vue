@@ -2,13 +2,27 @@
 <template>
   <div v-if="nexomon" class="details-container">
     <h1 class="h1" style="margin-top: 20px;">{{ nexomon.Number }} - {{ nexomon.Name }}</h1>
-    <img class="nexomon-sprite" :src="getImage(nexomon.Name, false)" />
-    <img class="nexomon-sprite" v-if="nexomon.Sprites.Cosmic" :src="getImage(nexomon.Name, true)" alt="Cosmic Sprite" />
+    
+    <div class="sprite-container">
+      <img
+        class="nexomon-sprite"
+        :src="getImage(nexomon.Name, showCosmic)"
+        alt="Nexomon Sprite"
+      />
+    </div>
 
     <div class="element-info">
       <h3>Element:</h3>
       <img :src="getImage(nexomon.Element + '_Type_Icon')" alt="Element Image" class="element-image" />
       <span>{{ nexomon.Element }}</span>
+
+      <button
+        v-if="nexomon.Sprites && nexomon.Sprites.Cosmic"
+        class="toggle-button"
+        @click="toggleSprite"
+      >
+        {{ showCosmic ? 'Show Regular' : 'Show Cosmic' }}
+      </button>
     </div>
 
     <h3>Rarity: {{ nexomon.Rarity }}</h3>
@@ -43,6 +57,7 @@ export default {
   data() {
     return {
       nexomons: data,
+      showCosmic: false,
     };
   },
   computed: {
@@ -72,8 +87,8 @@ export default {
       this.$router.push({ name: 'NexomonDetails', params: { number } });
     },
 
-    getImage(imageName, isCosmic) {
-      if (isCosmic) {
+    getImage(imageName, showCosmic) {
+      if (showCosmic) {
         try {
           return require(`@/assets/downloaded_images/${imageName}_Cosmic.png`);
         } catch (error) {
@@ -97,6 +112,10 @@ export default {
           }
         }
       }
+    },
+
+    toggleSprite() {
+      this.showCosmic = !this.showCosmic; // Toggle between cosmic and regular sprite
     }
   }
 };
@@ -106,6 +125,22 @@ export default {
 .details-container {
   text-align: center;
   /* Center-align all text in the container */
+}
+
+.sprite-container {
+  position: relative; /* Make the sprite container the relative parent */
+  display: inline-block; /* Inline block to respect content size */
+}
+
+.toggle-button {
+  padding: 5px;
+  background-color: #2b9fcc;
+  color: #fff;
+  border: none;
+  font-size: 12px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
 }
 
 .element-info {
@@ -128,6 +163,20 @@ export default {
 .nexomon-sprite {
   max-width: 300px;
   height: auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+.nexomon-card {
+  width: calc(25% - 10px);
+  margin-bottom: 20px;
+  padding: 10px;
+  
 }
 
 .navigation-buttons {
@@ -149,6 +198,18 @@ button {
   display: inline-block;
   margin: 10px;
   text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+.evolution-stage:hover{
+  background-color: rgba(0, 0, 0, 0.1);
+  transform: scale(1.02);
 }
 
 .evolution-image {
