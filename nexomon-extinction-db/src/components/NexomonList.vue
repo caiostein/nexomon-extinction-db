@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <h1>Nexomon Database</h1>
-    
+  <div>    
     <!-- Search Input -->
     <input
       type="text"
@@ -47,13 +45,14 @@ export default {
 
 <style scoped>
 .nexomon-grid {
+  margin: 50px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
 
 .nexomon-card {
-  width: calc(20% - 10px);
+  width: calc(25% - 10px);
   margin-bottom: 20px;
   padding: 10px;
   border: 1px solid #ccc;
@@ -61,8 +60,8 @@ export default {
   text-align: center;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease, transform 0.3s ease;
-  text-decoration: none; /* Remove underline from link */
-  color: inherit; /* Keep the text color consistent with the rest of the app */
+  text-decoration: none;
+  color: inherit;
 }
 
 .nexomon-card img {
@@ -78,7 +77,7 @@ export default {
 .search-box {
   width: 30%;
   padding: 10px;
-  margin-bottom: 20px;
+  margin-top: 40px;
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 5px;

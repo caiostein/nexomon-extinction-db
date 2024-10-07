@@ -1,7 +1,7 @@
 <!-- src/components/NexomonDetails.vue -->
 <template>
   <div v-if="nexomon" class="details-container">
-    <h1>{{nexomon.Number}} - {{ nexomon.Name }}</h1>
+    <h1 class="h1" style="margin-top: 20px;">{{ nexomon.Number }} - {{ nexomon.Name }}</h1>
     <img class="nexomon-sprite" :src="getImage(nexomon.Name, false)" />
     <img class="nexomon-sprite" v-if="nexomon.Sprites.Cosmic" :src="getImage(nexomon.Name, true)" alt="Cosmic Sprite" />
 
@@ -15,12 +15,21 @@
 
     <!-- Add more details as needed -->
 
-    <div class="navigation-buttons">
-      <button @click="goToNexomon(parseInt(nexomon.Number) - 1)" :disabled="!hasPrevious">Previous</button>
-      <button @click="goToNexomon(parseInt(nexomon.Number) + 1)" :disabled="!hasNext">Next</button>
+    <div v-if="nexomon.Evolution && nexomon.Evolution.length" class="evolution-container">
+      <h3>Evolution Line:</h3>
+      <div class="evolution-stage" v-for="(details, nexomonName) in nexomonEvolution" :key="nexomonName">
+        <img :src="getImage(nexomonName)" :alt="nexomonName" class="evolution-image" />
+        <span>{{ nexomonName }} - {{ details.text }}</span>
+      </div>
     </div>
 
-    <button @click="goBack">Back</button>
+
+    <div class="navigation-buttons">
+      <button class="btn btn-outline-primary" @click="goToNexomon(parseInt(nexomon.Number) - 1)" :disabled="!hasPrevious">Previous</button>
+      <button class="btn btn-outline-primary" @click="goToNexomon(parseInt(nexomon.Number) + 1)" :disabled="!hasNext">Next</button>
+    </div>
+
+    <button class="btn btn-outline-danger" @click="goBack">Back</button>
   </div>
 </template>
 
@@ -37,23 +46,30 @@ export default {
     };
   },
   computed: {
-  nexomon() {      
-    return this.nexomons.find(n => parseInt(n.Number) === parseInt(this.number));
+    nexomon() {
+      return this.nexomons.find(n => parseInt(n.Number) === parseInt(this.number));
+    },
+    nexomonEvolution() {
+      if (this.nexomon && this.nexomon.Evolution && this.nexomon.Evolution.length > 0) {
+        // Return the first (and likely only) item in the Evolution array
+        return this.nexomon.Evolution[0];
+      }
+      return {};
+    },
+    hasPrevious() {
+      return this.nexomon && parseInt(this.nexomon.Number) > 1;
+    },
+    hasNext() {
+      return this.nexomon && parseInt(this.nexomon.Number) < this.nexomons.length; // Adjust this if needed
+    }
   },
-  hasPrevious() {
-    return this.nexomon && parseInt(this.nexomon.Number) > 1;
-  },
-  hasNext() {
-    return this.nexomon && parseInt(this.nexomon.Number) < this.nexomons.length; // Adjust this if needed
-  }
-},
   methods: {
     goBack() {
-      this.$router.push({ name: 'dex', params: { } });
+      this.$router.push({ name: 'dex', params: {} });
     },
-    
+
     goToNexomon(number) {
-    this.$router.push({ name: 'NexomonDetails', params: { number } });
+      this.$router.push({ name: 'NexomonDetails', params: { number } });
     },
 
     getImage(imageName, isCosmic) {
@@ -68,6 +84,9 @@ export default {
           }
         }
       } else {
+
+        imageName = imageName.replace(' (Extinction)', '');
+        
         try {
           return require(`@/assets/downloaded_images/${imageName}.png`);
         } catch (error) {
@@ -107,7 +126,7 @@ export default {
 }
 
 .nexomon-sprite {
-  width: 18%;
+  max-width: 300px;
   height: auto;
 }
 
@@ -121,4 +140,21 @@ button {
   font-size: 16px;
 }
 
+.evolution-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.evolution-stage {
+  display: inline-block;
+  margin: 10px;
+  text-align: center;
+}
+
+.evolution-image {
+  width: 140px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
 </style>
