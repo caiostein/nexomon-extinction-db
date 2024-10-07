@@ -91,7 +91,10 @@ export default {
 
     goToEvolution(nexomonName) {
       let evolvedNexomon = this.nexomons.find(n => n.Name == nexomonName);
-      return `/nexomon/${evolvedNexomon.Number}`
+      if(evolvedNexomon){
+        return `/nexomon/${evolvedNexomon.Number}`
+      }
+      return ''      
     },
 
     getImage(imageName, showCosmic) {
