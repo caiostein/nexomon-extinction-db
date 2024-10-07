@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunknexomon_extinction_db"]=self["webpackChunknexomon_extinction_db"]||[]).push([[594],{603:function(n,t,e){e.r(t),e.d(t,{default:function(){return s}});var u=e(56768);const o={class:"about"};function a(n,t){return(0,u.uX)(),(0,u.CE)("div",o,t[0]||(t[0]=[(0,u.Lk)("h1",null,"This is an about page",-1)]))}var c=e(71241);const i={},r=(0,c.A)(i,[["render",a]]);var s=r}}]);
+//# sourceMappingURL=about.1fff5c0d.js.map
