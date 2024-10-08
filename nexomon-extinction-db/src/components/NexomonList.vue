@@ -1,22 +1,13 @@
 <template>
-  <div>    
+  <div>
     <!-- Search Input -->
-    <input
-      type="text"
-      v-model="searchQuery"
-      placeholder="Search for a Nexomon"
-      class="search-box"
-    />
+    <input type="text" v-model="searchQuery" placeholder="Search for a Nexomon" class="search-box" />
 
     <div class="nexomon-grid">
-      <router-link
-        v-for="nexomon in filteredNexomons"
-        :key="nexomon.Number"
-        :to="`/nexomon/${nexomon.Number}`"
-        class="nexomon-card"
-      >
-        <h3>{{ nexomon.Name }}</h3>
-        <img :src="nexomon.Sprites.Thumbnail" alt="Sprite" />
+      <router-link v-for="nexomon in filteredNexomons" :key="nexomon.Number" :to="`/nexomon/${nexomon.Number}`"
+        class="nexomon-card">
+        <h3>{{ nexomon.Number }} - {{ nexomon.Name }}</h3>
+        <img :src="getThumbnail(nexomon.Name)" alt="Sprite" />
       </router-link>
     </div>
 
@@ -35,10 +26,33 @@ export default {
   },
   computed: {
     filteredNexomons() {
-      return this.nexomons.filter(nexomon =>
-        nexomon.Name.toLowerCase().includes(this.searchQuery.toLowerCase())
+      const searchQueryLower = this.searchQuery.toLowerCase();
+
+      return this.nexomons.filter(nexomon => {
+        const nameMatches = nexomon.Name.toLowerCase().includes(searchQueryLower);
+
+        // Check if the number matches, convert both to numbers for comparison
+        const numberMatches = nexomon.Number.includes(searchQueryLower);
+
+        // Return true if either name or number matches
+        return nameMatches || numberMatches;
+      }
       );
     }
+  },
+  methods: {
+    getThumbnail(nexomonName) {
+
+      try {
+        return require(`@/assets/downloaded_images/${nexomonName}-menu.png`);
+      } catch (error) {
+        try {
+          return require(`@/assets/downloaded_images/${nexomonName}_(Extinction)-menu.png`);
+        } catch (error) {
+          console.warn(`Neither ${nexomonName}-menu.png nor ${nexomonName}_(Extinction)-menu.png were found.`);
+        }
+      }
+    },
   }
 };
 </script>

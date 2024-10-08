@@ -2,13 +2,9 @@
 <template>
   <div v-if="nexomon" class="details-container">
     <h1 class="h1" style="margin-top: 20px;">{{ nexomon.Number }} - {{ nexomon.Name }}</h1>
-    
+
     <div class="sprite-container">
-      <img
-        class="nexomon-sprite"
-        :src="getImage(nexomon.Name, showCosmic)"
-        alt="Nexomon Sprite"
-      />
+      <img class="nexomon-sprite" :src="getImage(nexomon.Name, showCosmic)" alt="Nexomon Sprite" />
     </div>
 
     <div class="element-info">
@@ -16,37 +12,55 @@
       <img :src="getImage(nexomon.Element + '_Type_Icon')" alt="Element Image" class="element-image" />
       <span>{{ nexomon.Element }}</span>
 
-      <button
-        v-if="nexomon.Sprites && nexomon.Sprites.Cosmic"
-        class="toggle-button"
-        @click="toggleSprite"
-      >
+      <button v-if="nexomon.Sprites && nexomon.Sprites.Cosmic" class="toggle-button" @click="toggleSprite">
         {{ showCosmic ? 'Show Regular' : 'Show Cosmic' }}
       </button>
     </div>
 
     <h3>Rarity: {{ nexomon.Rarity }}</h3>
 
+    <div class="navigation-buttons">
+      <button class="btn btn-outline-primary" @click="goToNexomon(parseInt(nexomon.Number) - 1)"
+        :disabled="!hasPrevious">Previous</button>
+      <button class="btn btn-outline-primary" @click="goToNexomon(parseInt(nexomon.Number) + 1)"
+        :disabled="!hasNext">Next</button>
+    </div>
+
+    <button class="btn btn-outline-danger" @click="goBack">Back</button>
+
     <!-- Add more details as needed -->
 
     <div v-if="nexomon.Evolution && nexomon.Evolution.length" class="evolution-container">
       <h3>Evolution Line:</h3>
       <div>
-        <router-link class="evolution-stage" v-for="(details, nexomonName) in nexomonEvolution" :key="nexomonName" :to="goToEvolution(nexomonName)"
-        >
-        <img :src="getImage(nexomonName)" :alt="nexomonName" class="evolution-image" />
-        <span>{{ nexomonName }} - {{ details.text }}</span>
+        <router-link class="evolution-stage" v-for="(details, nexomonName) in nexomonEvolution" :key="nexomonName"
+          :to="goToEvolution(nexomonName)">
+          <img :src="getImage(nexomonName)" :alt="nexomonName" class="evolution-image" />
+          <span>{{ nexomonName }} - {{ details.text }}</span>
         </router-link>
       </div>
     </div>
 
+    <div class="location-container" v-if="nexomon.Locations && nexomon.Locations.length">
+      <h3>Locations:</h3>
+      <div>
+        <div v-for="(location, index) in nexomon.Locations" :key="index"
+          :class="{ 'location-stage': true, 'location-stage-active': clickedRegion === index }">
+          <!-- Region Image and Name -->
+          <img @click="toggleRegion(index)" :src="getRegionImage(location.Region.text)" :alt="location.Region.text" class="location-image" />
+          <span>{{ location.Region.text }}</span>
 
-    <div class="navigation-buttons">
-      <button class="btn btn-outline-primary" @click="goToNexomon(parseInt(nexomon.Number) - 1)" :disabled="!hasPrevious">Previous</button>
-      <button class="btn btn-outline-primary" @click="goToNexomon(parseInt(nexomon.Number) + 1)" :disabled="!hasNext">Next</button>
+          <!-- Maps (shown when clicked) -->
+          <div v-if="clickedRegion === index" class="maps-container">
+            <ul>
+              <li v-for="(map, mapIndex) in splitMaps(location.Maps)" :key="mapIndex">
+                {{ map }}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
-
-    <button class="btn btn-outline-danger" @click="goBack">Back</button>
   </div>
 </template>
 
@@ -61,6 +75,7 @@ export default {
     return {
       nexomons: data,
       showCosmic: false,
+      clickedRegion: null,
     };
   },
   computed: {
@@ -81,21 +96,30 @@ export default {
     }
   },
   methods: {
+    // Toggle the region to show or hide maps
+    toggleRegion(index) {
+      this.clickedRegion = this.clickedRegion === index ? null : index;
+    },
+    // Split maps string into an array
+    splitMaps(maps) {
+      return maps.split(", ").map(map => map.trim());
+    },
     goBack() {
       this.$router.push({ name: 'dex', params: {} });
     },
 
     goToNexomon(number) {
       this.showCosmic = false;
+      this.clickedRegion = null;
       this.$router.push({ name: 'NexomonDetails', params: { number } });
     },
 
     goToEvolution(nexomonName) {
       let evolvedNexomon = this.nexomons.find(n => n.Name == nexomonName);
-      if(evolvedNexomon){
+      if (evolvedNexomon) {
         return `/nexomon/${evolvedNexomon.Number}`
       }
-      return ''      
+      return ''
     },
 
     // Method to split and clean up the Maps field into an array
@@ -117,7 +141,7 @@ export default {
       } else {
 
         imageName = imageName.replace(' (Extinction)', '');
-        
+
         try {
           return require(`@/assets/downloaded_images/${imageName}.png`);
         } catch (error) {
@@ -128,6 +152,16 @@ export default {
           }
         }
       }
+    },
+
+    getRegionImage(regionName) {
+      console.log(regionName)
+
+      while (regionName.includes(' ')) {
+        regionName = regionName.replace(" ", "_")
+      }
+
+      return require(`@/assets/downloaded_images/${regionName}Warp.png`);
     },
 
     toggleSprite() {
@@ -144,8 +178,10 @@ export default {
 }
 
 .sprite-container {
-  position: relative; /* Make the sprite container the relative parent */
-  display: inline-block; /* Inline block to respect content size */
+  position: relative;
+  /* Make the sprite container the relative parent */
+  display: inline-block;
+  /* Inline block to respect content size */
 }
 
 .toggle-button {
@@ -192,7 +228,7 @@ export default {
   width: calc(25% - 10px);
   margin-bottom: 20px;
   padding: 10px;
-  
+
 }
 
 .navigation-buttons {
@@ -223,7 +259,7 @@ button {
   color: inherit;
 }
 
-.evolution-stage:hover{
+.evolution-stage:hover {
   background-color: rgba(0, 0, 0, 0.1);
   transform: scale(1.02);
 }
@@ -235,30 +271,67 @@ button {
   margin: 0 auto;
 }
 
-.locations-container {
+.location-container {
   margin-top: 20px;
+  text-align: center;
 }
 
-.location-section {
-  margin-bottom: 20px;
+.location-stage {
+  display: inline-block;
+  margin: 10px;
+  margin-bottom: 40px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  /* Allows positioning of the maps-container relative to location-stage */
 }
 
-.region-info {
-  display: flex;
-  align-items: center;
+.location-stage-active {
+  background-color: rgba(0, 0, 0, 0.1); /* Set a new background color when active */
+  transform: scale(1.02); /* Optional: slightly scale the card for a visual cue */
 }
 
-.region-image {
-  width: 50px;
-  height: 50px;
-  margin-right: 10px;
+.location-image {
+  width: 300px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
 }
 
-.maps-list ul {
-  padding-left: 20px;
+.maps-container {
+  margin-top: 10px;
+  text-align: center;
+  display: block;
+  /* Block level to take up the full width inside location-stage */
+  position: absolute;
+  /* Position the maps container relative to location-stage */
+  left: 50%;
+  /* Move to the middle of the location-stage */
+  transform: translateX(-50%);
+  /* Center the maps-container horizontally */
 }
 
-.maps-list li {
-  list-style-type: disc;
+.maps-container ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+  text-align: left;
+}
+
+.maps-container li {
+  margin: 5px 0;
+  padding: 5px;
+  border-radius: 5px;
+  width: 200px;
+  display: block;
+  text-align: center;
+}
+
+.maps-container li:hover {
+  background: #f0f0f0;
 }
 </style>
