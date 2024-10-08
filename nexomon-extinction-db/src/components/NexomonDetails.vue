@@ -77,7 +77,7 @@ export default {
       return this.nexomon && parseInt(this.nexomon.Number) > 1;
     },
     hasNext() {
-      return this.nexomon && parseInt(this.nexomon.Number) < this.nexomons.length; // Adjust this if needed
+      return this.nexomon && parseInt(this.nexomon.Number) < this.nexomons.length;
     }
   },
   methods: {
@@ -86,6 +86,7 @@ export default {
     },
 
     goToNexomon(number) {
+      this.showCosmic = false;
       this.$router.push({ name: 'NexomonDetails', params: { number } });
     },
 
@@ -95,6 +96,11 @@ export default {
         return `/nexomon/${evolvedNexomon.Number}`
       }
       return ''      
+    },
+
+    // Method to split and clean up the Maps field into an array
+    parseMaps(mapsString) {
+      return mapsString.split(',').map(map => map.trim());
     },
 
     getImage(imageName, showCosmic) {
@@ -227,5 +233,32 @@ button {
   height: auto;
   display: block;
   margin: 0 auto;
+}
+
+.locations-container {
+  margin-top: 20px;
+}
+
+.location-section {
+  margin-bottom: 20px;
+}
+
+.region-info {
+  display: flex;
+  align-items: center;
+}
+
+.region-image {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.maps-list ul {
+  padding-left: 20px;
+}
+
+.maps-list li {
+  list-style-type: disc;
 }
 </style>
