@@ -47,19 +47,25 @@
         <div v-for="(location, index) in nexomon.Locations" :key="index"
           :class="{ 'location-stage': true, 'location-stage-active': clickedRegion === index }">
           <!-- Region Image and Name -->
-          <img @click="toggleRegion(index)" :src="getRegionImage(location.Region.text)" :alt="location.Region.text" class="location-image" />
+          <img @click="toggleRegion(index)" :src="getRegionImage(location.Region.text)" :alt="location.Region.text"
+            class="location-image" />
           <span>{{ location.Region.text }}</span>
 
           <!-- Maps (shown when clicked) -->
           <div v-if="clickedRegion === index" class="maps-container">
             <ul>
-              <li v-for="(map, mapIndex) in splitMaps(location.Maps)" :key="mapIndex">
+              <li v-for="(map, mapIndex) in splitMaps(location.Maps)" :key="mapIndex"
+                @mouseenter="showMapImage(map, $event)" @mouseleave="hideMapImage">
                 {{ map }}
               </li>
             </ul>
           </div>
         </div>
       </div>
+    </div>
+    <!-- Image display area -->
+    <div v-if="hoveredMapImage" class="map-image-container" :style="{ top: mouseY - 60 + 'px', left: mouseX - 120 + 'px' }">
+      <img :src="hoveredMapImage" alt="Map Image" class="map-image" />
     </div>
   </div>
 </template>
@@ -76,6 +82,7 @@ export default {
       nexomons: data,
       showCosmic: false,
       clickedRegion: null,
+      hoveredMapImage: null,
     };
   },
   computed: {
@@ -155,8 +162,6 @@ export default {
     },
 
     getRegionImage(regionName) {
-      console.log(regionName)
-
       while (regionName.includes(' ')) {
         regionName = regionName.replace(" ", "_")
       }
@@ -165,7 +170,57 @@ export default {
     },
 
     toggleSprite() {
-      this.showCosmic = !this.showCosmic; // Toggle between cosmic and regular sprite
+      this.showCosmic = !this.showCosmic;
+    },
+
+    showMapImage(map, event) {
+    this.hoveredMapImage = this.getMapImage(map);
+
+    // Get the bounding box of the hovered element
+    const hoveredElement = event.currentTarget.getBoundingClientRect();
+
+    const imageWidth = 300; // Adjust based on your image size
+    const imageHeight = 300; // Adjust based on your image size
+    const padding = 20; // Padding from the hovered element
+
+    // Get available window width and height
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
+
+    // Determine the X position (to the right of the hovered element)
+    let newXPosition = hoveredElement.right + padding;
+    if (newXPosition + imageWidth > windowWidth) {
+      // If it overflows, place it to the left
+      newXPosition = hoveredElement.left - imageWidth - padding;
+    }
+
+    // Determine the Y position (centered on the hovered element)
+    let newYPosition = hoveredElement.top + (hoveredElement.height / 2) - (imageHeight / 2);
+    if (newYPosition + imageHeight > windowHeight) {
+      // If it overflows at the bottom, adjust it upward
+      newYPosition = windowHeight - imageHeight - padding;
+    } else if (newYPosition < 0) {
+      // If it overflows at the top, adjust it downward
+      newYPosition = padding;
+    }
+
+    // Update the position based on the calculated values
+    this.mouseX = newXPosition;
+    this.mouseY = newYPosition;
+  },
+
+  hideMapImage() {
+    this.hoveredMapImage = null;
+  },
+
+    getMapImage(mapName) {
+      const formattedMapName = mapName.replace(/\s+/g, '_');
+      try {
+        return require(`@/assets/downloaded_location_images/${formattedMapName}.png`);
+      } catch (error) {
+        console.warn(`Map image for ${formattedMapName} not found.`);
+        return null;
+      }
     }
   }
 };
@@ -174,7 +229,6 @@ export default {
 <style scoped>
 .details-container {
   text-align: center;
-  /* Center-align all text in the container */
 }
 
 .sprite-container {
@@ -291,8 +345,10 @@ button {
 }
 
 .location-stage-active {
-  background-color: rgba(0, 0, 0, 0.1); /* Set a new background color when active */
-  transform: scale(1.02); /* Optional: slightly scale the card for a visual cue */
+  background-color: rgba(0, 0, 0, 0.1);
+  /* Set a new background color when active */
+  transform: scale(1.02);
+  /* Optional: slightly scale the card for a visual cue */
 }
 
 .location-image {
@@ -333,5 +389,26 @@ button {
 
 .maps-container li:hover {
   background: #f0f0f0;
+}
+
+.map-image-container {
+  position: fixed;
+  /* Fixed positioning to keep it on top */
+  z-index: 100;
+  /* High z-index to ensure it appears above all other elements */
+  pointer-events: none;
+  /* Allow clicks to pass through */
+}
+
+.map-image {
+  width: 25%;
+  /* Adjust the size of the image as necessary */
+  height: auto;
+  border: 1px solid #ccc;
+  /* Optional: Add border for better visibility */
+  border-radius: 5px;
+  /* Optional: Round corners */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  /* Optional: Add shadow */
 }
 </style>
