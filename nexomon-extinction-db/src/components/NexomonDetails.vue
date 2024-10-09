@@ -323,7 +323,6 @@ button {
   border-radius: 8px;
   padding: 10px;
   text-align: center;
-  background-color: #f9f9f9;
   transition: transform 0.3s ease;
   cursor: pointer;
   overflow: hidden;

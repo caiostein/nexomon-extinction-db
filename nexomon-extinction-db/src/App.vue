@@ -39,4 +39,26 @@ nav a {
 nav a.router-link-exact-active {
   color: #42b983;
 }
+
+@media (prefers-color-scheme: dark) {
+  #app, body, html {
+    background-color: #212529;
+    color: #e0e0e0;
+  }
+
+  .maps-list {
+    background-color: #313131;
+    border-top: 1px solid #ccc;
+  }
+
+  .search-box {
+    background-color: #5a5959;
+    color: #f1f1f1;
+  }
+
+  .toggle-button {
+    background-color: #555;
+    color: #fff;
+  }
+}
 </style>
