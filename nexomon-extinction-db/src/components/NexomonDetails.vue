@@ -341,7 +341,6 @@ button {
 
 .maps-list {
   padding: 10px;
-  background-color: #f0f0f0;
   border-top: 1px solid #ccc;
   margin-top: 10px;
   max-height: 0;

@@ -27,6 +27,10 @@
   color: #2c3e50;
 }
 
+.maps-list {  
+  background-color: #f0f0f0;
+}
+
 nav {
   padding: 30px;
 }
