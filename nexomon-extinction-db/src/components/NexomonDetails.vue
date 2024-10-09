@@ -46,6 +46,7 @@
       <div>
         <div v-for="(location, index) in nexomon.Locations" :key="index"
           :class="{ 'location-stage': true, 'location-stage-active': clickedRegion === index }">
+          
           <!-- Region Image and Name -->
           <img @click="toggleRegion(index)" :src="getRegionImage(location.Region.text)" :alt="location.Region.text"
             class="location-image" />
@@ -60,6 +61,7 @@
               </li>
             </ul>
           </div>
+
         </div>
       </div>
     </div>
@@ -364,9 +366,7 @@ button {
   display: block;
   /* Block level to take up the full width inside location-stage */
   position: absolute;
-  /* Position the maps container relative to location-stage */
   left: 50%;
-  /* Move to the middle of the location-stage */
   transform: translateX(-50%);
   /* Center the maps-container horizontally */
 }
@@ -394,8 +394,6 @@ button {
 .map-image-container {
   position: fixed;
   /* Fixed positioning to keep it on top */
-  z-index: 100;
-  /* High z-index to ensure it appears above all other elements */
   pointer-events: none;
   /* Allow clicks to pass through */
 }
