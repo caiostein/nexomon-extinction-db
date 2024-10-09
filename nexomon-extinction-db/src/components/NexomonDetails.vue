@@ -64,7 +64,7 @@
       </div>
     </div>
     <!-- Image display area -->
-    <div v-if="hoveredMapImage" class="map-image-container" :style="{ top: mouseY - 60 + 'px', left: mouseX - 120 + 'px' }">
+    <div v-if="hoveredMapImage" class="map-image-container" :style="{ top: mouseY + 'px', left: mouseX + 'px' }">
       <img :src="hoveredMapImage" alt="Map Image" class="map-image" />
     </div>
   </div>
@@ -401,7 +401,7 @@ button {
 }
 
 .map-image {
-  width: 25%;
+  width: 500px;
   /* Adjust the size of the image as necessary */
   height: auto;
   border: 1px solid #ccc;
