@@ -30,46 +30,42 @@
 
     <!-- Add more details as needed -->
 
-    <div v-if="nexomon.Evolution && nexomon.Evolution.length" class="evolution-container">
-      <h3>Evolution Line:</h3>
-      <div>
-        <router-link class="evolution-stage" v-for="(details, nexomonName) in nexomonEvolution" :key="nexomonName"
-          :to="goToEvolution(nexomonName)">
-          <img :src="getImage(nexomonName)" :alt="nexomonName" class="evolution-image" />
-          <span>{{ nexomonName }} - {{ details.text }}</span>
-        </router-link>
-      </div>
-    </div>
+  </div>
 
-    <div class="location-container" v-if="nexomon.Locations && nexomon.Locations.length">
-      <h3>Locations:</h3>
-      <div>
-        <div v-for="(location, index) in nexomon.Locations" :key="index"
-          :class="{ 'location-stage': true, 'location-stage-active': clickedRegion === index }">
-          
-          <!-- Region Image and Name -->
-          <img @click="toggleRegion(index)" :src="getRegionImage(location.Region.text)" :alt="location.Region.text"
-            class="location-image" />
-          <span>{{ location.Region.text }}</span>
-
-          <!-- Maps (shown when clicked) -->
-          <div v-if="clickedRegion === index" class="maps-container">
-            <ul>
-              <li v-for="(map, mapIndex) in splitMaps(location.Maps)" :key="mapIndex"
-                @mouseenter="showMapImage(map, $event)" @mouseleave="hideMapImage">
-                {{ map }}
-              </li>
-            </ul>
-          </div>
-
-        </div>
-      </div>
-    </div>
-    <!-- Image display area -->
-    <div v-if="hoveredMapImage" class="map-image-container" :style="{ top: mouseY + 'px', left: mouseX + 'px' }">
-      <img :src="hoveredMapImage" alt="Map Image" class="map-image" />
+  <div v-if="nexomon.Evolution && nexomon.Evolution.length" class="evolution-container">
+    <h3>Evolution Line:</h3>
+    <div>
+      <router-link class="evolution-stage" v-for="(details, nexomonName) in nexomonEvolution" :key="nexomonName"
+        :to="goToEvolution(nexomonName)">
+        <img :src="getImage(nexomonName)" :alt="nexomonName" class="evolution-image" />
+        <span>{{ nexomonName }} - {{ details.text }}</span>
+      </router-link>
     </div>
   </div>
+
+  <div class="habitat-info">
+    <h3>Habitats</h3>
+    <div class="regions-grid">
+
+      <div class="region-card" v-for="(region, index) in nexomon.Locations" :key="index" @click="toggleRegion(index)">
+
+        <img :src="getRegionImage(region.Region.text)" alt="Region Image" class="region-image" />
+        
+        <div class="region-text">
+        <h4>{{ region.Region.text }}</h4>
+        </div>
+
+        <!-- Only show maps when the card is expanded -->
+        <div :class="{ 'maps-list': true, 'expanded': expandedRegion === index, 'collapsed': expandedRegion !== index }">
+          <ul>
+            <li v-for="map in region.Maps.split(', ')" :key="map">{{ map }}</li>
+          </ul>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
 </template>
 
 
@@ -83,8 +79,7 @@ export default {
     return {
       nexomons: data,
       showCosmic: false,
-      clickedRegion: null,
-      hoveredMapImage: null,
+      expandedRegion: null
     };
   },
   computed: {
@@ -105,14 +100,12 @@ export default {
     }
   },
   methods: {
-    // Toggle the region to show or hide maps
+
     toggleRegion(index) {
-      this.clickedRegion = this.clickedRegion === index ? null : index;
+      // Toggle the region between expanded and collapsed states
+      this.expandedRegion = this.expandedRegion === index ? null : index;
     },
-    // Split maps string into an array
-    splitMaps(maps) {
-      return maps.split(", ").map(map => map.trim());
-    },
+
     goBack() {
       this.$router.push({ name: 'dex', params: {} });
     },
@@ -129,11 +122,6 @@ export default {
         return `/nexomon/${evolvedNexomon.Number}`
       }
       return ''
-    },
-
-    // Method to split and clean up the Maps field into an array
-    parseMaps(mapsString) {
-      return mapsString.split(',').map(map => map.trim());
     },
 
     getImage(imageName, showCosmic) {
@@ -174,46 +162,6 @@ export default {
     toggleSprite() {
       this.showCosmic = !this.showCosmic;
     },
-
-    showMapImage(map, event) {
-    this.hoveredMapImage = this.getMapImage(map);
-
-    // Get the bounding box of the hovered element
-    const hoveredElement = event.currentTarget.getBoundingClientRect();
-
-    const imageWidth = 300; // Adjust based on your image size
-    const imageHeight = 300; // Adjust based on your image size
-    const padding = 20; // Padding from the hovered element
-
-    // Get available window width and height
-    const windowWidth = window.innerWidth;
-    const windowHeight = window.innerHeight;
-
-    // Determine the X position (to the right of the hovered element)
-    let newXPosition = hoveredElement.right + padding;
-    if (newXPosition + imageWidth > windowWidth) {
-      // If it overflows, place it to the left
-      newXPosition = hoveredElement.left - imageWidth - padding;
-    }
-
-    // Determine the Y position (centered on the hovered element)
-    let newYPosition = hoveredElement.top + (hoveredElement.height / 2) - (imageHeight / 2);
-    if (newYPosition + imageHeight > windowHeight) {
-      // If it overflows at the bottom, adjust it upward
-      newYPosition = windowHeight - imageHeight - padding;
-    } else if (newYPosition < 0) {
-      // If it overflows at the top, adjust it downward
-      newYPosition = padding;
-    }
-
-    // Update the position based on the calculated values
-    this.mouseX = newXPosition;
-    this.mouseY = newYPosition;
-  },
-
-  hideMapImage() {
-    this.hoveredMapImage = null;
-  },
 
     getMapImage(mapName) {
       const formattedMapName = mapName.replace(/\s+/g, '_');
@@ -327,86 +275,113 @@ button {
   margin: 0 auto;
 }
 
-.location-container {
-  margin-top: 20px;
-  text-align: center;
+.habitat-info {
+  margin: 20px 0;
 }
 
-.location-stage {
-  display: inline-block;
-  margin: 10px;
-  margin-bottom: 40px;
-  text-align: center;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease, transform 0.3s ease;
-  cursor: pointer;
-  position: relative;
-  /* Allows positioning of the maps-container relative to location-stage */
-}
-
-.location-stage-active {
-  background-color: rgba(0, 0, 0, 0.1);
-  /* Set a new background color when active */
-  transform: scale(1.02);
-  /* Optional: slightly scale the card for a visual cue */
-}
-
-.location-image {
-  width: 300px;
-  height: auto;
-  display: block;
+.regions-grid {
+  display: grid;
+  align-items: start;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  justify-content: center;
+  /* This will center the grid */
+  max-width: 1000px;
+  /* Optional: restrict the grid's width if needed */
   margin: 0 auto;
+  /* Center the grid container itself */
 }
 
-.maps-container {
-  margin-top: 10px;
-  text-align: center;
-  display: block;
-  /* Block level to take up the full width inside location-stage */
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  /* Center the maps-container horizontally */
+@keyframes expand {
+  from {
+    max-height: 0;
+    opacity: 0;
+  }
+
+  to {
+    max-height: 500px;
+    /* Adjust based on content height */
+    opacity: 1;
+  }
 }
 
-.maps-container ul {
-  list-style-type: none;
-  padding-left: 0;
-  margin: 0;
-  text-align: left;
+@keyframes collapse {
+  from {
+    max-height: 500px;
+    /* Same as above, must match content */
+    opacity: 1;
+  }
+
+  to {
+    max-height: 0;
+    opacity: 0;
+  }
 }
 
-.maps-container li {
-  margin: 5px 0;
-  padding: 5px;
-  border-radius: 5px;
-  width: 200px;
-  display: block;
-  text-align: center;
-}
-
-.maps-container li:hover {
-  background: #f0f0f0;
-}
-
-.map-image-container {
-  position: fixed;
-  /* Fixed positioning to keep it on top */
-  pointer-events: none;
-  /* Allow clicks to pass through */
-}
-
-.map-image {
-  width: 500px;
-  /* Adjust the size of the image as necessary */
-  height: auto;
+.region-card {
   border: 1px solid #ccc;
-  /* Optional: Add border for better visibility */
-  border-radius: 5px;
-  /* Optional: Round corners */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  /* Optional: Add shadow */
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+  background-color: #f9f9f9;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  overflow: hidden;
+  /* Ensure the content doesn't overflow */
+}
+
+.region-card:hover {
+  transform: scale(1.01);
+}
+
+.region-image {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.maps-list {
+  padding: 10px;
+  background-color: #f0f0f0;
+  border-top: 1px solid #ccc;
+  margin-top: 10px;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  /* Ensure the collapsed content is hidden */
+}
+
+.maps-list ul {
+  list-style-type: none; /* Remove bullet points */
+  padding-left: 0; /* Remove default padding */
+  margin-left: 0; /* Remove default margin */
+  margin-bottom: 0;
+}
+
+.maps-list li {
+  transition: background-color 0.3s ease, color 0.3s ease;
+  list-style-type: none;
+  padding-bottom: 3%;
+  padding-top: 3%;
+  background-clip: padding-box;
+}
+
+.maps-list li:hover {
+  background-color: #e0e0e0; /* Change to your preferred highlight color */
+  color: #000; /* Optional: Change the text color on hover */
+  cursor: pointer; /* Optional: Change the cursor to indicate interactivity */
+}
+
+.maps-list.expanded {
+  animation: expand 0.3s forwards;
+}
+
+.maps-list.collapsed {
+  animation: collapse 0.3s forwards;
+  position: absolute;
+}
+
+.region-text {
+  padding-top: 15px;
 }
 </style>
