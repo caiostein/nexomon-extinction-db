@@ -45,6 +45,9 @@
 
   <div class="habitat-info">
     <h3>Habitats</h3>
+
+    <p v-if="!hasLocations">{{ locationException }}</p>
+
     <div class="regions-grid">
 
       <div class="region-card" v-for="(region, index) in nexomon.Locations" :key="index" @click="toggleRegion(index)">
@@ -77,12 +80,14 @@
 
 <script>
 import data from '../../../python-scripts/assets/nexomon_extinction_database.json';
+import locationExceptions from '../assets/location_exceptions.json';
 
 export default {
   props: ['number'],
   data() {
     return {
       nexomons: data,
+      locationExceptions: locationExceptions,
       showCosmic: false,
       expandedRegion: null,
       hoveredMap: null
@@ -103,6 +108,16 @@ export default {
     },
     hasNext() {
       return this.nexomon && parseInt(this.nexomon.Number) < this.nexomons.length;
+    },
+    hasLocations() {
+      return this.nexomon && this.nexomon.Locations && this.nexomon.Locations.length > 0;
+    },
+    locationException() {
+      if (!this.hasLocations && this.nexomon) {
+        // Use the Nexomon name as the key in the dictionary
+        return this.locationExceptions[this.nexomon.Name] || "No specific habitat information.";
+      }
+      return null;
     }
   },
   methods: {
