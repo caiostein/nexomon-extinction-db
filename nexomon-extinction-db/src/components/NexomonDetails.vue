@@ -50,26 +50,23 @@
       <div class="region-card" v-for="(region, index) in nexomon.Locations" :key="index" @click="toggleRegion(index)">
 
         <img :src="getRegionImage(region.Region.text)" alt="Region Image" class="region-image" />
-        
+
         <div class="region-text">
-        <h4>{{ region.Region.text }}</h4>
+          <h4>{{ region.Region.text }}</h4>
         </div>
 
         <!-- Only show maps when the card is expanded -->
-        <div :class="{ 'maps-list': true, 'expanded': expandedRegion === index, 'collapsed': expandedRegion !== index }">
+        <div
+          :class="{ 'maps-list': true, 'expanded': expandedRegion === index, 'collapsed': expandedRegion !== index }">
           <ul @click.stop>
-            <li
-                v-for="map in region.Maps.split(', ')"
-                :key="map"
-                @mouseenter="hoverMap(map)"
-                @mouseleave="hoverMap(null)"
-              >
+            <li v-for="map in region.Maps.split(', ')" :key="map" @mouseenter="hoverMap(map)"
+              @mouseleave="hoverMap(null)">
               {{ map }} <br>
               <img v-if="hoveredMap === map" :src="getMapImage(map)" alt="Map Image" class="map-preview" />
             </li>
           </ul>
         </div>
-        
+
       </div>
     </div>
   </div>
@@ -111,8 +108,23 @@ export default {
   methods: {
 
     toggleRegion(index) {
-      // Toggle the region between expanded and collapsed states
-      this.expandedRegion = this.expandedRegion === index ? null : index;
+      if (this.expandedRegion !== index) {
+        this.expandedRegion = index;
+
+        // Preload all map images for the clicked region
+        this.preloadMapImages(this.nexomon.Locations[index].Maps.split(', '));
+      } else {
+        this.expandedRegion = null; // Collapse the region if it's already expanded
+      }
+    },
+
+    preloadMapImages(mapNames) {
+      this.preloadedImages = mapNames.map(mapName => {
+        const formattedMapName = mapName.replace(/\s+/g, '_'); // Format the map name as needed
+        const img = new Image();
+        img.src = this.getMapImage(formattedMapName);
+        return img;
+      });
     },
 
     hoverMap(map) {
@@ -372,9 +384,12 @@ button {
 }
 
 .maps-list ul {
-  list-style-type: none; /* Remove bullet points */
-  padding-left: 0; /* Remove default padding */
-  margin-left: 0; /* Remove default margin */
+  list-style-type: none;
+  /* Remove bullet points */
+  padding-left: 0;
+  /* Remove default padding */
+  margin-left: 0;
+  /* Remove default margin */
   margin-bottom: 0;
 }
 
@@ -387,9 +402,12 @@ button {
 }
 
 .maps-list li:hover {
-  background-color: #e0e0e0; /* Change to your preferred highlight color */
-  color: #000; /* Optional: Change the text color on hover */
-  cursor: pointer; /* Optional: Change the cursor to indicate interactivity */
+  background-color: #e0e0e0;
+  /* Change to your preferred highlight color */
+  color: #000;
+  /* Optional: Change the text color on hover */
+  cursor: pointer;
+  /* Optional: Change the cursor to indicate interactivity */
 }
 
 .maps-list.expanded {
