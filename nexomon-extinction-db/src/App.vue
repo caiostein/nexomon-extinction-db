@@ -1,8 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#" style="margin-left: 15px;">Nexomon Extinction Database</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -52,42 +51,41 @@ export default {
 
 <style>
 #app {
+  min-height: 100%; /* Ensure the app fills at least the viewport */
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   background-color: #ffffff;
+  height: fit-content;
   color: #000000;
 }
 
 html, body {
-  background-color: #ffffff;
-  color: #000000;
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+  height: 100%; /* Ensure full height for body and app */
+  overflow-x: hidden; /* Prevent horizontal overflow */
 }
 
-nav {
+.navbar {
   padding: 30px;
+  width: 100%; /* Ensure navbar takes full width */
 }
 
-nav a {
+.navbar a {
   font-weight: bold;
-  color: #2c3e50;
+  color: #e0e0e0;
+  text-shadow: 2px 0 #000000, -2px 0 #000000, 0 2px #000000, 0 -2px #000000,
+               1px 1px #000000, -1px -1px #000000, 1px -1px #000000, -1px 1px #000000;
 }
 
-nav a.router-link-exact-active {
-  color: #3aa9bd;
+.navbar a.router-link-exact-active {
+  color: #e2e79e;
 }
 
 .maps-list {
   background-color: #f0f0f0;
-}
-
-#app {
-  height: fit-content; /* Ensure full height for body and app */
-}
-
-body, html {
-  height: 100%; /* Ensure full height for body and app */
 }
 
 #app {

@@ -324,7 +324,7 @@ button {
   }
 
   to {
-    max-height: 500px;
+    max-height: 1000px;
     /* Adjust based on content height */
     opacity: 1;
   }
