@@ -66,6 +66,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: center; /* Center align cards */
+  min-height: 800px; /* Set a minimum height to prevent collapsing */
 }
 
 .nexomon-card {
@@ -79,6 +80,7 @@ export default {
   transition: background-color 0.3s ease, transform 0.3s ease;
   text-decoration: none;
   color: inherit;
+  max-height: 278px;
 }
 
 .nexomon-card img {
@@ -92,7 +94,7 @@ export default {
 }
 
 .nexomon-card:hover {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(141, 140, 140, 0.068);
   transform: scale(1.02);
 }
 
@@ -100,7 +102,7 @@ export default {
   width: 100%; /* Full width on smaller screens */
   max-width: 300px; /* Limit maximum width */
   padding: 10px;
-  margin-top: 40px;
+  margin: 40px auto; /* Centered and space from the top */
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -118,6 +120,7 @@ export default {
     width: calc(30% - 20px); /* Maintain three cards per row on small mobile devices */
     margin: 10px; /* Space between cards */
     flex-basis: 26.9%;
+    max-height: 144px;
   }
 
   .nexomon-card h3 {

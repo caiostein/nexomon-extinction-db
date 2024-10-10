@@ -65,7 +65,7 @@ html, body {
   margin: 0; /* Remove default margin */
   padding: 0; /* Remove default padding */
   height: 100%; /* Ensure full height for body and app */
-  overflow-x: hidden; /* Prevent horizontal overflow */
+  
 }
 
 .navbar {
