@@ -1,20 +1,11 @@
 <template>
   <div>
     <!-- Search Input -->
-    <input
-      type="text"
-      v-model="searchQuery"
-      placeholder="Search for a Nexomon"
-      class="search-box"
-    />
+    <input type="text" v-model="searchQuery" placeholder="Search for a Nexomon" class="search-box" />
 
     <div class="nexomon-grid">
-      <router-link
-        v-for="nexomon in filteredNexomons"
-        :key="nexomon.Number"
-        :to="`/nexomon/${nexomon.Number}`"
-        class="nexomon-card"
-      >
+      <router-link v-for="nexomon in filteredNexomons" :key="nexomon.Number" :to="`/nexomon/${nexomon.Number}`"
+        class="nexomon-card">
         <h3>{{ nexomon.Number }} - {{ nexomon.Name }}</h3>
         <img :src="getThumbnail(nexomon.Name)" alt="Sprite" />
       </router-link>
@@ -65,13 +56,17 @@ export default {
   margin: 45px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center; /* Center align cards */
-  min-height: 800px; /* Set a minimum height to prevent collapsing */
+  justify-content: center;
+  /* Center align cards */
+  min-height: 10000px;
+  /* Set a minimum height to prevent collapsing */
 }
 
 .nexomon-card {
-  width: calc(14% - 14.8px); /* Default width for larger screens */
-  margin: 30px; /* Space between cards */
+  width: calc(14% - 14.8px);
+  /* Default width for larger screens */
+  margin: 30px;
+  /* Space between cards */
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -84,13 +79,17 @@ export default {
 }
 
 .nexomon-card img {
-  max-width: 100%; /* Full width for images */
-  height: auto; /* Maintain aspect ratio */
+  max-width: 100%;
+  /* Full width for images */
+  height: auto;
+  /* Maintain aspect ratio */
 }
 
 .nexomon-card h3 {
-  font-size: 1.5em; /* Default font size */
-  margin: 5px 0; /* Space around the heading */
+  font-size: 1.5em;
+  /* Default font size */
+  margin: 5px 0;
+  /* Space around the heading */
 }
 
 .nexomon-card:hover {
@@ -99,46 +98,70 @@ export default {
 }
 
 .search-box {
-  width: 100%; /* Full width on smaller screens */
-  max-width: 300px; /* Limit maximum width */
+  width: 100%;
+  /* Full width on smaller screens */
+  max-width: 300px;
+  /* Limit maximum width */
   padding: 10px;
-  margin: 40px auto; /* Centered and space from the top */
+  margin: 40px auto;
+  /* Centered and space from the top */
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
 
 /* Media Queries for Responsiveness */
-@media (max-width: 768px) {
+
+@media (max-width: 3840px) {
   .nexomon-card {
-    width: calc(10% - 10px); /* Two cards per row on tablets */
+    width: calc(14% - 14.8px);
+    margin: 30px;
+    max-height: 300px;
+  }
+}
+
+@media (max-width: 1925px) {
+  .nexomon-card {
+    width: calc(14% - 14.8px);
+    /* Default width for larger screens */
+    margin: 30px;
+    max-height: 278px;
+  }
+}
+
+
+@media (max-width: 1280px) {
+  .nexomon-card {
+    width: calc(30% - 20px);
+    /* Maintain three cards per row on small mobile devices */
+    margin: 10px;
+    /* Space between cards */
+    flex-basis: 26.9%;
+    max-height: 289px;
   }
 }
 
 @media (max-width: 480px) {
   .nexomon-card {
-    width: calc(30% - 20px); /* Maintain three cards per row on small mobile devices */
-    margin: 10px; /* Space between cards */
+    width: calc(30% - 20px);
+    /* Maintain three cards per row on small mobile devices */
+    margin: 10px;
+    /* Space between cards */
     flex-basis: 26.9%;
     max-height: 144px;
   }
 
   .nexomon-card h3 {
-    font-size: 0.9em; /* Smaller font size for small devices */
+    font-size: 0.9em;
+    /* Smaller font size for small devices */
   }
 
   .nexomon-grid {
-    justify-content: space-between; /* Space out cards */
+    justify-content: space-between;
+    /* Space out cards */
     margin: 20px;
     flex-flow: row wrap;
   }
- 
-}
 
-@media (max-width: 360px) {
-  .nexomon-card {
-    width: calc(33.33% - 10px); /* Two cards per row on extra-small mobile devices */
-  }
 }
 </style>
-
