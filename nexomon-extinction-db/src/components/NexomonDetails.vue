@@ -57,8 +57,16 @@
 
         <!-- Only show maps when the card is expanded -->
         <div :class="{ 'maps-list': true, 'expanded': expandedRegion === index, 'collapsed': expandedRegion !== index }">
-          <ul>
-            <li v-for="map in region.Maps.split(', ')" :key="map">{{ map }}</li>
+          <ul @click.stop>
+            <li
+                v-for="map in region.Maps.split(', ')"
+                :key="map"
+                @mouseenter="hoverMap(map)"
+                @mouseleave="hoverMap(null)"
+              >
+              {{ map }} <br>
+              <img v-if="hoveredMap === map" :src="getMapImage(map)" alt="Map Image" class="map-preview" />
+            </li>
           </ul>
         </div>
         
@@ -79,7 +87,8 @@ export default {
     return {
       nexomons: data,
       showCosmic: false,
-      expandedRegion: null
+      expandedRegion: null,
+      hoveredMap: null
     };
   },
   computed: {
@@ -104,6 +113,10 @@ export default {
     toggleRegion(index) {
       // Toggle the region between expanded and collapsed states
       this.expandedRegion = this.expandedRegion === index ? null : index;
+    },
+
+    hoverMap(map) {
+      this.hoveredMap = map;
     },
 
     goBack() {
@@ -326,7 +339,6 @@ button {
   transition: transform 0.3s ease;
   cursor: pointer;
   overflow: hidden;
-  /* Ensure the content doesn't overflow */
 }
 
 .region-card:hover {
@@ -347,6 +359,16 @@ button {
   opacity: 0;
   overflow: hidden;
   /* Ensure the collapsed content is hidden */
+}
+
+.map-preview {
+  margin-left: 10px;
+  height: 130px;
+  display: inline-block;
+  overflow: visible;
+  vertical-align: middle;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 .maps-list ul {
