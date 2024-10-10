@@ -137,7 +137,7 @@ export default {
 
     goToNexomon(number) {
       this.showCosmic = false;
-      this.clickedRegion = null;
+      this.expandedRegion = null;
       this.$router.push({ name: 'NexomonDetails', params: { number } });
     },
 
