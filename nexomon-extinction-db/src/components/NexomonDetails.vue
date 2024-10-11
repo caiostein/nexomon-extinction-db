@@ -485,8 +485,8 @@ button {
 }
 
 .highlighted-map {
-  background-color: #000000; 
-  border: 2px solid #ff9800; 
+  background-color: #454545; 
+  border: 2px solid white; 
   cursor: pointer;
 }
 
