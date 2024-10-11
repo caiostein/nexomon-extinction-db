@@ -1,0 +1,48 @@
+.sprite-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .toggle-button {
+    padding: 5px;
+    background-color: #2b9fcc;
+    color: #fff;
+    border: none;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .element-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+  }
+  
+  .element-label {
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+    margin-right: 5px
+  }
+  
+  .nexomon-sprite {
+    max-width: 300px;
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .nexomon-card {
+    width: calc(25% - 10px);
+    margin-bottom: 20px;
+    padding: 10px;
+  
+  }

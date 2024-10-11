@@ -1,0 +1,50 @@
+{
+    "types": {
+      "Normal": {
+        "strong_against": [],
+        "weak_against": ["Ghost", "Psychic"],
+        "neutral_against": ["Normal", "Fire", "Water", "Plant", "Wind", "Electric", "Mineral"]
+      },
+      "Fire": {
+        "strong_against": ["Plant", "Wind", "Ghost"],
+        "weak_against": ["Water", "Fire", "Mineral"],
+        "neutral_against": ["Normal", "Electric", "Psychic"]
+      },
+      "Water": {
+        "strong_against": ["Fire", "Mineral", "Ghost"],
+        "weak_against": ["Plant", "Water", "Electric"],
+        "neutral_against": ["Normal", "Wind", "Psychic"]
+      },
+      "Plant": {
+        "strong_against": ["Water", "Electric", "Psychic"],
+        "weak_against": ["Fire", "Plant", "Wind"],
+        "neutral_against": ["Normal", "Mineral", "Ghost"]
+      },
+      "Wind": {
+        "strong_against": ["Plant", "Mineral"],
+        "weak_against": ["Fire", "Electric", "Ghost"],
+        "neutral_against": ["Normal", "Water", "Wind", "Psychic"]
+      },
+      "Electric": {
+        "strong_against": ["Water", "Wind", "Psychic"],
+        "weak_against": ["Plant", "Electric", "Mineral"],
+        "neutral_against": ["Normal", "Fire", "Ghost"]
+      },
+      "Mineral": {
+        "strong_against": ["Fire", "Electric"],
+        "weak_against": ["Water", "Wind", "Psychic"],
+        "neutral_against": ["Normal", "Ghost", "Plant", "Mineral"]
+      },
+      "Ghost": {
+        "strong_against": ["Normal", "Wind", "Psychic"],
+        "weak_against": ["Fire", "Water"],
+        "neutral_against": ["Plant", "Electric", "Mineral", "Ghost"]
+      },
+      "Psychic": {
+        "strong_against": ["Normal", "Electric", "Ghost"],
+        "weak_against": ["Mineral", "Psychic"],
+        "neutral_against": ["Fire", "Water", "Plant", "Wind"]
+      }
+    }
+  }
+  
