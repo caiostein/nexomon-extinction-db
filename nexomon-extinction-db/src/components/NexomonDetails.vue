@@ -63,14 +63,22 @@
           :class="{ 'maps-list': true, 'expanded': expandedRegion === index, 'collapsed': expandedRegion !== index }">
           <ul @click.stop>
             <li v-for="map in region.Maps.split(', ')" :key="map" @mouseenter="hoverMap(map)"
-              @mouseleave="hoverMap(null)">
+              @mouseleave="hoverMap(null)" @click="clickMap(map)" :class="{ 'highlighted-map': clickedMap === map }">
               {{ map }} <br>
-              <img v-if="hoveredMap === map" :src="getMapImage(map)" alt="Map Image" class="map-preview" />
+              <img v-if="hoveredMap === map || clickedMap === map" :src="getMapImage(map)" alt="Map Image"
+                class="map-preview" />
             </li>
           </ul>
         </div>
 
       </div>
+    </div>
+  </div>
+
+  <!-- Supa Zoom -->
+  <div v-if="showZoom" class="zoomed-map-overlay" @click="closeZoom">
+    <div class="zoomed-map-container">
+      <img :src="zoomedMap" alt="Zoomed Map" class="zoomed-map-image" />
     </div>
   </div>
 
@@ -90,7 +98,10 @@ export default {
       locationExceptions: locationExceptions,
       showCosmic: false,
       expandedRegion: null,
-      hoveredMap: null
+      hoveredMap: null,
+      zoomedMap: null,
+      showZoom: false,
+      clickedMap: null
     };
   },
   computed: {
@@ -144,6 +155,17 @@ export default {
 
     hoverMap(map) {
       this.hoveredMap = map;
+    },
+
+    clickMap(map) {
+      this.clickedMap = map;
+      this.zoomedMap = this.getMapImage(map);
+      this.showZoom = true;
+    },
+
+    closeZoom() {
+      this.clickedMap = null;
+      this.showZoom = false;
     },
 
     goBack() {
@@ -436,5 +458,39 @@ button {
 
 .region-text {
   padding-top: 15px;
+}
+
+.zoomed-map-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.zoomed-map-container {
+  position: relative;
+}
+
+.zoomed-map-image {
+  max-width: 90%;
+  max-height: 90%;
+  border: 5px solid white;
+  border-radius: 8px;
+}
+
+.highlighted-map {
+  background-color: #000000; 
+  border: 2px solid #ff9800; 
+  cursor: pointer;
+}
+
+.highlighted-map:hover {
+  background-color: #ffc107; 
 }
 </style>
