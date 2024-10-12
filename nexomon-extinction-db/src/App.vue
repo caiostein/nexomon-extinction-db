@@ -76,8 +76,6 @@ html, body {
 .navbar a {
   font-weight: bold;
   color: #e0e0e0;
-  text-shadow: 2px 0 #000000, -2px 0 #000000, 0 2px #000000, 0 -2px #000000,
-               1px 1px #000000, -1px -1px #000000, 1px -1px #000000, -1px 1px #000000;
 }
 
 .navbar a.router-link-exact-active {
@@ -101,6 +99,8 @@ html, body {
 .dark-mode #app {
   background-color: #212529;
   color: #e0e0e0;
+  text-shadow: 2px 0 #000000, -2px 0 #000000, 0 2px #000000, 0 -2px #000000,
+               1px 1px #000000, -1px -1px #000000, 1px -1px #000000, -1px 1px #000000;
 }
 
 /* Maps list and other sections */

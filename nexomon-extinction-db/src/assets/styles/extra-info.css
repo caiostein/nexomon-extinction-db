@@ -1,0 +1,126 @@
+.extra-info {
+  display: flex;
+  align-items: start;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  justify-content: center;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.extra-section {
+  width: 100%;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  user-select: none
+}
+
+.extra-section:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  transform: scale(1.01);
+}
+
+.extra-section h3 {
+  text-align: center;
+  font-size: 24px;
+}
+
+@keyframes expand {
+  from {
+    max-height: 0;
+    opacity: 0;
+  }
+
+  to {
+    max-height: 1000px;
+    /* Adjust based on content height */
+    opacity: 1;
+  }
+}
+
+@keyframes collapse {
+  from {
+    max-height: 500px;
+    /* Same as above, must match content */
+    opacity: 1;
+  }
+
+  to {
+    max-height: 0;
+    opacity: 0;
+  }
+}
+
+.extra-list.expanded {
+  animation: expand 0.3s forwards;
+}
+
+.extra-list.collapsed {
+  animation: collapse 0.3s forwards;
+  position: absolute;
+}
+
+.extra-list table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.extra-list td {
+  padding: 10px;
+  vertical-align: top;
+}
+
+.extra-list strong {
+  display: block;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.extra-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.extra-item {
+  display: flex;
+  justify-content: left;
+  padding: 5px 0 0 25%;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+.extra-item:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+}
+
+.food-image {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.element-image {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  margin-bottom: 3px;
+}
+
+.battle-text {
+  text-shadow: 2px 0 #000000, -2px 0 #000000, 0 2px #000000, 0 -2px #000000,
+               1px 1px #000000, -1px -1px #000000, 1px -1px #000000, -1px 1px #000000;
+}
+
+@media (max-width: 480px) {
+  .extra-item {
+    padding: 0 0 0 0;    
+  }
+  .extra-section {
+    margin: 15px;
+  }
+}

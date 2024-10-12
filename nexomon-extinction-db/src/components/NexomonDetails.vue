@@ -9,7 +9,7 @@
 
     <div class="element-info">
       <h3>Element:</h3>
-      <img :src="getImage(nexomon.Element + '_Type_Icon')" alt="Element Image" class="element-image" />
+      <img :src="getImage(nexomon.Element + '_Type_Icon')" alt="Element Image" class="element-label" />
       <span>{{ nexomon.Element }}</span>
 
       <button v-if="nexomon.Sprites && nexomon.Sprites.Cosmic" class="toggle-button" @click="toggleSprite">
@@ -28,7 +28,75 @@
 
     <button class="btn btn-outline-danger" @click="goBack">Back</button>
 
-    <!-- Add more details as needed -->
+    <div class="extra-info">
+      <div class="extra-section" @click="toggleSection('extra-info')">
+        <h3>&#x1F94A; Battle Info </h3>
+        <div :class="{ 'extra-list': true, 'expanded': !collapsedSections['extra-info'], 'collapsed': collapsedSections['extra-info'] }" v-if="!collapsedSections['extra-info']">
+          <table>
+          <tbody>
+            <tr v-if="strongAgainst.length > 0">
+              <td>
+                <strong><span style='color:green'>Strong</span> Against:</strong>
+                <ul>
+                  <li v-for="type in strongAgainst" :key="type" class="extra-item">
+                    <img :src="getImage(type + '_Type_Icon')" alt="Element Image" class="element-image" />{{ type }}
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr v-if="weakAgainst.length > 0">
+              <td>
+                <strong><span style='color:crimson' class="battle-text">Weak</span> Against:</strong>
+                <ul>
+                  <li v-for="type in weakAgainst" :key="type" class="extra-item">
+                    <img :src="getImage(type + '_Type_Icon')" alt="Element Image" class="element-image" />{{ type }}
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr v-if="neutralAgainst.length > 0">
+              <td>
+                <strong><span style='color:dodgerblue'>Neutral</span> Against:</strong>
+                <ul>
+                  <li v-for="type in neutralAgainst" :key="type" class="extra-item">
+                    <img :src="getImage(type + '_Type_Icon')" alt="Element Image" class="element-image" />{{ type }}
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+
+      <div class='extra-section' @click="toggleSection('loved-food')">
+        <h3 >&#x1F359; Loved Food</h3>
+        <div :class="{ 'extra-list': true, 'expanded': !collapsedSections['loved-food'], 'collapsed': collapsedSections['loved-food'] }" v-if="!collapsedSections['loved-food']">
+          <table>
+          <tbody>
+            <tr v-if="lovedFood.length > 0">
+              <td>
+                <ul>
+                  <li v-for="food in lovedFood" :key="food" class="extra-item">
+                    <img :src="getFoodImage(food)" alt="Food Image" class="food-image" />{{ food.name }}
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr v-else>
+              <td>
+                <ul>
+                  <li>
+                    No food info to display
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+    </div>
 
   </div>
 
@@ -43,8 +111,8 @@
     </div>
   </div>
 
-  <div class="habitat-info">
-    <h3>Habitats</h3>
+  <div class="location-info">
+    <h3>Locations</h3>
 
     <p v-if="!hasLocations">{{ locationException }}</p>
 
@@ -89,49 +157,86 @@
 <script>
 import data from '../../../python-scripts/assets/nexomon_extinction_database.json';
 import locationExceptions from '../assets/location_exceptions.json';
+import typeChart from '../assets/type_chart.json'
 
 export default {
   props: ['number'],
   data() {
     return {
-      nexomons: data,
+      database: data,
       locationExceptions: locationExceptions,
+      typeChart: typeChart,
       showCosmic: false,
       expandedRegion: null,
       hoveredMap: null,
       zoomedMap: null,
       showZoom: false,
-      clickedMap: null
+      clickedMap: null,
+      collapsedSections: {
+        'extra-info': true,
+        'loved-food': true
+      }
     };
   },
   computed: {
+    //Basic Info
     nexomon() {
-      return this.nexomons.find(n => parseInt(n.Number) === parseInt(this.number));
+      return this.database.find(n => parseInt(n.Number) === parseInt(this.number));
     },
+
+    //Evolution Info
     nexomonEvolution() {
       if (this.nexomon && this.nexomon.Evolution && this.nexomon.Evolution.length > 0) {
         return this.nexomon.Evolution[0];
       }
       return {};
     },
+
+    //Navigation Info
     hasPrevious() {
       return this.nexomon && parseInt(this.nexomon.Number) > 1;
     },
     hasNext() {
-      return this.nexomon && parseInt(this.nexomon.Number) < this.nexomons.length;
+      return this.nexomon && parseInt(this.nexomon.Number) < this.database.length;
     },
+
+    //Habitat Info
     hasLocations() {
       return this.nexomon && this.nexomon.Locations && this.nexomon.Locations.length > 0;
     },
     locationException() {
       if (!this.hasLocations && this.nexomon) {
-        // Use the Nexomon name as the key in the dictionary
         return this.locationExceptions[this.nexomon.Name] || "No specific habitat information.";
       }
       return null;
+    },
+
+    //Battle Info
+    strongAgainst() {
+      return this.typeChart.types[this.nexomon.Element]?.strong_against || [];
+    },
+    weakAgainst() {
+      return this.typeChart.types[this.nexomon.Element]?.weak_against || [];
+    },
+    neutralAgainst() {
+      return this.typeChart.types[this.nexomon.Element]?.neutral_against || [];
+    },
+
+    //Food Info
+    lovedFood() {
+      if (this.nexomon && this.nexomon['Loved Food'] && this.nexomon['Loved Food'].length > 0) {
+        return this.nexomon['Loved Food'];
+      }
+      return {name: "This nexomon doesn't have any loved food"};
     }
   },
   methods: {
+
+    toggleSection(section) {
+      console.log("abcde")
+      console.log(section)
+      this.collapsedSections[section] = !this.collapsedSections[section];
+    },
 
     toggleRegion(index) {
       if (this.expandedRegion !== index) {
@@ -179,11 +284,16 @@ export default {
     },
 
     goToEvolution(nexomonName) {
-      let evolvedNexomon = this.nexomons.find(n => n.Name == nexomonName);
+      let evolvedNexomon = this.database.find(n => n.Name == nexomonName);
       if (evolvedNexomon) {
         return `/nexomon/${evolvedNexomon.Number}`
       }
       return ''
+    },
+
+    getFoodImage(food) {
+      const imageName = food.name.replace(' ', '-');
+      return require(`@/assets/downloaded_images/${imageName}.png`);
     },
 
     getImage(imageName, showCosmic) {
@@ -243,60 +353,6 @@ export default {
   text-align: center;
 }
 
-.sprite-container {
-  position: relative;
-  /* Make the sprite container the relative parent */
-  display: inline-block;
-  /* Inline block to respect content size */
-}
-
-.toggle-button {
-  padding: 5px;
-  background-color: #2b9fcc;
-  color: #fff;
-  border: none;
-  font-size: 12px;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-}
-
-.element-info {
-  display: flex;
-  justify-content: center;
-  /* Center the elements horizontally */
-  align-items: center;
-  /* Align items vertically center */
-  margin: 10px 0;
-  /* Add some space above and below */
-}
-
-.element-image {
-  width: 30px;
-  height: 30px;
-  margin-left: 10px;
-  margin-right: 5px
-}
-
-.nexomon-sprite {
-  max-width: 300px;
-  height: auto;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  text-align: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease, transform 0.3s ease;
-  text-decoration: none;
-  color: inherit;
-}
-
-.nexomon-card {
-  width: calc(25% - 10px);
-  margin-bottom: 20px;
-  padding: 10px;
-
-}
-
 .navigation-buttons {
   margin: 20px 0;
 }
@@ -306,191 +362,9 @@ button {
   padding: 10px;
   font-size: 16px;
 }
-
-.evolution-container {
-  margin-top: 20px;
-  text-align: center;
-}
-
-.evolution-stage {
-  display: inline-block;
-  margin: 10px;
-  text-align: center;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  text-align: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease, transform 0.3s ease;
-  text-decoration: none;
-  color: inherit;
-}
-
-.evolution-stage:hover {
-  background-color: rgba(0, 0, 0, 0.1);
-  transform: scale(1.02);
-}
-
-.evolution-image {
-  width: 140px;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-}
-
-.habitat-info {
-  margin: 20px 0;
-}
-
-.regions-grid {
-  display: grid;
-  align-items: start;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px;
-  justify-content: center;
-  /* This will center the grid */
-  max-width: 1000px;
-  /* Optional: restrict the grid's width if needed */
-  margin: 0 auto;
-  /* Center the grid container itself */
-}
-
-@keyframes expand {
-  from {
-    max-height: 0;
-    opacity: 0;
-  }
-
-  to {
-    max-height: 1000px;
-    /* Adjust based on content height */
-    opacity: 1;
-  }
-}
-
-@keyframes collapse {
-  from {
-    max-height: 500px;
-    /* Same as above, must match content */
-    opacity: 1;
-  }
-
-  to {
-    max-height: 0;
-    opacity: 0;
-  }
-}
-
-.region-card {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 10px;
-  text-align: center;
-  transition: transform 0.3s ease;
-  cursor: pointer;
-  overflow: hidden;
-}
-
-.region-card:hover {
-  transform: scale(1.01);
-}
-
-.region-image {
-  width: 100%;
-  height: auto;
-  border-radius: 4px;
-}
-
-.maps-list {
-  padding: 10px;
-  border-top: 1px solid #ccc;
-  margin-top: 10px;
-  max-height: 0;
-  opacity: 0;
-  overflow: hidden;
-  /* Ensure the collapsed content is hidden */
-}
-
-.map-preview {
-  margin-left: 10px;
-  height: 130px;
-  display: inline-block;
-  overflow: visible;
-  vertical-align: middle;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.maps-list ul {
-  list-style-type: none;
-  /* Remove bullet points */
-  padding-left: 0;
-  /* Remove default padding */
-  margin-left: 0;
-  /* Remove default margin */
-  margin-bottom: 0;
-}
-
-.maps-list li {
-  transition: background-color 0.3s ease, color 0.3s ease;
-  list-style-type: none;
-  padding-bottom: 3%;
-  padding-top: 3%;
-  background-clip: padding-box;
-}
-
-.maps-list li:hover {
-  background-color: #e0e0e0;
-  /* Change to your preferred highlight color */
-  color: #000;
-  /* Optional: Change the text color on hover */
-  cursor: pointer;
-  /* Optional: Change the cursor to indicate interactivity */
-}
-
-.maps-list.expanded {
-  animation: expand 0.3s forwards;
-}
-
-.maps-list.collapsed {
-  animation: collapse 0.3s forwards;
-  position: absolute;
-}
-
-.region-text {
-  padding-top: 15px;
-}
-
-.zoomed-map-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.zoomed-map-container {
-  position: relative;
-}
-
-.zoomed-map-image {
-  max-width: 90%;
-  max-height: 90%;
-  border: 5px solid white;
-  border-radius: 8px;
-}
-
-.highlighted-map {
-  background-color: #454545; 
-  border: 2px solid white; 
-  cursor: pointer;
-}
-
-.highlighted-map:hover {
-  background-color: #ffc107; 
-}
 </style>
+
+<style scoped src="../assets/styles/basic-info.css"></style>
+<style scoped src="../assets/styles/location-info.css"></style>
+<style scoped src="../assets/styles/evolution-info.css"></style>
+<style scoped src="../assets/styles/extra-info.css"></style>
