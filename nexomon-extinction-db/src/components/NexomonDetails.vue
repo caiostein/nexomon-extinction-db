@@ -31,69 +31,73 @@
     <div class="extra-info">
       <div class="extra-section" @click="toggleSection('extra-info')">
         <h3>&#x1F94A; Battle Info </h3>
-        <div :class="{ 'extra-list': true, 'expanded': !collapsedSections['extra-info'], 'collapsed': collapsedSections['extra-info'] }" v-if="!collapsedSections['extra-info']">
+        <div
+          :class="{ 'extra-list': true, 'expanded': !collapsedSections['extra-info'], 'collapsed': collapsedSections['extra-info'] }"
+          v-if="!collapsedSections['extra-info']">
           <table>
-          <tbody>
-            <tr v-if="strongAgainst.length > 0">
-              <td>
-                <strong><span style='color:green'>Strong</span> Against:</strong>
-                <ul>
-                  <li v-for="type in strongAgainst" :key="type" class="extra-item">
-                    <img :src="getImage(type + '_Type_Icon')" alt="Element Image" class="element-image" />{{ type }}
-                  </li>
-                </ul>
-              </td>
-            </tr>
-            <tr v-if="weakAgainst.length > 0">
-              <td>
-                <strong><span style='color:crimson' class="battle-text">Weak</span> Against:</strong>
-                <ul>
-                  <li v-for="type in weakAgainst" :key="type" class="extra-item">
-                    <img :src="getImage(type + '_Type_Icon')" alt="Element Image" class="element-image" />{{ type }}
-                  </li>
-                </ul>
-              </td>
-            </tr>
-            <tr v-if="neutralAgainst.length > 0">
-              <td>
-                <strong><span style='color:dodgerblue'>Neutral</span> Against:</strong>
-                <ul>
-                  <li v-for="type in neutralAgainst" :key="type" class="extra-item">
-                    <img :src="getImage(type + '_Type_Icon')" alt="Element Image" class="element-image" />{{ type }}
-                  </li>
-                </ul>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+            <tbody>
+              <tr v-if="strongAgainst.length > 0">
+                <td>
+                  <strong><span style='color:green' class="battle-text">Strong</span> Against:</strong>
+                  <ul>
+                    <li v-for="type in strongAgainst" :key="type" class="extra-item">
+                      <img :src="getImage(type + '_Type_Icon')" alt="Element Image" class="element-image" />{{ type }}
+                    </li>
+                  </ul>
+                </td>
+              </tr>
+              <tr v-if="weakAgainst.length > 0">
+                <td>
+                  <strong><span style='color:crimson' class="battle-text">Weak</span> Against:</strong>
+                  <ul>
+                    <li v-for="type in weakAgainst" :key="type" class="extra-item">
+                      <img :src="getImage(type + '_Type_Icon')" alt="Element Image" class="element-image" />{{ type }}
+                    </li>
+                  </ul>
+                </td>
+              </tr>
+              <tr v-if="neutralAgainst.length > 0">
+                <td>
+                  <strong><span style='color:dodgerblue' class="battle-text">Neutral</span> Against:</strong>
+                  <ul>
+                    <li v-for="type in neutralAgainst" :key="type" class="extra-item">
+                      <img :src="getImage(type + '_Type_Icon')" alt="Element Image" class="element-image" />{{ type }}
+                    </li>
+                  </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
 
       <div class='extra-section' @click="toggleSection('loved-food')">
-        <h3 >&#x1F359; Loved Food</h3>
-        <div :class="{ 'extra-list': true, 'expanded': !collapsedSections['loved-food'], 'collapsed': collapsedSections['loved-food'] }" v-if="!collapsedSections['loved-food']">
+        <h3>&#x1F359; Loved Food</h3>
+        <div
+          :class="{ 'extra-list': true, 'expanded': !collapsedSections['loved-food'], 'collapsed': collapsedSections['loved-food'] }"
+          v-if="!collapsedSections['loved-food']">
           <table>
-          <tbody>
-            <tr v-if="lovedFood.length > 0">
-              <td>
-                <ul>
-                  <li v-for="food in lovedFood" :key="food" class="extra-item">
-                    <img :src="getFoodImage(food)" alt="Food Image" class="food-image" />{{ food.name }}
-                  </li>
-                </ul>
-              </td>
-            </tr>
-            <tr v-else>
-              <td>
-                <ul>
-                  <li>
-                    No food info to display
-                  </li>
-                </ul>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+            <tbody>
+              <tr v-if="lovedFood.length > 0">
+                <td>
+                  <ul>
+                    <li v-for="food in lovedFood" :key="food" class="extra-item">
+                      <img :src="getFoodImage(food)" alt="Food Image" class="food-image" />{{ food.name }}
+                    </li>
+                  </ul>
+                </td>
+              </tr>
+              <tr v-else>
+                <td>
+                  <ul>
+                    <li>
+                      No food info to display
+                    </li>
+                  </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -227,14 +231,17 @@ export default {
       if (this.nexomon && this.nexomon['Loved Food'] && this.nexomon['Loved Food'].length > 0) {
         return this.nexomon['Loved Food'];
       }
-      return {name: "This nexomon doesn't have any loved food"};
+      return { name: "This nexomon doesn't have any loved food" };
     }
   },
+
+  mounted() {
+    this.preloadImages(); // Preload battle and food images on page load
+  },
+
   methods: {
 
     toggleSection(section) {
-      console.log("abcde")
-      console.log(section)
       this.collapsedSections[section] = !this.collapsedSections[section];
     },
 
@@ -342,6 +349,36 @@ export default {
       } catch (error) {
         console.warn(`Map image for ${formattedMapName} not found.`);
         return null;
+      }
+    },
+
+    preloadImages() {
+      // Preload battle info images (element icons)
+      const elementTypes = [...this.strongAgainst, ...this.weakAgainst, ...this.neutralAgainst];
+      this.preloadImageSet(elementTypes, 'downloaded_images', 'Type_Icon');
+
+      // Preload loved food images
+      if (this.lovedFood && this.lovedFood.length > 0) {
+        const foodImages = this.lovedFood.map(food => food.name);
+        this.preloadImageSet(foodImages, 'downloaded_images');
+      }
+    },
+
+    // Helper method to preload a set of images from a folder
+    preloadImageSet(imageNames, folder, extra_params) {
+      imageNames.forEach(name => {
+        const img = new Image();
+        let formattedName = name.replace(/\s+/g, '-'); // Replace spaces with hyphens
+        img.src = this.getImagePath(formattedName, folder, extra_params);
+      });
+    },
+
+    // Helper method to get the correct image path based on the folder
+    getImagePath(name, folder, extra_params) {
+      if (extra_params) {
+        return require(`@/assets/${folder}/${name}_${extra_params}.png`);
+      } else {
+        return require(`@/assets/${folder}/${name}.png`);
       }
     }
   }
