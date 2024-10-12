@@ -29,9 +29,10 @@
     <button class="btn btn-outline-danger" @click="goBack">Back</button>
 
     <div class="extra-info">
-      <div class="battle-info">
-        <h3>Battle Info</h3>
-        <table>
+      <div class="battle-info" @click="toggleSection('battle-info')">
+        <h3>Battle Info </h3>
+        <div :class="{ 'battle-list': true, 'expanded': !collapsedSections['battle-info'], 'collapsed': collapsedSections['battle-info'] }" v-if="!collapsedSections['battle-info']">
+          <table>
           <tbody>
             <tr v-if="strongAgainst.length > 0">
               <td>
@@ -65,11 +66,13 @@
             </tr>
           </tbody>
         </table>
+        </div>
       </div>
 
-      <div class="food-info">
+      <div class='food-info' @click="toggleSection('loved-food')">
         <h3>Loved Food</h3>
-        <table>
+        <div :class="{ 'food-list': true, 'expanded': !collapsedSections['loved-food'], 'collapsed': collapsedSections['loved-food'] }" v-if="!collapsedSections['loved-food']">
+          <table>
           <tbody>
             <tr v-if="lovedFood.length > 0">
               <td>
@@ -80,12 +83,20 @@
                 </ul>
               </td>
             </tr>
+            <tr v-else>
+              <td>
+                <ul>
+                  <li>
+                    No food info to display
+                  </li>
+                </ul>
+              </td>
+            </tr>
           </tbody>
         </table>
+        </div>
       </div>
     </div>
-
-    <!-- Add more details as needed -->
 
   </div>
 
@@ -100,8 +111,8 @@
     </div>
   </div>
 
-  <div class="habitat-info">
-    <h3>Habitats</h3>
+  <div class="location-info">
+    <h3>Locations</h3>
 
     <p v-if="!hasLocations">{{ locationException }}</p>
 
@@ -160,7 +171,11 @@ export default {
       hoveredMap: null,
       zoomedMap: null,
       showZoom: false,
-      clickedMap: null
+      clickedMap: null,
+      collapsedSections: {
+        'battle-info': true,
+        'loved-food': true
+      }
     };
   },
   computed: {
@@ -208,15 +223,20 @@ export default {
     },
 
     //Food Info
-    lovedFood(){
-      console.log(this.nexomon['Loved Food'][0])
+    lovedFood() {
       if (this.nexomon && this.nexomon['Loved Food'] && this.nexomon['Loved Food'].length > 0) {
         return this.nexomon['Loved Food'];
       }
-      return {};
+      return {name: "This nexomon doesn't have any loved food"};
     }
   },
   methods: {
+
+    toggleSection(section) {
+      console.log("abcde")
+      console.log(section)
+      this.collapsedSections[section] = !this.collapsedSections[section];
+    },
 
     toggleRegion(index) {
       if (this.expandedRegion !== index) {
@@ -271,7 +291,7 @@ export default {
       return ''
     },
 
-    getFoodImage(food){
+    getFoodImage(food) {
       const imageName = food.name.replace(' ', '-');
       return require(`@/assets/downloaded_images/${imageName}.png`);
     },
@@ -344,13 +364,20 @@ button {
 }
 
 .extra-info {
-  display: flex;
-  place-items: center;
+  display: grid;
+  align-items: start;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  justify-content: center;
+  /* This will center the grid */
+  max-width: 1000px;
+  /* Optional: restrict the grid's width if needed */
+  margin: 0 auto;
 }
 </style>
 
 <style scoped src="../assets/styles/basic-info.css"></style>
-<style scoped src="../assets/styles/habitat-info.css"></style>
+<style scoped src="../assets/styles/location-info.css"></style>
 <style scoped src="../assets/styles/evolution-info.css"></style>
 <style scoped src="../assets/styles/battle-info.css"></style>
 <style scoped src="../assets/styles/food-info.css"></style>

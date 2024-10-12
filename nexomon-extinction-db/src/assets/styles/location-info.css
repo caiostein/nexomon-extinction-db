@@ -1,4 +1,4 @@
-.habitat-info {
+.location-info {
     margin: 20px 0;
   }
   
@@ -68,7 +68,6 @@
     max-height: 0;
     opacity: 0;
     overflow: hidden;
-    /* Ensure the collapsed content is hidden */
   }
   
   .map-preview {
@@ -83,11 +82,8 @@
   
   .maps-list ul {
     list-style-type: none;
-    /* Remove bullet points */
     padding-left: 0;
-    /* Remove default padding */
     margin-left: 0;
-    /* Remove default margin */
     margin-bottom: 0;
   }
   
@@ -101,11 +97,8 @@
   
   .maps-list li:hover {
     background-color: #e0e0e0;
-    /* Change to your preferred highlight color */
     color: #000;
-    /* Optional: Change the text color on hover */
     cursor: pointer;
-    /* Optional: Change the cursor to indicate interactivity */
   }
   
   .maps-list.expanded {
