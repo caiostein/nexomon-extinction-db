@@ -29,16 +29,16 @@
     <button class="btn btn-outline-danger" @click="goBack">Back</button>
 
     <div class="extra-info">
-      <div class="battle-info" @click="toggleSection('battle-info')">
-        <h3>Battle Info </h3>
-        <div :class="{ 'battle-list': true, 'expanded': !collapsedSections['battle-info'], 'collapsed': collapsedSections['battle-info'] }" v-if="!collapsedSections['battle-info']">
+      <div class="extra-section" @click="toggleSection('extra-info')">
+        <h3>&#x1F94A; Battle Info </h3>
+        <div :class="{ 'extra-list': true, 'expanded': !collapsedSections['extra-info'], 'collapsed': collapsedSections['extra-info'] }" v-if="!collapsedSections['extra-info']">
           <table>
           <tbody>
             <tr v-if="strongAgainst.length > 0">
               <td>
-                <strong>Strong Against:</strong>
+                <strong><span style='color:green'>Strong</span> Against:</strong>
                 <ul>
-                  <li v-for="type in strongAgainst" :key="type" class="battle-item">
+                  <li v-for="type in strongAgainst" :key="type" class="extra-item">
                     <img :src="getImage(type + '_Type_Icon')" alt="Element Image" class="element-image" />{{ type }}
                   </li>
                 </ul>
@@ -46,9 +46,9 @@
             </tr>
             <tr v-if="weakAgainst.length > 0">
               <td>
-                <strong>Weak Against:</strong>
+                <strong><span style='color:crimson' class="battle-text">Weak</span> Against:</strong>
                 <ul>
-                  <li v-for="type in weakAgainst" :key="type" class="battle-item">
+                  <li v-for="type in weakAgainst" :key="type" class="extra-item">
                     <img :src="getImage(type + '_Type_Icon')" alt="Element Image" class="element-image" />{{ type }}
                   </li>
                 </ul>
@@ -56,9 +56,9 @@
             </tr>
             <tr v-if="neutralAgainst.length > 0">
               <td>
-                <strong>Neutral Against:</strong>
+                <strong><span style='color:dodgerblue'>Neutral</span> Against:</strong>
                 <ul>
-                  <li v-for="type in neutralAgainst" :key="type" class="battle-item">
+                  <li v-for="type in neutralAgainst" :key="type" class="extra-item">
                     <img :src="getImage(type + '_Type_Icon')" alt="Element Image" class="element-image" />{{ type }}
                   </li>
                 </ul>
@@ -69,15 +69,15 @@
         </div>
       </div>
 
-      <div class='food-info' @click="toggleSection('loved-food')">
-        <h3>Loved Food</h3>
-        <div :class="{ 'food-list': true, 'expanded': !collapsedSections['loved-food'], 'collapsed': collapsedSections['loved-food'] }" v-if="!collapsedSections['loved-food']">
+      <div class='extra-section' @click="toggleSection('loved-food')">
+        <h3 >&#x1F359; Loved Food</h3>
+        <div :class="{ 'extra-list': true, 'expanded': !collapsedSections['loved-food'], 'collapsed': collapsedSections['loved-food'] }" v-if="!collapsedSections['loved-food']">
           <table>
           <tbody>
             <tr v-if="lovedFood.length > 0">
               <td>
                 <ul>
-                  <li v-for="food in lovedFood" :key="food" class="food-item">
+                  <li v-for="food in lovedFood" :key="food" class="extra-item">
                     <img :src="getFoodImage(food)" alt="Food Image" class="food-image" />{{ food.name }}
                   </li>
                 </ul>
@@ -173,7 +173,7 @@ export default {
       showZoom: false,
       clickedMap: null,
       collapsedSections: {
-        'battle-info': true,
+        'extra-info': true,
         'loved-food': true
       }
     };
@@ -362,22 +362,9 @@ button {
   padding: 10px;
   font-size: 16px;
 }
-
-.extra-info {
-  display: grid;
-  align-items: start;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px;
-  justify-content: center;
-  /* This will center the grid */
-  max-width: 1000px;
-  /* Optional: restrict the grid's width if needed */
-  margin: 0 auto;
-}
 </style>
 
 <style scoped src="../assets/styles/basic-info.css"></style>
 <style scoped src="../assets/styles/location-info.css"></style>
 <style scoped src="../assets/styles/evolution-info.css"></style>
-<style scoped src="../assets/styles/battle-info.css"></style>
-<style scoped src="../assets/styles/food-info.css"></style>
+<style scoped src="../assets/styles/extra-info.css"></style>
