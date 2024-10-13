@@ -114,7 +114,7 @@
           v-if="!collapsedSections['base-stats']">
           <table>
             <tbody>
-              <tr v-if="lovedFood.length > 0">
+              <tr>
                 <td>
                   <ul>
                     <li v-for="(value, key) in baseStats" :key="key" class="extra-item">
@@ -302,7 +302,6 @@ export default {
     },
 
     getRarityColor(rarity) {
-      console.log(rarity)
       switch (rarity) {
         case 'Common':
           return 'grey';
@@ -314,6 +313,8 @@ export default {
           return 'purple';
         case 'Ultra Rare':
           return 'brown';
+        case 'Ultimate':
+          return '#264BA3'
         case 'Legendary':
           return 'orange'; // or use a gradient if needed
         default:
