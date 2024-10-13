@@ -82,6 +82,10 @@ html, body {
   color: #e2e79e;
 }
 
+.navbar-toggler{
+  margin-right: 10px;
+}
+
 .maps-list {
   background-color: #f0f0f0;
 }

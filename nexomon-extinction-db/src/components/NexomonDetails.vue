@@ -148,7 +148,7 @@
   <div class="location-info">
     <h3>Locations</h3>
 
-    <p v-if="!hasLocations">{{ locationException }}</p>
+    <p v-if="!hasLocations" class="location-exception">{{ locationException }}</p>
 
     <div class="regions-grid">
 
