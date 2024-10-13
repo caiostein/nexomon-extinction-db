@@ -1,39 +1,45 @@
 <!-- src/components/NexomonDetails.vue -->
 <template>
   <div v-if="nexomon" class="details-container">
-    <h1 class="h1" style="margin-top: 20px;">{{ nexomon.Number }} - {{ nexomon.Name }}</h1>
 
-    <div class="sprite-container">
-      <img class="nexomon-sprite" :src="getImage(nexomon.Name, showCosmic)" alt="Nexomon Sprite" />
-    </div>
+    <div class="main-infos">
+      <h1 class="h1" style="margin-top: 20px;">{{ nexomon.Number }} - {{ nexomon.Name }}</h1>
 
-    <div class="element-info">
-      <h3>Element:</h3>
-      <img :src="getImage(nexomon.Element + '_Type_Icon')" alt="Element Image" class="element-label" />
-      <span>{{ nexomon.Element }}</span>
+      <div class="sprite-container">
+        <img class="nexomon-sprite" :src="getImage(nexomon.Name, showCosmic)" alt="Nexomon Sprite" />
+        <div class="element-info">
+          <h3 style="margin-top: 10px;">Element:</h3>
+          <img :src="getImage(nexomon.Element + '_Type_Icon')" alt="Element Image" class="element-label" />
+          <span>{{ nexomon.Element }}</span>
+          <button v-if="nexomon.Sprites && nexomon.Sprites.Cosmic" class="toggle-button" @click="toggleSprite">
+            {{ showCosmic ? 'Show Regular' : 'Show Cosmic' }}
+          </button>
+        </div>
+        <div class="description-container">
+          <p>{{ description.Description }}</p>
+        </div>
+      </div>
 
-      <button v-if="nexomon.Sprites && nexomon.Sprites.Cosmic" class="toggle-button" @click="toggleSprite">
-        {{ showCosmic ? 'Show Regular' : 'Show Cosmic' }}
-      </button>
-    </div>
+        <h3 >
+          Rarity: <span :style="{ backgroundColor: getRarityColor(nexomon.Rarity), color: 'white', borderRadius: '5px', padding: '3px'}" >{{ nexomon.Rarity }}</span>
+        </h3>
 
-    <h3>Rarity: {{ nexomon.Rarity }}</h3>
-
-    <div class="navigation-buttons">
-      <button class="btn btn-outline-primary" @click="goToNexomon(parseInt(nexomon.Number) - 1)"
-        :disabled="!hasPrevious">Previous</button>
-      <button class="btn btn-outline-primary" @click="goToNexomon(parseInt(nexomon.Number) + 1)"
-        :disabled="!hasNext">Next</button>
+      <div class="navigation-buttons">
+        <button class="btn btn-outline-primary" @click="goToNexomon(parseInt(nexomon.Number) - 1)"
+          :disabled="!hasPrevious">Previous</button>
+        <button class="btn btn-outline-primary" @click="goToNexomon(parseInt(nexomon.Number) + 1)"
+          :disabled="!hasNext">Next</button>
+      </div>
     </div>
 
     <button class="btn btn-outline-danger" @click="goBack">Back</button>
 
     <div class="extra-info">
-      <div class="extra-section" @click="toggleSection('extra-info')">
+      <div class="extra-section" @click="toggleSection('battle-info')">
         <h3>&#x1F94A; Battle Info </h3>
         <div
-          :class="{ 'extra-list': true, 'expanded': !collapsedSections['extra-info'], 'collapsed': collapsedSections['extra-info'] }"
-          v-if="!collapsedSections['extra-info']">
+          :class="{ 'extra-list': true, 'expanded': !collapsedSections['battle-info'], 'collapsed': collapsedSections['battle-info'] }"
+          v-if="!collapsedSections['battle-info']">
           <table>
             <tbody>
               <tr v-if="strongAgainst.length > 0">
@@ -92,6 +98,30 @@
                   <ul>
                     <li>
                       No food info to display
+                    </li>
+                  </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class='extra-section' @click="toggleSection('base-stats')">
+        <h3>&#x1F4C8; Base Stats</h3>
+        <div
+          :class="{ 'extra-list': true, 'expanded': !collapsedSections['base-stats'], 'collapsed': collapsedSections['base-stats'] }"
+          v-if="!collapsedSections['base-stats']">
+          <table>
+            <tbody>
+              <tr v-if="lovedFood.length > 0">
+                <td>
+                  <ul>
+                    <li v-for="(value, key) in baseStats" :key="key" class="extra-item">
+                      <img :src="getStatImage(key)" alt="Stat image" class="element-image" />{{ key }} : {{ value }}
+                    </li>
+                    <li class="extra-item">
+                      <span style="margin-right: 5%; font-size:24px">&#x1F4CB;</span> Stats Total: {{ nexomon.BST }}
                     </li>
                   </ul>
                 </td>
@@ -160,6 +190,7 @@
 
 <script>
 import data from '../../../python-scripts/assets/nexomon_extinction_database.json';
+import descriptionData from '../../../python-scripts/assets/nexomon_description_database.json'
 import locationExceptions from '../assets/location_exceptions.json';
 import typeChart from '../assets/type_chart.json'
 
@@ -168,6 +199,7 @@ export default {
   data() {
     return {
       database: data,
+      description_database: descriptionData,
       locationExceptions: locationExceptions,
       typeChart: typeChart,
       showCosmic: false,
@@ -177,8 +209,9 @@ export default {
       showZoom: false,
       clickedMap: null,
       collapsedSections: {
-        'extra-info': true,
-        'loved-food': true
+        'battle-info': true,
+        'loved-food': true,
+        'base-stats': true,
       }
     };
   },
@@ -186,6 +219,10 @@ export default {
     //Basic Info
     nexomon() {
       return this.database.find(n => parseInt(n.Number) === parseInt(this.number));
+    },
+
+    description() {
+      return this.description_database.find(n => parseInt(n.Number) === parseInt(this.number))
     },
 
     //Evolution Info
@@ -232,6 +269,14 @@ export default {
         return this.nexomon['Loved Food'];
       }
       return { name: "This nexomon doesn't have any loved food" };
+    },
+
+    //Stats Info
+    baseStats() {
+      if (this.nexomon) {
+        return this.nexomon['Stats']
+      }
+      return {}
     }
   },
 
@@ -253,6 +298,26 @@ export default {
         this.preloadMapImages(this.nexomon.Locations[index].Maps.split(', '));
       } else {
         this.expandedRegion = null; // Collapse the region if it's already expanded
+      }
+    },
+
+    getRarityColor(rarity) {
+      console.log(rarity)
+      switch (rarity) {
+        case 'Common':
+          return 'grey';
+        case 'Uncommon':
+          return 'green';
+        case 'Rare':
+          return 'aqua';
+        case 'Mega Rare':
+          return 'purple';
+        case 'Ultra Rare':
+          return 'brown';
+        case 'Legendary':
+          return 'orange'; // or use a gradient if needed
+        default:
+          return 'transparent'; // default background color
       }
     },
 
@@ -301,6 +366,10 @@ export default {
     getFoodImage(food) {
       const imageName = food.name.replace(' ', '-');
       return require(`@/assets/downloaded_images/${imageName}.png`);
+    },
+
+    getStatImage(stat) {
+      return require(`@/assets/downloaded_images/${stat}_Stat_Icon.png`)
     },
 
     getImage(imageName, showCosmic) {
