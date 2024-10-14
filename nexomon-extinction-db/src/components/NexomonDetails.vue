@@ -8,7 +8,7 @@
       <div class="sprite-container">
         <img class="nexomon-sprite" :src="getImage(nexomon.Name, showCosmic)" alt="Nexomon Sprite" />
         <div class="element-info">
-          <h3 style="margin-top: 10px;">Element:</h3>
+          <h3 style="margin-top: 7px;">Element:</h3>
           <img :src="getImage(nexomon.Element + '_Type_Icon')" alt="Element Image" class="element-label" />
           <span>{{ nexomon.Element }}</span>
           <button v-if="nexomon.Sprites && nexomon.Sprites.Cosmic" class="toggle-button" @click="toggleSprite">

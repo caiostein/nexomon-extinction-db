@@ -60,11 +60,13 @@
   padding-top: 1%;
   padding-left: 20px;
   padding-right: 20px;
+  min-height: 104px;
 }
 
 @media (max-width: 480px) {
   .description-container {
     padding-top: 3%;
+    min-height: 248.36px;
     max-width: 90%;
   }
 }
