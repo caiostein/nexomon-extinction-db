@@ -42,31 +42,34 @@
           v-if="!collapsedSections['battle-info']">
           <table>
             <tbody>
-              <tr v-if="strongAgainst.length > 0">
+              <tr>
+                <p style="margin-top:10px">{{ nexomon.Name }}'s Type: <img :src="getImage(nexomon.Element + '_Type_Icon')" alt="Element Image" class="element-image" /></p>
+              </tr>
+              <tr v-if="effectiveVs.length > 0">
                 <td>
-                  <strong><span style='color:green' class="battle-text">Strong</span> Against:</strong>
+                  <strong><span style='color:green' class="battle-text">Effective</span> Against:</strong>
                   <ul>
-                    <li v-for="type in strongAgainst" :key="type" class="extra-item">
+                    <li v-for="type in effectiveVs" :key="type" class="extra-item">
                       <img :src="getImage(type + '_Type_Icon')" alt="Element Image" class="element-image" />{{ type }}
                     </li>
                   </ul>
                 </td>
               </tr>
-              <tr v-if="weakAgainst.length > 0">
+              <tr v-if="vulnerableTo.length > 0">
                 <td>
-                  <strong><span style='color:crimson' class="battle-text">Weak</span> Against:</strong>
+                  <strong><span style='color:dodgerblue' class="battle-text">Ineffective</span> Against:</strong>
                   <ul>
-                    <li v-for="type in weakAgainst" :key="type" class="extra-item">
+                    <li v-for="type in vulnerableTo" :key="type" class="extra-item">
                       <img :src="getImage(type + '_Type_Icon')" alt="Element Image" class="element-image" />{{ type }}
                     </li>
                   </ul>
                 </td>
               </tr>
-              <tr v-if="neutralAgainst.length > 0">
+              <tr v-if="ineffectiveVs.length > 0">
                 <td>
-                  <strong><span style='color:dodgerblue' class="battle-text">Neutral</span> Against:</strong>
+                  <strong><span style='color:crimson' class="battle-text">Vulnerable</span> Against:</strong>
                   <ul>
-                    <li v-for="type in neutralAgainst" :key="type" class="extra-item">
+                    <li v-for="type in ineffectiveVs" :key="type" class="extra-item">
                       <img :src="getImage(type + '_Type_Icon')" alt="Element Image" class="element-image" />{{ type }}
                     </li>
                   </ul>
@@ -253,14 +256,14 @@ export default {
     },
 
     //Battle Info
-    strongAgainst() {
-      return this.typeChart.types[this.nexomon.Element]?.strong_against || [];
+    effectiveVs() {
+      return this.typeChart.types[this.nexomon.Element]?.effective_vs || [];
     },
-    weakAgainst() {
-      return this.typeChart.types[this.nexomon.Element]?.weak_against || [];
+    vulnerableTo() {
+      return this.typeChart.types[this.nexomon.Element]?.vulnerable_to || [];
     },
-    neutralAgainst() {
-      return this.typeChart.types[this.nexomon.Element]?.neutral_against || [];
+    ineffectiveVs() {
+      return this.typeChart.types[this.nexomon.Element]?.ineffective_vs || [];
     },
 
     //Food Info
@@ -424,7 +427,7 @@ export default {
 
     preloadImages() {
       // Preload battle info images (element icons)
-      const elementTypes = [...this.strongAgainst, ...this.weakAgainst, ...this.neutralAgainst];
+      const elementTypes = [...this.effectiveVs, ...this.vulnerableTo, ...this.ineffectiveVs];
       this.preloadImageSet(elementTypes, 'downloaded_images', 'Type_Icon');
 
       // Preload loved food images

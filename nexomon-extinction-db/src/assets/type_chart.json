@@ -1,49 +1,49 @@
 {
     "types": {
       "Normal": {
-        "strong_against": [],
-        "weak_against": ["Ghost", "Psychic"],
-        "neutral_against": ["Normal", "Fire", "Water", "Plant", "Wind", "Electric", "Mineral"]
+        "effective_vs": [],
+        "vulnerable_to": ["Ghost", "Psychic"],
+        "ineffective_vs": ["Ghost", "Psychic"]
       },
       "Fire": {
-        "strong_against": ["Plant", "Wind", "Ghost"],
-        "weak_against": ["Water", "Fire", "Mineral"],
-        "neutral_against": ["Normal", "Electric", "Psychic"]
+        "effective_vs": ["Plant", "Wind", "Ghost"],
+        "vulnerable_to": ["Water", "Mineral"],
+        "ineffective_vs": ["Water", "Fire", "Mineral"]
       },
       "Water": {
-        "strong_against": ["Fire", "Mineral", "Ghost"],
-        "weak_against": ["Plant", "Water", "Electric"],
-        "neutral_against": ["Normal", "Wind", "Psychic"]
+        "effective_vs": ["Fire", "Mineral", "Ghost"],
+        "vulnerable_to": ["Plant", "Electric"],
+        "ineffective_vs": ["Plant", "Water", "Electric"]
       },
       "Plant": {
-        "strong_against": ["Water", "Electric", "Psychic"],
-        "weak_against": ["Fire", "Plant", "Wind"],
-        "neutral_against": ["Normal", "Mineral", "Ghost"]
+        "effective_vs": ["Water", "Electric", "Psychic"],
+        "vulnerable_to": ["Fire", "Wind"],
+        "ineffective_vs": ["Fire", "Plant", "Wind"]
       },
       "Wind": {
-        "strong_against": ["Plant", "Mineral"],
-        "weak_against": ["Fire", "Electric", "Ghost"],
-        "neutral_against": ["Normal", "Water", "Wind", "Psychic"]
+        "effective_vs": ["Plant", "Mineral"],
+        "vulnerable_to": ["Fire", "Electric", "Ghost"],
+        "ineffective_vs": ["Fire", "Electric", "Ghost"]
       },
       "Electric": {
-        "strong_against": ["Water", "Wind", "Psychic"],
-        "weak_against": ["Plant", "Electric", "Mineral"],
-        "neutral_against": ["Normal", "Fire", "Ghost"]
+        "effective_vs": ["Water", "Wind", "Psychic"],
+        "vulnerable_to": ["Plant", "Psychic", "Mineral"],
+        "ineffective_vs": ["Plant", "Electric", "Mineral"]
       },
       "Mineral": {
-        "strong_against": ["Fire", "Electric"],
-        "weak_against": ["Water", "Wind", "Psychic"],
-        "neutral_against": ["Normal", "Ghost", "Plant", "Mineral"]
+        "effective_vs": ["Fire", "Electric"],
+        "vulnerable_to": ["Water", "Wind"],
+        "ineffective_vs": ["Water", "Wind", "Psychic"]
       },
       "Ghost": {
-        "strong_against": ["Normal", "Wind", "Psychic"],
-        "weak_against": ["Fire", "Water"],
-        "neutral_against": ["Plant", "Electric", "Mineral", "Ghost"]
+        "effective_vs": ["Normal", "Wind", "Psychic"],
+        "vulnerable_to": ["Fire", "Water", "Psychic"],
+        "ineffective_vs": ["Fire", "Water"]
       },
       "Psychic": {
-        "strong_against": ["Normal", "Electric", "Ghost"],
-        "weak_against": ["Mineral", "Psychic"],
-        "neutral_against": ["Fire", "Water", "Plant", "Wind"]
+        "effective_vs": ["Normal", "Electric", "Ghost"],
+        "vulnerable_to": ["Plant", "Electric", "Ghost"],
+        "ineffective_vs": ["Mineral", "Psychic"]
       }
     }
   }
