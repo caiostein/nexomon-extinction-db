@@ -57,7 +57,7 @@
               </tr>
               <tr v-if="vulnerableTo.length > 0">
                 <td>
-                  <strong><span style='color:dodgerblue' class="battle-text">Ineffective</span> Against:</strong>
+                  <strong><span style='color:crimson' class="battle-text">Vulnerable</span> Against:</strong>
                   <ul>
                     <li v-for="type in vulnerableTo" :key="type" class="extra-item">
                       <img :src="getImage(type + '_Type_Icon')" alt="Element Image" class="element-image" />{{ type }}
@@ -67,7 +67,7 @@
               </tr>
               <tr v-if="ineffectiveVs.length > 0">
                 <td>
-                  <strong><span style='color:crimson' class="battle-text">Vulnerable</span> Against:</strong>
+                  <strong><span style='color:dodgerblue' class="battle-text">Ineffective</span> Against:</strong>
                   <ul>
                     <li v-for="type in ineffectiveVs" :key="type" class="extra-item">
                       <img :src="getImage(type + '_Type_Icon')" alt="Element Image" class="element-image" />{{ type }}
