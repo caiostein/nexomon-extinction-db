@@ -43,7 +43,9 @@
           <table>
             <tbody>
               <tr>
+                <td>
                 <p style="margin-top:10px">{{ nexomon.Name }}'s Type: <img :src="getImage(nexomon.Element + '_Type_Icon')" alt="Element Image" class="element-image" /></p>
+                </td>
               </tr>
               <tr v-if="effectiveVs.length > 0">
                 <td>
