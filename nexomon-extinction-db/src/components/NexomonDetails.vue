@@ -350,13 +350,13 @@ export default {
     },
 
     goBack() {
-      this.$router.push({ name: 'dex', params: {} });
+      this.$router.push({ name: 'Nexomon Database', params: {} });
     },
 
     goToNexomon(number) {
       this.showCosmic = false;
       this.expandedRegion = null;
-      this.$router.push({ name: 'NexomonDetails', params: { number } });
+      this.$router.push({ name: 'Nexomon Details', params: { number } });
     },
 
     goToEvolution(nexomonName) {
