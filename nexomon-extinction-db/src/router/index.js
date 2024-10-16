@@ -6,17 +6,17 @@ import NexomonDetails from '@/components/NexomonDetails'
 const routes = [
   {
     path: '/',
-    name: 'home',
+    name: 'Home',
     component: HomeView
   },
   {
     path: '/dex',
-    name: 'dex',
+    name: 'Nexomon Database',
     component: NexomonList
   },
   {
     path: '/nexomon/:number',
-    name: 'NexomonDetails',
+    name: 'Nexomon Details',
     component: NexomonDetails, // Nexomon details page
     props: true, // Allow route params as props
   },
@@ -37,5 +37,10 @@ const router = createRouter({
     return { x: 0, y: 0 }; // Forces scroll to the top on each route
   }
 })
+
+router.beforeEach((to, from, next) => {
+  document.title = to.name;
+  next();
+});
 
 export default router
