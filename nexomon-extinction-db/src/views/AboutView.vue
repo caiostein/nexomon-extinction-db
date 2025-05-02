@@ -36,6 +36,69 @@
     </div>
     
     <div class="about-card">
+      <h2 class="version-header" @click="toggleVersionHistory">
+        Version History
+        <span class="dropdown-icon">
+          <i :class="collapsedVersionHistory ? 'fas fa-chevron-down' : 'fas fa-chevron-up'"></i>
+        </span>
+      </h2>
+      
+      <div 
+        :class="{ 'extra-list': true, 'expanded': !collapsedVersionHistory, 'collapsed': collapsedVersionHistory }" 
+        v-if="!collapsedVersionHistory">
+        <div class="version">
+          <h3>v1.2.0 <span class="version-date">May 2, 2025</span></h3>
+          <ul>
+            <li>Added About page with project information</li>
+            <li>Fixed dark mode issues</li>
+            <li>Added 'Element' filter</li>
+            <li>Overall improvements to UI and functionality</li>
+          </ul>
+        </div>
+        
+        <div class="version">
+          <h3>v1.1.0 <span class="version-date">October 15, 2024</span></h3>
+          <ul>
+            <li>More bug fixes</li>
+            <li>Improved Battle Info section</li>
+            <li>Updated page titles</li>
+          </ul>
+        </div>
+        
+        <div class="version">
+          <h3>v1.0.2 <span class="version-date">October 13, 2024</span></h3>
+          <ul>
+            <li>Improved maps functionality</li>
+            <li>Enhanced responsive design for mobile devices</li>
+            <li>Added Nexomon descriptions</li>
+            <li>Fixed various bugs</li>
+          </ul>
+        </div>
+        
+        <div class="version">
+          <h3>v1.0.1 <span class="version-date">October 12, 2024</span></h3>
+          <ul>
+            <li>Implemented image preloading for better performance</li>
+            <li>Visual improvements</li>
+            <li>Enhanced food and battle info sections</li>
+          </ul>
+        </div>
+        
+        <div class="version">
+          <h3>v1.0.0 <span class="version-date">October 9, 2024</span></h3>
+          <ul>
+            <li>Initial release</li>
+            <li>Added dark mode toggle</li>
+            <li>Implemented map hover and zoom functionality</li>
+            <li>Fixed location display for all Nexomon</li>
+            <li>Enhanced responsive design</li>
+            <li>Added region containers with interactive maps</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <div class="about-card">
       <h2>Contact</h2>
       <p>
         Found an issue or have suggestions for improvement? Please let me know!
@@ -48,6 +111,21 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      collapsedVersionHistory: true
+    };
+  },
+  methods: {
+    toggleVersionHistory() {
+      this.collapsedVersionHistory = !this.collapsedVersionHistory;
+    }
+  }
+};
+</script>
 
 <style scoped>
 .about-container {
@@ -125,5 +203,95 @@ li {
 .dark-mode .about-card h2 {
   text-shadow: none;
   color: #333;
+}
+
+.version-header {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: color 0.3s ease;
+}
+
+.version-header:hover {
+  color: #2d8a9e;
+}
+
+.dropdown-icon {
+  font-size: 0.9rem;
+  transition: transform 0.3s ease;
+}
+
+.extra-list {
+  overflow: hidden;
+}
+
+.extra-list.expanded {
+  animation: expand 0.3s forwards;
+}
+
+.extra-list.collapsed {
+  animation: collapse 0.3s forwards;
+  position: absolute;
+}
+
+@keyframes expand {
+  from {
+    max-height: 0;
+    opacity: 0;
+  }
+
+  to {
+    max-height: 1000px;
+    opacity: 1;
+  }
+}
+
+@keyframes collapse {
+  from {
+    max-height: 1000px;
+    opacity: 1;
+  }
+
+  to {
+    max-height: 0;
+    opacity: 0;
+  }
+}
+
+.version-list {
+  margin-top: 10px;
+  transition: max-height 0.5s ease;
+  overflow: hidden;
+}
+
+.version {
+  margin-bottom: 20px;
+}
+
+.version:last-child {
+  margin-bottom: 0;
+}
+
+.version h3 {
+  color: #333;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 1.2rem;
+}
+
+.version-date {
+  color: #777;
+  font-size: 0.9rem;
+  font-weight: normal;
+}
+
+.dark-mode .version h3 {
+  color: #333;
+}
+
+.dark-mode .version-date {
+  color: #555;
 }
 </style>
