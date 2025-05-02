@@ -35,12 +35,36 @@ export default {
   methods: {
     toggleDarkMode() {
       this.isDarkMode = !this.isDarkMode;
-      document.body.classList.toggle('dark-mode', this.isDarkMode);
+      
+      // Apply to documentElement instead of body to match index.html
+      if (this.isDarkMode) {
+        document.documentElement.classList.add('dark-mode');
+      } else {
+        document.documentElement.classList.remove('dark-mode');
+      }
+      
+      // Also apply to body to maintain backward compatibility
+      if (this.isDarkMode) {
+        document.body.classList.add('dark-mode');
+      } else {
+        document.body.classList.remove('dark-mode');
+      }
+      
+      // Save preference to localStorage
       localStorage.setItem('dark-mode', this.isDarkMode);
     },
     loadUserPreference() {
       const savedMode = localStorage.getItem('dark-mode') === 'true';
       this.isDarkMode = savedMode;
+      
+      // Apply to documentElement to match index.html
+      if (savedMode) {
+        document.documentElement.classList.add('dark-mode');
+      } else {
+        document.documentElement.classList.remove('dark-mode');
+      }
+      
+      // Also apply to body to maintain backward compatibility
       if (savedMode) {
         document.body.classList.add('dark-mode');
       } else {
@@ -82,11 +106,10 @@ html, body {
   margin: 0; /* Remove default margin */
   padding: 0; /* Remove default padding */
   height: 100%; /* Ensure full height for body and app */
-  
 }
 
 .navbar {
-  padding: 30px;
+  padding: 15px 30px; /* Adjust padding for better layout */
   width: 100%; /* Ensure navbar takes full width */
   position: relative; /* Needed for z-index */
   z-index: 20; /* Higher than filters-container (10) */
@@ -116,16 +139,25 @@ html, body {
   justify-content: space-between;
 }
 
-/* Style the expanded dropdown menu background */
+/* Style the expanded dropdown menu background - Updated to fix desktop view */
 .navbar-collapse {
-  background-color: #343a40; /* Example: Slightly different dark color, adjust as needed */
-  padding: 0.5rem 1rem; /* Add some padding if needed */
-  border-radius: 0.25rem; /* Optional: Add rounded corners */
-  margin-top: 5px; /* Optional: Add space below the toggler */
+  background-color: #343a40;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  margin-top: 5px;
+}
+
+/* Add styles specifically for large screens */
+@media (min-width: 992px) {
+  .navbar-collapse {
+    background-color: transparent; /* Remove background on desktop */
+    padding: 0; /* Remove padding on desktop */
+    margin-top: 0; /* Remove margin on desktop */
+  }
 }
 
 /* Dark mode for body, app, and html */
-.dark-mode html,
+.dark-mode html ,
 .dark-mode body,
 .dark-mode #app {
   background-color: #212529;
