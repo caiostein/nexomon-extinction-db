@@ -9,6 +9,10 @@ const routes = [
     component: NexomonList
   },
   {
+    path: '/dex',
+    redirect: '/'
+  },
+  {
     path: '/nexomon/:number',
     name: 'Nexomon Details',
     component: NexomonDetails,

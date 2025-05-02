@@ -1,23 +1,25 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#" style="margin-left: 15px;">Nexomon Extinction Database</a>
-    <button ref="navbarToggler" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-          <router-link class="nav-link" to="/" @click="handleNavClick">Database</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" to="/about" @click="handleNavClick">About</router-link>
-        </li>
-      </ul>
-      
-      <!-- Dark mode toggle in navbar -->
-      <button class="toggle-button" @click="toggleDarkMode">
-        {{ isDarkMode ? 'Light Mode' : 'Dark Mode' }}
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Nexomon Extinction Database</a>
+      <button ref="navbarToggler" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
       </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <router-link class="nav-link" to="/" @click="handleNavClick">Database</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/about" @click="handleNavClick">About</router-link>
+          </li>
+        </ul>
+        
+        <!-- Dark mode toggle in navbar -->
+        <button class="toggle-button" @click="toggleDarkMode">
+          {{ isDarkMode ? 'Light Mode' : 'Dark Mode' }}
+        </button>
+      </div>
     </div>
   </nav>
   <div id="app" :class="{ 'dark-mode': isDarkMode }">
@@ -114,10 +116,20 @@ html, body {
 }
 
 .navbar {
-  padding: 15px 30px; 
+  padding: 0.5rem 1rem; /* Use Bootstrap's standard padding */
   width: 100%;
   position: relative; 
   z-index: 20;
+}
+
+.navbar-brand {
+  margin-left: 0 !important; /* Remove any inline margin that could cause shifting */
+  padding-left: 0;
+}
+
+.navbar-toggler {
+  margin-right: 0 !important; /* Ensure no right margin on the toggle button */
+  padding: 0.25rem 0.75rem; /* Bootstrap's default padding for navbar-toggler */
 }
 
 .navbar a {
@@ -127,10 +139,6 @@ html, body {
 
 .navbar a.router-link-exact-active {
   color: #e2e79e;
-}
-
-.navbar-toggler{
-  margin-right: 10px;
 }
 
 .maps-list {
@@ -219,6 +227,11 @@ html, body {
   .toggle-button {
     margin: 10px 0;
     width: 150px;
+  }
+  
+  .navbar-collapse {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
   }
 }
 </style>
