@@ -5,14 +5,19 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav">
-        <li class="nav-item active">
-          <router-link class="nav-link" to="/" @click="handleNavClick">Home</router-link>
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <router-link class="nav-link" to="/" @click="handleNavClick">Database</router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" to="/dex" @click="handleNavClick">Database</router-link>
+          <router-link class="nav-link" to="/about" @click="handleNavClick">About</router-link>
         </li>
       </ul>
+      
+      <!-- Dark mode toggle in navbar -->
+      <button class="toggle-button" @click="toggleDarkMode">
+        {{ isDarkMode ? 'Light Mode' : 'Dark Mode' }}
+      </button>
     </div>
   </nav>
   <div id="app" :class="{ 'dark-mode': isDarkMode }">
@@ -91,7 +96,7 @@ export default {
 
 <style>
 #app {
-  min-height: 100%; /* Ensure the app fills at least the viewport */
+  min-height: 100%;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -99,20 +104,20 @@ export default {
   background-color: #ffffff;
   height: fit-content;
   color: #000000;
-  position: relative; /* Needed for absolute positioning of children if used */
+  position: relative;
 }
 
 html, body {
-  margin: 0; /* Remove default margin */
-  padding: 0; /* Remove default padding */
-  height: 100%; /* Ensure full height for body and app */
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
 
 .navbar {
-  padding: 15px 30px; /* Adjust padding for better layout */
-  width: 100%; /* Ensure navbar takes full width */
-  position: relative; /* Needed for z-index */
-  z-index: 20; /* Higher than filters-container (10) */
+  padding: 15px 30px; 
+  width: 100%;
+  position: relative; 
+  z-index: 20;
 }
 
 .navbar a {
@@ -133,13 +138,13 @@ html, body {
 }
 
 #app {
-  min-height: 100%; /* Ensure the app fills at least the viewport */
+  min-height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-/* Style the expanded dropdown menu background - Updated to fix desktop view */
+/* Style the expanded dropdown menu background */
 .navbar-collapse {
   background-color: #343a40;
   padding: 0.5rem 1rem;
@@ -150,9 +155,9 @@ html, body {
 /* Add styles specifically for large screens */
 @media (min-width: 992px) {
   .navbar-collapse {
-    background-color: transparent; /* Remove background on desktop */
-    padding: 0; /* Remove padding on desktop */
-    margin-top: 0; /* Remove margin on desktop */
+    background-color: transparent;
+    padding: 0;
+    margin-top: 0;
   }
 }
 
@@ -178,18 +183,42 @@ html, body {
 }
 
 /* Page Transition Styles */
-.fade-enter-active { /* Only apply transition to entering element */
+.fade-enter-active {
   transition: opacity 0.3s ease;
 }
 
 .fade-enter-from,
-.fade-leave-to { /* Start transparent (enter) or end transparent (leave) */
+.fade-leave-to {
   opacity: 0;
 }
 
 .fade-enter-to,
-.fade-leave-from { /* End opaque (enter) or start opaque (leave) */
+.fade-leave-from {
   opacity: 1;
 }
 
+/* Dark mode toggle button in navbar */
+.toggle-button {
+  padding: 8px 15px;
+  background-color: #3aa9bd;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-right: 15px;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+.dark-mode .toggle-button {
+  background-color: #555555;
+  color: #f0f0f0;
+}
+
+@media (max-width: 991.98px) {
+  .toggle-button {
+    margin: 10px 0;
+    width: 150px;
+  }
+}
 </style>
