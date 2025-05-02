@@ -1,26 +1,31 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#" style="margin-left: 15px;">Nexomon Extinction Database</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <button ref="navbarToggler" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
         <li class="nav-item active">
-          <router-link class="nav-link" to="/">Home</router-link>
+          <router-link class="nav-link" to="/" @click="handleNavClick">Home</router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" to="/dex">Database</router-link>
+          <router-link class="nav-link" to="/dex" @click="handleNavClick">Database</router-link>
         </li>
       </ul>
     </div>
   </nav>
   <div id="app" :class="{ 'dark-mode': isDarkMode }">
-    <router-view />
+    <router-view v-slot="{ Component }">
+      <transition name="fade">
+        <component :is="Component" />
+      </transition>
+    </router-view>
   </div>
 </template>
 
 <script>
+import { Collapse } from 'bootstrap';
 export default {
   data() {
     return {
@@ -41,7 +46,18 @@ export default {
       } else {
         document.body.classList.remove('dark-mode');
       }
-    }
+    },
+    handleNavClick() {
+      const toggler = this.$refs.navbarToggler;
+      const collapseElement = document.getElementById('navbarNavDropdown');
+
+      if (toggler && toggler.offsetParent !== null && collapseElement && collapseElement.classList.contains('show')) {
+        const bsCollapse = Collapse.getInstance(collapseElement);
+        if (bsCollapse) {
+          bsCollapse.hide();
+        }
+      }
+    },
   },
   mounted() {
     this.loadUserPreference(); // Load user dark mode preference on app mount
@@ -59,6 +75,7 @@ export default {
   background-color: #ffffff;
   height: fit-content;
   color: #000000;
+  position: relative; /* Needed for absolute positioning of children if used */
 }
 
 html, body {
@@ -71,6 +88,8 @@ html, body {
 .navbar {
   padding: 30px;
   width: 100%; /* Ensure navbar takes full width */
+  position: relative; /* Needed for z-index */
+  z-index: 20; /* Higher than filters-container (10) */
 }
 
 .navbar a {
@@ -97,6 +116,14 @@ html, body {
   justify-content: space-between;
 }
 
+/* Style the expanded dropdown menu background */
+.navbar-collapse {
+  background-color: #343a40; /* Example: Slightly different dark color, adjust as needed */
+  padding: 0.5rem 1rem; /* Add some padding if needed */
+  border-radius: 0.25rem; /* Optional: Add rounded corners */
+  margin-top: 5px; /* Optional: Add space below the toggler */
+}
+
 /* Dark mode for body, app, and html */
 .dark-mode html,
 .dark-mode body,
@@ -117,4 +144,20 @@ html, body {
   background-color: #313131;
   border-top: 1px solid #ccc;
 }
+
+/* Page Transition Styles */
+.fade-enter-active { /* Only apply transition to entering element */
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to { /* Start transparent (enter) or end transparent (leave) */
+  opacity: 0;
+}
+
+.fade-enter-to,
+.fade-leave-from { /* End opaque (enter) or start opaque (leave) */
+  opacity: 1;
+}
+
 </style>

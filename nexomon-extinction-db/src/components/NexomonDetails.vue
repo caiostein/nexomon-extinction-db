@@ -1,194 +1,195 @@
 <!-- src/components/NexomonDetails.vue -->
 <template>
-  <div v-if="nexomon" class="details-container">
+  <div class="nexomon-details-wrapper"> <!-- Add this wrapping div -->
+    <div v-if="nexomon" class="details-container">
 
-    <div class="main-infos">
-      <h1 class="h1" style="margin-top: 20px;">{{ nexomon.Number }} - {{ nexomon.Name }}</h1>
+      <div class="main-infos">
+        <h1 class="h1" style="margin-top: 20px;">{{ nexomon.Number }} - {{ nexomon.Name }}</h1>
 
-      <div class="sprite-container">
-        <img class="nexomon-sprite" :src="getImage(nexomon.Name, showCosmic)" alt="Nexomon Sprite" />
-        <div class="element-info">
-          <h3 style="margin-top: 7px;">Element:</h3>
-          <img :src="getImage(nexomon.Element + '_Type_Icon')" alt="Element Image" class="element-label" />
-          <span>{{ nexomon.Element }}</span>
-          <button v-if="nexomon.Sprites && nexomon.Sprites.Cosmic" class="toggle-button" @click="toggleSprite">
-            {{ showCosmic ? 'Show Regular' : 'Show Cosmic' }}
-          </button>
+        <div class="sprite-container">
+          <img class="nexomon-sprite" :src="getImage(nexomon.Name, showCosmic)" alt="Nexomon Sprite" />
+          <div class="element-info">
+            <h3 style="margin-top: 7px;">Element:</h3>
+            <img :src="getImage(nexomon.Element + '_Type_Icon')" alt="Element Image" class="element-label" />
+            <span>{{ nexomon.Element }}</span>
+            <button v-if="nexomon.Sprites && nexomon.Sprites.Cosmic" class="toggle-button" @click="toggleSprite">
+              {{ showCosmic ? 'Show Regular' : 'Show Cosmic' }}
+            </button>
+          </div>
+          <div class="description-container">
+            <p>{{ description.Description }}</p>
+          </div>
         </div>
-        <div class="description-container">
-          <p>{{ description.Description }}</p>
+
+          <h3 >
+            Rarity: <span :style="{ backgroundColor: getRarityColor(nexomon.Rarity), color: 'white', borderRadius: '5px', padding: '3px'}" >{{ nexomon.Rarity }}</span>
+          </h3>
+
+        <div class="navigation-buttons">
+          <button class="btn btn-outline-primary" @click="goToNexomon(parseInt(nexomon.Number) - 1)"
+            :disabled="!hasPrevious">Previous</button>
+          <button class="btn btn-outline-primary" @click="goToNexomon(parseInt(nexomon.Number) + 1)"
+            :disabled="!hasNext">Next</button>
         </div>
       </div>
 
-        <h3 >
-          Rarity: <span :style="{ backgroundColor: getRarityColor(nexomon.Rarity), color: 'white', borderRadius: '5px', padding: '3px'}" >{{ nexomon.Rarity }}</span>
-        </h3>
+      <button class="btn btn-outline-danger" @click="goBack">Back</button>
 
-      <div class="navigation-buttons">
-        <button class="btn btn-outline-primary" @click="goToNexomon(parseInt(nexomon.Number) - 1)"
-          :disabled="!hasPrevious">Previous</button>
-        <button class="btn btn-outline-primary" @click="goToNexomon(parseInt(nexomon.Number) + 1)"
-          :disabled="!hasNext">Next</button>
+      <div class="extra-info">
+        <div class="extra-section" @click="toggleSection('battle-info')">
+          <h3>&#x1F94A; Battle Info </h3>
+          <div
+            :class="{ 'extra-list': true, 'expanded': !collapsedSections['battle-info'], 'collapsed': collapsedSections['battle-info'] }"
+            v-if="!collapsedSections['battle-info']">
+            <table>
+              <tbody>
+                <tr>
+                  <td>
+                  <span>{{ nexomon.Name }}'s Type: <img :src="getImage(nexomon.Element + '_Type_Icon')" alt="Element Image" class="element-image" /></span>
+                  </td>
+                </tr>
+                <tr v-if="effectiveVs.length > 0">
+                  <td>
+                    <strong><span style='color:green' class="battle-text">Effective</span> Against:</strong>
+                    <ul>
+                      <li v-for="type in effectiveVs" :key="type" class="extra-item">
+                        <img :src="getImage(type + '_Type_Icon')" alt="Element Image" class="element-image" />{{ type }}
+                      </li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr v-if="vulnerableTo.length > 0">
+                  <td>
+                    <strong><span style='color:crimson' class="battle-text">Vulnerable</span> Against:</strong>
+                    <ul>
+                      <li v-for="type in vulnerableTo" :key="type" class="extra-item">
+                        <img :src="getImage(type + '_Type_Icon')" alt="Element Image" class="element-image" />{{ type }}
+                      </li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr v-if="ineffectiveVs.length > 0">
+                  <td>
+                    <strong><span style='color:dodgerblue' class="battle-text">Ineffective</span> Against:</strong>
+                    <ul>
+                      <li v-for="type in ineffectiveVs" :key="type" class="extra-item">
+                        <img :src="getImage(type + '_Type_Icon')" alt="Element Image" class="element-image" />{{ type }}
+                      </li>
+                    </ul>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class='extra-section' @click="toggleSection('loved-food')">
+          <h3>&#x1F359; Loved Food</h3>
+          <div
+            :class="{ 'extra-list': true, 'expanded': !collapsedSections['loved-food'], 'collapsed': collapsedSections['loved-food'] }"
+            v-if="!collapsedSections['loved-food']">
+            <table>
+              <tbody>
+                <tr v-if="lovedFood.length > 0">
+                  <td>
+                    <ul>
+                      <li v-for="food in lovedFood" :key="food" class="extra-item">
+                        <img :src="getFoodImage(food)" alt="Food Image" class="food-image" />{{ food.name }}
+                      </li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr v-else>
+                  <td>
+                    <ul>
+                      <li>
+                        No food info to display
+                      </li>
+                    </ul>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class='extra-section' @click="toggleSection('base-stats')">
+          <h3>&#x1F4C8; Base Stats</h3>
+          <div
+            :class="{ 'extra-list': true, 'expanded': !collapsedSections['base-stats'], 'collapsed': collapsedSections['base-stats'] }"
+            v-if="!collapsedSections['base-stats']">
+            <table>
+              <tbody>
+                <tr>
+                  <td>
+                    <ul>
+                      <li v-for="(value, key) in baseStats" :key="key" class="extra-item">
+                        <img :src="getStatImage(key)" alt="Stat image" class="element-image" />{{ key }} : {{ value }}
+                      </li>
+                      <li class="extra-item">
+                        <span style="margin-right: 5%; font-size:24px">&#x1F4CB;</span> Stats Total: {{ nexomon.BST }}
+                      </li>
+                    </ul>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div v-if="nexomon.Evolution && nexomon.Evolution.length" class="evolution-container">
+      <h3>Evolution Line:</h3>
+      <div>
+        <router-link class="evolution-stage" v-for="(details, nexomonName) in nexomonEvolution" :key="nexomonName"
+          :to="goToEvolution(nexomonName)">
+          <img :src="getImage(nexomonName)" :alt="nexomonName" class="evolution-image" />
+          <span>{{ nexomonName }} - {{ details.text }}</span>
+        </router-link>
       </div>
     </div>
 
-    <button class="btn btn-outline-danger" @click="goBack">Back</button>
+    <div class="location-info">
+      <h3>Locations</h3>
 
-    <div class="extra-info">
-      <div class="extra-section" @click="toggleSection('battle-info')">
-        <h3>&#x1F94A; Battle Info </h3>
-        <div
-          :class="{ 'extra-list': true, 'expanded': !collapsedSections['battle-info'], 'collapsed': collapsedSections['battle-info'] }"
-          v-if="!collapsedSections['battle-info']">
-          <table>
-            <tbody>
-              <tr>
-                <td>
-                <span>{{ nexomon.Name }}'s Type: <img :src="getImage(nexomon.Element + '_Type_Icon')" alt="Element Image" class="element-image" /></span>
-                </td>
-              </tr>
-              <tr v-if="effectiveVs.length > 0">
-                <td>
-                  <strong><span style='color:green' class="battle-text">Effective</span> Against:</strong>
-                  <ul>
-                    <li v-for="type in effectiveVs" :key="type" class="extra-item">
-                      <img :src="getImage(type + '_Type_Icon')" alt="Element Image" class="element-image" />{{ type }}
-                    </li>
-                  </ul>
-                </td>
-              </tr>
-              <tr v-if="vulnerableTo.length > 0">
-                <td>
-                  <strong><span style='color:crimson' class="battle-text">Vulnerable</span> Against:</strong>
-                  <ul>
-                    <li v-for="type in vulnerableTo" :key="type" class="extra-item">
-                      <img :src="getImage(type + '_Type_Icon')" alt="Element Image" class="element-image" />{{ type }}
-                    </li>
-                  </ul>
-                </td>
-              </tr>
-              <tr v-if="ineffectiveVs.length > 0">
-                <td>
-                  <strong><span style='color:dodgerblue' class="battle-text">Ineffective</span> Against:</strong>
-                  <ul>
-                    <li v-for="type in ineffectiveVs" :key="type" class="extra-item">
-                      <img :src="getImage(type + '_Type_Icon')" alt="Element Image" class="element-image" />{{ type }}
-                    </li>
-                  </ul>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+      <p v-if="!hasLocations" class="location-exception">{{ locationException }}</p>
 
-      <div class='extra-section' @click="toggleSection('loved-food')">
-        <h3>&#x1F359; Loved Food</h3>
-        <div
-          :class="{ 'extra-list': true, 'expanded': !collapsedSections['loved-food'], 'collapsed': collapsedSections['loved-food'] }"
-          v-if="!collapsedSections['loved-food']">
-          <table>
-            <tbody>
-              <tr v-if="lovedFood.length > 0">
-                <td>
-                  <ul>
-                    <li v-for="food in lovedFood" :key="food" class="extra-item">
-                      <img :src="getFoodImage(food)" alt="Food Image" class="food-image" />{{ food.name }}
-                    </li>
-                  </ul>
-                </td>
-              </tr>
-              <tr v-else>
-                <td>
-                  <ul>
-                    <li>
-                      No food info to display
-                    </li>
-                  </ul>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+      <div class="regions-grid">
 
-      <div class='extra-section' @click="toggleSection('base-stats')">
-        <h3>&#x1F4C8; Base Stats</h3>
-        <div
-          :class="{ 'extra-list': true, 'expanded': !collapsedSections['base-stats'], 'collapsed': collapsedSections['base-stats'] }"
-          v-if="!collapsedSections['base-stats']">
-          <table>
-            <tbody>
-              <tr>
-                <td>
-                  <ul>
-                    <li v-for="(value, key) in baseStats" :key="key" class="extra-item">
-                      <img :src="getStatImage(key)" alt="Stat image" class="element-image" />{{ key }} : {{ value }}
-                    </li>
-                    <li class="extra-item">
-                      <span style="margin-right: 5%; font-size:24px">&#x1F4CB;</span> Stats Total: {{ nexomon.BST }}
-                    </li>
-                  </ul>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="region-card" v-for="(region, index) in nexomon.Locations" :key="index" @click="toggleRegion(index)">
+
+          <img :src="getRegionImage(region.Region.text)" alt="Region Image" class="region-image" />
+
+          <div class="region-text">
+            <h4>{{ region.Region.text }}</h4>
+          </div>
+
+          <!-- Only show maps when the card is expanded -->
+          <div
+            :class="{ 'maps-list': true, 'expanded': expandedRegion === index, 'collapsed': expandedRegion !== index }">
+            <ul @click.stop>
+              <li v-for="map in region.Maps.split(', ')" :key="map" @mouseenter="hoverMap(map)"
+                @mouseleave="hoverMap(null)" @click="clickMap(map)" :class="{ 'highlighted-map': clickedMap === map }">
+                {{ map }} <br>
+                <img v-if="hoveredMap === map || clickedMap === map" :src="getMapImage(map)" alt="Map Image"
+                  class="map-preview" />
+              </li>
+            </ul>
+          </div>
+
         </div>
       </div>
     </div>
 
-  </div>
-
-  <div v-if="nexomon.Evolution && nexomon.Evolution.length" class="evolution-container">
-    <h3>Evolution Line:</h3>
-    <div>
-      <router-link class="evolution-stage" v-for="(details, nexomonName) in nexomonEvolution" :key="nexomonName"
-        :to="goToEvolution(nexomonName)">
-        <img :src="getImage(nexomonName)" :alt="nexomonName" class="evolution-image" />
-        <span>{{ nexomonName }} - {{ details.text }}</span>
-      </router-link>
-    </div>
-  </div>
-
-  <div class="location-info">
-    <h3>Locations</h3>
-
-    <p v-if="!hasLocations" class="location-exception">{{ locationException }}</p>
-
-    <div class="regions-grid">
-
-      <div class="region-card" v-for="(region, index) in nexomon.Locations" :key="index" @click="toggleRegion(index)">
-
-        <img :src="getRegionImage(region.Region.text)" alt="Region Image" class="region-image" />
-
-        <div class="region-text">
-          <h4>{{ region.Region.text }}</h4>
-        </div>
-
-        <!-- Only show maps when the card is expanded -->
-        <div
-          :class="{ 'maps-list': true, 'expanded': expandedRegion === index, 'collapsed': expandedRegion !== index }">
-          <ul @click.stop>
-            <li v-for="map in region.Maps.split(', ')" :key="map" @mouseenter="hoverMap(map)"
-              @mouseleave="hoverMap(null)" @click="clickMap(map)" :class="{ 'highlighted-map': clickedMap === map }">
-              {{ map }} <br>
-              <img v-if="hoveredMap === map || clickedMap === map" :src="getMapImage(map)" alt="Map Image"
-                class="map-preview" />
-            </li>
-          </ul>
-        </div>
-
+    <!-- Supa Zoom -->
+    <div v-if="showZoom" class="zoomed-map-overlay" @click="closeZoom">
+      <div class="zoomed-map-container">
+        <img :src="zoomedMap" alt="Zoomed Map" class="zoomed-map-image" />
       </div>
     </div>
-  </div>
-
-  <!-- Supa Zoom -->
-  <div v-if="showZoom" class="zoomed-map-overlay" @click="closeZoom">
-    <div class="zoomed-map-container">
-      <img :src="zoomedMap" alt="Zoomed Map" class="zoomed-map-image" />
-    </div>
-  </div>
-
+  </div> <!-- Close the wrapping div -->
 </template>
 
 
@@ -473,6 +474,11 @@ button {
   margin: 0 10px;
   padding: 10px;
   font-size: 16px;
+}
+
+.nexomon-details-wrapper {
+  /* Add any necessary styles for the wrapper */
+  width: 100%;
 }
 </style>
 

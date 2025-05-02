@@ -1,0 +1,3 @@
+html {
+    overflow-y: scroll; /* Force vertical scrollbar to always be visible */
+  }

@@ -11,6 +11,9 @@ import 'bootstrap-vue-3/dist/bootstrap-vue-3.css';
 
 import BootstrapVue3 from 'bootstrap-vue-3';
 
+// Import global styles
+import './assets/styles/global.css';
+
 const app = createApp(App);
 
 app.use(router);

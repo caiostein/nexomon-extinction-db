@@ -1,37 +1,54 @@
 <template>
-  <div>
-    <!-- Search Input -->
-    <input type="text" v-model="searchQuery" placeholder="Search for a Nexomon" class="search-box" />
+  <div class="nexomon-list-wrapper">
+    <!-- Removed the extra inner div -->
+    <div class="filters-container">
+      <!-- Search Input -->
+      <input type="text" v-model="searchQuery" placeholder="Search for a Nexomon" class="search-box" />
 
-    <div class="nexomon-grid">
-      <router-link v-for="nexomon in filteredNexomons" :key="nexomon.Number" :to="`/nexomon/${nexomon.Number}`"
-        class="nexomon-card">
-        <h3>{{ nexomon.Number }} - {{ nexomon.Name }}</h3>
-        <img :src="getThumbnail(nexomon.Name)" alt="Sprite" />
-      </router-link>
+      <!-- Element Filter Dropdown -->
+      <select v-model="selectedElement" class="element-filter">
+        <option value="">All Elements</option>
+        <option v-for="element in uniqueElements" :key="element" :value="element">{{ element }}</option>
+      </select>
+    </div>
+
+    <div class="grid-scroll-container"> <!-- Container for scrolling -->
+      <div class="nexomon-grid">
+        <router-link v-for="nexomon in filteredNexomons" :key="nexomon.Number" :to="`/nexomon/${nexomon.Number}`"
+          class="nexomon-card">
+          <h3>{{ nexomon.Number }} - {{ nexomon.Name }}</h3>
+          <img :src="getThumbnail(nexomon.Name)" alt="Sprite" />
+        </router-link>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import data from '../../../python-scripts/assets/nexomon_extinction_database.json';
+import typeChart from '../assets/type_chart.json';
 
 export default {
   data() {
     return {
       nexomons: data,
       searchQuery: '',
+      selectedElement: '',
     };
   },
   computed: {
+    uniqueElements() {
+      return Object.keys(typeChart.types);
+    },
     filteredNexomons() {
       const searchQueryLower = this.searchQuery.toLowerCase();
 
       return this.nexomons.filter(nexomon => {
         const nameMatches = nexomon.Name.toLowerCase().includes(searchQueryLower);
         const numberMatches = nexomon.Number.includes(searchQueryLower);
+        const elementMatches = this.selectedElement === '' || nexomon.Element === this.selectedElement;
 
-        return nameMatches || numberMatches;
+        return (nameMatches || numberMatches) && elementMatches;
       });
     },
   },
@@ -52,14 +69,37 @@ export default {
 </script>
 
 <style scoped>
+.nexomon-list-wrapper {
+  --header-height: 60px; /* Adjust to your actual header height */
+  --filter-container-height: 150px; /* Adjust based on actual filter height */
+}
+
+.filters-container {
+  position: fixed;
+  top: var(--header-height);
+  left: 0;
+  width: 100%;
+  padding: 20px 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: var(--filter-container-height);
+  box-sizing: border-box;
+}
+
+.grid-scroll-container {
+  padding-top: var(--filter-container-height);
+  height: calc(100vh - var(--filter-container-height) - var(--header-height));
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
 .nexomon-grid {
-  margin: 45px;
+  margin: -100px 45px 45px; /* Adjust top margin */
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  /* Center align cards */
-  min-height: 10000px;
-  /* Set a minimum height to prevent collapsing */
+  justify-content: flex-start;
 }
 
 .nexomon-card {
@@ -103,8 +143,7 @@ export default {
   max-width: 300px;
   /* Limit maximum width */
   padding: 10px;
-  margin: 40px auto;
-  /* Centered and space from the top */
+  margin: 10px auto; /* Adjust margin for flex container */
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -158,10 +197,26 @@ export default {
 
   .nexomon-grid {
     justify-content: space-between;
-    /* Space out cards */
-    margin: 20px;
+    /*which one is the top margin?
+     */
+    margin: -150px 20px 20px;
     flex-flow: row wrap;
   }
 
+  .grid-scroll-container {
+     padding-top: var(--filter-container-height); /* Ensure padding is applied */
+     height: calc(100vh - 300px); /* Ensure height is calculated */
+  }
+
+}
+
+.element-filter {
+  width: 100%;
+  max-width: 300px;
+  padding: 10px;
+  margin: 10px auto; /* Adjust margin for flex container */
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 </style>
