@@ -1,6 +1,27 @@
 {
-    "Nara": "It can be captured during the 'Deena is Reborn' quest. After that, we can talk to Eliza to release captured legendaries again and it'll it'll likely appear in the Hidden Village region, although this hasn't been confirmed.",
-    "Ventra": "It can be captured during the 'Nadine is Reborn' quest. After that, we can talk to Eliza to release captured legendaries again and it'll likely appear in the Drake Isles, although this hasn't been confirmed.",
+    "quest_locations": {
+        "resurrect_bolzen": {
+            "quest_name": "Resurrect Bolzen quest",
+            "region": {
+                "text": "Cadium",
+                "image": "https://static.wikia.nocookie.net/nexomon/images/2/22/CadiumWarp.png"
+            },
+            "maps": [
+                "Cadium East", 
+                "Logan's House", 
+                "Cadium Generator Room 1", 
+                "Cadium Generator Room 2", 
+                "Logan's House South", 
+                "Cadium Generator Room 4", 
+                "Cadium Generator Room 3 North", 
+                "Cadium Generator Room 3", 
+                "Cadium Generator Room 3 Northeast"
+            ]
+        }
+    },
+    "legendary_exceptions": {
+        "Nara": "It can be captured during the 'Deena is Reborn' quest. After that, we can talk to Eliza to release captured legendaries again and it'll it'll likely appear in the Hidden Village region, although this hasn't been confirmed.",
+        "Ventra": "It can be captured during the 'Nadine is Reborn' quest. After that, we can talk to Eliza to release captured legendaries again and it'll likely appear in the Drake Isles, although this hasn't been confirmed.",
     "Vados": "It can't be captured in the wild, only evolved from Protovados.",
     "Omnisun": "It can't be captured in the wild, only evolved from Solus.",
     "Hexia": "It can be only found roaming in the Precursor Valley but might need to complete the DLC and ask Eliza to release legendaries at her house.",
@@ -23,9 +44,9 @@
     "Oregoon": "No known locations.",
     "Boscage": "It can be captured during The Drake of Nature quest. After that, we can talk to Eliza to release captured legendaries again and it'll likely appear in the Hidden Village region, although this hasn't been confirmed.",
     "Tyrake": "It can be captured during The Drake of Wind quest. After that, we can talk to Eliza to release captured legendaries again and it'll appear in the Drake Isles.",
-    "Krainnull": "It can be captured during The Drake of Decay quest. After that, we can talk to Eliza to release captured legendaries again and it'll likely appear in the Immortal Citadel region, although this hasn't been confirmed.",
-    "Nivalis": "It can be captured during the post-game in the Frozen Tundra.",
+    "Krainnull": "It can be captured during The Drake of Decay quest. After that, we can talk to Eliza to release captured legendaries again and it'll likely appear in the Immortal Citadel region, although this hasn't been confirmed.",    "Nivalis": "It can be captured during the post-game in the Frozen Tundra.",
     "Tikala": "It can be captured during the post-game in the Hidden Village region.",
     "Eurus": "It can be captured during the post-game in the Drake Isles."
   }
+}
   

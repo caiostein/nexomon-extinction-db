@@ -1,9 +1,7 @@
 <!-- src/components/NexomonDetails.vue -->
 <template>
   <div class="nexomon-details-wrapper"> <!-- Add this wrapping div -->
-    <div v-if="nexomon" class="details-container">
-
-      <div class="main-infos">
+    <div v-if="nexomon" class="details-container">      <div class="main-infos">
         <h1 class="h1" style="margin-top: 20px;">{{ nexomon.Number }} - {{ nexomon.Name }}</h1>
 
         <div class="sprite-container">
@@ -166,16 +164,44 @@
             <h4>{{ region.Region.text }}</h4>
           </div>
 
-          <!-- Only show maps when the card is expanded -->
-          <div
+          <!-- Only show maps when the card is expanded -->          <div
             :class="{ 'maps-list': true, 'expanded': expandedRegion === index, 'collapsed': expandedRegion !== index }">
             <ul @click.stop>
-              <li v-for="map in region.Maps.split(', ')" :key="map" @mouseenter="hoverMap(map)"
-                @mouseleave="hoverMap(null)" @click="clickMap(map)" :class="{ 'highlighted-map': clickedMap === map }">
-                {{ map }} <br>
-                <img v-if="hoveredMap === map || clickedMap === map" :src="getMapImage(map)" alt="Map Image"
-                  class="map-preview" />
-              </li>
+              <!-- Quest exception notice -->
+              <div v-if="region.Exception" class="quest-exception">
+                <strong>Quest Location:</strong> {{ region.Exception }}
+              </div>
+              
+              <!-- Maps list -->
+              <template v-if="Array.isArray(region.Maps)">
+                <li v-for="map in region.Maps" :key="map" @mouseenter="hoverMap(map)"
+                  @mouseleave="hoverMap(null)" @click="clickMap(map)" :class="{ 'highlighted-map': clickedMap === map }">
+                  {{ map }} <br>
+                  <img v-if="hoveredMap === map || clickedMap === map" :src="getMapImage(map)" alt="Map Image"
+                    class="map-preview" />
+                </li>
+              </template>
+              <!-- Legacy format support -->
+              <template v-else-if="typeof region.Maps === 'string'">
+                <!-- Check if this is a quest location (legacy format) -->
+                <template v-if="isQuestLocation(region)">
+                  <li v-for="map in getCleanMapsList(region.Maps)" :key="map" @mouseenter="hoverMap(map)"
+                    @mouseleave="hoverMap(null)" @click="clickMap(map)" :class="{ 'highlighted-map': clickedMap === map }">
+                    {{ map }} <br>
+                    <img v-if="hoveredMap === map || clickedMap === map" :src="getMapImage(map)" alt="Map Image"
+                      class="map-preview" />
+                  </li>
+                </template>
+                <!-- Regular location (legacy format) -->
+                <template v-else>
+                  <li v-for="map in region.Maps.split(', ')" :key="map" @mouseenter="hoverMap(map)"
+                    @mouseleave="hoverMap(null)" @click="clickMap(map)" :class="{ 'highlighted-map': clickedMap === map }">
+                    {{ map }} <br>
+                    <img v-if="hoveredMap === map || clickedMap === map" :src="getMapImage(map)" alt="Map Image"
+                      class="map-preview" />
+                  </li>
+                </template>
+              </template>
             </ul>
           </div>
 
@@ -201,26 +227,26 @@ import locationExceptions from '../assets/location_exceptions.json';
 import typeChart from '../assets/type_chart.json'
 
 export default {
-  props: ['number'],
-  data() {
-    return {
-      database: data,
-      description_database: descriptionData,
-      locationExceptions: locationExceptions,
-      typeChart: typeChart,
-      showCosmic: false,
-      expandedRegion: null,
-      hoveredMap: null,
-      zoomedMap: null,
-      showZoom: false,
-      clickedMap: null,
-      collapsedSections: {
-        'battle-info': true,
-        'loved-food': true,
-        'base-stats': true,
-      }
-    };
-  },
+  props: ['number'],  data() {
+      return {
+        database: data,
+        description_database: descriptionData,
+        locationExceptions: locationExceptions,
+        typeChart: typeChart,
+        showCosmic: false,
+        expandedRegion: null,
+        hoveredMap: null,
+        zoomedMap: null,
+        showZoom: false,
+        clickedMap: null,
+        questLocations: locationExceptions.quest_locations || {},
+        collapsedSections: {
+          'battle-info': true,
+          'loved-food': true,
+          'base-stats': true,
+        }
+      };
+    },
   computed: {
     //Basic Info
     nexomon() {
@@ -291,17 +317,40 @@ export default {
   },
 
   methods: {
-
-    toggleSection(section) {
-      this.collapsedSections[section] = !this.collapsedSections[section];
+    // Quest location related methods
+    isQuestLocation(region) {
+      if (typeof region.Maps === 'string') {
+        return region.Maps.includes("Only during the Resurrect Bolzen quest:");
+      }
+      return false;
     },
 
-    toggleRegion(index) {
+    getCleanMapsList(mapsString) {
+      if (typeof mapsString !== 'string') return [];
+      // Remove the quest text and split by comma
+      return mapsString.replace("Only during the Resurrect Bolzen quest:", "").split(', ')
+        .map(map => map.trim())
+        .filter(map => map.length > 0);
+    },
+
+    // Existing methods
+    toggleSection(section) {
+      this.collapsedSections[section] = !this.collapsedSections[section];
+    },    toggleRegion(index) {
       if (this.expandedRegion !== index) {
         this.expandedRegion = index;
 
+        // Get the maps from the region
+        const regionMaps = this.nexomon.Locations[index].Maps;
+        
         // Preload all map images for the clicked region
-        this.preloadMapImages(this.nexomon.Locations[index].Maps.split(', '));
+        if (typeof regionMaps === 'string') {
+          // Handle legacy string format
+          this.preloadMapImages(regionMaps.split(', '));
+        } else if (Array.isArray(regionMaps)) {
+          // Handle new array format
+          this.preloadMapImages(regionMaps);
+        }
       } else {
         this.expandedRegion = null; // Collapse the region if it's already expanded
       }

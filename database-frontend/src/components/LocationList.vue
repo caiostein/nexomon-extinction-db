@@ -1,9 +1,11 @@
 <template>
   <div class="location-list-wrapper">
     <div class="filters-container">
-      <input type="text" v-model="searchQuery" placeholder="Search for a Location" class="search-box" />
+      <div class="search-bar-container">
+        <input type="text" v-model="searchQuery" placeholder="Search for a Location" class="search-box" />
+      </div>
     </div>
-    <div class="grid-scroll-container">
+    <div class="regions-container">
       <div class="location-grid">
         <router-link v-for="location in filteredLocations" :key="location" :to="`/location/${location}`" class="location-card">
           <h3>{{ location.replace(/ \(Extinction\)/i, '') }}</h3>
@@ -16,12 +18,14 @@
 
 <script>
 import data from '../../../python-scripts/assets/nexomon_extinction_database.json';
+import locationExceptions from '../assets/location_exceptions.json';
 
 export default {
   data() {
     return {
       searchQuery: '',
       locations: this.getAllLocations(),
+      questLocations: locationExceptions.quest_locations || {}
     };
   },
   methods: {
@@ -64,6 +68,39 @@ export default {
   width: 100%;
 }
 
+.filters-container {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  width: 100%;
+  padding: 20px 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 90px;
+  box-sizing: border-box;
+  background: inherit;
+}
+
+.search-bar-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.regions-container {
+  padding-top: 90px;
+  height: calc(100vh - 90px - 60px);
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.grid-scroll-container {
+  padding-top: 90px;
+  box-sizing: border-box;
+}
+
 .location-grid {
   display: grid;
   align-items: start;
@@ -75,11 +112,13 @@ export default {
 }
 
 .location-card {
+  width: 100%;
+  max-width: 700px;
   border: 2px solid #eee;
   border-radius: 12px;
   background: #fff;
   box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-  padding: 0 0 18px 0;
+  padding: 0 0 32px 0;
   margin: 0;
   text-align: center;
   transition: transform 0.3s, box-shadow 0.3s, background 0.3s, border-color 0.3s;
@@ -89,6 +128,7 @@ export default {
   flex-direction: column;
   align-items: center;
   text-decoration: none;
+  min-height: 340px;
 }
 
 .location-card:hover {
@@ -99,8 +139,9 @@ export default {
 }
 
 .location-card img {
-  width: 95%;
-  height: 220px;
+  width: 100%;
+  height: auto;
+  max-height: 340px;
   object-fit: cover;
   border-radius: 8px 8px 0 0;
   margin: 18px 0 0 0;
@@ -109,10 +150,13 @@ export default {
 }
 
 .location-card h3 {
-  font-size: 2em;
+  font-size: 2.2em;
   color: #222;
-  margin: 18px 0 0 0;
-  text-shadow: none;
+  margin: 28px 0 0 0;
+  text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff,
+               1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
+  font-weight: 700;
+  letter-spacing: 1px;
 }
 
 .filters-container {
@@ -175,28 +219,51 @@ export default {
 }
 
 @media (max-width: 900px) {
+  .filters-container {
+    margin-top: -10px;
+    height: 120px;
+    padding: 28px 0;
+  }
+  .regions-container {
+    padding-top: 90px;
+  }
   .location-grid {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    display: flex;
+    flex-direction: column;
     gap: 18px;
+    align-items: center;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  .location-card {
+    max-width: 98vw;
+    min-height: 220px;
+    padding-bottom: 24px;
   }
   .location-card img {
-    height: 120px;
+    max-height: 180px;
   }
   .location-card h3 {
-    font-size: 1.2em;
+    font-size: 1.6em;
+    margin-top: 18px;
   }
 }
 
 @media (max-width: 480px) {
   .location-grid {
-    grid-template-columns: 1fr;
     gap: 10px;
   }
+  .location-card {
+    max-width: 100vw;
+    min-height: 160px;
+    padding-bottom: 16px;
+  }
   .location-card img {
-    height: 90px;
+    max-height: 120px;
   }
   .location-card h3 {
-    font-size: 1em;
+    font-size: 1.2em;
+    margin-top: 12px;
   }
 }
 </style>

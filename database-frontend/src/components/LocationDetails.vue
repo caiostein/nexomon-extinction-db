@@ -30,30 +30,65 @@
 
 <script>
 import data from '../../../python-scripts/assets/nexomon_extinction_database.json';
+import locationExceptions from '../assets/location_exceptions.json';
 
 export default {
   props: ['location'],
+  data() {
+    return {
+      questLocations: locationExceptions.quest_locations || {}
+    };
+  },
   computed: {
     locationName() {
       return this.$route.params.location;
-    },
-    maps() {
+    },    maps() {
       // Find all maps for this region
       const maps = new Set();
       data.forEach(n => {
         if (n.Locations) {
           n.Locations.forEach(region => {
             if (region.Region && region.Region.text === this.locationName) {
-              region.Maps.split(', ').forEach(m => maps.add(m));
+              // Handle normal map strings (backward compatibility)
+              if (typeof region.Maps === 'string') {
+                if (!region.Maps.includes("Only during the Resurrect Bolzen quest:")) {
+                  region.Maps.split(', ').forEach(m => maps.add(m));
+                }
+              } 
+              // Handle new format with Maps as array
+              else if (Array.isArray(region.Maps)) {
+                region.Maps.forEach(map => {
+                  if (region.Exception) {
+                    maps.add(`${map} (${region.Exception})`);
+                  } else {
+                    maps.add(map);
+                  }
+                });
+              }
             }
           });
         }
       });
+      
       return Array.from(maps).sort();
-    },
-    nexomons() {
+    },    nexomons() {
       // Find all Nexomon found in this region
-      return data.filter(n => n.Locations && n.Locations.some(region => region.Region && region.Region.text === this.locationName));
+      return data.filter(n => {
+        if (!n.Locations) return false;
+        
+        return n.Locations.some(region => {
+          if (!region.Region || region.Region.text !== this.locationName) return false;
+          
+          // Handle both string and array formats for backward compatibility
+          if (typeof region.Maps === 'string') {
+            return true;
+          } else if (Array.isArray(region.Maps)) {
+            return true;
+          }
+          
+          return false;
+        });
+      });
     }
   },
   methods: {

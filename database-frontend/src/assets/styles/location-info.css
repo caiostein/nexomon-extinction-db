@@ -163,6 +163,12 @@
   border: 2px solid #ddd;
   border-radius: 8px;
   padding-top: 1%;
+  background-color: #eef6ff;
+  border-left: 4px solid #3399ff;
+  padding: 10px;
+  margin: 10px 0;
+  font-size: 0.9em;
+  color: #333;
 }
 
 @media (max-width: 480px) {
@@ -171,4 +177,21 @@
     padding-top: 5px;
     max-width: 80%;
   }
+}
+
+.quest-exception {
+  background-color: #ffeecc;
+  border-left: 4px solid #ffaa33;
+  padding: 10px;
+  margin-bottom: 15px;
+  font-size: 0.9em;
+  border-radius: 4px;
+  color: #333;
+}
+
+/* Ensure text remains visible in dark mode */
+.dark-mode .quest-exception {
+  background-color: #664400;
+  border-left: 4px solid #ffaa33;
+  color: #fff;
 }
