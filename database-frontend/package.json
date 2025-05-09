@@ -2,7 +2,7 @@
   "name": "nexomon-extinction-db",
   "version": "0.1.0",
   "private": true,  "scripts": {
-    "start": "vue-cli-service serve --host localhost --port 8080 --open",
+    "start": "vue-cli-service serve",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",

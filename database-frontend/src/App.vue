@@ -11,6 +11,9 @@
             <router-link class="nav-link" to="/" @click="handleNavClick">Database</router-link>
           </li>
           <li class="nav-item">
+            <router-link class="nav-link" to="/locations" @click="handleNavClick">Location Database</router-link>
+          </li>
+          <li class="nav-item">
             <router-link class="nav-link" to="/about" @click="handleNavClick">About</router-link>
           </li>
         </ul>

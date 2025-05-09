@@ -1,6 +1,8 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import NexomonList from '@/components/NexomonList.vue'
 import NexomonDetails from '@/components/NexomonDetails'
+import LocationList from '@/components/LocationList.vue'
+import LocationDetails from '@/components/LocationDetails.vue'
 
 const routes = [
   {
@@ -17,6 +19,17 @@ const routes = [
     name: 'Nexomon Details',
     component: NexomonDetails,
     props: true,
+  },
+  {
+    path: '/locations',
+    name: 'Location List',
+    component: LocationList
+  },
+  {
+    path: '/location/:location',
+    name: 'Location Details',
+    component: LocationDetails,
+    props: true
   },
   {
     path: '/about',
