@@ -4,14 +4,43 @@
     <div>
       <button class="btn btn-sm btn-outline-danger back-button" @click="goBack">Back to Locations</button>
     </div>
-      <!-- Nexomon section - now displayed first -->
+
+    <!-- Maps section - now displayed first and made collapsible -->
+    <div v-if="maps.length" class="maps-section">
+      <div class="section-header" @click="toggleMapsSection">
+        <h2>Maps <span class="toggle-icon">{{ mapsCollapsed ? '▼' : '▲' }}</span></h2>
+      </div>
+        <transition name="collapse">
+        <div v-show="!mapsCollapsed" class="section-content">
+          <p v-if="selectedMap" class="map-highlight-notice">
+            Highlighting Nexomon from: {{ selectedMap }}
+            <button class="btn btn-sm btn-outline-secondary clear-btn" @click="selectedMap = null; highlightedNexomon.clear()">Clear</button>
+          </p>
+          <ul class="maps-list">
+            <li 
+              v-for="map in maps" 
+              :key="map" 
+              class="map-item" 
+              :class="{ 'selected-map': selectedMap === map }"
+              @click="toggleMapHighlight(map)">
+              <div class="map-name">{{ map }}</div>
+              <img :src="getMapImage(map)" :alt="map" class="map-image" />
+            </li>
+          </ul>
+        </div>
+      </transition>
+    </div>
+    
+    <!-- Nexomon section - now displayed after Maps -->
     <div v-if="nexomons.length" class="nexomon-section">
       <h2>Nexomon found here</h2>
-      <div class="nexomon-grid">        <router-link 
+      <div class="nexomon-grid">
+        <router-link 
           v-for="nexomon in nexomons" 
           :key="nexomon.Number" 
           :to="`/nexomon/${nexomon.Number}`"
-          class="nexomon-item">
+          class="nexomon-item"
+          :class="{ 'highlighted-nexomon': isNexomonHighlighted(nexomon.Number) }">
           <img :src="getThumbnail(nexomon.Name)" :alt="nexomon.Name" class="nexomon-thumb" />
           <div class="nexomon-info">
             <div class="nexomon-number">{{ nexomon.Number }}</div>
@@ -19,17 +48,6 @@
           </div>
         </router-link>
       </div>
-    </div>
-    
-    <!-- Maps section - now displayed after Nexomon -->
-    <div v-if="maps.length" class="maps-section">
-      <h2>Maps</h2>
-      <ul class="maps-list">
-        <li v-for="map in maps" :key="map" class="map-item">
-          <div class="map-name">{{ map }}</div>
-          <img :src="getMapImage(map)" :alt="map" class="map-image" />
-        </li>
-      </ul>
     </div>
     <div v-else>
       <p>No maps found for this location.</p>
@@ -42,10 +60,12 @@ import data from '../../../python-scripts/assets/nexomon_extinction_database.jso
 import locationExceptions from '../assets/location_exceptions.json';
 
 export default {
-  props: ['location'],
-  data() {
+  props: ['location'],  data() {
     return {
-      questLocations: locationExceptions.quest_locations || {}
+      questLocations: locationExceptions.quest_locations || {},
+      selectedMap: null,
+      highlightedNexomon: new Set(),
+      mapsCollapsed: false
     };
   },
   computed: {
@@ -141,10 +161,48 @@ export default {
           }
         }
       }
-    },
-    
+    },    
     goBack() {
       this.$router.push({ path: '/locations' });
+    },
+    
+    toggleMapHighlight(map) {
+      // If clicking the same map, toggle it off
+      if (this.selectedMap === map) {
+        this.selectedMap = null;
+        this.highlightedNexomon.clear();
+        return;
+      }
+      
+      // Set the new selected map
+      this.selectedMap = map;
+      
+      // Clear previous highlights
+      this.highlightedNexomon.clear();
+      
+      // Find all nexomon that appear in this map
+      data.forEach(nexomon => {
+        if (!nexomon.Locations) return;
+        
+        nexomon.Locations.forEach(location => {
+          if (location.Region && location.Region.text === this.locationName) {
+            // Check if this nexomon appears in the selected map
+            if (Array.isArray(location.Maps) && location.Maps.includes(map)) {
+              this.highlightedNexomon.add(nexomon.Number);
+            } else if (typeof location.Maps === 'string' && location.Maps.split(', ').includes(map)) {
+              this.highlightedNexomon.add(nexomon.Number);
+            }
+          }
+        });
+      });
+    },
+      isNexomonHighlighted(nexomonNumber) {
+      if (!this.selectedMap) return false;
+      return this.highlightedNexomon.has(nexomonNumber);
+    },
+    
+    toggleMapsSection() {
+      this.mapsCollapsed = !this.mapsCollapsed;
     }
   }
 };
@@ -192,7 +250,7 @@ export default {
 
 /* Nexomon section styling */
 .nexomon-section {
-  margin-bottom: 30px;
+  margin: 20px 0 30px 0;
 }
 
 .nexomon-grid {
@@ -202,18 +260,18 @@ export default {
   padding: 0;
   margin: 0 auto;
   max-width: 1200px;
-  gap: 5px;
+  gap: 2px; /* Tighter gap between grid items */
 }
 
 .nexomon-item {
-  width: calc(16.666% - 20px);
-  margin: 10px;
+  width: calc(16.666% - 8px); /* Reduced margin for tighter layout */
+  margin: 4px;
   padding: 10px 6px 15px;
   border: 1px solid #ccc;
   border-radius: 8px;
   text-align: center;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition: all 0.3s ease;
   max-height: 290px;
   text-decoration: none;
   color: inherit;
@@ -221,11 +279,34 @@ export default {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 
 .nexomon-item:hover {
   background-color: rgba(141, 140, 140, 0.068);
   transform: scale(1.02);
+}
+
+@media (hover: none) {
+  /* Special touch interactions for mobile devices */
+  .nexomon-item:active {
+    background-color: rgba(141, 140, 140, 0.12);
+    transform: scale(0.98);
+    transition: all 0.1s ease;
+  }
+}
+
+.highlighted-nexomon {
+  background-color: rgba(43, 159, 204, 0.15) !important;
+  border-color: rgb(43, 159, 204) !important;
+  box-shadow: 0 0 8px rgba(43, 159, 204, 0.4) !important;
+  transform: scale(1.02);
+}
+
+.dark-mode .highlighted-nexomon {
+  background-color: rgba(43, 159, 204, 0.25) !important;
+  border-color: rgb(43, 159, 204) !important;
+  box-shadow: 0 0 10px rgba(43, 159, 204, 0.6) !important;
 }
 
 .dark-mode .nexomon-item {
@@ -281,7 +362,66 @@ export default {
 
 /* Maps section styling */
 .maps-section {
-  margin-top: 30px;
+  margin: 10px 0 30px 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 0;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  background-color: #f9f9f9;
+}
+
+.section-header {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  padding: 12px;
+  transition: background-color 0.3s ease;
+  border-radius: 0;
+}
+
+.section-header:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+.section-header h2 {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.toggle-icon {
+  margin-left: 10px;
+  font-size: 0.8rem;
+}
+
+.section-content {
+  padding: 10px 10px 15px;
+  overflow: hidden;
+  background-color: #f9f9f9; /* Consistent background to avoid white lines */
+}
+
+.dark-mode .section-content {
+  background-color: #2a2a2a;
+}
+
+/* Collapse/expand transition effects */
+.collapse-enter-active,
+.collapse-leave-active {
+  transition: all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+  max-height: 2000px; /* Higher value to accommodate more content */
+  opacity: 1;
+  overflow: hidden;
+  will-change: max-height, opacity;
+}
+
+.collapse-enter-from,
+.collapse-leave-to {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding: 0;
 }
 
 .maps-list {
@@ -290,6 +430,8 @@ export default {
   gap: 20px;
   list-style-type: none;
   padding: 0;
+  margin: 5px 0 0 0;
+  border: none;
 }
 
 .map-item {
@@ -314,81 +456,324 @@ export default {
   object-fit: contain;
 }
 
+.map-item {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.map-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+@media (hover: none) {
+  /* Touch interactions for mobile devices */
+  .map-item:active {
+    background-color: rgba(0, 0, 0, 0.05);
+    transform: scale(0.98);
+    transition: all 0.1s ease;
+  }
+  
+  .dark-mode .map-item:active {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+.selected-map {
+  border-color: rgb(43, 159, 204);
+  background-color: rgba(43, 159, 204, 0.1);
+  box-shadow: 0 0 10px rgba(43, 159, 204, 0.3);
+  transform: translateY(-3px);
+}
+
+.map-highlight-notice {
+  background-color: rgba(43, 159, 204, 0.1);
+  padding: 8px 15px;
+  border-radius: 5px;
+  margin: 10px 0 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.clear-btn {
+  margin-left: 10px;
+  padding: 2px 8px;
+  font-size: 0.8rem;
+}
+
 /* Dark mode adjustments */
 .dark-mode .map-item {
   border-color: #555;
   background-color: #2a2a2a;
 }
 
+.dark-mode .selected-map {
+  border-color: rgb(43, 159, 204);
+  background-color: rgba(43, 159, 204, 0.2);
+  box-shadow: 0 0 15px rgba(43, 159, 204, 0.4);
+}
+
+.dark-mode .map-highlight-notice {
+  background-color: rgba(43, 159, 204, 0.2);
+  color: #fff;
+}
+
+/* Dark mode styling for collapsible sections */
+.dark-mode .maps-section {
+  border-color: #444;
+  background-color: #2a2a2a;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .section-header:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
 /* Media Queries for Responsiveness */
 @media (max-width: 3840px) {
   .nexomon-item {
-    width: calc(16.666% - 20px);
-    margin: 10px;
+    width: calc(16.666% - 8px);
+    margin: 4px;
     max-height: 310px;
   }
 }
 
 @media (max-width: 1925px) {
   .nexomon-item {
-    width: calc(16.666% - 20px);
-    margin: 10px;
+    width: calc(16.666% - 8px);
+    margin: 4px;
     max-height: 300px;
   }
 }
 
 @media (max-width: 1280px) {
   .nexomon-item {
-    width: calc(20% - 20px);
-    margin: 10px;
+    width: calc(20% - 6px);
+    margin: 3px;
     max-height: 290px;
   }
 }
 
 @media (max-width: 1024px) {
   .nexomon-item {
-    width: calc(25% - 20px);
-    margin: 10px;
+    width: calc(25% - 6px);
+    margin: 3px;
     max-height: 280px;
   }
 }
 
 @media (max-width: 768px) {
+  .nexomon-grid {
+    gap: 0;
+    justify-content: space-evenly;
+  }
+  
   .nexomon-item {
-    width: calc(33.333% - 20px);
-    margin: 10px;
+    width: calc(33.333% - 4px);
+    margin: 2px;
     max-height: 260px;
   }
 }
 
 @media (max-width: 600px) {
+  .nexomon-grid {
+    gap: 0;
+    justify-content: space-evenly;
+  }
+  
   .nexomon-item {
-    width: calc(50% - 20px);
-    margin: 10px;
-    max-height: 240px;
+    width: calc(33.333% - 4px); /* 3 per row with minimal spacing */
+    margin: 2px;
+    max-height: 220px;
+  }
+  
+  .nexomon-thumb {
+    width: 56px;
+    height: 56px;
+  }
+  
+  .nexomon-name {
+    font-size: 0.85em;
+  }
+  
+  .nexomon-number {
+    font-size: 0.77em;
   }
 }
 
 @media (max-width: 480px) {
+  .location-details-wrapper {
+    padding: 15px 10px;
+  }
+
+  .nexomon-grid {
+    gap: 0;
+    justify-content: space-evenly;
+  }
+
   .nexomon-item {
-    width: calc(50% - 15px);
-    margin: 7px;
-    max-height: 220px;
+    width: calc(33.333% - 2px); /* 3 per row with minimal spacing */
+    margin: 1px;
+    max-height: 160px;
+    padding: 6px 4px 8px;
   }
 
   .nexomon-name {
-    font-size: 0.85em;
-    min-height: 3.2em; /* More space for text on small screens */
-    line-height: 1.3em;
+    font-size: 0.75em;
+    min-height: 2.6em;
+    line-height: 1.2em;
   }
   
   .nexomon-number {
-    font-size: 0.75em;
+    font-size: 0.7em;
   }
   
   .nexomon-thumb {
-    width: 48px;
-    height: 48px;
+    width: 40px;
+    height: 40px;
+    margin-bottom: 4px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+  }
+}
+
+/* Maps section responsiveness */
+@media (max-width: 768px) {
+  .maps-list {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+  }
+  
+  .map-image {
+    width: 120px;
+    height: 120px;
+  }
+
+  .section-header {
+    padding: 15px; /* Larger touch target */
+  }
+  
+  .toggle-icon {
+    font-size: 0.9rem;
+    margin-left: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .maps-list {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px;
+  }
+  
+  .map-image {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .map-name {
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+  }
+
+  .map-item {
+    padding: 8px;
+  }
+  
+  .section-header h2 {
+    font-size: 1.3rem;
+  }
+  
+  .map-highlight-notice {
+    font-size: 0.9rem;
+    padding: 6px 12px;
+    margin: 8px 0 15px;
+  }
+  
+  .clear-btn {
+    padding: 1px 6px;
+    font-size: 0.7rem;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 359px) {
+  .location-details-wrapper {
+    padding: 10px 6px;
+  }
+
+  .nexomon-grid {
+    gap: 0;
+    justify-content: space-evenly;
+  }
+
+  .nexomon-item {
+    width: calc(33.333% - 1px); /* Maintain 3 per row with minimal spacing */
+    margin: 0.5px;
+    max-height: 140px;
+    padding: 4px 1px 6px;
+  }
+
+  .nexomon-thumb {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .maps-list {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 8px;
+  }
+  
+  .map-image {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .map-name {
+    font-size: 0.8rem;
+    margin-bottom: 6px;
+  }
+
+  h1 {
+    font-size: 1.4rem;
+    margin-bottom: 0.4rem;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .section-header h2 {
+    font-size: 1.2rem;
+  }
+}
+
+/* Very narrow screens */
+@media (max-width: 320px) {
+  .nexomon-item {
+    width: calc(50% - 1px); /* Switch to 2 per row with minimal spacing */
+    margin: 0.5px;
+    padding: 4px 1px 6px;
+  }
+
+  .nexomon-name {
+    font-size: 0.7em;
+    min-height: 2.4em;
+  }
+
+  .nexomon-thumb {
+    width: 32px;
+    height: 32px;
   }
 }
 </style>
