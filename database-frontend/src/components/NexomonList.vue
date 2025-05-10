@@ -185,10 +185,6 @@ export default {
   transition: transform 0.2s ease-in-out;
 }
 
-.nexomon-card img.nexomon-thumb:hover {
-  transform: scale(1.1);
-}
-
 .nexomon-info {
   width: 100%;
   display: flex;
