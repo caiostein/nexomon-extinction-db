@@ -33,8 +33,11 @@
       <div class="nexomon-grid">
         <router-link v-for="nexomon in filteredNexomons" :key="nexomon.Number" :to="`/nexomon/${nexomon.Number}`"
           class="nexomon-card">
-          <h3>{{ nexomon.Number }} - {{ nexomon.Name }}</h3>
-          <img :src="getThumbnail(nexomon.Name)" alt="Sprite" />
+          <div class="nexomon-info">
+            <div class="nexomon-number">{{ nexomon.Number }}</div>
+            <div class="nexomon-name">{{ nexomon.Name }}</div>
+          </div>
+          <img :src="getThumbnail(nexomon.Name)" alt="Sprite" class="nexomon-thumb" />
         </router-link>
       </div>
     </div>
@@ -148,42 +151,89 @@ export default {
   margin: -100px 45px 45px; /* Adjust top margin */
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: center;
+  gap: 5px; /* Consistent with LocationDetails */
 }
 
 .nexomon-card {
-  width: calc(14% - 14.8px);
-  /* Default width for larger screens */
-  margin: 30px;
-  /* Space between cards */
-  padding: 10px;
+  width: calc(16.666% - 8px); /* Match LocationDetails sizing */
+  margin: 4px;
+  padding: 10px 6px 15px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 8px;
   text-align: center;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition: all 0.3s ease;
   text-decoration: none;
   color: inherit;
-  max-height: 278px;
+  max-height: 290px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  position: relative; /* For potential positioning of elements */
 }
 
-.nexomon-card img {
-  max-width: 100%;
-  /* Full width for images */
-  height: auto;
-  /* Maintain aspect ratio */
+.nexomon-card img.nexomon-thumb {
+  width: 100px;  /* Larger for desktop */
+  height: 100px;
+  object-fit: contain;
+  margin: 8px 0;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 5px;
+  transition: transform 0.2s ease-in-out;
 }
 
-.nexomon-card h3 {
-  font-size: 1.5em;
-  /* Default font size */
-  margin: 5px 0;
-  /* Space around the heading */
+.nexomon-card img.nexomon-thumb:hover {
+  transform: scale(1.1);
+}
+
+.nexomon-info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.nexomon-number {
+  font-size: 0.8rem;
+  color: #666;
+  margin-bottom: 2px;
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 2px 8px;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+.dark-mode .nexomon-number {
+  color: #aaa;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nexomon-name {
+  font-size: 0.9rem;
+  text-align: center;
+  width: 100%;
+  min-height: 2.8em; /* Allow for two lines of text */
+  line-height: 1.4em;
+  word-wrap: break-word;
+  hyphens: auto;
 }
 
 .nexomon-card:hover {
   background-color: rgba(141, 140, 140, 0.068);
   transform: scale(1.02);
+}
+
+@media (hover: none) {
+  /* Touch interactions for mobile devices */
+  .nexomon-card:active {
+    background-color: rgba(141, 140, 140, 0.12);
+    transform: scale(0.98);
+    transition: all 0.1s ease;
+  }
 }
 
 .search-box {
@@ -207,65 +257,199 @@ export default {
   border: 1px solid #555;
 }
 
-/* Media Queries for Responsiveness */
+/* Dark mode adjustments for nexomon cards */
+.dark-mode .nexomon-card {
+  border-color: #444;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
 
+.dark-mode .nexomon-card:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Media Queries for Responsiveness */
 @media (max-width: 3840px) {
   .nexomon-card {
-    width: calc(14% - 14.8px);
-    margin: 30px;
-    max-height: 300px;
+    width: calc(16.666% - 8px);
+    margin: 4px;
+    max-height: 350px;
+  }
+  
+  .nexomon-thumb {
+    width: 120px !important;
+    height: 120px !important;
+  }
+  
+  .nexomon-name {
+    font-size: 1.1rem !important;
+  }
+  
+  .nexomon-number {
+    font-size: 1rem !important;
+    font-weight: 500;
   }
 }
 
 @media (max-width: 1925px) {
   .nexomon-card {
-    width: calc(14% - 14.8px);
-    /* Default width for larger screens */
-    margin: 30px;
-    max-height: 278px;
+    width: calc(16.666% - 8px);
+    margin: 4px;
+    max-height: 320px;
+  }
+  
+  .nexomon-thumb {
+    width: 100px !important;
+    height: 100px !important;
+  }
+  
+  .nexomon-name {
+    font-size: 1rem !important;
+  }
+  
+  .nexomon-number {
+    font-size: 0.9rem !important;
+    font-weight: 500;
   }
 }
 
-
 @media (max-width: 1280px) {
   .nexomon-card {
-    width: calc(30% - 20px);
-    /* Maintain three cards per row on small mobile devices */
-    margin: 10px;
-    /* Space between cards */
-    flex-basis: 26.9%;
-    max-height: 289px;
+    width: calc(20% - 6px);
+    margin: 3px;
+    max-height: 290px;
+  }
+  
+  .nexomon-thumb {
+    width: 90px !important;
+    height: 90px !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  .nexomon-card {
+    width: calc(25% - 6px);
+    margin: 3px;
+    max-height: 280px;
+  }
+  
+  .nexomon-thumb {
+    width: 80px !important;
+    height: 80px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .nexomon-grid {
+    gap: 0;
+    justify-content: space-evenly;
+  }
+  
+  .nexomon-card {
+    width: calc(33.333% - 4px);
+    margin: 2px;
+    max-height: 260px;
+  }
+  
+  .nexomon-thumb {
+    width: 70px !important;
+    height: 70px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .nexomon-grid {
+    gap: 0;
+    justify-content: space-evenly;
+  }
+  
+  .nexomon-card {
+    width: calc(33.333% - 4px); /* 3 per row with minimal spacing */
+    margin: 2px;
+    max-height: 220px;
+  }
+  
+  .nexomon-thumb {
+    width: 56px;
+    height: 56px;
+  }
+  
+  .nexomon-name {
+    font-size: 0.85em;
+  }
+  
+  .nexomon-number {
+    font-size: 0.77em;
   }
 }
 
 @media (max-width: 480px) {
-  .nexomon-card {
-    width: calc(30% - 20px);
-    /* Maintain three cards per row on small mobile devices */
-    margin: 10px;
-    /* Space between cards */
-    flex-basis: 26.9%;
-    max-height: 144px;
-  }
-
-  .nexomon-card h3 {
-    font-size: 0.9em;
-    /* Smaller font size for small devices */
-  }
-
   .nexomon-grid {
-    justify-content: space-between;
-    /*which one is the top margin?
-     */
+    gap: 0;
+    justify-content: space-evenly;
     margin: -150px 20px 20px;
-    flex-flow: row wrap;
+  }
+
+  .nexomon-card {
+    width: calc(33.333% - 2px); /* 3 per row with minimal spacing */
+    margin: 1px;
+    max-height: 160px;
+    padding: 6px 4px 8px;
+  }
+
+  .nexomon-name {
+    font-size: 0.75em;
+    min-height: 2.6em;
+    line-height: 1.2em;
+  }
+  
+  .nexomon-number {
+    font-size: 0.7em;
+  }
+  
+  .nexomon-thumb {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 4px;
   }
 
   .grid-scroll-container {
      padding-top: var(--filter-container-height); /* Ensure padding is applied */
      height: calc(100vh - 300px); /* Ensure height is calculated */
   }
+}
 
+/* Extra small screens */
+@media (max-width: 359px) {
+  .nexomon-card {
+    width: calc(33.333% - 1px); /* Maintain 3 per row with minimal spacing */
+    margin: 0.5px;
+    max-height: 140px;
+    padding: 4px 1px 6px;
+  }
+
+  .nexomon-thumb {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+/* Very narrow screens */
+@media (max-width: 320px) {
+  .nexomon-card {
+    width: calc(50% - 1px); /* Switch to 2 per row with minimal spacing */
+    margin: 0.5px;
+    padding: 4px 1px 6px;
+  }
+
+  .nexomon-name {
+    font-size: 0.7em;
+    min-height: 2.4em;
+  }
+
+  .nexomon-thumb {
+    width: 32px;
+    height: 32px;
+  }
 }
 
 .element-icon {
@@ -355,6 +539,22 @@ export default {
 
 .dark-mode .dropdown-item:hover {
   background-color: #444;
+}
+
+/* Enhanced hover effects for desktop */
+@media (min-width: 1024px) {
+  .nexomon-card:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+  }
+  
+  .dark-mode .nexomon-card:hover {
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+  }
+  
+  .nexomon-card:hover .nexomon-thumb {
+    transform: scale(1.15);
+  }
 }
 </style>
 
