@@ -1,9 +1,13 @@
 <!-- src/components/NexomonDetails.vue -->
 <template>
   <div class="nexomon-details-wrapper"> <!-- Add this wrapping div -->
-    <div v-if="nexomon" class="details-container">      <div class="main-infos">
-        <h1 class="h1" style="margin-top: 20px;">{{ nexomon.Number }} - {{ nexomon.Name }}</h1>
-
+    <div v-if="nexomon" class="details-container">      
+      <div class="main-infos">
+        <!-- Consistent Nexomon name/number display -->
+        <div class="nexomon-info">
+          <div class="nexomon-number">{{ nexomon.Number }}</div>
+          <div class="nexomon-name">{{ nexomon.Name }}</div>
+        </div>
         <div class="sprite-container">
           <img class="nexomon-sprite" :src="getImage(nexomon.Name, showCosmic)" alt="Nexomon Sprite" />
           <div class="element-info">
@@ -276,7 +280,17 @@ export default {
     },
     locationException() {
       if (!this.hasLocations && this.nexomon) {
-        return this.locationExceptions[this.nexomon.Name] || "No specific habitat information.";
+        // Check both locationExceptions and legendary_exceptions
+        if (this.locationExceptions[this.nexomon.Name]) {
+          return this.locationExceptions[this.nexomon.Name];
+        }
+        if (
+          this.locationExceptions.legendary_exceptions &&
+          this.locationExceptions.legendary_exceptions[this.nexomon.Name]
+        ) {
+          return this.locationExceptions.legendary_exceptions[this.nexomon.Name];
+        }
+        return "No specific habitat information.";
       }
       return null;
     },
@@ -557,6 +571,43 @@ export default {
   text-align: center;
 }
 
+.nexomon-info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 0 !important;
+}
+
+.nexomon-number {
+  font-size: 1.3rem;
+  color: #666;
+  margin-bottom: 4px;
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 4px 14px;
+  border-radius: 10px;
+  display: inline-block;
+  font-weight: 600;
+  margin-top: 20px
+}
+
+.dark-mode .nexomon-number {
+  color: #aaa;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nexomon-name {
+  font-size: 2rem;
+  text-align: center;
+  width: 100%;
+  min-height: 2.8em;
+  line-height: 1.4em;
+  word-wrap: break-word;
+  hyphens: auto;
+  font-weight: 700;
+  margin-bottom: -20px;
+}
+
 .navigation-buttons {
   margin: 20px 0;
   display: flex;
@@ -573,6 +624,93 @@ export default {
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
+}
+
+@media (max-width: 1024px) {
+  .nexomon-number {
+    font-size: 1.2rem;
+    padding: 3px 10px;
+  }
+  .nexomon-name {
+    font-size: 1.5rem;
+  }
+}
+@media (max-width: 600px) {
+  .nexomon-number {
+    font-size: 1.2rem;
+    padding: 2px 8px;
+  }
+  .nexomon-name {
+    font-size: 1.5rem;
+  }
+}
+
+.location-exception {
+  margin: 18px auto 18px auto;
+  max-width: 600px;
+  width: fit-content;
+  min-width: 220px;
+  background: #f8f9fa;
+  color: #333;
+  border: 1.5px solid #d1d5db;
+  border-radius: 10px;
+  padding: 18px 22px;
+  text-align: center;
+  font-size: 1.08rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  font-style: italic;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 90vw;
+}
+
+.dark-mode .location-exception {
+  background: #23272e;
+  color: #e0e0e0;
+  border: 1.5px solid #444b55;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+
+.location-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.description-container {
+  margin: 18px auto 18px auto;
+  max-width: 600px;
+  width: fit-content;
+  min-width: 220px;
+  background: #f8f9fa;
+  color: #333;
+  border: 1.5px solid #d1d5db;
+  border-radius: 10px;
+  padding: 18px 22px;
+  text-align: center;
+  font-size: 1.08rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  font-style: italic;
+  display: block; /* Remove flex for perfect padding centering */
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 90vw;
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
+.description-container p {
+  margin: 0;
+  margin-bottom: -10px;
+  padding: 0;
+  width: 100%;
+}
+
+.dark-mode .description-container {
+  background: #23272e;
+  color: #e0e0e0;
+  border: 1.5px solid #444b55;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
 }
 </style>
 
