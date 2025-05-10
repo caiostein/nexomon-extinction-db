@@ -39,11 +39,27 @@
           :key="nexomon.Number" 
           :to="`/nexomon/${nexomon.Number}`"
           class="nexomon-item"
-          :class="{ 'highlighted-nexomon': isNexomonHighlighted(nexomon.Number) }">
+          :class="exceptionClass(nexomon)"
+          @mouseenter="showTooltip($event, nexomon)"
+          @mouseleave="hideTooltip"
+        >
           <img :src="getThumbnail(nexomon.Name)" :alt="nexomon.Name" class="nexomon-thumb" />
           <div class="nexomon-info">
-            <div class="nexomon-number">{{ nexomon.Number }}</div>
+            <div class="nexomon-number">
+              {{ nexomon.Number }}
+              <span v-if="nexomon._regionException && selectedMap" class="exception-icon">
+                ⚠️
+              </span>
+            </div>
             <div class="nexomon-name">{{ nexomon.Name }}</div>
+          </div>
+          <!-- Tooltip rendered inside the card, absolutely positioned -->
+          <div
+            v-if="tooltipNexomon === nexomon.Number && tooltipPos.visible"
+            class="custom-tooltip"
+            :style="{ position: 'absolute', left: '50%', top: '-44px', transform: 'translateX(-50%)', zIndex: 2147483647, pointerEvents: 'none' }"
+          >
+            {{ tooltipText }}
           </div>
         </router-link>
       </div>
@@ -64,8 +80,20 @@ export default {
       questLocations: locationExceptions.quest_locations || {},
       selectedMap: null,
       highlightedNexomon: new Set(),
-      mapsCollapsed: false
+      mapsCollapsed: false,
+      tooltipNexomon: null,
+      tooltipText: '',
+      tooltipPos: { left: 0, top: 0, visible: false },
     };
+  },
+  mounted() {
+    // Restore last selected map for this location from localStorage
+    const key = `nexomondb_last_selected_map_${this.locationName}`;
+    const lastMap = localStorage.getItem(key);
+    if (lastMap && this.maps.includes(lastMap)) {
+      this.selectedMap = lastMap;
+      this.highlightNexomonForMap(lastMap);
+    }
   },
   computed: {
     locationName() {
@@ -79,45 +107,35 @@ export default {
             if (region.Region && region.Region.text === this.locationName) {
               // Handle normal map strings (backward compatibility)
               if (typeof region.Maps === 'string') {
-                if (!region.Maps.includes("Only during the Resurrect Bolzen quest:")) {
-                  region.Maps.split(', ').forEach(m => maps.add(m));
-                }
+                region.Maps.split(', ').forEach(m => maps.add(m));
               } 
               // Handle new format with Maps as array
-              else if (Array.isArray(region.Maps)) {                // Only display maps that don't have exceptions
-                if (!region.Exception) {
-                  region.Maps.forEach(map => {
-                    maps.add(map);
-                  });
-                }
+              else if (Array.isArray(region.Maps)) {
+                region.Maps.forEach(map => {
+                  maps.add(map);
+                });
               }
             }
           });
         }
       });
-      
       return Array.from(maps).sort();
     },    nexomons() {
-      // Find all Nexomon found in this region
-      return data.filter(n => {
-        if (!n.Locations) return false;
-        
-        return n.Locations.some(region => {
-          if (!region.Region || region.Region.text !== this.locationName) return false;
-          
-          // Don't show nexomon that only appear during quests
-          if (region.Exception) return false;
-          
-          // Handle both string and array formats for backward compatibility
-          if (typeof region.Maps === 'string') {
-            return !region.Maps.includes("Only during the Resurrect Bolzen quest:");
-          } else if (Array.isArray(region.Maps)) {
-            return true;
-          }
-          
-          return false;
-        });
-      });
+      // Find all Nexomon found in this region, including those with exceptions
+      return data
+        .map(n => {
+          if (!n.Locations) return null;
+          // Find the region object for this location
+          const regionObj = n.Locations.find(region => region.Region && region.Region.text === this.locationName);
+          if (!regionObj) return null;
+          // Attach the exception (if any) to the nexomon object for use in the template
+          return {
+            ...n,
+            _regionException: regionObj.Exception || null,
+            _regionExceptionText: regionObj.Exception ? regionObj.Exception : null
+          };
+        })
+        .filter(Boolean);
     }
   },
   methods: {
@@ -162,6 +180,7 @@ export default {
       }
     },    
     goBack() {
+      localStorage.removeItem(`nexomondb_last_selected_map_${this.locationName}`);
       this.$router.push({ path: '/locations' });
     },
     
@@ -170,19 +189,22 @@ export default {
       if (this.selectedMap === map) {
         this.selectedMap = null;
         this.highlightedNexomon.clear();
+        // Remove from localStorage
+        localStorage.removeItem(`nexomondb_last_selected_map_${this.locationName}`);
         return;
       }
-      
       // Set the new selected map
       this.selectedMap = map;
-      
+      // Save to localStorage
+      localStorage.setItem(`nexomondb_last_selected_map_${this.locationName}`, map);
+      this.highlightNexomonForMap(map);
+    },
+    highlightNexomonForMap(map) {
       // Clear previous highlights
       this.highlightedNexomon.clear();
-      
       // Find all nexomon that appear in this map
       data.forEach(nexomon => {
         if (!nexomon.Locations) return;
-        
         nexomon.Locations.forEach(location => {
           if (location.Region && location.Region.text === this.locationName) {
             // Check if this nexomon appears in the selected map
@@ -202,7 +224,28 @@ export default {
     
     toggleMapsSection() {
       this.mapsCollapsed = !this.mapsCollapsed;
-    }
+    },
+    exceptionClass(nexomon) {
+      if (nexomon._regionException && this.selectedMap) {
+        return 'exception-nexomon';
+      } else if (this.isNexomonHighlighted(nexomon.Number)) {
+        return 'highlighted-nexomon';
+      } else {
+        return '';
+      }
+    },
+    showTooltip(event, nexomon) {
+      if (nexomon._regionException && this.selectedMap) {
+        this.tooltipNexomon = nexomon.Number;
+        this.tooltipText = nexomon._regionExceptionText;
+        this.tooltipPos.visible = true;
+      }
+    },
+    hideTooltip() {
+      this.tooltipNexomon = null;
+      this.tooltipText = '';
+      this.tooltipPos.visible = false;
+    },
   }
 };
 </script>
@@ -778,6 +821,53 @@ export default {
     width: 32px;
     height: 32px;
   }
+}
+
+.exception-nexomon {
+  border-color: #e6b800 !important;
+  box-shadow: 0 0 8px rgba(230, 184, 0, 0.3) !important;
+  background-color: rgba(255, 243, 205, 0.4) !important;
+  position: relative;
+}
+
+.dark-mode .exception-nexomon {
+  border-color: #ffd700 !important;
+  background-color: rgba(80, 70, 0, 0.3) !important;
+}
+
+.exception-icon {
+  margin-left: 6px;
+  font-size: 1.1em;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.custom-tooltip {
+  position: absolute;
+  left: 50%;
+  top: -44px;
+  transform: translateX(-50%);
+  background: #fffbe6;
+  color: #7a5a00;
+  border: 1px solid #e6b800;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 0.95em;
+  box-shadow: 0 2px 8px rgba(230, 184, 0, 0.15);
+  white-space: pre-line;
+  min-width: 180px;
+  max-width: 260px;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.15s;
+  z-index: 2147483647;
+}
+.dark-mode .custom-tooltip {
+  background: #2a2300;
+  color: #ffe066;
+  border: 1px solid #ffd700;
+  box-shadow: 0 2px 8px rgba(255, 215, 0, 0.18);
+  z-index: 2147483647;
 }
 </style>
 

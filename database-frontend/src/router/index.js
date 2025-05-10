@@ -7,12 +7,12 @@ import LocationDetails from '@/components/LocationDetails.vue'
 const routes = [
   {
     path: '/',
-    name: 'Nexomon Database',
-    component: NexomonList
+    redirect: '/nexomons'
   },
   {
-    path: '/dex',
-    redirect: '/'
+    path: '/nexomons',
+    name: 'Nexomon Database',
+    component: NexomonList
   },
   {
     path: '/nexomon/:number',
@@ -22,7 +22,7 @@ const routes = [
   },
   {
     path: '/locations',
-    name: 'Location List',
+    name: 'Location Database',
     component: LocationList
   },
   {

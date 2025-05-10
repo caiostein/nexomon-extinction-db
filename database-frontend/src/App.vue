@@ -1,14 +1,13 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Nexomon Extinction Database</a>
+      <a class="navbar-brand" href="#/nexomons">Nexomon Extinction Database</a>
       <button ref="navbarToggler" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav me-auto">
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">        <ul class="navbar-nav me-auto">
           <li class="nav-item">
-            <router-link class="nav-link" to="/" @click="handleNavClick">Database</router-link>
+            <router-link class="nav-link" to="/nexomons" @click="handleNavClick">Nexomon Database</router-link>
           </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/locations" @click="handleNavClick">Location Database</router-link>
@@ -137,6 +136,10 @@ html, body {
 .navbar a {
   font-weight: bold;
   color: #e0e0e0;
+}
+
+.navbar a.router-link-active {
+  color: #e2e79e;
 }
 
 .navbar a.router-link-exact-active {

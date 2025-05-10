@@ -8,8 +8,10 @@
     <div class="regions-container">
       <div class="location-grid">
         <router-link v-for="location in filteredLocations" :key="location" :to="`/location/${location}`" class="location-card">
-          <h3>{{ location.replace(/ \(Extinction\)/i, '') }}</h3>
-          <img :src="getRegionImage(location)" :alt="location" />
+          <div @click="clearRegionMapSelection(location)" style="width:100%;height:100%">
+            <h3>{{ location.replace(/ \(Extinction\)/i, '') }}</h3>
+            <img :src="getRegionImage(location)" :alt="location" />
+          </div>
         </router-link>
       </div>
     </div>
@@ -25,6 +27,7 @@ export default {
     return {
       searchQuery: '',
       locations: this.getAllLocations(),
+      regionMaps: this.getRegionMapsLookup(),
       questLocations: locationExceptions.quest_locations || {}
     };
   },
@@ -42,6 +45,30 @@ export default {
       });
       return Array.from(all).sort();
     },
+    getRegionMapsLookup() {
+      // Returns { regionName: Set of all map names (subareas) }
+      const lookup = {};
+      data.forEach(n => {
+        if (n.Locations) {
+          n.Locations.forEach(region => {
+            if (region.Region && region.Region.text) {
+              const regionName = region.Region.text;
+              if (!lookup[regionName]) lookup[regionName] = new Set();
+              if (typeof region.Maps === 'string') {
+                region.Maps.split(', ').forEach(m => lookup[regionName].add(m));
+              } else if (Array.isArray(region.Maps)) {
+                region.Maps.forEach(m => lookup[regionName].add(m));
+              }
+            }
+          });
+        }
+      });
+      // Convert sets to arrays for easier use
+      Object.keys(lookup).forEach(region => {
+        lookup[region] = Array.from(lookup[region]);
+      });
+      return lookup;
+    },
     getRegionImage(regionName) {
       let name = regionName;
       while (name.includes(' ')) {
@@ -52,12 +79,20 @@ export default {
       } catch {
         return '';
       }
+    },
+    clearRegionMapSelection(region) {
+      localStorage.removeItem(`nexomondb_last_selected_map_${region}`);
     }
   },
   computed: {
     filteredLocations() {
       if (!this.searchQuery) return this.locations;
-      return this.locations.filter(l => l.toLowerCase().includes(this.searchQuery.toLowerCase()));
+      const q = this.searchQuery.toLowerCase();
+      return this.locations.filter(region => {
+        if (region.toLowerCase().includes(q)) return true;
+        const maps = this.regionMaps[region] || [];
+        return maps.some(map => map && map.toLowerCase().includes(q));
+      });
     }
   }
 };
