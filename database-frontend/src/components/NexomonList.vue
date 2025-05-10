@@ -175,10 +175,10 @@ export default {
 }
 
 .nexomon-card img.nexomon-thumb {
-  width: 100px;  /* Larger for desktop */
+  width: 100px;
   height: 100px;
   object-fit: contain;
-  margin: 8px 0;
+  margin: -10px 0 0 0 !important;
   border-radius: 10px;
   background-color: rgba(0, 0, 0, 0.05);
   padding: 5px;
@@ -194,7 +194,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 5px;
+  margin-bottom: 0 !important; /* Remove extra space below number/name for all screens */
 }
 
 .nexomon-number {
