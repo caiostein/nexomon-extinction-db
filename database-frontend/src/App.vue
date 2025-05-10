@@ -17,9 +17,8 @@
             <router-link class="nav-link" to="/about" @click="handleNavClick">About</router-link>
           </li>
         </ul>
-        
-        <!-- Dark mode toggle in navbar -->
-        <button class="toggle-button" @click="toggleDarkMode">
+          <!-- Dark mode toggle in navbar -->
+        <button class="nexo-button nexo-button-toggle" @click="toggleDarkMode">
           {{ isDarkMode ? 'Light Mode' : 'Dark Mode' }}
         </button>
       </div>
@@ -238,3 +237,5 @@ html, body {
   }
 }
 </style>
+
+<style src="./assets/styles/button-styles.css"></style>

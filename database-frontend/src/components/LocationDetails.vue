@@ -2,7 +2,7 @@
     <h1>{{ locationName }}</h1>
     <img :src="getRegionImage(locationName)" :alt="locationName" class="region-image" />
     <div>
-      <button class="btn btn-sm btn-outline-danger back-button" @click="goBack">Back to Locations</button>
+      <button class="nexo-button nexo-button-danger" @click="goBack">Back to Locations</button>
     </div>
 
     <!-- Maps section - now displayed first and made collapsible -->
@@ -11,10 +11,9 @@
         <h2>Maps <span class="toggle-icon">{{ mapsCollapsed ? '▼' : '▲' }}</span></h2>
       </div>
         <transition name="collapse">
-        <div v-show="!mapsCollapsed" class="section-content">
-          <p v-if="selectedMap" class="map-highlight-notice">
+        <div v-show="!mapsCollapsed" class="section-content">          <p v-if="selectedMap" class="map-highlight-notice">
             Highlighting Nexomon from: {{ selectedMap }}
-            <button class="btn btn-sm btn-outline-secondary clear-btn" @click="selectedMap = null; highlightedNexomon.clear()">Clear</button>
+            <button class="nexo-button nexo-button-secondary" @click="selectedMap = null; highlightedNexomon.clear()">Clear</button>
           </p>
           <ul class="maps-list">
             <li 
@@ -781,3 +780,5 @@ export default {
   }
 }
 </style>
+
+<style scoped src="../assets/styles/button-styles.css"></style>

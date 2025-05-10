@@ -357,3 +357,5 @@ export default {
   background-color: #444;
 }
 </style>
+
+<style scoped src="../assets/styles/button-styles.css"></style>

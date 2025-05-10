@@ -1,0 +1,126 @@
+/* Button styles for Nexomon Extinction database */
+
+/* Common button styles */
+.nexo-button {
+  margin: 8px 5px;
+  font-size: 0.85rem;
+  transition: all 0.2s ease-in-out;
+  border-radius: 20px;
+  padding: 5px 15px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.nexo-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.nexo-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Primary button - blue */
+.nexo-button-primary {
+  background-color: #007bff;
+  color: white !important;
+  border-color: #007bff;
+}
+
+.nexo-button-primary:hover:not(:disabled) {
+  background-color: #0069d9;
+  border-color: #0062cc;
+}
+
+/* Secondary button - gray */
+.nexo-button-secondary {
+  background-color: #6c757d;
+  color: white !important;
+  border-color: #6c757d;
+}
+
+.nexo-button-secondary:hover:not(:disabled) {
+  background-color: #5a6268;
+  border-color: #545b62;
+}
+
+/* Danger button - red */
+.nexo-button-danger {
+  background-color: #dc3545;
+  color: white !important;
+  border-color: #dc3545;
+}
+
+.nexo-button-danger:hover:not(:disabled) {
+  background-color: #c82333;
+  border-color: #bd2130;
+}
+
+/* Info button - light blue */
+.nexo-button-info {
+  background-color: #17a2b8;
+  color: white !important;
+  border-color: #17a2b8;
+}
+
+.nexo-button-info:hover:not(:disabled) {
+  background-color: #138496;
+  border-color: #117a8b;
+}
+
+/* Toggle button */
+.nexo-button-toggle {
+  background-color: #6f42c1;
+  color: white !important;
+  border-color: #6f42c1;
+}
+
+.nexo-button-toggle:hover:not(:disabled) {
+  background-color: #5e37a6;
+  border-color: #58329d;
+}
+
+/* Dark mode adjustments */
+.dark-mode .nexo-button-primary {
+  background-color: #375a7f;
+  border-color: #375a7f;
+}
+
+.dark-mode .nexo-button-primary:hover:not(:disabled) {
+  background-color: #2b4764;
+  border-color: #243a53;
+}
+
+.dark-mode .nexo-button-secondary {
+  background-color: #495057;
+  border-color: #495057;
+}
+
+.dark-mode .nexo-button-secondary:hover:not(:disabled) {
+  background-color: #3d4347;
+  border-color: #373b3e;
+}
+
+.dark-mode .nexo-button-danger {
+  background-color: #e74c3c;
+  border-color: #e74c3c;
+}
+
+.dark-mode .nexo-button-danger:hover:not(:disabled) {
+  background-color: #d62c1a;
+  border-color: #c82333;
+}
+
+.dark-mode .nexo-button-toggle {
+  background-color: #8557d3;
+  border-color: #8557d3;
+}
+
+.dark-mode .nexo-button-toggle:hover:not(:disabled) {
+  background-color: #7340c3;
+  border-color: #6930bb;
+}

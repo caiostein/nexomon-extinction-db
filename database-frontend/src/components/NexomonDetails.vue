@@ -8,9 +8,8 @@
           <img class="nexomon-sprite" :src="getImage(nexomon.Name, showCosmic)" alt="Nexomon Sprite" />
           <div class="element-info">
             <h3 style="margin-top: 7px;">Element:</h3>
-            <img :src="getImage(nexomon.Element + '_Type_Icon')" alt="Element Image" class="element-label" />
-            <span>{{ nexomon.Element }}</span>
-            <button v-if="nexomon.Sprites && nexomon.Sprites.Cosmic" class="toggle-button" @click="toggleSprite">
+            <img :src="getImage(nexomon.Element + '_Type_Icon')" alt="Element Image" class="element-label" />            <span>{{ nexomon.Element }}</span>
+            <button v-if="nexomon.Sprites && nexomon.Sprites.Cosmic" class="nexo-button nexo-button-toggle" @click="toggleSprite">
               {{ showCosmic ? 'Show Regular' : 'Show Cosmic' }}
             </button>
           </div>
@@ -21,17 +20,14 @@
 
           <h3 >
             Rarity: <span :style="{ backgroundColor: getRarityColor(nexomon.Rarity), color: 'white', borderRadius: '5px', padding: '3px'}" >{{ nexomon.Rarity }}</span>
-          </h3>
-
-        <div class="navigation-buttons">
-          <button class="btn btn-outline-primary" @click="goToNexomon(parseInt(nexomon.Number) - 1)"
+          </h3>        <div class="navigation-buttons">
+          <button class="nexo-button nexo-button-primary" @click="goToNexomon(parseInt(nexomon.Number) - 1)"
             :disabled="!hasPrevious">Previous</button>
-          <button class="btn btn-outline-primary" @click="goToNexomon(parseInt(nexomon.Number) + 1)"
+          <button class="nexo-button nexo-button-primary" @click="goToNexomon(parseInt(nexomon.Number) + 1)"
             :disabled="!hasNext">Next</button>
-        </div>
-      </div>
+        </div>      </div>
 
-      <button class="btn btn-outline-danger" @click="goBack">Back</button>
+      <button class="nexo-button nexo-button-danger" @click="goBack">{{ backButtonText }}</button>
 
       <div class="extra-info">
         <div class="extra-section" @click="toggleSection('battle-info')">
@@ -160,7 +156,7 @@
 
           <img :src="getRegionImage(region.Region.text)" alt="Region Image" class="region-image" />          <div class="region-text">
             <h4>{{ region.Region.text }}</h4>
-            <button class="btn view-location-btn" @click.stop="goToLocation(region.Region.text)">
+            <button class="nexo-button nexo-button-primary" @click.stop="goToLocation(region.Region.text)">
               View Region Details
             </button>
           </div>
@@ -210,10 +206,10 @@
       </div>
     </div>
 
-    <!-- Supa Zoom -->
-    <div v-if="showZoom" class="zoomed-map-overlay" @click="closeZoom">
+    <!-- Supa Zoom -->    <div v-if="showZoom" class="zoomed-map-overlay" @click="closeZoom">
       <div class="zoomed-map-container">
         <img :src="zoomedMap" alt="Zoomed Map" class="zoomed-map-image" />
+        <button class="nexo-button nexo-button-secondary close-zoom-btn" @click.stop="closeZoom">Close</button>
       </div>
     </div>
   </div> <!-- Close the wrapping div -->
@@ -302,14 +298,27 @@ export default {
         return this.nexomon['Loved Food'];
       }
       return { name: "This nexomon doesn't have any loved food" };
-    },
-
-    //Stats Info
+    },    //Stats Info
     baseStats() {
       if (this.nexomon) {
         return this.nexomon['Stats']
       }
       return {}
+    },
+    
+    //UI Text
+    backButtonText() {
+      // Check if we came from a location page
+      const previousRouteString = localStorage.getItem('previousRoute');
+      try {
+        const previousRoute = JSON.parse(previousRouteString);
+        if (previousRoute && previousRoute.name === 'Location Details') {
+          return `Back to ${previousRoute.params.location}`;
+        }
+      } catch (e) {
+        // If there's an error parsing, fall back to default text
+      }
+      return 'Back';
     }
   },
 
@@ -353,7 +362,7 @@ export default {
           this.preloadMapImages(regionMaps);
         }
       } else {
-        this.expandedRegion = null; // Collapse the region if it's already expanded
+        this.expandedRegion = null;
       }
     },
 
@@ -395,14 +404,32 @@ export default {
       this.clickedMap = map;
       this.zoomedMap = this.getMapImage(map);
       this.showZoom = true;
-    },
-
-    closeZoom() {
+    },    closeZoom() {
       this.clickedMap = null;
       this.showZoom = false;
     },    goBack() {
-      // Default behavior - go back to nexomon database
-      this.$router.push({ name: 'Nexomon Database', params: {} });
+      // Check if we came from a location details page
+      const previousRouteString = localStorage.getItem('previousRoute');
+      let previousRoute = null;
+      
+      try {
+        if (previousRouteString) {
+          previousRoute = JSON.parse(previousRouteString);
+        }
+      } catch (e) {
+        console.error('Error parsing previous route from localStorage', e);
+      }
+      
+      if (previousRoute && previousRoute.name === 'Location Details' && previousRoute.params.location) {
+        // Navigate back to the location details page
+        this.$router.push({ 
+          name: 'Location Details', 
+          params: { location: previousRoute.params.location }
+        });
+      } else {
+        // Default behavior - go back to nexomon database
+        this.$router.push({ name: 'Nexomon Database', params: {} });
+      }
     },
     
     goToLocation(locationName) {
@@ -532,17 +559,20 @@ export default {
 
 .navigation-buttons {
   margin: 20px 0;
-}
-
-button {
-  margin: 0 10px;
-  padding: 10px;
-  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
 }
 
 .nexomon-details-wrapper {
-  /* Add any necessary styles for the wrapper */
   width: 100%;
+}
+
+.close-zoom-btn {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 </style>
 
@@ -550,3 +580,4 @@ button {
 <style scoped src="../assets/styles/location-info.css"></style>
 <style scoped src="../assets/styles/evolution-info.css"></style>
 <style scoped src="../assets/styles/extra-info.css"></style>
+<style scoped src="../assets/styles/button-styles.css"></style>
