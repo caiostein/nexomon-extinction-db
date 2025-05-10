@@ -51,6 +51,36 @@
   overflow: hidden;
 }
 
+.view-location-btn {
+  margin: 8px 0 10px 0;
+  font-size: 0.85rem;
+  transition: all 0.2s ease-in-out;
+  background-color: #007bff;
+  color: white !important;
+  border-color: #007bff;
+  border-radius: 20px;
+  padding: 5px 15px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.view-location-btn:hover {
+  background-color: #0069d9;
+  border-color: #0062cc;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.dark-mode .view-location-btn {
+  background-color: #375a7f;
+  border-color: #375a7f;
+}
+
+.dark-mode .view-location-btn:hover {
+  background-color: #2b4764;
+  border-color: #243a53;
+}
+
 .region-card:hover {
   transform: scale(1.01);
 }

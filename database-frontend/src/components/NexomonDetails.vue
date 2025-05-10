@@ -158,13 +158,14 @@
 
         <div class="region-card" v-for="(region, index) in nexomon.Locations" :key="index" @click="toggleRegion(index)">
 
-          <img :src="getRegionImage(region.Region.text)" alt="Region Image" class="region-image" />
-
-          <div class="region-text">
+          <img :src="getRegionImage(region.Region.text)" alt="Region Image" class="region-image" />          <div class="region-text">
             <h4>{{ region.Region.text }}</h4>
+            <button class="btn view-location-btn" @click.stop="goToLocation(region.Region.text)">
+              View Region Details
+            </button>
           </div>
 
-          <!-- Only show maps when the card is expanded -->          <div
+          <!-- Only show maps when the card is expanded --><div
             :class="{ 'maps-list': true, 'expanded': expandedRegion === index, 'collapsed': expandedRegion !== index }">
             <ul @click.stop>
               <!-- Quest exception notice -->
@@ -400,28 +401,16 @@ export default {
       this.clickedMap = null;
       this.showZoom = false;
     },    goBack() {
-      // Check if we came from a location page
-      const previousRouteString = localStorage.getItem('previousRoute');
-      let previousRoute = null;
-      
-      try {
-        if (previousRouteString) {
-          previousRoute = JSON.parse(previousRouteString);
-        }
-      } catch (e) {
-        console.error('Error parsing previous route from localStorage', e);
-      }
-      
-      if (previousRoute && previousRoute.name === 'Location Details') {
-        // Navigate back to that location
-        this.$router.push({ 
-          name: 'Location Details', 
-          params: { location: previousRoute.params.location } 
-        });
-      } else {
-        // Default behavior - go back to nexomon database
-        this.$router.push({ name: 'Nexomon Database', params: {} });
-      }
+      // Default behavior - go back to nexomon database
+      this.$router.push({ name: 'Nexomon Database', params: {} });
+    },
+    
+    goToLocation(locationName) {
+      // Navigate to the location details page
+      this.$router.push({ 
+        name: 'Location Details', 
+        params: { location: locationName }
+      });
     },goToNexomon(number) {
       this.showCosmic = false;
       this.expandedRegion = null;
