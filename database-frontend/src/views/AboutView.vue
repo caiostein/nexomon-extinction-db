@@ -46,53 +46,10 @@
       <div 
         :class="{ 'extra-list': true, 'expanded': !collapsedVersionHistory, 'collapsed': collapsedVersionHistory }" 
         v-if="!collapsedVersionHistory">
-        <div class="version">
-          <h3>v1.2.0 <span class="version-date">May 2, 2025</span></h3>
+        <div class="version" v-for="entry in versionHistory" :key="entry.version + entry.date">
+          <h3>v{{ entry.version }} <span class="version-date">{{ entry.date }}</span></h3>
           <ul>
-            <li>Added About page with project information</li>
-            <li>Fixed dark mode issues</li>
-            <li>Added 'Element' filter</li>
-            <li>Overall improvements to UI and functionality</li>
-          </ul>
-        </div>
-        
-        <div class="version">
-          <h3>v1.1.0 <span class="version-date">October 15, 2024</span></h3>
-          <ul>
-            <li>More bug fixes</li>
-            <li>Improved Battle Info section</li>
-            <li>Updated page titles</li>
-          </ul>
-        </div>
-        
-        <div class="version">
-          <h3>v1.0.2 <span class="version-date">October 13, 2024</span></h3>
-          <ul>
-            <li>Improved maps functionality</li>
-            <li>Enhanced responsive design for mobile devices</li>
-            <li>Added Nexomon descriptions</li>
-            <li>Fixed various bugs</li>
-          </ul>
-        </div>
-        
-        <div class="version">
-          <h3>v1.0.1 <span class="version-date">October 12, 2024</span></h3>
-          <ul>
-            <li>Implemented image preloading for better performance</li>
-            <li>Visual improvements</li>
-            <li>Enhanced food and battle info sections</li>
-          </ul>
-        </div>
-        
-        <div class="version">
-          <h3>v1.0.0 <span class="version-date">October 9, 2024</span></h3>
-          <ul>
-            <li>Initial release</li>
-            <li>Added dark mode toggle</li>
-            <li>Implemented map hover and zoom functionality</li>
-            <li>Fixed location display for all Nexomon</li>
-            <li>Enhanced responsive design</li>
-            <li>Added region containers with interactive maps</li>
+            <li v-for="change in entry.changes" :key="change">{{ change }}</li>
           </ul>
         </div>
       </div>
@@ -113,10 +70,13 @@
 </template>
 
 <script>
+import versionHistory from './AboutView.versions.js';
+
 export default {
   data() {
     return {
-      collapsedVersionHistory: true
+      collapsedVersionHistory: true,
+      versionHistory // expose for template
     };
   },
   methods: {
