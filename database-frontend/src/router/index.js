@@ -47,6 +47,13 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  // Store the previous route in localStorage for smarter navigation
+  localStorage.setItem('previousRoute', JSON.stringify({
+    name: from.name,
+    path: from.path,
+    params: from.params
+  }));
+  
   document.title = to.name;
   next();
 });

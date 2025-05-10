@@ -399,15 +399,41 @@ export default {
     closeZoom() {
       this.clickedMap = null;
       this.showZoom = false;
-    },
-
-    goBack() {
-      this.$router.push({ name: 'Nexomon Database', params: {} });
-    },
-
-    goToNexomon(number) {
+    },    goBack() {
+      // Check if we came from a location page
+      const previousRouteString = localStorage.getItem('previousRoute');
+      let previousRoute = null;
+      
+      try {
+        if (previousRouteString) {
+          previousRoute = JSON.parse(previousRouteString);
+        }
+      } catch (e) {
+        console.error('Error parsing previous route from localStorage', e);
+      }
+      
+      if (previousRoute && previousRoute.name === 'Location Details') {
+        // Navigate back to that location
+        this.$router.push({ 
+          name: 'Location Details', 
+          params: { location: previousRoute.params.location } 
+        });
+      } else {
+        // Default behavior - go back to nexomon database
+        this.$router.push({ name: 'Nexomon Database', params: {} });
+      }
+    },goToNexomon(number) {
       this.showCosmic = false;
       this.expandedRegion = null;
+      
+      // When using Next/Previous buttons, we want to clear location context
+      // Set a marker that we're navigating within the Nexomon list
+      localStorage.setItem('previousRoute', JSON.stringify({
+        name: 'Nexomon Database',
+        path: '/',
+        params: {}
+      }));
+      
       this.$router.push({ name: 'Nexomon Details', params: { number } });
     },
 

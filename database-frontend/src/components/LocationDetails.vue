@@ -218,10 +218,9 @@ export default {
 }
 
 .region-image {
-  width: 180px;
-  height: 180px;
+  width: 640px;
+  height: 400px;
   object-fit: contain;
-  margin-bottom: 24px;
 }
 
 .back-button {
@@ -606,6 +605,11 @@ export default {
 @media (max-width: 480px) {
   .location-details-wrapper {
     padding: 15px 10px;
+  }
+  
+  .region-image {
+    width: 320px;
+    height: 200px;
   }
 
   .nexomon-grid {
