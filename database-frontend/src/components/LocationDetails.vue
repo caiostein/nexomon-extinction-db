@@ -80,7 +80,7 @@ export default {
       questLocations: locationExceptions.quest_locations || {},
       selectedMap: null,
       highlightedNexomon: new Set(),
-      mapsCollapsed: false,
+      mapsCollapsed: true,
       tooltipNexomon: null,
       tooltipText: '',
       tooltipPos: { left: 0, top: 0, visible: false },
