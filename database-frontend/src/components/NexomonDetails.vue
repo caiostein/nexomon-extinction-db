@@ -136,6 +136,59 @@
         </div>
       </div>
 
+      <!-- Standalone Skill Tree collapsible section -->
+      <div class="skill-tree-section">
+        <div class="section-header" @click="toggleSkillTreeSection">
+          <h2>Skill Tree <span class="toggle-icon">{{ skillTreeCollapsed ? '▼' : '▲' }}</span></h2>
+        </div>
+        <transition name="collapse">
+          <div v-show="!skillTreeCollapsed" class="section-content">
+            <table v-if="skillTree.length" class="skill-tree-table">
+              <thead>
+                <tr>
+                  <th>Level</th>
+                  <th>Skill</th>
+                  <th>Type</th>
+                  <th>Power</th>
+                  <th>Acc</th>
+                  <th>STA</th>
+                  <th>Speed</th>
+                  <th>Crit %</th>
+                  <th>Effect</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(skill, idx) in skillTree" :key="idx">
+                  <td>{{ skill.Level || skill.level || '-' }}</td>
+                  <td>
+                    <img v-if="skill._db && skill._db.Image" :src="require(`@/assets/${skill._db.Image}`)" :alt="skill._db.Name" style="height:28px;vertical-align:middle;margin-right:6px;" />
+                    {{ skill._db?.Name || skill.Skill?.text || skill.Skill || '-' }}
+                  </td>
+                  <td>
+                    <img v-if="skill._db && skill._db.Type && skill._db.Type.image" :src="require(`@/assets/${skill._db.Type.image}`)" :alt="skill._db.Type.text" style="height:22px;vertical-align:middle;margin-right:4px;" />
+                    {{ skill._db?.Type?.text || '-' }}
+                  </td>
+                  <td>{{ skill._db?.Power || '-' }}</td>
+                  <td>{{ skill._db?.Acc || '-' }}</td>
+                  <td>{{ skill._db?.STA || '-' }}</td>
+                  <td>{{ skill._db?.Speed || '-' }}</td>
+                  <td>{{ skill._db?.['Crit %'] || '-' }}</td>
+                  <td>
+                    <span v-if="skill._db && skill._db.Effect && skill._db.Effect.image">
+                      <img :src="require(`@/assets/${skill._db.Effect.image}`)" :alt="skill._db.Effect.text" style="height:22px;vertical-align:middle;margin-right:4px;" />
+                    </span>
+                    {{ skill._db?.Effect?.text || skill._db?.Effect || '-' }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div v-else>
+              No skill tree data available.
+            </div>
+          </div>
+        </transition>
+      </div>
+
     </div>
 
     <div v-if="nexomon.Evolution && nexomon.Evolution.length" class="evolution-container">
@@ -226,6 +279,7 @@ import data from '../../../python-scripts/assets/nexomon_extinction_database.jso
 import descriptionData from '../../../python-scripts/assets/nexomon_description_database.json'
 import locationExceptions from '../assets/location_exceptions.json';
 import typeChart from '../assets/type_chart.json'
+import skillDatabase from '../assets/skill_database.json';
 
 export default {
   props: ['number'],  data() {
@@ -245,7 +299,8 @@ export default {
           'battle-info': true,
           'loved-food': true,
           'base-stats': true,
-        }
+        },
+        skillTreeCollapsed: true, // Collapsed by default
       };
     },
   computed: {
@@ -318,6 +373,19 @@ export default {
         return this.nexomon['Stats']
       }
       return {}
+    },
+    
+    skillTree() {
+      if (!this.nexomon || !this.nexomon['Skill Tree']) return [];
+      // Map each skill in the tree to its full info from the skill database
+      return this.nexomon['Skill Tree'].map(entry => {
+        let skillName = entry.Skill?.text || entry.Skill?.name || entry.Skill || '';
+        let dbSkill = skillDatabase.find(s => s.Name === skillName);
+        return {
+          ...entry,
+          _db: dbSkill
+        };
+      });
     },
     
     //UI Text
@@ -561,7 +629,11 @@ export default {
       } else {
         return require(`@/assets/${folder}/${name}.png`);
       }
-    }
+    },
+
+    toggleSkillTreeSection() {
+      this.skillTreeCollapsed = !this.skillTreeCollapsed;
+    },
   }
 };
 </script>
@@ -711,6 +783,118 @@ export default {
   color: #e0e0e0;
   border: 1.5px solid #444b55;
   box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+
+/* Skill Tree Section Styles (match Maps section style) */
+.skill-tree-section {
+  margin: 10px auto 30px auto;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 0;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  background-color: #f9f9f9;
+  max-width: 700px;
+  width: 100%;
+}
+
+.section-header {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  padding: 12px;
+  transition: background-color 0.3s ease;
+  border-radius: 0;
+}
+
+.section-header:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+.section-header h2 {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.toggle-icon {
+  margin-left: 10px;
+  font-size: 0.8rem;
+}
+
+.section-content {
+  padding: 10px 10px 15px;
+  overflow: hidden;
+  background-color: #f9f9f9;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.dark-mode .section-content {
+  background-color: #2a2a2a;
+}
+
+.collapse-enter-active,
+.collapse-leave-active {
+  transition: all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+  max-height: 2000px;
+  opacity: 1;
+  overflow: hidden;
+  will-change: max-height, opacity;
+}
+.collapse-enter-from,
+.collapse-leave-to {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+.skill-tree-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 auto;
+  background: none;
+  max-width: 660px;
+}
+.skill-tree-table th, .skill-tree-table td {
+  border: 1px solid #ccc;
+  padding: 6px 10px;
+  text-align: center;
+  font-size: 1em;
+}
+.skill-tree-table th {
+  background: #f2f2f2;
+}
+.skill-icon, .type-icon, .effect-icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  vertical-align: middle;
+  margin-right: 4px;
+}
+.no-skills {
+  text-align: center;
+  color: #888;
+  padding: 18px 0;
+}
+
+.dark-mode .skill-tree-section {
+  border-color: #444;
+  background-color: #2a2a2a;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+.dark-mode .section-header:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+.dark-mode .skill-tree-table th {
+  background: #23272e;
+  color: #e0e0e0;
+}
+.dark-mode .skill-tree-table td {
+  background: #23272e;
+  color: #e0e0e0;
 }
 </style>
 

@@ -1,0 +1,3088 @@
+[
+  {
+    "Name": "Scratch",
+    "Image": "downloaded_images/Scratch_EX_SkillIcon.png",
+    "Type": {
+      "text": "Normal Type",
+      "image": "downloaded_images/Normal_Type_Icon.png"
+    },
+    "Power": "40",
+    "Acc": "95%",
+    "STA": "5",
+    "Speed": "55",
+    "Crit %": "10%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Sandstorm",
+    "Image": "downloaded_images/Sandstorm_EX_SkillIcon.png",
+    "Type": {
+      "text": "Mineral Type",
+      "image": "downloaded_images/Mineral_Type_Icon.png"
+    },
+    "Power": "65",
+    "Acc": "85%",
+    "STA": "10",
+    "Speed": "15",
+    "Crit %": "15%",
+    "Effect": {
+      "text": "Confusion (Status)",
+      "image": "downloaded_images/Confusion_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Battle Roar",
+    "Image": "downloaded_images/Battle_Roar_EX_SkillIcon.png",
+    "Type": {
+      "text": "Normal Type",
+      "image": "downloaded_images/Normal_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "30%",
+    "STA": "10",
+    "Speed": "67",
+    "Crit %": "0%",
+    "Effect": {
+      "text": "Demotivated (Status)",
+      "image": "downloaded_images/Demotivated_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Recover",
+    "Image": "downloaded_images/Recover_EX_SkillIcon.png",
+    "Type": {
+      "text": "Normal Type",
+      "image": "downloaded_images/Normal_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "5",
+    "Speed": "10",
+    "Crit %": "0%",
+    "Effect": {
+      "text": "Recovery (Status)",
+      "image": "downloaded_images/Recover_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Plasma",
+    "Image": "downloaded_images/Plasma_EX_SkillIcon.png",
+    "Type": {
+      "text": "Normal Type",
+      "image": "downloaded_images/Normal_Type_Icon.png"
+    },
+    "Power": "60",
+    "Acc": "85%",
+    "STA": "5",
+    "Speed": "56",
+    "Crit %": "10%",
+    "Effect": "-"
+  },
+  {
+    "Name": "X Slash",
+    "Image": "downloaded_images/X_Slash_EX_SkillIcon.png",
+    "Type": {
+      "text": "Normal Type",
+      "image": "downloaded_images/Normal_Type_Icon.png"
+    },
+    "Power": "40",
+    "Acc": "95%",
+    "STA": "5",
+    "Speed": "71",
+    "Crit %": "5%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Double Slash",
+    "Image": "downloaded_images/Double_Slash_EX_SkillIcon.png",
+    "Type": {
+      "text": "Normal Type",
+      "image": "downloaded_images/Normal_Type_Icon.png"
+    },
+    "Power": "105",
+    "Acc": "85%",
+    "STA": "20",
+    "Speed": "24",
+    "Crit %": "10%",
+    "Effect": {
+      "text": "Demotivated (Status)",
+      "image": "downloaded_images/Demotivated_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Elemental Up",
+    "Image": "downloaded_images/Elemental_Up_EX_SkillIcon.png",
+    "Type": {
+      "text": "Normal Type",
+      "image": "downloaded_images/Normal_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "10",
+    "Speed": "91",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Drill",
+    "Image": "downloaded_images/Drill_EX_SkillIcon.png",
+    "Type": {
+      "text": "Mineral Type",
+      "image": "downloaded_images/Mineral_Type_Icon.png"
+    },
+    "Power": "100",
+    "Acc": "100%",
+    "STA": "15",
+    "Speed": "44",
+    "Crit %": "5%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Pummel",
+    "Image": "downloaded_images/Pummel_EX_SkillIcon.png",
+    "Type": {
+      "text": "Normal Type",
+      "image": "downloaded_images/Normal_Type_Icon.png"
+    },
+    "Power": "80",
+    "Acc": "85%",
+    "STA": "15",
+    "Speed": "20",
+    "Crit %": "15%",
+    "Effect": {
+      "text": "Demotivated (Status)",
+      "image": "downloaded_images/Demotivated_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Raging Focus",
+    "Image": "downloaded_images/Raging_Focus_EX_SkillIcon.png",
+    "Type": {
+      "text": "Normal Type",
+      "image": "downloaded_images/Normal_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "5",
+    "Speed": "86",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Seismic Move",
+    "Image": "downloaded_images/Seismic_Move_EX_SkillIcon.png",
+    "Type": {
+      "text": "Mineral Type",
+      "image": "downloaded_images/Mineral_Type_Icon.png"
+    },
+    "Power": "70",
+    "Acc": "95%",
+    "STA": "10",
+    "Speed": "16",
+    "Crit %": "5%",
+    "Effect": {
+      "text": "Confusion (Status)",
+      "image": "downloaded_images/Confusion_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Mud Attack",
+    "Image": "downloaded_images/Mud_Attack_EX_SkillIcon.png",
+    "Type": {
+      "text": "Mineral Type",
+      "image": "downloaded_images/Mineral_Type_Icon.png"
+    },
+    "Power": "20",
+    "Acc": "85%",
+    "STA": "10",
+    "Speed": "73",
+    "Crit %": "15%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Snake Eyes",
+    "Image": "downloaded_images/Snake_Eyes_EX_SkillIcon.png",
+    "Type": {
+      "text": "Normal Type",
+      "image": "downloaded_images/Normal_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "10",
+    "Speed": "80",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Sonic Scream",
+    "Image": "downloaded_images/Sonic_Scream_EX_SkillIcon.png",
+    "Type": {
+      "text": "Normal Type",
+      "image": "downloaded_images/Normal_Type_Icon.png"
+    },
+    "Power": "85",
+    "Acc": "85%",
+    "STA": "15",
+    "Speed": "21",
+    "Crit %": "15%",
+    "Effect": {
+      "text": "Sleep (Status)",
+      "image": "downloaded_images/Sleep_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Corrupted Mineral",
+    "Image": "downloaded_images/Corrupted_Mineral_EX_SkillIcon.png",
+    "Type": {
+      "text": "Mineral Type",
+      "image": "downloaded_images/Mineral_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "15",
+    "Speed": "76",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Flame",
+    "Image": "downloaded_images/Flame_EX_SkillIcon.png",
+    "Type": {
+      "text": "Fire Type",
+      "image": "downloaded_images/Fire_Type_Icon.png"
+    },
+    "Power": "50",
+    "Acc": "90%",
+    "STA": "5",
+    "Speed": "54",
+    "Crit %": "15%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Flame Column",
+    "Image": "downloaded_images/Flame_Column_EX_SkillIcon.png",
+    "Type": {
+      "text": "Fire Type",
+      "image": "downloaded_images/Fire_Type_Icon.png"
+    },
+    "Power": "55",
+    "Acc": "85%",
+    "STA": "10",
+    "Speed": "13",
+    "Crit %": "15%",
+    "Effect": {
+      "text": "Bind (Status)",
+      "image": "downloaded_images/Bind_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Combustion",
+    "Image": "downloaded_images/Combustion_EX_SkillIcon.png",
+    "Type": {
+      "text": "Fire Type",
+      "image": "downloaded_images/Fire_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "10",
+    "Speed": "89",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Blaze",
+    "Image": "downloaded_images/Blaze_EX_SkillIcon.png",
+    "Type": {
+      "text": "Fire Type",
+      "image": "downloaded_images/Fire_Type_Icon.png"
+    },
+    "Power": "80",
+    "Acc": "75%",
+    "STA": "10",
+    "Speed": "52",
+    "Crit %": "20%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Pyro Bomb",
+    "Image": "downloaded_images/Pyro_Bomb_EX_SkillIcon.png",
+    "Type": {
+      "text": "Fire Type",
+      "image": "downloaded_images/Fire_Type_Icon.png"
+    },
+    "Power": "35",
+    "Acc": "90%",
+    "STA": "10",
+    "Speed": "17",
+    "Crit %": "10%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Fire Cage",
+    "Image": "downloaded_images/Fire_Cage_EX_SkillIcon.png",
+    "Type": {
+      "text": "Fire Type",
+      "image": "downloaded_images/Fire_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "10",
+    "Speed": "59",
+    "Crit %": "0%",
+    "Effect": {
+      "text": "Bind (Status)",
+      "image": "downloaded_images/Bind_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Palm Flurry",
+    "Image": "downloaded_images/Palm_Flurry_EX_SkillIcon.png",
+    "Type": {
+      "text": "Normal Type",
+      "image": "downloaded_images/Normal_Type_Icon.png"
+    },
+    "Power": "115",
+    "Acc": "80%",
+    "STA": "20",
+    "Speed": "19",
+    "Crit %": "15%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Incinerate",
+    "Image": "downloaded_images/Incinerate_EX_SkillIcon.png",
+    "Type": {
+      "text": "Fire Type",
+      "image": "downloaded_images/Fire_Type_Icon.png"
+    },
+    "Power": "120",
+    "Acc": "95%",
+    "STA": "20",
+    "Speed": "25",
+    "Crit %": "5%",
+    "Effect": {
+      "text": "Burn (Status)",
+      "image": "downloaded_images/Burn_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Heal",
+    "Image": "downloaded_images/Heal_EX_SkillIcon.png",
+    "Type": {
+      "text": "Normal Type",
+      "image": "downloaded_images/Normal_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "25",
+    "Speed": "100",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Super Punch",
+    "Image": "downloaded_images/Super_Punch_EX_SkillIcon.png",
+    "Type": {
+      "text": "Normal Type",
+      "image": "downloaded_images/Normal_Type_Icon.png"
+    },
+    "Power": "90",
+    "Acc": "85%",
+    "STA": "10",
+    "Speed": "40",
+    "Crit %": "10%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Headbutt",
+    "Image": "downloaded_images/Headbutt_EX_SkillIcon.png",
+    "Type": {
+      "text": "Normal Type",
+      "image": "downloaded_images/Normal_Type_Icon.png"
+    },
+    "Power": "100",
+    "Acc": "85%",
+    "STA": "15",
+    "Speed": "23",
+    "Crit %": "25%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Fire Barrier",
+    "Image": "downloaded_images/Fire_Barrier_EX_SkillIcon.png",
+    "Type": {
+      "text": "Fire Type",
+      "image": "downloaded_images/Fire_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "15",
+    "Speed": "80",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Disintegrate",
+    "Image": "downloaded_images/Disintegrate_EX_SkillIcon.png",
+    "Type": {
+      "text": "Fire Type",
+      "image": "downloaded_images/Fire_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "85%",
+    "STA": "15",
+    "Speed": "82",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Fire Will",
+    "Image": "downloaded_images/Fire_Will_EX_SkillIcon.png",
+    "Type": {
+      "text": "Fire Type",
+      "image": "downloaded_images/Fire_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "10",
+    "Speed": "92",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Suncore",
+    "Image": "downloaded_images/Suncore_EX_SkillIcon.png",
+    "Type": {
+      "text": "Fire Type",
+      "image": "downloaded_images/Fire_Type_Icon.png"
+    },
+    "Power": "110",
+    "Acc": "95%",
+    "STA": "15",
+    "Speed": "44",
+    "Crit %": "8%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Splash",
+    "Image": "downloaded_images/Splash_EX_SkillIcon.png",
+    "Type": {
+      "text": "Water Type",
+      "image": "downloaded_images/Water_Type_Icon.png"
+    },
+    "Power": "50",
+    "Acc": "90%",
+    "STA": "5",
+    "Speed": "55",
+    "Crit %": "15%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Torrent",
+    "Image": "downloaded_images/Torrent_EX_SkillIcon.png",
+    "Type": {
+      "text": "Water Type",
+      "image": "downloaded_images/Water_Type_Icon.png"
+    },
+    "Power": "60",
+    "Acc": "85%",
+    "STA": "5",
+    "Speed": "56",
+    "Crit %": "10%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Furious Torrent",
+    "Image": "downloaded_images/Furious_Torrent_EX_SkillIcon.png",
+    "Type": {
+      "text": "Water Type",
+      "image": "downloaded_images/Water_Type_Icon.png"
+    },
+    "Power": "110",
+    "Acc": "95%",
+    "STA": "15",
+    "Speed": "44",
+    "Crit %": "8%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Water Blast",
+    "Image": "downloaded_images/Water_Blast_EX_SkillIcon.png",
+    "Type": {
+      "text": "Water Type",
+      "image": "downloaded_images/Water_Type_Icon.png"
+    },
+    "Power": "100",
+    "Acc": "100%",
+    "STA": "15",
+    "Speed": "46",
+    "Crit %": "5%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Tornado Kick",
+    "Image": "downloaded_images/Tornado_Kick_EX_SkillIcon.png",
+    "Type": {
+      "text": "Normal Type",
+      "image": "downloaded_images/Normal_Type_Icon.png"
+    },
+    "Power": "35",
+    "Acc": "85%",
+    "STA": "15",
+    "Speed": "74",
+    "Crit %": "20%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Toxic Splash",
+    "Image": "downloaded_images/Toxic_Splash_EX_SkillIcon.png",
+    "Type": {
+      "text": "Water Type",
+      "image": "downloaded_images/Water_Type_Icon.png"
+    },
+    "Power": "35",
+    "Acc": "75%",
+    "STA": "5",
+    "Speed": "12",
+    "Crit %": "25%",
+    "Effect": {
+      "text": "Poison (Status)",
+      "image": "downloaded_images/Poison_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Whirlpool",
+    "Image": "downloaded_images/Whirlpool_EX_SkillIcon.png",
+    "Type": {
+      "text": "Water Type",
+      "image": "downloaded_images/Water_Type_Icon.png"
+    },
+    "Power": "25",
+    "Acc": "95%",
+    "STA": "10",
+    "Speed": "90",
+    "Crit %": "10%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Ice Assault",
+    "Image": "downloaded_images/Ice_Assault_EX_SkillIcon.png",
+    "Type": {
+      "text": "Water Type",
+      "image": "downloaded_images/Water_Type_Icon.png"
+    },
+    "Power": "95",
+    "Acc": "95%",
+    "STA": "15",
+    "Speed": "24",
+    "Crit %": "5%",
+    "Effect": {
+      "text": "Freeze (Status)",
+      "image": "downloaded_images/Freeze_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Ice Flakes",
+    "Image": "downloaded_images/Ice_Flakes_EX_SkillIcon.png",
+    "Type": {
+      "text": "Water Type",
+      "image": "downloaded_images/Water_Type_Icon.png"
+    },
+    "Power": "65",
+    "Acc": "85%",
+    "STA": "10",
+    "Speed": "16",
+    "Crit %": "15%",
+    "Effect": {
+      "text": "Freeze (Status)",
+      "image": "downloaded_images/Freeze_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Aqua Siphon",
+    "Image": "downloaded_images/Aqua_Siphon_EX_SkillIcon.png",
+    "Type": {
+      "text": "Water Type",
+      "image": "downloaded_images/Water_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "15",
+    "Speed": "60",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Power Up",
+    "Image": "downloaded_images/Power_Up_EX_SkillIcon.png",
+    "Type": {
+      "text": "Normal Type",
+      "image": "downloaded_images/Normal_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "95%",
+    "STA": "10",
+    "Speed": "90",
+    "Crit %": "5%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Tropical Rain",
+    "Image": "downloaded_images/Tropical_Rain_EX_SkillIcon.png",
+    "Type": {
+      "text": "Water Type",
+      "image": "downloaded_images/Water_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "10",
+    "Speed": "92",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Smoke Screen",
+    "Image": "downloaded_images/Smoke_Screen_EX_SkillIcon.png",
+    "Type": {
+      "text": "Normal Type",
+      "image": "downloaded_images/Normal_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "90%",
+    "STA": "15",
+    "Speed": "81",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Blue Mirror",
+    "Image": "downloaded_images/Blue_Mirror_EX_SkillIcon.png",
+    "Type": {
+      "text": "Water Type",
+      "image": "downloaded_images/Water_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "20",
+    "Speed": "25",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Bullet Seed",
+    "Image": "downloaded_images/Bullet_Seed_EX_SkillIcon.png",
+    "Type": {
+      "text": "Plant Type",
+      "image": "downloaded_images/Plant_Type_Icon.png"
+    },
+    "Power": "75",
+    "Acc": "80%",
+    "STA": "10",
+    "Speed": "49",
+    "Crit %": "25%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Blooming Spores",
+    "Image": "downloaded_images/Blooming_Spores_EX_SkillIcon.png",
+    "Type": {
+      "text": "Plant Type",
+      "image": "downloaded_images/Plant_Type_Icon.png"
+    },
+    "Power": "65",
+    "Acc": "95%",
+    "STA": "10",
+    "Speed": "16",
+    "Crit %": "5%",
+    "Effect": {
+      "text": "Poison (Status)",
+      "image": "downloaded_images/Poison_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Thorn Storm",
+    "Image": "downloaded_images/Thorn_Storm_EX_SkillIcon.png",
+    "Type": {
+      "text": "Plant Type",
+      "image": "downloaded_images/Plant_Type_Icon.png"
+    },
+    "Power": "50",
+    "Acc": "90%",
+    "STA": "5",
+    "Speed": "54",
+    "Crit %": "15%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Natural Heal",
+    "Image": "downloaded_images/Natural_Heal_EX_SkillIcon.png",
+    "Type": {
+      "text": "Plant Type",
+      "image": "downloaded_images/Plant_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "15",
+    "Speed": "65",
+    "Crit %": "0%",
+    "Effect": {
+      "text": "Planted (Status)",
+      "image": "downloaded_images/Planted_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Focus Seed",
+    "Image": "downloaded_images/Focus_Seed_EX_SkillIcon.png",
+    "Type": {
+      "text": "Plant Type",
+      "image": "downloaded_images/Plant_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "5",
+    "Speed": "87",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Green Spirit",
+    "Image": "downloaded_images/Green_Spirit_EX_SkillIcon.png",
+    "Type": {
+      "text": "Plant Type",
+      "image": "downloaded_images/Plant_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "70",
+    "Speed": "10",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Poison Cloud",
+    "Image": "downloaded_images/Poison_Cloud_EX_SkillIcon.png",
+    "Type": {
+      "text": "Plant Type",
+      "image": "downloaded_images/Plant_Type_Icon.png"
+    },
+    "Power": "30",
+    "Acc": "85%",
+    "STA": "5",
+    "Speed": "11",
+    "Crit %": "15%",
+    "Effect": {
+      "text": "Poison (Status)",
+      "image": "downloaded_images/Poison_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Forest Energy",
+    "Image": "downloaded_images/Forest_Energy_EX_SkillIcon.png",
+    "Type": {
+      "text": "Plant Type",
+      "image": "downloaded_images/Plant_Type_Icon.png"
+    },
+    "Power": "110",
+    "Acc": "95%",
+    "STA": "15",
+    "Speed": "44",
+    "Crit %": "8%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Infected Seed",
+    "Image": "downloaded_images/Infected_Seed_EX_SkillIcon.png",
+    "Type": {
+      "text": "Plant Type",
+      "image": "downloaded_images/Plant_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "70%",
+    "STA": "10",
+    "Speed": "75",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Green Sphere",
+    "Image": "downloaded_images/Green_Sphere_EX_SkillIcon.png",
+    "Type": {
+      "text": "Plant Type",
+      "image": "downloaded_images/Plant_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "15",
+    "Speed": "90",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Vine Whip",
+    "Image": "downloaded_images/Vine_Whip_EX_SkillIcon.png",
+    "Type": {
+      "text": "Plant Type",
+      "image": "downloaded_images/Plant_Type_Icon.png"
+    },
+    "Power": "95",
+    "Acc": "95%",
+    "STA": "15",
+    "Speed": "22",
+    "Crit %": "5%",
+    "Effect": {
+      "text": "Bind (Status)",
+      "image": "downloaded_images/Bind_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Rock Barrage",
+    "Image": "downloaded_images/Rock_Barrage_EX_SkillIcon.png",
+    "Type": {
+      "text": "Mineral Type",
+      "image": "downloaded_images/Mineral_Type_Icon.png"
+    },
+    "Power": "50",
+    "Acc": "90%",
+    "STA": "5",
+    "Speed": "48",
+    "Crit %": "25%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Healing Stone",
+    "Image": "downloaded_images/Healing_Stone_EX_SkillIcon.png",
+    "Type": {
+      "text": "Mineral Type",
+      "image": "downloaded_images/Mineral_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "15",
+    "Speed": "80",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Mineral Siphon",
+    "Image": "downloaded_images/Mineral_Siphon_EX_SkillIcon.png",
+    "Type": {
+      "text": "Mineral Type",
+      "image": "downloaded_images/Mineral_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "15",
+    "Speed": "60",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Rocknite",
+    "Image": "downloaded_images/Rocknite_EX_SkillIcon.png",
+    "Type": {
+      "text": "Mineral Type",
+      "image": "downloaded_images/Mineral_Type_Icon.png"
+    },
+    "Power": "60",
+    "Acc": "85%",
+    "STA": "5",
+    "Speed": "56",
+    "Crit %": "10%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Meteor Strike",
+    "Image": "downloaded_images/Meteor_Strike_EX_SkillIcon.png",
+    "Type": {
+      "text": "Mineral Type",
+      "image": "downloaded_images/Mineral_Type_Icon.png"
+    },
+    "Power": "90",
+    "Acc": "95%",
+    "STA": "15",
+    "Speed": "21",
+    "Crit %": "5%",
+    "Effect": {
+      "text": "Frail (Status)",
+      "image": "downloaded_images/Frail_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Rock Prison",
+    "Image": "downloaded_images/Rock_Prison_EX_SkillIcon.png",
+    "Type": {
+      "text": "Mineral Type",
+      "image": "downloaded_images/Mineral_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "10",
+    "Speed": "100",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Rock Wall",
+    "Image": "downloaded_images/Rock_Wall_EX_SkillIcon.png",
+    "Type": {
+      "text": "Mineral Type",
+      "image": "downloaded_images/Mineral_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "25",
+    "Speed": "55",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Tackle",
+    "Image": "downloaded_images/Tackle_EX_SkillIcon.png",
+    "Type": {
+      "text": "Normal Type",
+      "image": "downloaded_images/Normal_Type_Icon.png"
+    },
+    "Power": "50",
+    "Acc": "90%",
+    "STA": "15",
+    "Speed": "60",
+    "Crit %": "20%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Plasma Cannon",
+    "Image": "downloaded_images/Plasma_Cannon_EX_SkillIcon.png",
+    "Type": {
+      "text": "Normal Type",
+      "image": "downloaded_images/Normal_Type_Icon.png"
+    },
+    "Power": "80",
+    "Acc": "75%",
+    "STA": "10",
+    "Speed": "52",
+    "Crit %": "20%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Sacred Mineral",
+    "Image": "downloaded_images/Sacred_Mineral_EX_SkillIcon.png",
+    "Type": {
+      "text": "Mineral Type",
+      "image": "downloaded_images/Mineral_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "15",
+    "Speed": "96",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Resonating Rock",
+    "Image": "downloaded_images/Resonating_Rock_EX_SkillIcon.png",
+    "Type": {
+      "text": "Mineral Type",
+      "image": "downloaded_images/Mineral_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "15",
+    "Speed": "57",
+    "Crit %": "0%",
+    "Effect": {
+      "text": "Confusion (Status)",
+      "image": "downloaded_images/Confusion_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Spinning Kick",
+    "Image": "downloaded_images/Spinning_Kick_EX_SkillIcon.png",
+    "Type": {
+      "text": "Normal Type",
+      "image": "downloaded_images/Normal_Type_Icon.png"
+    },
+    "Power": "75",
+    "Acc": "90%",
+    "STA": "10",
+    "Speed": "26",
+    "Crit %": "10%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Wind Pellet",
+    "Image": "downloaded_images/Wind_Pellet_EX_SkillIcon.png",
+    "Type": {
+      "text": "Wind Type",
+      "image": "downloaded_images/Wind_Type_Icon.png"
+    },
+    "Power": "45",
+    "Acc": "90%",
+    "STA": "5",
+    "Speed": "52",
+    "Crit %": "15%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Gust",
+    "Image": "downloaded_images/Gust_EX_SkillIcon.png",
+    "Type": {
+      "text": "Wind Type",
+      "image": "downloaded_images/Wind_Type_Icon.png"
+    },
+    "Power": "60",
+    "Acc": "85%",
+    "STA": "5",
+    "Speed": "56",
+    "Crit %": "10%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Frosty Winds",
+    "Image": "downloaded_images/Frosty_Winds_EX_SkillIcon.png",
+    "Type": {
+      "text": "Wind Type",
+      "image": "downloaded_images/Wind_Type_Icon.png"
+    },
+    "Power": "55",
+    "Acc": "85%",
+    "STA": "10",
+    "Speed": "14",
+    "Crit %": "15%",
+    "Effect": {
+      "text": "Freeze (Status)",
+      "image": "downloaded_images/Freeze_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Twin Tornado",
+    "Image": "downloaded_images/Twin_Tornado_EX_SkillIcon.png",
+    "Type": {
+      "text": "Wind Type",
+      "image": "downloaded_images/Wind_Type_Icon.png"
+    },
+    "Power": "50",
+    "Acc": "85%",
+    "STA": "5",
+    "Speed": "13",
+    "Crit %": "15%",
+    "Effect": {
+      "text": "Confusion (Status)",
+      "image": "downloaded_images/Confusion_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Wind Song",
+    "Image": "downloaded_images/Wind_Song_EX_SkillIcon.png",
+    "Type": {
+      "text": "Wind Type",
+      "image": "downloaded_images/Wind_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "15",
+    "Speed": "55",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Sky Blessing",
+    "Image": "downloaded_images/Sky_Blessing_EX_SkillIcon.png",
+    "Type": {
+      "text": "Wind Type",
+      "image": "downloaded_images/Wind_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "15",
+    "Speed": "97",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Combo",
+    "Image": "downloaded_images/Combo_EX_SkillIcon.png",
+    "Type": {
+      "text": "Normal Type",
+      "image": "downloaded_images/Normal_Type_Icon.png"
+    },
+    "Power": "95",
+    "Acc": "75%",
+    "STA": "15",
+    "Speed": "22",
+    "Crit %": "25%",
+    "Effect": {
+      "text": "Demotivated (Status)",
+      "image": "downloaded_images/Demotivated_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Glaze",
+    "Image": "downloaded_images/Glaze_EX_SkillIcon.png",
+    "Type": {
+      "text": "Wind Type",
+      "image": "downloaded_images/Wind_Type_Icon.png"
+    },
+    "Power": "115",
+    "Acc": "95%",
+    "STA": "20",
+    "Speed": "25",
+    "Crit %": "5%",
+    "Effect": {
+      "text": "Freeze (Status)",
+      "image": "downloaded_images/Freeze_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Gusty Storm",
+    "Image": "downloaded_images/Gusty_Storm_EX_SkillIcon.png",
+    "Type": {
+      "text": "Wind Type",
+      "image": "downloaded_images/Wind_Type_Icon.png"
+    },
+    "Power": "110",
+    "Acc": "95%",
+    "STA": "15",
+    "Speed": "44",
+    "Crit %": "8%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Corrosive Breeze",
+    "Image": "downloaded_images/Corrosive_Breeze_EX_SkillIcon.png",
+    "Type": {
+      "text": "Wind Type",
+      "image": "downloaded_images/Wind_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "70%",
+    "STA": "15",
+    "Speed": "76",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Crescent Wings",
+    "Image": "downloaded_images/Crescent_Wings_EX_SkillIcon.png",
+    "Type": {
+      "text": "Wind Type",
+      "image": "downloaded_images/Wind_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "15",
+    "Speed": "93",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Icicle",
+    "Image": "downloaded_images/Icicle_EX_SkillIcon.png",
+    "Type": {
+      "text": "Wind Type",
+      "image": "downloaded_images/Wind_Type_Icon.png"
+    },
+    "Power": "70",
+    "Acc": "75%",
+    "STA": "10",
+    "Speed": "17",
+    "Crit %": "25%",
+    "Effect": {
+      "text": "Freeze (Status)",
+      "image": "downloaded_images/Freeze_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Pulse Storm",
+    "Image": "downloaded_images/Pulse_Storm_EX_SkillIcon.png",
+    "Type": {
+      "text": "Electric Type",
+      "image": "downloaded_images/Electric_Type_Icon.png"
+    },
+    "Power": "50",
+    "Acc": "90%",
+    "STA": "5",
+    "Speed": "53",
+    "Crit %": "15%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Thunder Blast",
+    "Image": "downloaded_images/Thunder_Blast_EX_SkillIcon.png",
+    "Type": {
+      "text": "Electric Type",
+      "image": "downloaded_images/Electric_Type_Icon.png"
+    },
+    "Power": "85",
+    "Acc": "85%",
+    "STA": "15",
+    "Speed": "20",
+    "Crit %": "15%",
+    "Effect": {
+      "text": "Paralyze (Status)",
+      "image": "downloaded_images/Paralyze_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Screech",
+    "Image": "downloaded_images/Screech_EX_SkillIcon.png",
+    "Type": {
+      "text": "Normal Type",
+      "image": "downloaded_images/Normal_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "10",
+    "Speed": "83",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Super Charge",
+    "Image": "downloaded_images/Super_Charge_EX_SkillIcon.png",
+    "Type": {
+      "text": "Electric Type",
+      "image": "downloaded_images/Electric_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "10",
+    "Speed": "91",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Thunder",
+    "Image": "downloaded_images/Thunder_EX_SkillIcon.png",
+    "Type": {
+      "text": "Electric Type",
+      "image": "downloaded_images/Electric_Type_Icon.png"
+    },
+    "Power": "75",
+    "Acc": "80%",
+    "STA": "10",
+    "Speed": "49",
+    "Crit %": "25%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Electric Storm",
+    "Image": "downloaded_images/Electric_Storm_EX_SkillIcon.png",
+    "Type": {
+      "text": "Electric Type",
+      "image": "downloaded_images/Electric_Type_Icon.png"
+    },
+    "Power": "105",
+    "Acc": "95%",
+    "STA": "20",
+    "Speed": "24",
+    "Crit %": "5%",
+    "Effect": {
+      "text": "Paralyze (Status)",
+      "image": "downloaded_images/Paralyze_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Blitz Barrier",
+    "Image": "downloaded_images/Blitz_Barrier_EX_SkillIcon.png",
+    "Type": {
+      "text": "Electric Type",
+      "image": "downloaded_images/Electric_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "20",
+    "Speed": "40",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Dark Flow",
+    "Image": "downloaded_images/Dark_Flow_EX_SkillIcon.png",
+    "Type": {
+      "text": "Electric Type",
+      "image": "downloaded_images/Electric_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "70%",
+    "STA": "15",
+    "Speed": "75",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Short Circuit",
+    "Image": "downloaded_images/Short_Circuit_EX_SkillIcon.png",
+    "Type": {
+      "text": "Electric Type",
+      "image": "downloaded_images/Electric_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "5",
+    "Speed": "68",
+    "Crit %": "0%",
+    "Effect": {
+      "text": "Puzzled (Status)",
+      "image": "downloaded_images/Puzzled_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Blue Charge",
+    "Image": "downloaded_images/Blue_Charge_EX_SkillIcon.png",
+    "Type": {
+      "text": "Electric Type",
+      "image": "downloaded_images/Electric_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "10",
+    "Speed": "89",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Electric Bomb",
+    "Image": "downloaded_images/Electric_Bomb_EX_SkillIcon.png",
+    "Type": {
+      "text": "Electric Type",
+      "image": "downloaded_images/Electric_Type_Icon.png"
+    },
+    "Power": "100",
+    "Acc": "100%",
+    "STA": "15",
+    "Speed": "45",
+    "Crit %": "5%",
+    "Effect": "-"
+  },
+  {
+    "Name": "EMP",
+    "Image": "downloaded_images/EMP_EX_SkillIcon.png",
+    "Type": {
+      "text": "Electric Type",
+      "image": "downloaded_images/Electric_Type_Icon.png"
+    },
+    "Power": "150",
+    "Acc": "90%",
+    "STA": "25",
+    "Speed": "10",
+    "Crit %": "5%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Psychic Blast",
+    "Image": "downloaded_images/Psychic_Blast_EX_SkillIcon.png",
+    "Type": {
+      "text": "Psychic Type",
+      "image": "downloaded_images/Psychic_Type_Icon.png"
+    },
+    "Power": "75",
+    "Acc": "80%",
+    "STA": "10",
+    "Speed": "47",
+    "Crit %": "25%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Psychic Bomb",
+    "Image": "downloaded_images/Psychic_Bomb_EX_SkillIcon.png",
+    "Type": {
+      "text": "Psychic Type",
+      "image": "downloaded_images/Psychic_Type_Icon.png"
+    },
+    "Power": "85",
+    "Acc": "100%",
+    "STA": "15",
+    "Speed": "35",
+    "Crit %": "5%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Psy Blast",
+    "Image": "downloaded_images/Psy_Blast_EX_SkillIcon.png",
+    "Type": {
+      "text": "Psychic Type",
+      "image": "downloaded_images/Psychic_Type_Icon.png"
+    },
+    "Power": "60",
+    "Acc": "85%",
+    "STA": "5",
+    "Speed": "56",
+    "Crit %": "10%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Cleanse",
+    "Image": "downloaded_images/Cleanse_EX_SkillIcon.png",
+    "Type": {
+      "text": "Psychic Type",
+      "image": "downloaded_images/Psychic_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "75%",
+    "STA": "15",
+    "Speed": "78",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Sleep Song",
+    "Image": "downloaded_images/Sleep_Song_EX_SkillIcon.png",
+    "Type": {
+      "text": "Normal Type",
+      "image": "downloaded_images/Normal_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "15",
+    "Speed": "65",
+    "Crit %": "0%",
+    "Effect": {
+      "text": "Sleep (Status)",
+      "image": "downloaded_images/Sleep_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Psychic Armor",
+    "Image": "downloaded_images/Psychic_Armor_EX_SkillIcon.png",
+    "Type": {
+      "text": "Psychic Type",
+      "image": "downloaded_images/Psychic_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "20",
+    "Speed": "30",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Pendulum",
+    "Image": "downloaded_images/Pendulum_EX_SkillIcon.png",
+    "Type": {
+      "text": "Psychic Type",
+      "image": "downloaded_images/Psychic_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "10",
+    "Speed": "61",
+    "Crit %": "0%",
+    "Effect": {
+      "text": "Sleep (Status)",
+      "image": "downloaded_images/Sleep_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Mind Control",
+    "Image": "downloaded_images/Mind_Control_EX_SkillIcon.png",
+    "Type": {
+      "text": "Psychic Type",
+      "image": "downloaded_images/Psychic_Type_Icon.png"
+    },
+    "Power": "80",
+    "Acc": "95%",
+    "STA": "15",
+    "Speed": "19",
+    "Crit %": "5%",
+    "Effect": {
+      "text": "Provoked (Status)",
+      "image": "downloaded_images/Provoked_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Psy Field",
+    "Image": "downloaded_images/Psy_Field_EX_SkillIcon.png",
+    "Type": {
+      "text": "Psychic Type",
+      "image": "downloaded_images/Psychic_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "35%",
+    "STA": "10",
+    "Speed": "64",
+    "Crit %": "0%",
+    "Effect": {
+      "text": "Paralyze (Status)",
+      "image": "downloaded_images/Paralyze_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Inception",
+    "Image": "downloaded_images/Inception_EX_SkillIcon.png",
+    "Type": {
+      "text": "Psychic Type",
+      "image": "downloaded_images/Psychic_Type_Icon.png"
+    },
+    "Power": "70",
+    "Acc": "90%",
+    "STA": "10",
+    "Speed": "17",
+    "Crit %": "10%",
+    "Effect": {
+      "text": "Inception (Status)",
+      "image": "downloaded_images/Inception_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Mind Shake",
+    "Image": "downloaded_images/Mind_Shake_EX_SkillIcon.png",
+    "Type": {
+      "text": "Psychic Type",
+      "image": "downloaded_images/Psychic_Type_Icon.png"
+    },
+    "Power": "60",
+    "Acc": "85%",
+    "STA": "10",
+    "Speed": "14",
+    "Crit %": "15%",
+    "Effect": {
+      "text": "Confusion (Status)",
+      "image": "downloaded_images/Confusion_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Absolute Barrier",
+    "Image": "downloaded_images/Absolute_Barrier_EX_SkillIcon.png",
+    "Type": {
+      "text": "Normal Type",
+      "image": "downloaded_images/Normal_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "20",
+    "Speed": "67",
+    "Crit %": "0%",
+    "Effect": {
+      "text": "Survive (Status)",
+      "image": "downloaded_images/Survive_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Spiritual Boost",
+    "Image": "downloaded_images/Spiritual_Boost_EX_SkillIcon.png",
+    "Type": {
+      "text": "Psychic Type",
+      "image": "downloaded_images/Psychic_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "15",
+    "Speed": "75",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Phantom Blast",
+    "Image": "downloaded_images/Phantom_Blast_EX_SkillIcon.png",
+    "Type": {
+      "text": "Ghost Type",
+      "image": "downloaded_images/Ghost_Type_Icon.png"
+    },
+    "Power": "50",
+    "Acc": "90%",
+    "STA": "5",
+    "Speed": "51",
+    "Crit %": "15%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Bite",
+    "Image": "downloaded_images/Bite_EX_SkillIcon.png",
+    "Type": {
+      "text": "Normal Type",
+      "image": "downloaded_images/Normal_Type_Icon.png"
+    },
+    "Power": "60",
+    "Acc": "85%",
+    "STA": "10",
+    "Speed": "51",
+    "Crit %": "20%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Darkness",
+    "Image": "downloaded_images/Darkness_EX_SkillIcon.png",
+    "Type": {
+      "text": "Ghost Type",
+      "image": "downloaded_images/Ghost_Type_Icon.png"
+    },
+    "Power": "75",
+    "Acc": "80%",
+    "STA": "10",
+    "Speed": "47",
+    "Crit %": "25%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Spectral Wall",
+    "Image": "downloaded_images/Spectral_Wall_EX_SkillIcon.png",
+    "Type": {
+      "text": "Ghost Type",
+      "image": "downloaded_images/Ghost_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "20",
+    "Speed": "100",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Plasma Star",
+    "Image": "downloaded_images/Plasma_Star_EX_SkillIcon.png",
+    "Type": {
+      "text": "Normal Type",
+      "image": "downloaded_images/Normal_Type_Icon.png"
+    },
+    "Power": "110",
+    "Acc": "95%",
+    "STA": "15",
+    "Speed": "44",
+    "Crit %": "8%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Haunting",
+    "Image": "downloaded_images/Haunting_EX_SkillIcon.png",
+    "Type": {
+      "text": "Ghost Type",
+      "image": "downloaded_images/Ghost_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "15",
+    "Speed": "93",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Reflective Mirror",
+    "Image": "downloaded_images/Reflective_Mirror_EX_SkillIcon.png",
+    "Type": {
+      "text": "Ghost Type",
+      "image": "downloaded_images/Ghost_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "15",
+    "Speed": "98",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Dark Mist",
+    "Image": "downloaded_images/Dark_Mist_EX_SkillIcon.png",
+    "Type": {
+      "text": "Ghost Type",
+      "image": "downloaded_images/Ghost_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "20",
+    "Speed": "5",
+    "Crit %": "0%",
+    "Effect": {
+      "text": "Cursed (Status)",
+      "image": "downloaded_images/Cursed_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Dark Flame",
+    "Image": "downloaded_images/Dark_Flame_EX_SkillIcon.png",
+    "Type": {
+      "text": "Ghost Type",
+      "image": "downloaded_images/Ghost_Type_Icon.png"
+    },
+    "Power": "60",
+    "Acc": "85%",
+    "STA": "5",
+    "Speed": "56",
+    "Crit %": "10%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Phantom Burner",
+    "Image": "downloaded_images/Phantom_Burner_EX_SkillIcon.png",
+    "Type": {
+      "text": "Ghost Type",
+      "image": "downloaded_images/Ghost_Type_Icon.png"
+    },
+    "Power": "110",
+    "Acc": "95%",
+    "STA": "15",
+    "Speed": "44",
+    "Crit %": "8%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Arcane Curse",
+    "Image": "downloaded_images/Arcane_Curse_EX_SkillIcon.png",
+    "Type": {
+      "text": "Ghost Type",
+      "image": "downloaded_images/Ghost_Type_Icon.png"
+    },
+    "Power": "90",
+    "Acc": "80%",
+    "STA": "15",
+    "Speed": "22",
+    "Crit %": "20%",
+    "Effect": {
+      "text": "Sick (Status)",
+      "image": "downloaded_images/Sick_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Constrict",
+    "Image": "downloaded_images/Constrict_EX_SkillIcon.png",
+    "Type": {
+      "text": "Ghost Type",
+      "image": "downloaded_images/Ghost_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "50%",
+    "STA": "15",
+    "Speed": "85",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Ghost Slash",
+    "Image": "downloaded_images/Ghost_Slash_EX_SkillIcon.png",
+    "Type": {
+      "text": "Ghost Type",
+      "image": "downloaded_images/Ghost_Type_Icon.png"
+    },
+    "Power": "35",
+    "Acc": "95%",
+    "STA": "5",
+    "Speed": "11",
+    "Crit %": "5%",
+    "Effect": {
+      "text": "Nervous (Status)",
+      "image": "downloaded_images/Nervous_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Howling Winds",
+    "Image": "downloaded_images/Howling_Winds_EX_SkillIcon.png",
+    "Type": {
+      "text": "Wind Type",
+      "image": "downloaded_images/Wind_Type_Icon.png"
+    },
+    "Power": "100",
+    "Acc": "100%",
+    "STA": "15",
+    "Speed": "43",
+    "Crit %": "5%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Mystic Aroma",
+    "Image": "downloaded_images/Mystic_Aroma_EX_SkillIcon.png",
+    "Type": {
+      "text": "Wind Type",
+      "image": "downloaded_images/Wind_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "15",
+    "Speed": "58",
+    "Crit %": "0%",
+    "Effect": {
+      "text": "Confusion (Status)",
+      "image": "downloaded_images/Confusion_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Disruption Ray",
+    "Image": "downloaded_images/Disruption_Ray_EX_SkillIcon.png",
+    "Type": {
+      "text": "Normal Type",
+      "image": "downloaded_images/Normal_Type_Icon.png"
+    },
+    "Power": "150",
+    "Acc": "90%",
+    "STA": "25",
+    "Speed": "10",
+    "Crit %": "5%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Fireball",
+    "Image": "downloaded_images/Fireball_EX_SkillIcon.png",
+    "Type": {
+      "text": "Fire Type",
+      "image": "downloaded_images/Fire_Type_Icon.png"
+    },
+    "Power": "60",
+    "Acc": "85%",
+    "STA": "5",
+    "Speed": "56",
+    "Crit %": "10%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Flame Breath",
+    "Image": "downloaded_images/Flame_Breath_EX_SkillIcon.png",
+    "Type": {
+      "text": "Fire Type",
+      "image": "downloaded_images/Fire_Type_Icon.png"
+    },
+    "Power": "75",
+    "Acc": "80%",
+    "STA": "10",
+    "Speed": "50",
+    "Crit %": "25%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Invincible",
+    "Image": "downloaded_images/Invincible_EX_SkillIcon.png",
+    "Type": {
+      "text": "Normal Type",
+      "image": "downloaded_images/Normal_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "20",
+    "Speed": "56",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Stamina Surge",
+    "Image": "downloaded_images/Stamina_Surge_EX_SkillIcon.png",
+    "Type": {
+      "text": "Normal Type",
+      "image": "downloaded_images/Normal_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "0",
+    "Speed": "100",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Barrier",
+    "Image": "downloaded_images/Barrier_EX_SkillIcon.png",
+    "Type": {
+      "text": "Normal Type",
+      "image": "downloaded_images/Normal_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "5",
+    "Speed": "88",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Conflagration",
+    "Image": "downloaded_images/Conflagration_EX_SkillIcon.png",
+    "Type": {
+      "text": "Fire Type",
+      "image": "downloaded_images/Fire_Type_Icon.png"
+    },
+    "Power": "140",
+    "Acc": "100%",
+    "STA": "50",
+    "Speed": "10",
+    "Crit %": "100%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Fire Cross",
+    "Image": "downloaded_images/Fire_Cross_EX_SkillIcon.png",
+    "Type": {
+      "text": "Fire Type",
+      "image": "downloaded_images/Fire_Type_Icon.png"
+    },
+    "Power": "70",
+    "Acc": "100%",
+    "STA": "20",
+    "Speed": "40",
+    "Crit %": "40%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Explosion",
+    "Image": "downloaded_images/Explosion_EX_SkillIcon.png",
+    "Type": {
+      "text": "Fire Type",
+      "image": "downloaded_images/Fire_Type_Icon.png"
+    },
+    "Power": "100",
+    "Acc": "100%",
+    "STA": "15",
+    "Speed": "46",
+    "Crit %": "5%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Fire Siphon",
+    "Image": "downloaded_images/Fire_Siphon_EX_SkillIcon.png",
+    "Type": {
+      "text": "Fire Type",
+      "image": "downloaded_images/Fire_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "15",
+    "Speed": "60",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Fire Stigma",
+    "Image": "downloaded_images/Fire_Stigma_EX_SkillIcon.png",
+    "Type": {
+      "text": "Fire Type",
+      "image": "downloaded_images/Fire_Type_Icon.png"
+    },
+    "Power": "70",
+    "Acc": "95%",
+    "STA": "10",
+    "Speed": "66",
+    "Crit %": "5%",
+    "Effect": {
+      "text": "Bind (Status)",
+      "image": "downloaded_images/Bind_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Sunshine",
+    "Image": "downloaded_images/Sunshine_EX_SkillIcon.png",
+    "Type": {
+      "text": "Fire Type",
+      "image": "downloaded_images/Fire_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "15",
+    "Speed": "70",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Fire Claw",
+    "Image": "downloaded_images/Fire_Claw_EX_SkillIcon.png",
+    "Type": {
+      "text": "Fire Type",
+      "image": "downloaded_images/Fire_Type_Icon.png"
+    },
+    "Power": "95",
+    "Acc": "75%",
+    "STA": "15",
+    "Speed": "23",
+    "Crit %": "15%",
+    "Effect": {
+      "text": "Burn (Status)",
+      "image": "downloaded_images/Burn_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Burn",
+    "Image": "downloaded_images/Burn_EX_SkillIcon.png",
+    "Type": {
+      "text": "Fire Type",
+      "image": "downloaded_images/Fire_Type_Icon.png"
+    },
+    "Power": "85",
+    "Acc": "85%",
+    "STA": "15",
+    "Speed": "20",
+    "Crit %": "15%",
+    "Effect": {
+      "text": "Burn (Status)",
+      "image": "downloaded_images/Burn_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Solar Flare",
+    "Image": "downloaded_images/Solar_Flare_EX_SkillIcon.png",
+    "Type": {
+      "text": "Fire Type",
+      "image": "downloaded_images/Fire_Type_Icon.png"
+    },
+    "Power": "150",
+    "Acc": "90%",
+    "STA": "25",
+    "Speed": "10",
+    "Crit %": "5%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Frost Bite",
+    "Image": "downloaded_images/Frost_Bite_EX_SkillIcon.png",
+    "Type": {
+      "text": "Water Type",
+      "image": "downloaded_images/Water_Type_Icon.png"
+    },
+    "Power": "75",
+    "Acc": "75%",
+    "STA": "15",
+    "Speed": "18",
+    "Crit %": "25%",
+    "Effect": {
+      "text": "Freeze (Status)",
+      "image": "downloaded_images/Freeze_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Freeze",
+    "Image": "downloaded_images/Freeze_EX_SkillIcon.png",
+    "Type": {
+      "text": "Water Type",
+      "image": "downloaded_images/Water_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "10",
+    "Speed": "62",
+    "Crit %": "0%",
+    "Effect": {
+      "text": "Freeze (Status)",
+      "image": "downloaded_images/Freeze_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Wave",
+    "Image": "downloaded_images/Wave_EX_SkillIcon.png",
+    "Type": {
+      "text": "Water Type",
+      "image": "downloaded_images/Water_Type_Icon.png"
+    },
+    "Power": "15",
+    "Acc": "90%",
+    "STA": "10",
+    "Speed": "72",
+    "Crit %": "10%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Healing Water",
+    "Image": "downloaded_images/Healing_Water_EX_SkillIcon.png",
+    "Type": {
+      "text": "Water Type",
+      "image": "downloaded_images/Water_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "15",
+    "Speed": "75",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Quick Feet",
+    "Image": "downloaded_images/Quick_Feet_EX_SkillIcon.png",
+    "Type": {
+      "text": "Normal Type",
+      "image": "downloaded_images/Normal_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "5",
+    "Speed": "88",
+    "Crit %": "10%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Tsunami",
+    "Image": "downloaded_images/Tsunami_EX_SkillIcon.png",
+    "Type": {
+      "text": "Water Type",
+      "image": "downloaded_images/Water_Type_Icon.png"
+    },
+    "Power": "150",
+    "Acc": "90%",
+    "STA": "25",
+    "Speed": "10",
+    "Crit %": "5%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Fauna",
+    "Image": "downloaded_images/Fauna_EX_SkillIcon.png",
+    "Type": {
+      "text": "Plant Type",
+      "image": "downloaded_images/Plant_Type_Icon.png"
+    },
+    "Power": "60",
+    "Acc": "85%",
+    "STA": "5",
+    "Speed": "56",
+    "Crit %": "10%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Poison Sting",
+    "Image": "downloaded_images/Poison_Sting_EX_SkillIcon.png",
+    "Type": {
+      "text": "Plant Type",
+      "image": "downloaded_images/Plant_Type_Icon.png"
+    },
+    "Power": "40",
+    "Acc": "75%",
+    "STA": "5",
+    "Speed": "12",
+    "Crit %": "25%",
+    "Effect": {
+      "text": "Poison (Status)",
+      "image": "downloaded_images/Poison_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Green Flow",
+    "Image": "downloaded_images/Green_Flow_EX_SkillIcon.png",
+    "Type": {
+      "text": "Plant Type",
+      "image": "downloaded_images/Plant_Type_Icon.png"
+    },
+    "Power": "80",
+    "Acc": "75%",
+    "STA": "10",
+    "Speed": "52",
+    "Crit %": "20%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Forest Song",
+    "Image": "downloaded_images/Forest_Song_EX_SkillIcon.png",
+    "Type": {
+      "text": "Plant Type",
+      "image": "downloaded_images/Plant_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "20",
+    "Speed": "79",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Grasping Root",
+    "Image": "downloaded_images/Grasping_Root_EX_SkillIcon.png",
+    "Type": {
+      "text": "Plant Type",
+      "image": "downloaded_images/Plant_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "10",
+    "Speed": "60",
+    "Crit %": "0%",
+    "Effect": {
+      "text": "Bind (Status)",
+      "image": "downloaded_images/Bind_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Piercing Root",
+    "Image": "downloaded_images/Piercing_Root_EX_SkillIcon.png",
+    "Type": {
+      "text": "Plant Type",
+      "image": "downloaded_images/Plant_Type_Icon.png"
+    },
+    "Power": "35",
+    "Acc": "85%",
+    "STA": "5",
+    "Speed": "11",
+    "Crit %": "15%",
+    "Effect": {
+      "text": "Bind (Status)",
+      "image": "downloaded_images/Bind_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Rock Punch",
+    "Image": "downloaded_images/Rock_Punch_EX_SkillIcon.png",
+    "Type": {
+      "text": "Mineral Type",
+      "image": "downloaded_images/Mineral_Type_Icon.png"
+    },
+    "Power": "75",
+    "Acc": "80%",
+    "STA": "10",
+    "Speed": "72",
+    "Crit %": "10%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Rocknite Blast",
+    "Image": "downloaded_images/Rocknite_Blast_EX_SkillIcon.png",
+    "Type": {
+      "text": "Mineral Type",
+      "image": "downloaded_images/Mineral_Type_Icon.png"
+    },
+    "Power": "80",
+    "Acc": "75%",
+    "STA": "10",
+    "Speed": "52",
+    "Crit %": "20%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Siphon",
+    "Image": "downloaded_images/Siphon_EX_SkillIcon.png",
+    "Type": {
+      "text": "Normal Type",
+      "image": "downloaded_images/Normal_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "15",
+    "Speed": "60",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Rocknite Burst",
+    "Image": "downloaded_images/Rocknite_Burst_EX_SkillIcon.png",
+    "Type": {
+      "text": "Mineral Type",
+      "image": "downloaded_images/Mineral_Type_Icon.png"
+    },
+    "Power": "110",
+    "Acc": "95%",
+    "STA": "15",
+    "Speed": "44",
+    "Crit %": "8%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Gust Wind",
+    "Image": "downloaded_images/Gust_Wind_EX_SkillIcon.png",
+    "Type": {
+      "text": "Wind Type",
+      "image": "downloaded_images/Wind_Type_Icon.png"
+    },
+    "Power": "80",
+    "Acc": "75%",
+    "STA": "10",
+    "Speed": "52",
+    "Crit %": "20%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Wind Barrier",
+    "Image": "downloaded_images/Wind_Barrier_EX_SkillIcon.png",
+    "Type": {
+      "text": "Wind Type",
+      "image": "downloaded_images/Wind_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "15",
+    "Speed": "50",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Wind Strike",
+    "Image": "downloaded_images/Wind_Strike_EX_SkillIcon.png",
+    "Type": {
+      "text": "Wind Type",
+      "image": "downloaded_images/Wind_Type_Icon.png"
+    },
+    "Power": "90",
+    "Acc": "95%",
+    "STA": "15",
+    "Speed": "21",
+    "Crit %": "5%",
+    "Effect": {
+      "text": "Confusion (Status)",
+      "image": "downloaded_images/Confusion_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Gale",
+    "Image": "downloaded_images/Gale_EX_SkillIcon.png",
+    "Type": {
+      "text": "Wind Type",
+      "image": "downloaded_images/Wind_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "15",
+    "Speed": "84",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Lightning Roar",
+    "Image": "downloaded_images/Lightning_Roar_EX_SkillIcon.png",
+    "Type": {
+      "text": "Electric Type",
+      "image": "downloaded_images/Electric_Type_Icon.png"
+    },
+    "Power": "70",
+    "Acc": "95%",
+    "STA": "10",
+    "Speed": "18",
+    "Crit %": "5%",
+    "Effect": {
+      "text": "Puzzled (Status)",
+      "image": "downloaded_images/Puzzled_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Twin Electrode",
+    "Image": "downloaded_images/Twin_Electrode_EX_SkillIcon.png",
+    "Type": {
+      "text": "Electric Type",
+      "image": "downloaded_images/Electric_Type_Icon.png"
+    },
+    "Power": "80",
+    "Acc": "75%",
+    "STA": "10",
+    "Speed": "52",
+    "Crit %": "20%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Electric Siphon",
+    "Image": "downloaded_images/Electric_Siphon_EX_SkillIcon.png",
+    "Type": {
+      "text": "Electric Type",
+      "image": "downloaded_images/Electric_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "15",
+    "Speed": "60",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Crimson Blast",
+    "Image": "downloaded_images/Crimson_Blast_EX_SkillIcon.png",
+    "Type": {
+      "text": "Electric Type",
+      "image": "downloaded_images/Electric_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "20",
+    "Speed": "45",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Drain",
+    "Image": "downloaded_images/Drain_EX_SkillIcon.png",
+    "Type": {
+      "text": "Electric Type",
+      "image": "downloaded_images/Electric_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "999%",
+    "STA": "5",
+    "Speed": "85",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Resistance",
+    "Image": "downloaded_images/Resistance_EX_SkillIcon.png",
+    "Type": {
+      "text": "Psychic Type",
+      "image": "downloaded_images/Psychic_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "15",
+    "Speed": "95",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Psy Burst",
+    "Image": "downloaded_images/Psy_Burst_EX_SkillIcon.png",
+    "Type": {
+      "text": "Psychic Type",
+      "image": "downloaded_images/Psychic_Type_Icon.png"
+    },
+    "Power": "80",
+    "Acc": "75%",
+    "STA": "10",
+    "Speed": "52",
+    "Crit %": "20%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Psychic Siphon",
+    "Image": "downloaded_images/Psychic_Siphon_EX_SkillIcon.png",
+    "Type": {
+      "text": "Psychic Type",
+      "image": "downloaded_images/Psychic_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "15",
+    "Speed": "60",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Lock Target",
+    "Image": "downloaded_images/Lock_Target_EX_SkillIcon.png",
+    "Type": {
+      "text": "Normal Type",
+      "image": "downloaded_images/Normal_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "5",
+    "Speed": "86",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Renovate",
+    "Image": "downloaded_images/Renovate_EX_SkillIcon.png",
+    "Type": {
+      "text": "Psychic Type",
+      "image": "downloaded_images/Psychic_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "15",
+    "Speed": "60",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Psy Ray",
+    "Image": "downloaded_images/Psy_Ray_EX_SkillIcon.png",
+    "Type": {
+      "text": "Psychic Type",
+      "image": "downloaded_images/Psychic_Type_Icon.png"
+    },
+    "Power": "150",
+    "Acc": "90%",
+    "STA": "25",
+    "Speed": "10",
+    "Crit %": "5%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Black Flame",
+    "Image": "downloaded_images/Black_Flame_EX_SkillIcon.png",
+    "Type": {
+      "text": "Ghost Type",
+      "image": "downloaded_images/Ghost_Type_Icon.png"
+    },
+    "Power": "80",
+    "Acc": "75%",
+    "STA": "10",
+    "Speed": "52",
+    "Crit %": "20%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Arcane Magic",
+    "Image": "downloaded_images/Arcane_Magic_EX_SkillIcon.png",
+    "Type": {
+      "text": "Ghost Type",
+      "image": "downloaded_images/Ghost_Type_Icon.png"
+    },
+    "Power": "100",
+    "Acc": "100%",
+    "STA": "15",
+    "Speed": "41",
+    "Crit %": "5%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Super Slam",
+    "Image": "downloaded_images/Super_Slam_EX_SkillIcon.png",
+    "Type": {
+      "text": "Normal Type",
+      "image": "downloaded_images/Normal_Type_Icon.png"
+    },
+    "Power": "110",
+    "Acc": "80%",
+    "STA": "20",
+    "Speed": "25",
+    "Crit %": "10%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Glare",
+    "Image": "downloaded_images/Glare_EX_SkillIcon.png",
+    "Type": {
+      "text": "Ghost Type",
+      "image": "downloaded_images/Ghost_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "15",
+    "Speed": "77",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Arcane Siphon",
+    "Image": "downloaded_images/Arcane_Siphon_EX_SkillIcon.png",
+    "Type": {
+      "text": "Ghost Type",
+      "image": "downloaded_images/Ghost_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "15",
+    "Speed": "60",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Electric Current",
+    "Image": "downloaded_images/Electric_Current_EX_SkillIcon.png",
+    "Type": {
+      "text": "Electric Type",
+      "image": "downloaded_images/Electric_Type_Icon.png"
+    },
+    "Power": "95",
+    "Acc": "75%",
+    "STA": "15",
+    "Speed": "23",
+    "Crit %": "25%",
+    "Effect": {
+      "text": "Paralyze (Status)",
+      "image": "downloaded_images/Paralyze_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Hydro Sphere",
+    "Image": "downloaded_images/Hydro_Sphere_EX_SkillIcon.png",
+    "Type": {
+      "text": "Water Type",
+      "image": "downloaded_images/Water_Type_Icon.png"
+    },
+    "Power": "80",
+    "Acc": "80%",
+    "STA": "10",
+    "Speed": "50",
+    "Crit %": "25%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Explosive Water",
+    "Image": "downloaded_images/Explosive_Water_EX_SkillIcon.png",
+    "Type": {
+      "text": "Water Type",
+      "image": "downloaded_images/Water_Type_Icon.png"
+    },
+    "Power": "80",
+    "Acc": "75%",
+    "STA": "10",
+    "Speed": "52",
+    "Crit %": "20%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Bubble Attack",
+    "Image": "downloaded_images/Bubble_Attack_EX_SkillIcon.png",
+    "Type": {
+      "text": "Water Type",
+      "image": "downloaded_images/Water_Type_Icon.png"
+    },
+    "Power": "25",
+    "Acc": "85%",
+    "STA": "15",
+    "Speed": "73",
+    "Crit %": "15%",
+    "Effect": {
+      "text": "Freeze (Status)",
+      "image": "downloaded_images/Freeze_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Solar Charge",
+    "Image": "downloaded_images/Solar_Charge_EX_SkillIcon.png",
+    "Type": {
+      "text": "Plant Type",
+      "image": "downloaded_images/Plant_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "10",
+    "Speed": "100",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Green Siphon",
+    "Image": "downloaded_images/Green_Siphon_EX_SkillIcon.png",
+    "Type": {
+      "text": "Plant Type",
+      "image": "downloaded_images/Plant_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "15",
+    "Speed": "60",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Crushing Boulder",
+    "Image": "downloaded_images/Crushing_Boulder_EX_SkillIcon.png",
+    "Type": {
+      "text": "Mineral Type",
+      "image": "downloaded_images/Mineral_Type_Icon.png"
+    },
+    "Power": "55",
+    "Acc": "75%",
+    "STA": "10",
+    "Speed": "14",
+    "Crit %": "25%",
+    "Effect": {
+      "text": "Frail (Status)",
+      "image": "downloaded_images/Frail_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Blazing Mineral",
+    "Image": "downloaded_images/Blazing_Mineral_EX_SkillIcon.png",
+    "Type": {
+      "text": "Mineral Type",
+      "image": "downloaded_images/Mineral_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "10",
+    "Speed": "90",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Meteor Shower",
+    "Image": "downloaded_images/Meteor_Shower_EX_SkillIcon.png",
+    "Type": {
+      "text": "Mineral Type",
+      "image": "downloaded_images/Mineral_Type_Icon.png"
+    },
+    "Power": "150",
+    "Acc": "90%",
+    "STA": "25",
+    "Speed": "10",
+    "Crit %": "5%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Wind Blast",
+    "Image": "downloaded_images/Wind_Blast_EX_SkillIcon.png",
+    "Type": {
+      "text": "Wind Type",
+      "image": "downloaded_images/Wind_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "50%",
+    "STA": "15",
+    "Speed": "20",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Wind Siphon",
+    "Image": "downloaded_images/Wind_Siphon_EX_SkillIcon.png",
+    "Type": {
+      "text": "Wind Type",
+      "image": "downloaded_images/Wind_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "15",
+    "Speed": "60",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Electrode",
+    "Image": "downloaded_images/Electrode_EX_SkillIcon.png",
+    "Type": {
+      "text": "Electric Type",
+      "image": "downloaded_images/Electric_Type_Icon.png"
+    },
+    "Power": "60",
+    "Acc": "85%",
+    "STA": "5",
+    "Speed": "56",
+    "Crit %": "10%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Energy Strike",
+    "Image": "downloaded_images/Energy_Strike_EX_SkillIcon.png",
+    "Type": {
+      "text": "Normal Type",
+      "image": "downloaded_images/Normal_Type_Icon.png"
+    },
+    "Power": "20",
+    "Acc": "95%",
+    "STA": "5",
+    "Speed": "71",
+    "Crit %": "5%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Electric Force",
+    "Image": "downloaded_images/Electric_Force_EX_SkillIcon.png",
+    "Type": {
+      "text": "Electric Type",
+      "image": "downloaded_images/Electric_Type_Icon.png"
+    },
+    "Power": "110",
+    "Acc": "95%",
+    "STA": "15",
+    "Speed": "44",
+    "Crit %": "8%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Mirage",
+    "Image": "downloaded_images/Mirage_EX_SkillIcon.png",
+    "Type": {
+      "text": "Electric Type",
+      "image": "downloaded_images/Electric_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "25",
+    "Speed": "20",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Kinetic Mirror",
+    "Image": "downloaded_images/Kinetic_Mirror_EX_SkillIcon.png",
+    "Type": {
+      "text": "Psychic Type",
+      "image": "downloaded_images/Psychic_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "20",
+    "Speed": "30",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Dispell",
+    "Image": "downloaded_images/Dispell_EX_SkillIcon.png",
+    "Type": {
+      "text": "Ghost Type",
+      "image": "downloaded_images/Ghost_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "20",
+    "Speed": "35",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Phantom Abyss",
+    "Image": "downloaded_images/Phantom_Abyss_EX_SkillIcon.png",
+    "Type": {
+      "text": "Ghost Type",
+      "image": "downloaded_images/Ghost_Type_Icon.png"
+    },
+    "Power": "60",
+    "Acc": "90%",
+    "STA": "10",
+    "Speed": "15",
+    "Crit %": "10%",
+    "Effect": {
+      "text": "Hex (Status)",
+      "image": "downloaded_images/Hex_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Creep",
+    "Image": "downloaded_images/Creep_EX_SkillIcon.png",
+    "Type": {
+      "text": "Ghost Type",
+      "image": "downloaded_images/Ghost_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "20",
+    "Speed": "63",
+    "Crit %": "0%",
+    "Effect": {
+      "text": "Paralyze (Status)",
+      "image": "downloaded_images/Paralyze_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Soul Feeder",
+    "Image": "downloaded_images/Soul_Feeder_EX_SkillIcon.png",
+    "Type": {
+      "text": "Ghost Type",
+      "image": "downloaded_images/Ghost_Type_Icon.png"
+    },
+    "Power": "80",
+    "Acc": "85%",
+    "STA": "15",
+    "Speed": "19",
+    "Crit %": "15%",
+    "Effect": {
+      "text": "Leech (Status)",
+      "image": "downloaded_images/Leech_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Eternal Darkness",
+    "Image": "downloaded_images/Eternal_Darkness_EX_SkillIcon.png",
+    "Type": {
+      "text": "Ghost Type",
+      "image": "downloaded_images/Ghost_Type_Icon.png"
+    },
+    "Power": "150",
+    "Acc": "90%",
+    "STA": "25",
+    "Speed": "10",
+    "Crit %": "5%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Martial Arts",
+    "Image": "downloaded_images/Martial_Arts_EX_SkillIcon.png",
+    "Type": {
+      "text": "Normal Type",
+      "image": "downloaded_images/Normal_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "5",
+    "Speed": "87",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Poison Bubbles",
+    "Image": "downloaded_images/Poison_Bubbles_EX_SkillIcon.png",
+    "Type": {
+      "text": "Water Type",
+      "image": "downloaded_images/Water_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "10",
+    "Speed": "65",
+    "Crit %": "0%",
+    "Effect": {
+      "text": "Poison (Status)",
+      "image": "downloaded_images/Poison_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Leaf Dance",
+    "Image": "downloaded_images/Leaf_Dance_EX_SkillIcon.png",
+    "Type": {
+      "text": "Plant Type",
+      "image": "downloaded_images/Plant_Type_Icon.png"
+    },
+    "Power": "100",
+    "Acc": "100%",
+    "STA": "15",
+    "Speed": "45",
+    "Crit %": "5%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Vine Shield",
+    "Image": "downloaded_images/Vine_Shield_EX_SkillIcon.png",
+    "Type": {
+      "text": "Plant Type",
+      "image": "downloaded_images/Plant_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "15",
+    "Speed": "50",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Thorn Pit",
+    "Image": "downloaded_images/Thorn_Pit_EX_SkillIcon.png",
+    "Type": {
+      "text": "Plant Type",
+      "image": "downloaded_images/Plant_Type_Icon.png"
+    },
+    "Power": "150",
+    "Acc": "90%",
+    "STA": "25",
+    "Speed": "10",
+    "Crit %": "5%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Rocky Rift",
+    "Image": "downloaded_images/Rocky_Rift_EX_SkillIcon.png",
+    "Type": {
+      "text": "Mineral Type",
+      "image": "downloaded_images/Mineral_Type_Icon.png"
+    },
+    "Power": "40",
+    "Acc": "85%",
+    "STA": "5",
+    "Speed": "53",
+    "Crit %": "15%",
+    "Effect": {
+      "text": "Frail (Status)",
+      "image": "downloaded_images/Frail_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Slashing Current",
+    "Image": "downloaded_images/Slashing_Current_EX_SkillIcon.png",
+    "Type": {
+      "text": "Wind Type",
+      "image": "downloaded_images/Wind_Type_Icon.png"
+    },
+    "Power": "75",
+    "Acc": "80%",
+    "STA": "10",
+    "Speed": "48",
+    "Crit %": "25%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Static Burst",
+    "Image": "downloaded_images/Static_Burst_EX_SkillIcon.png",
+    "Type": {
+      "text": "Electric Type",
+      "image": "downloaded_images/Electric_Type_Icon.png"
+    },
+    "Power": "60",
+    "Acc": "85%",
+    "STA": "10",
+    "Speed": "15",
+    "Crit %": "15%",
+    "Effect": {
+      "text": "Puzzled (Status)",
+      "image": "downloaded_images/Puzzled_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Psy Bomb",
+    "Image": "downloaded_images/Psy_Bomb_EX_SkillIcon.png",
+    "Type": {
+      "text": "Psychic Type",
+      "image": "downloaded_images/Psychic_Type_Icon.png"
+    },
+    "Power": "90",
+    "Acc": "90%",
+    "STA": "10",
+    "Speed": "52",
+    "Crit %": "15%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Telepathy",
+    "Image": "downloaded_images/Telepathy_EX_SkillIcon.png",
+    "Type": {
+      "text": "Psychic Type",
+      "image": "downloaded_images/Psychic_Type_Icon.png"
+    },
+    "Power": "30",
+    "Acc": "90%",
+    "STA": "10",
+    "Speed": "95",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Psy Geyser",
+    "Image": "downloaded_images/Psy_Geyser_EX_SkillIcon.png",
+    "Type": {
+      "text": "Psychic Type",
+      "image": "downloaded_images/Psychic_Type_Icon.png"
+    },
+    "Power": "110",
+    "Acc": "95%",
+    "STA": "15",
+    "Speed": "44",
+    "Crit %": "8%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Spectral Invasion",
+    "Image": "downloaded_images/Spectral_Invasion_EX_SkillIcon.png",
+    "Type": {
+      "text": "Ghost Type",
+      "image": "downloaded_images/Ghost_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "70%",
+    "STA": "15",
+    "Speed": "70",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Ocean Force",
+    "Image": "downloaded_images/Ocean_Force_EX_SkillIcon.png",
+    "Type": {
+      "text": "Water Type",
+      "image": "downloaded_images/Water_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "15",
+    "Speed": "99",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Psychic Barrage",
+    "Image": "downloaded_images/Psychic_Barrage_EX_SkillIcon.png",
+    "Type": {
+      "text": "Psychic Type",
+      "image": "downloaded_images/Psychic_Type_Icon.png"
+    },
+    "Power": "50",
+    "Acc": "80%",
+    "STA": "5",
+    "Speed": "13",
+    "Crit %": "20%",
+    "Effect": {
+      "text": "Puzzled (Status)",
+      "image": "downloaded_images/Puzzled_Status_Icon.png"
+    }
+  },
+  {
+    "Name": "Kinetic Sponge",
+    "Image": "downloaded_images/Kinetic_Sponge_EX_SkillIcon.png",
+    "Type": {
+      "text": "Water Type",
+      "image": "downloaded_images/Water_Type_Icon.png"
+    },
+    "Power": "0",
+    "Acc": "100%",
+    "STA": "15",
+    "Speed": "60",
+    "Crit %": "0%",
+    "Effect": "-"
+  },
+  {
+    "Name": "Cyclone",
+    "Image": "downloaded_images/Cyclone_EX_SkillIcon.png",
+    "Type": {
+      "text": "Wind Type",
+      "image": "downloaded_images/Wind_Type_Icon.png"
+    },
+    "Power": "150",
+    "Acc": "90%",
+    "STA": "25",
+    "Speed": "10",
+    "Crit %": "5%",
+    "Effect": "-"
+  }
+]
