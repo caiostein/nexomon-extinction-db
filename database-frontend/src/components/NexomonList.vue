@@ -132,12 +132,38 @@ export default {
   left: 0;
   width: 100%;
   padding: 20px 0;
-  z-index: 10;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
   height: var(--filter-container-height);
   box-sizing: border-box;
+  gap: 16px;
+}
+
+@media (max-width: 900px) {
+  
+  .filters-container {
+    flex-direction: column;
+    height: auto;
+    gap: 0;
+    align-items: center;
+    justify-content: center;
+  }
+  .search-box {
+    width: 90vw;
+    max-width: 320px;
+    margin: 0 auto 10px auto;
+    display: block;
+  }
+  .custom-select {
+    width: 90vw;
+    max-width: 320px;
+    margin: 0 auto 10px auto;
+    display: block;
+    
+  }
 }
 
 .grid-scroll-container {
@@ -233,17 +259,20 @@ export default {
 }
 
 .search-box {
-  width: 100%;
-  /* Full width on smaller screens */
-  max-width: 300px;
-  /* Limit maximum width */
-  padding: 10px;
-  margin: 10px auto; /* Adjust margin for flex container */
-  font-size: 16px;
+  width: 320px;
+  padding: 10px 16px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  background-color: #fff;
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+  outline: none;
+  transition: border 0.2s, box-shadow 0.2s;
+  background: #fff;
   color: #333;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  margin-right: 0;
+  margin-left: 0;
+  display: block;
 }
 
 /* Dark mode styles for search box */
@@ -458,11 +487,11 @@ export default {
 /* Custom dropdown styles */
 .custom-select {
   position: relative;
-  width: 100%;
-  max-width: 300px;
-  margin: 10px auto;
-  cursor: pointer;
+  min-width: 180px;
+  margin: 0 8px 12px 8px;
   user-select: none;
+  font-size: 1.05rem;
+  z-index: 30;
 }
 
 .selected-option {

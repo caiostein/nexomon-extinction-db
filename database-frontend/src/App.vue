@@ -10,6 +10,9 @@
             <router-link class="nav-link" to="/nexomons" @click="handleNavClick">Nexomon Database</router-link>
           </li>
           <li class="nav-item">
+            <router-link class="nav-link" to="/skills" @click="handleNavClick">Skill Database</router-link>
+          </li>
+          <li class="nav-item">
             <router-link class="nav-link" to="/locations" @click="handleNavClick">Location Database</router-link>
           </li>
           <li class="nav-item">
@@ -120,7 +123,7 @@ html, body {
   padding: 0.5rem 1rem; /* Use Bootstrap's standard padding */
   width: 100%;
   position: relative; 
-  z-index: 20;
+  z-index: 40;
 }
 
 .navbar-brand {

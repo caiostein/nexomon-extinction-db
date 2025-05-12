@@ -60,7 +60,7 @@
     "Speed": "10",
     "Crit %": "0%",
     "Effect": {
-      "text": "Recovery (Status)",
+      "text": "Recover (Status)",
       "image": "downloaded_images/Recover_Status_Icon.png"
     }
   },

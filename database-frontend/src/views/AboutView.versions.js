@@ -2,6 +2,14 @@
 // Version history for AboutView.vue (Nexomon Extinction Database)
 
 export default [
+  { 
+    version: '1.4.0',
+    date: 'May 12, 2025',
+    changes: [
+      'Added Skill Tree section to NexomonDetails',
+      'Added Skill Database',
+    ]
+  },
   {
     version: '1.3.0',
     date: 'May 10, 2025',

@@ -3,6 +3,7 @@ import NexomonList from '@/components/NexomonList.vue'
 import NexomonDetails from '@/components/NexomonDetails'
 import LocationList from '@/components/LocationList.vue'
 import LocationDetails from '@/components/LocationDetails.vue'
+import SkillList from '@/components/SkillList.vue'
 
 const routes = [
   {
@@ -30,6 +31,11 @@ const routes = [
     name: 'Location Details',
     component: LocationDetails,
     props: true
+  },
+  {
+    path: '/skills',
+    name: 'Skill Database',
+    component: SkillList
   },
   {
     path: '/about',
