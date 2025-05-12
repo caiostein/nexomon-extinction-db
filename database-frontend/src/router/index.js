@@ -38,6 +38,12 @@ const routes = [
     component: SkillList
   },
   {
+    path: '/skill/:skillName',
+    name: 'Skill Details',
+    component: () => import('../components/SkillDetails.vue'),
+    props: true
+  },
+  {
     path: '/about',
     name: 'About',
     component: () => import('../views/AboutView.vue')

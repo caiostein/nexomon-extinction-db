@@ -1,7 +1,7 @@
 <!-- src/components/NexomonDetails.vue -->
 <template>
   <div class="nexomon-details-wrapper"> <!-- Add this wrapping div -->
-    <div v-if="nexomon" class="details-container">      
+    <div class="nexomon-maininfo-container">
       <div class="main-infos">
         <!-- Consistent Nexomon name/number display -->
         <div class="nexomon-info">
@@ -29,9 +29,10 @@
             :disabled="!hasPrevious">Previous</button>
           <button class="nexo-button nexo-button-primary" @click="goToNexomon(parseInt(nexomon.Number) + 1)"
             :disabled="!hasNext">Next</button>
-        </div>      </div>
-
-      <button class="nexo-button nexo-button-danger" @click="goBack">{{ backButtonText }}</button>
+        </div>      
+        <button class="nexo-button nexo-button-danger details-back-btn" @click="goBack">{{ backButtonText }}</button>
+      </div>
+    </div>
 
       <div class="extra-info">
         <div class="extra-section" @click="toggleSection('battle-info')">
@@ -143,48 +144,50 @@
         </div>
         <transition name="collapse">
           <div v-show="!skillTreeCollapsed" class="section-content">
-            <table v-if="skillTree.length" class="skill-tree-table">
-              <thead>
-                <tr>
-                  <th>Level</th>
-                  <th>Skill</th>
-                  <th>Type</th>
-                  <th>Power</th>
-                  <th>Acc</th>
-                  <th>STA</th>
-                  <th>Speed</th>
-                  <th>Crit %</th>
-                  <th>Effect</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="(skill, idx) in skillTree" :key="idx">
-                  <td>{{ skill.Level || skill.level || '-' }}</td>
-                  <td>
-                    <img v-if="skill._db && skill._db.Image" :src="require(`@/assets/${skill._db.Image}`)" :alt="skill._db.Name" style="height:28px;vertical-align:middle;margin-right:6px;" />
-                    {{ skill._db?.Name || skill.Skill?.text || skill.Skill || '-' }}
-                  </td>
-                  <td>
-                    <img v-if="skill._db && skill._db.Type && skill._db.Type.image" :src="require(`@/assets/${skill._db.Type.image}`)" :alt="skill._db.Type.text" style="height:22px;vertical-align:middle;margin-right:4px;" />
-                    {{ skill._db?.Type?.text || '-' }}
-                  </td>
-                  <td>{{ skill._db?.Power || '-' }}</td>
-                  <td>{{ skill._db?.Acc || '-' }}</td>
-                  <td>{{ skill._db?.STA || '-' }}</td>
-                  <td>{{ skill._db?.Speed || '-' }}</td>
-                  <td>{{ skill._db?.['Crit %'] || '-' }}</td>
-                  <td>
-                    <span v-if="skill._db && skill._db.Effect && skill._db.Effect.image">
-                      <img :src="require(`@/assets/${skill._db.Effect.image}`)" :alt="skill._db.Effect.text" style="height:22px;vertical-align:middle;margin-right:4px;" />
-                    </span>
-                    {{ skill._db?.Effect?.text || skill._db?.Effect || '-' }}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <div v-else>
-              No skill tree data available.
-            </div>
+            <template v-if="skillTree.length">
+              <table class="skill-tree-table">
+                <thead>
+                  <tr>
+                    <th>Level</th>
+                    <th>Skill</th>
+                    <th>Type</th>
+                    <th>Power</th>
+                    <th>Acc</th>
+                    <th>STA</th>
+                    <th>Speed</th>
+                    <th>Crit %</th>
+                    <th>Effect</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="(skill, idx) in skillTree" :key="idx" @click="goToSkill(skill._db?.Name)" style="cursor:pointer;">
+                    <td>{{ skill.Level || skill.level || '-' }}</td>
+                    <td>
+                      <img v-if="skill._db && skill._db.Image" :src="require(`@/assets/${skill._db.Image}`)" :alt="skill._db.Name" style="height:28px;vertical-align:middle;margin-right:6px;" />
+                      {{ skill._db?.Name || skill.Skill?.text || skill.Skill || '-' }}
+                    </td>
+                    <td>
+                      <img v-if="skill._db && skill._db.Type && skill._db.Type.image" :src="require(`@/assets/${skill._db.Type.image}`)" :alt="skill._db.Type.text" style="height:22px;vertical-align:middle;margin-right:4px;" />
+                      {{ skill._db?.Type?.text || '-' }}
+                    </td>
+                    <td>{{ skill._db?.Power || '-' }}</td>
+                    <td>{{ skill._db?.Acc || '-' }}</td>
+                    <td>{{ skill._db?.STA || '-' }}</td>
+                    <td>{{ skill._db?.Speed || '-' }}</td>
+                    <td>{{ skill._db?.['Crit %'] || '-' }}</td>
+                    <td>
+                      <span v-if="skill._db && skill._db.Effect && skill._db.Effect.image">
+                        <img :src="require(`@/assets/${skill._db.Effect.image}`)" :alt="skill._db.Effect.text" style="height:22px;vertical-align:middle;margin-right:4px;" />
+                      </span>
+                      {{ skill._db?.Effect?.text || skill._db?.Effect || '-' }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </template>
+            <template v-else>
+              <div>No skill tree data available.</div>
+            </template>
           </div>
         </transition>
       </div>
@@ -269,7 +272,6 @@
         <button class="nexo-button nexo-button-secondary close-zoom-btn" @click.stop="closeZoom">Close</button>
       </div>
     </div>
-  </div> <!-- Close the wrapping div -->
 </template>
 
 
@@ -490,10 +492,9 @@ export default {
       this.clickedMap = null;
       this.showZoom = false;
     },    goBack() {
-      // Check if we came from a location details page
+      // Check if we came from a location details page or a skill details page
       const previousRouteString = localStorage.getItem('previousRoute');
       let previousRoute = null;
-      
       try {
         if (previousRouteString) {
           previousRoute = JSON.parse(previousRouteString);
@@ -501,15 +502,14 @@ export default {
       } catch (e) {
         console.error('Error parsing previous route from localStorage', e);
       }
-      
       if (previousRoute && previousRoute.name === 'Location Details' && previousRoute.params.location) {
-        // Navigate back to the location details page
         this.$router.push({ 
           name: 'Location Details', 
           params: { location: previousRoute.params.location }
         });
+      } else if (previousRoute && previousRoute.name === 'Skill Details' && previousRoute.params.name) {
+        this.$router.push(`/skill/${encodeURIComponent(previousRoute.params.name)}`);
       } else {
-        // Default behavior - go back to nexomon database
         this.$router.push({ name: 'Nexomon Database', params: {} });
       }
     },
@@ -633,6 +633,17 @@ export default {
 
     toggleSkillTreeSection() {
       this.skillTreeCollapsed = !this.skillTreeCollapsed;
+    },
+
+    goToSkill(skillName) {
+      if (!skillName || typeof skillName !== 'string' || !skillName.trim()) return;
+      // Save current route as previousRoute for back navigation
+      localStorage.setItem('previousRoute', JSON.stringify({
+        name: 'Skill Details',
+        path: `/skill/${skillName}`,
+        params: { name: skillName }
+      }));
+      this.$router.push(`/skill/${encodeURIComponent(skillName)}`);
     },
   }
 };
@@ -794,7 +805,7 @@ export default {
   overflow: hidden;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
   background-color: #f9f9f9;
-  max-width: 700px;
+  max-width: 1100px;
   width: 100%;
 }
 
@@ -827,7 +838,7 @@ export default {
   padding: 10px 10px 15px;
   overflow: hidden;
   background-color: #f9f9f9;
-  max-width: 680px;
+  max-width: 1080px;
   margin: 0 auto;
 }
 
@@ -856,7 +867,12 @@ export default {
   border-collapse: collapse;
   margin: 0 auto;
   background: none;
-  max-width: 660px;
+  max-width: 900px; /* Increased from 660px to 900px for a wider table */
+}
+@media (max-width: 1200px) {
+  .skill-tree-table {
+    max-width: 98vw;
+  }
 }
 .skill-tree-table th, .skill-tree-table td {
   border: 1px solid #ccc;
@@ -895,6 +911,47 @@ export default {
 .dark-mode .skill-tree-table td {
   background: #23272e;
   color: #e0e0e0;
+}
+
+.skill-tree-table td {
+  transition: background 0.18s, box-shadow 0.18s;
+  cursor: pointer;
+}
+.skill-tree-table tbody tr:hover td {
+  background: #eaf3ff;
+  box-shadow: 0 2px 8px rgba(38, 75, 163, 0.08);
+  z-index: 1;
+}
+.dark-mode .skill-tree-table tbody tr:hover td {
+  background: #232c3a;
+  box-shadow: 0 2px 8px rgba(38, 75, 163, 0.18);
+}
+
+.nexomon-maininfo-container {
+  background: #fafdff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10), 0 1.5px 6px rgba(0,0,0,0.04);
+  padding: 32px 32px 24px 32px;
+  margin: 0 auto 32px auto;
+  max-width: 520px;
+  min-width: 260px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: none;
+  position: relative;
+  z-index: 2;
+  transition: background 0.3s, box-shadow 0.3s;
+  margin-top: 20px;
+}
+.dark-mode .nexomon-maininfo-container {
+  background: #23272b;
+  border: none;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18), 0 1.5px 6px rgba(0,0,0,0.18);
+}
+.details-back-btn {
+  margin-top: 18px;
+  align-self: flex-end;
 }
 </style>
 

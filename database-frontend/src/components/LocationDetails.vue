@@ -1,4 +1,5 @@
-<template>  <div class="location-details-wrapper">
+<template>  
+  <div class="location-details-wrapper">
     <h1>{{ locationName }}</h1>
     <img :src="getRegionImage(locationName)" :alt="locationName" class="region-image" />
     <div>
@@ -325,6 +326,7 @@ export default {
 
 .nexomon-item:hover {
   background-color: rgba(141, 140, 140, 0.068);
+  box-shadow: 0 4px 12px rgba(43,159,204,0.18);
   transform: scale(1.02);
 }
 
@@ -367,11 +369,6 @@ export default {
   border-radius: 10px;
   background-color: rgba(0, 0, 0, 0.05);
   padding: 5px;
-  transition: transform 0.2s ease-in-out;
-}
-
-.nexomon-thumb:hover {
-  transform: scale(1.1);
 }
 
 .nexomon-info {

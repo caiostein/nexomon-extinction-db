@@ -59,29 +59,31 @@
         <div class="grid-scroll-container">
             <div class="skill-grid">
                 <div v-for="skill in filteredSkills" :key="skill.Name" class="skill-card">
-                    <div class="skill-info">
-                        <div class="skill-name">
-                            <img v-if="skill.Image" :src="require(`@/assets/${skill.Image}`)" :alt="skill.Name"
-                                class="skill-icon" />
-                            {{ skill.Name }}
+                    <router-link :to="`/skill/${encodeURIComponent(skill.Name)}`" class="skill-link">
+                        <div class="skill-info">
+                            <div class="skill-name">
+                                <img v-if="skill.Image" :src="require(`@/assets/${skill.Image}`)" :alt="skill.Name"
+                                    class="skill-icon" />
+                                {{ skill.Name }}
+                            </div>
+                            <div class="skill-type"
+                                :class="{ 'single-row': !skill.Effect || (typeof skill.Effect === 'string' && skill.Effect === '-') }">
+                                <img v-if="skill.Type && skill.Type.image" :src="require(`@/assets/${skill.Type.image}`)"
+                                    :alt="skill.Type.text" class="type-icon" />
+                                {{ skill.Type && skill.Type.text }}
+                            </div>
+                            <div v-if="skill.Effect && !(typeof skill.Effect === 'string' && skill.Effect === '-')"
+                                class="skill-effect">
+                                <img v-if="skill.Effect && skill.Effect.image"
+                                    :src="require(`@/assets/${skill.Effect.image}`)" :alt="skill.Effect.text"
+                                    class="effect-icon" />
+                                <span v-if="skill.Effect && skill.Effect.text">{{
+                                    skill.Effect.text.replace(/\s*\(status\)$/i, '') }}</span>
+                                <span v-else-if="typeof skill.Effect === 'string'">{{
+                                    skill.Effect.replace(/\s*\(status\)$/i, '') }}</span>
+                            </div>
                         </div>
-                        <div class="skill-type"
-                            :class="{ 'single-row': !skill.Effect || (typeof skill.Effect === 'string' && skill.Effect === '-') }">
-                            <img v-if="skill.Type && skill.Type.image" :src="require(`@/assets/${skill.Type.image}`)"
-                                :alt="skill.Type.text" class="type-icon" />
-                            {{ skill.Type && skill.Type.text }}
-                        </div>
-                        <div v-if="skill.Effect && !(typeof skill.Effect === 'string' && skill.Effect === '-')"
-                            class="skill-effect">
-                            <img v-if="skill.Effect && skill.Effect.image"
-                                :src="require(`@/assets/${skill.Effect.image}`)" :alt="skill.Effect.text"
-                                class="effect-icon" />
-                            <span v-if="skill.Effect && skill.Effect.text">{{
-                                skill.Effect.text.replace(/\s*\(status\)$/i, '') }}</span>
-                            <span v-else-if="typeof skill.Effect === 'string'">{{
-                                skill.Effect.replace(/\s*\(status\)$/i, '') }}</span>
-                        </div>
-                    </div>
+                    </router-link>
                 </div>
             </div>
         </div>
@@ -250,24 +252,40 @@ export default {
 }
 
 .skill-card {
-    width: calc(50% - 16px);
-    /* Make cards wider for more text room */
-    min-width: 220px;
-    max-width: 420px;
-    margin: 8px;
-    padding: 10px 8px 15px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    text-align: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    color: inherit;
-    max-height: 290px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
+  background: var(--card-bg, #fafdff);
+  border-radius: 16px;
+  border: 2px solid #e3e8f0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10), 0 1.5px 6px rgba(0,0,0,0.08);
+  padding: 18px 16px 14px 16px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: box-shadow 0.18s, border-color 0.18s, background 0.18s;
+  cursor: pointer;
+  position: relative;
+  border-bottom: 3.5px solid #414652;
+  min-width: 220px;
+  max-width: 260px;
+  min-height: 170px;
+  max-height: 210px;
+}
+.skill-card:hover {
+  box-shadow: 0 4px 18px rgba(0,0,0,0.18), 0 2px 8px rgba(0,0,0,0.10);
+  border-color: #264ba3;
+  background: #f0f6ff;
+  z-index: 2;
+}
+.dark-mode .skill-card {
+  background: #23272b;
+  border: 2px solid #353a40;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.22), 0 1.5px 6px rgba(0,0,0,0.18);
+  border-bottom: 3.5px solid #4f545f;
+}
+.dark-mode .skill-card:hover {
+  background: #232c3a;
+  border-color: #264ba3;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.28), 0 2px 8px rgba(0,0,0,0.18);
 }
 
 .skill-info {
@@ -574,5 +592,17 @@ export default {
     align-items: center;
     justify-content: flex-start;
     gap: 4px;
+}
+
+.skill-link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
+}
+.skill-link:focus {
+  outline: none;
+  box-shadow: none;
 }
 </style>
