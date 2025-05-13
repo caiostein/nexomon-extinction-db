@@ -16,17 +16,17 @@
             Highlighting Nexomon from: {{ selectedMap }}
             <button class="nexo-button nexo-button-secondary" @click="selectedMap = null; highlightedNexomon.clear()">Clear</button>
           </p>
-          <ul class="maps-list">
-            <li 
+          <div class="maps-grid">
+            <div 
               v-for="map in maps" 
               :key="map" 
               class="map-item" 
               :class="{ 'selected-map': selectedMap === map }"
               @click="toggleMapHighlight(map)">
-              <div class="map-name">{{ map }}</div>
               <img :src="getMapImage(map)" :alt="map" class="map-image" />
-            </li>
-          </ul>
+              <div class="map-name">{{ map }}</div>
+            </div>
+          </div>
         </div>
       </transition>
     </div>
@@ -462,111 +462,10 @@ export default {
   padding: 0;
 }
 
-.maps-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
-  list-style-type: none;
-  padding: 0;
-  margin: 5px 0 0 0;
-  border: none;
-}
-
-.map-item {
-  border: 1px solid #444;
-  border-radius: 8px;
-  overflow: hidden;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.map-name {
-  font-size: 1rem;
-  margin-bottom: 10px;
-  text-align: center;
-}
-
-.map-image {
-  width: 150px;
-  height: 150px;
-  object-fit: contain;
-}
-
-.map-item {
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.map-item:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
-
-@media (hover: none) {
-  /* Touch interactions for mobile devices */
-  .map-item:active {
-    background-color: rgba(0, 0, 0, 0.05);
-    transform: scale(0.98);
-    transition: all 0.1s ease;
-  }
-  
-  .dark-mode .map-item:active {
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-}
-
-.selected-map {
-  border-color: rgb(43, 159, 204);
-  background-color: rgba(43, 159, 204, 0.1);
-  box-shadow: 0 0 10px rgba(43, 159, 204, 0.3);
-  transform: translateY(-3px);
-}
-
-.map-highlight-notice {
-  background-color: rgba(43, 159, 204, 0.1);
-  padding: 8px 15px;
-  border-radius: 5px;
-  margin: 10px 0 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1rem;
-}
-
-.clear-btn {
-  margin-left: 10px;
-  padding: 2px 8px;
-  font-size: 0.8rem;
-}
-
-/* Dark mode adjustments */
-.dark-mode .map-item {
-  border-color: #555;
-  background-color: #2a2a2a;
-}
-
-.dark-mode .selected-map {
-  border-color: rgb(43, 159, 204);
-  background-color: rgba(43, 159, 204, 0.2);
-  box-shadow: 0 0 15px rgba(43, 159, 204, 0.4);
-}
-
-.dark-mode .map-highlight-notice {
-  background-color: rgba(43, 159, 204, 0.2);
-  color: #fff;
-}
-
-/* Dark mode styling for collapsible sections */
 .dark-mode .maps-section {
   border-color: #444;
-  background-color: #2a2a2a;
+  background-color: #23272b;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-.dark-mode .section-header:hover {
-  background-color: rgba(255, 255, 255, 0.05);
 }
 
 /* Media Queries for Responsiveness */
@@ -690,64 +589,6 @@ export default {
   }
 }
 
-/* Maps section responsiveness */
-@media (max-width: 768px) {
-  .maps-list {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 15px;
-  }
-  
-  .map-image {
-    width: 120px;
-    height: 120px;
-  }
-
-  .section-header {
-    padding: 15px; /* Larger touch target */
-  }
-  
-  .toggle-icon {
-    font-size: 0.9rem;
-    margin-left: 15px;
-  }
-}
-
-@media (max-width: 480px) {
-  .maps-list {
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 10px;
-  }
-  
-  .map-image {
-    width: 100px;
-    height: 100px;
-  }
-  
-  .map-name {
-    font-size: 0.9rem;
-    margin-bottom: 8px;
-  }
-
-  .map-item {
-    padding: 8px;
-  }
-  
-  .section-header h2 {
-    font-size: 1.3rem;
-  }
-  
-  .map-highlight-notice {
-    font-size: 0.9rem;
-    padding: 6px 12px;
-    margin: 8px 0 15px;
-  }
-  
-  .clear-btn {
-    padding: 1px 6px;
-    font-size: 0.7rem;
-  }
-}
-
 /* Extra small screens */
 @media (max-width: 359px) {
   .location-details-wrapper {
@@ -769,21 +610,6 @@ export default {
   .nexomon-thumb {
     width: 36px;
     height: 36px;
-  }
-  
-  .maps-list {
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    gap: 8px;
-  }
-  
-  .map-image {
-    width: 80px;
-    height: 80px;
-  }
-  
-  .map-name {
-    font-size: 0.8rem;
-    margin-bottom: 6px;
   }
 
   h1 {
@@ -869,3 +695,4 @@ export default {
 </style>
 
 <style scoped src="../assets/styles/button-styles.css"></style>
+<style scoped src="../assets/styles/maps-section.css"></style>

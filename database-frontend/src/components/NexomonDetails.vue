@@ -717,6 +717,10 @@ export default {
   .nexomon-name {
     font-size: 1.5rem;
   }
+  html, body, .nexomon-details-wrapper, .regions-grid, .region-card, .skill-tree-section, .skill-tree-table {
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+  }
 }
 @media (max-width: 600px) {
   .nexomon-number {
@@ -725,6 +729,42 @@ export default {
   }
   .nexomon-name {
     font-size: 1.5rem;
+  }
+  .skill-tree-table {
+    font-size: 0.78em;
+    max-width: 99vw;
+    min-width: 0;
+    table-layout: fixed;
+    word-break: break-word;
+    overflow-x: auto;
+    display: block;
+  }
+  .skill-tree-table th,
+  .skill-tree-table td {
+    padding: 4px 2px;
+    font-size: 0.78em;
+    min-width: 36px;
+    max-width: 70px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .skill-tree-table th:nth-child(2),
+  .skill-tree-table td:nth-child(2) {
+    min-width: 60px;
+    max-width: 90px;
+  }
+  .skill-tree-table th:nth-child(9),
+  .skill-tree-table td:nth-child(9) {
+    min-width: 50px;
+    max-width: 70px;
+  }
+}
+@media (max-width: 400px) {
+  .skill-tree-table th,
+  .skill-tree-table td {
+    font-size: 0.7em;
+    padding: 2px 1px;
   }
 }
 
@@ -925,6 +965,45 @@ export default {
 .dark-mode .skill-tree-table tbody tr:hover td {
   background: #232c3a;
   box-shadow: 0 2px 8px rgba(38, 75, 163, 0.18);
+}
+
+@media (max-width: 600px) {
+  .skill-tree-table {
+    font-size: 0.78em;
+    max-width: 99vw;
+    min-width: 0;
+    table-layout: fixed;
+    word-break: break-word;
+    overflow-x: auto;
+    display: block;
+  }
+  .skill-tree-table th,
+  .skill-tree-table td {
+    padding: 4px 2px;
+    font-size: 0.78em;
+    min-width: 36px;
+    max-width: 70px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .skill-tree-table th:nth-child(2),
+  .skill-tree-table td:nth-child(2) {
+    min-width: 60px;
+    max-width: 90px;
+  }
+  .skill-tree-table th:nth-child(9),
+  .skill-tree-table td:nth-child(9) {
+    min-width: 50px;
+    max-width: 70px;
+  }
+}
+@media (max-width: 400px) {
+  .skill-tree-table th,
+  .skill-tree-table td {
+    font-size: 0.7em;
+    padding: 2px 1px;
+  }
 }
 
 .nexomon-maininfo-container {
