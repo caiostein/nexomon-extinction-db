@@ -12,10 +12,7 @@
         <h2>Maps <span class="toggle-icon">{{ mapsCollapsed ? '▼' : '▲' }}</span></h2>
       </div>
         <transition name="collapse">
-        <div v-show="!mapsCollapsed" class="section-content">          <p v-if="selectedMap" class="map-highlight-notice">
-            Highlighting Nexomon from: {{ selectedMap }}
-            <button class="nexo-button nexo-button-secondary" @click="selectedMap = null; highlightedNexomon.clear()">Clear</button>
-          </p>
+        <div v-show="!mapsCollapsed" class="section-content">
           <div class="maps-grid">
             <div 
               v-for="map in maps" 
