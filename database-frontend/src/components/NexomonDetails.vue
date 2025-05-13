@@ -18,11 +18,9 @@
             </button>
           </div>
           <div class="navigation-buttons">
-            <button class="nexo-button nexo-button-primary" @click="goToNexomon(parseInt(nexomon.Number) - 1)"
-              :disabled="!hasPrevious">Previous</button>
+            <button class="nexo-button nexo-button-primary" @click="goToPreviousNexomon" :disabled="!hasPrevious" aria-label="Previous Nexomon">Previous</button>
             <button class="nexo-button nexo-button-danger details-back-btn" @click="goBack">{{ backButtonText }}</button>
-            <button class="nexo-button nexo-button-primary" @click="goToNexomon(parseInt(nexomon.Number) + 1)"
-              :disabled="!hasNext">Next</button>
+            <button class="nexo-button nexo-button-primary" @click="goToNextNexomon()" :disabled="!hasNext" aria-label="Next Nexomon">Next</button>
           </div>
           <div class="description-container">
             <p>{{ description.Description }}</p>
@@ -411,8 +409,11 @@ export default {
 
   mounted() {
     this.preloadImages(); // Preload battle and food images on page load
+    window.addEventListener('keydown', this.handleArrowNavigation);
   },
-
+  beforeUnmount() {
+    window.removeEventListener('keydown', this.handleArrowNavigation);
+  },
   methods: {
     // Quest location related methods
     isQuestLocation(region) {
@@ -647,6 +648,27 @@ export default {
         params: { name: skillName }
       }));
       this.$router.push(`/skill/${encodeURIComponent(skillName)}`);
+    },
+
+    goToPreviousNexomon() {
+      if (this.hasPrevious) {
+        this.goToNexomon(parseInt(this.nexomon.Number) - 1);
+      }
+    },
+
+    goToNextNexomon() {
+      console.log()
+      if (this.hasNext) {
+        this.goToNexomon(parseInt(this.nexomon.Number) + 1);
+      }
+    },
+
+    handleArrowNavigation(e) {
+      if (e.key === 'ArrowLeft') {
+        this.goToPreviousNexomon();
+      } else if (e.key === 'ArrowRight') {
+        this.goToNextNexomon();
+      }
     },
   }
 };
