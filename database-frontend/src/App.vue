@@ -29,7 +29,9 @@
   <div id="app" :class="{ 'dark-mode': isDarkMode }">
     <router-view v-slot="{ Component }">
       <transition name="fade">
-        <component :is="Component" />
+        <div>
+          <component :is="Component" />
+        </div>
       </transition>
     </router-view>
   </div>
