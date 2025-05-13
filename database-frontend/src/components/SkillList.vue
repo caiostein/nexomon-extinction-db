@@ -561,7 +561,6 @@ export default {
         max-width: 320px;
         margin: 0 auto 10px auto;
         display: block;
-
     }
 }
 

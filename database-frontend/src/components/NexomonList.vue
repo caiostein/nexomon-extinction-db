@@ -10,10 +10,14 @@
             <img :src="getElementIcon(selectedElement)" alt="Icon" class="element-icon" />
             {{ selectedElement }}
           </span>
-          <span v-else>All Elements</span>
+          <span v-else>
+            <span class="element-icon" style="font-size: 1.2em;">🌈</span>
+            All Elements
+          </span>
           <span class="dropdown-arrow">▼</span>
         </div>        <div class="dropdown-menu" v-if="dropdownOpen">
           <div class="dropdown-item" @click.stop="selectElement('')">
+            <span class="element-icon" style="font-size: 1.2em; margin-left: -4px; margin-right: 8px;">🌈</span>
             All Elements
           </div>
           <div 
@@ -140,6 +144,7 @@ export default {
   height: var(--filter-container-height);
   box-sizing: border-box;
   gap: 16px;
+  z-index: 10;
 }
 
 @media (max-width: 900px) {
@@ -197,6 +202,7 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  z-index: 0;
   position: relative; /* For potential positioning of elements */
 }
 
@@ -484,14 +490,12 @@ export default {
   vertical-align: middle;
 }
 
-/* Custom dropdown styles */
 .custom-select {
   position: relative;
   min-width: 180px;
   margin: 0 8px 12px 8px;
   user-select: none;
   font-size: 1.05rem;
-  z-index: 30;
 }
 
 .selected-option {
@@ -530,7 +534,7 @@ export default {
   color: #333;
   border: 1px solid #ccc;
   border-radius: 0 0 5px 5px;
-  z-index: 1000;
+  z-index: 30;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
   /* Ensure the dropdown is visible when displayed */
   display: block !important;

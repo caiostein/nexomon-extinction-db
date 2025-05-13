@@ -27,9 +27,10 @@
           <div class="description-container">
             <p>{{ description.Description }}</p>
           </div>
-          <h3 >
-            Rarity: <span :style="{ backgroundColor: getRarityColor(nexomon.Rarity), color: 'white', borderRadius: '5px', padding: '3px'}" >{{ nexomon.Rarity }}</span>
-          </h3>
+          <div class="rarity-row">
+            <h3 style="margin: 0; font-weight: 500;">Rarity:</h3>
+            <span class="rarity-label" :style="{ backgroundColor: getRarityColor(nexomon.Rarity), color: 'white' }">{{ nexomon.Rarity }}</span>
+          </div>
         </div>
       </div>
     </div>

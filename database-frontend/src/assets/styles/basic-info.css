@@ -77,6 +77,35 @@
   box-shadow: 0 2px 8px rgba(0,0,0,0.25);
 }
 
+.rarity-label {
+  display: inline-block;
+  min-width: 70px;
+  padding: 4px 14px;
+  border-radius: 16px;
+  font-weight: 600;
+  font-size: 1.08em;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  border: 1.5px solid #ddd;
+  margin-left: 8px;
+  vertical-align: middle;
+  text-align: center;
+  transition: background 0.2s, color 0.2s;
+}
+
+.dark-mode .rarity-label {
+  border: 1.5px solid #444b55;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+}
+
+.rarity-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0 18px 0;
+  gap: 8px;
+}
+
 @media (max-width: 480px) {
   .description-container {
     padding-top: 3%;
