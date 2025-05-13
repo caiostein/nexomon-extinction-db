@@ -43,8 +43,8 @@
 }
 
 .map-image {
-  width: 64px;
-  height: 64px;
+  width: 160px;
+  height: 160px;
   object-fit: contain;
   margin-bottom: 8px;
   border-radius: 10px;
@@ -98,8 +98,8 @@
     max-height: 220px;
   }
   .map-image {
-    width: 56px;
-    height: 56px;
+    width: 100px;
+    height: 100px;
   }
   .map-name {
     font-size: 0.85em;
@@ -117,8 +117,8 @@
     padding: 6px 4px 8px;
   }
   .map-image {
-    width: 40px;
-    height: 40px;
+    width: 100px;
+    height: 100px;
     margin-bottom: 4px;
   }
   .map-name {
@@ -166,6 +166,6 @@
 }
 .dark-mode .maps-section {
   border-color: #444;
-  background-color: #23272b;
+  background-color: #2a2a2a;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }

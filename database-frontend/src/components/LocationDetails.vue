@@ -398,17 +398,6 @@ export default {
   hyphens: auto;
 }
 
-/* Maps section styling */
-.maps-section {
-  margin: 10px 0 30px 0;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 0;
-  overflow: hidden;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-  background-color: #f9f9f9;
-}
-
 .section-header {
   cursor: pointer;
   display: flex;
@@ -460,12 +449,6 @@ export default {
   opacity: 0;
   overflow: hidden;
   padding: 0;
-}
-
-.dark-mode .maps-section {
-  border-color: #444;
-  background-color: #23272b;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 /* Media Queries for Responsiveness */
