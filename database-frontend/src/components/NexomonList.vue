@@ -31,6 +31,21 @@
           </div>
         </div>
       </div>
+      <div class="custom-select">
+        <div class="selected-option" @click="toggleRarityDropdown">
+          <span v-if="selectedRarity">
+            <span class="rarity-label" :style="{ backgroundColor: getRarityColor(selectedRarity), color: 'white' }">{{ selectedRarity }}</span>
+          </span>
+          <span v-else>All Rarities</span>
+          <span class="dropdown-arrow">▼</span>
+        </div>
+        <div v-if="showRarityDropdown" class="dropdown-menu">
+          <div class="dropdown-item" @click="selectRarity('')">All Rarities</div>
+          <div class="dropdown-item" v-for="rarity in rarities" :key="rarity" @click="selectRarity(rarity)">
+            <span class="rarity-label" :style="{ backgroundColor: getRarityColor(rarity), color: 'white' }">{{ rarity }}</span>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="grid-scroll-container"> <!-- Container for scrolling -->
@@ -52,6 +67,16 @@
 import data from '../../../python-scripts/assets/nexomon_extinction_database.json';
 import typeChart from '../assets/type_chart.json';
 
+const RARITY_ORDER = [
+  'Common',
+  'Uncommon',
+  'Rare',
+  'Mega Rare',
+  'Ultra Rare',
+  'Legendary',
+  'Ultimate',
+];
+
 export default {
   data() {
     return {
@@ -59,24 +84,41 @@ export default {
       searchQuery: '',
       selectedElement: '',
       dropdownOpen: false,
-      elementIcons: {}
+      elementIcons: {},
+      selectedRarity: '',
+      showRarityDropdown: false,
     };
   },
   computed: {
     uniqueElements() {
       return Object.keys(typeChart.types);
     },
+    rarities() {
+      // Only include rarities present in the data, in the custom order
+      const set = new Set();
+      this.nexomons.forEach(n => {
+        if (n.Rarity) set.add(n.Rarity);
+      });
+      return RARITY_ORDER.filter(r => set.has(r));
+    },
     filteredNexomons() {
       const searchQueryLower = this.searchQuery.toLowerCase();
 
-      return this.nexomons.filter(nexomon => {
+      let filtered = this.nexomons.filter(nexomon => {
         const nameMatches = nexomon.Name.toLowerCase().includes(searchQueryLower);
         const numberMatches = nexomon.Number.includes(searchQueryLower);
         const elementMatches = this.selectedElement === '' || nexomon.Element === this.selectedElement;
 
         return (nameMatches || numberMatches) && elementMatches;
       });
-    },  },
+
+      if (this.selectedRarity) {
+        filtered = filtered.filter(n => n.Rarity === this.selectedRarity);
+      }
+
+      return filtered;
+    },
+  },
   methods: {
     getThumbnail(nexomonName) {
       try {
@@ -96,7 +138,28 @@ export default {
         console.warn(`Element icon for ${element} not found.`);
         return '';
       }
-    },    toggleDropdown() {
+    },
+    getRarityColor(rarity) {
+      switch (rarity) {
+        case 'Common':
+          return 'grey';
+        case 'Uncommon':
+          return 'green';
+        case 'Rare':
+          return 'aqua';
+        case 'Mega Rare':
+          return 'purple';
+        case 'Ultra Rare':
+          return 'brown';
+        case 'Ultimate':
+          return '#264BA3';
+        case 'Legendary':
+          return 'orange';
+        default:
+          return 'transparent';
+      }
+    },
+    toggleDropdown() {
       this.dropdownOpen = !this.dropdownOpen;      
       // Add click outside listener when dropdown is opened
       if (this.dropdownOpen) {
@@ -105,17 +168,26 @@ export default {
           document.addEventListener('click', this.closeDropdownOutside);
         }, 10);
       }
-    },    closeDropdownOutside(e) {
+    },
+    closeDropdownOutside(e) {
       if (!e.target.closest('.custom-select')) {
         this.dropdownOpen = false;
         document.removeEventListener('click', this.closeDropdownOutside);
       }
-    },    selectElement(element) {
+    },
+    selectElement(element) {
       this.selectedElement = element;
       this.dropdownOpen = false;
       // Remove the event listener when an option is selected
       document.removeEventListener('click', this.closeDropdownOutside);
-    }
+    },
+    toggleRarityDropdown() {
+      this.showRarityDropdown = !this.showRarityDropdown;
+    },
+    selectRarity(rarity) {
+      this.selectedRarity = rarity;
+      this.showRarityDropdown = false;
+    },
   },
   beforeUnmount() {
     // Clean up event listener when component is unmounted
@@ -445,7 +517,7 @@ export default {
 
   .grid-scroll-container {
      padding-top: var(--filter-container-height); /* Ensure padding is applied */
-     height: calc(100vh - 300px); /* Ensure height is calculated */
+     height: calc(100vh - 350px); /* Ensure height is calculated */
   }
 }
 
@@ -585,6 +657,28 @@ export default {
     transform: scale(1.15);
   }
 }
+
+.rarity-label {
+  min-width: 0;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  border: 1.5px solid #ddd;
+  margin-left: 8px;
+  vertical-align: middle;
+  text-align: left;
+  transition: background 0.2s, color 0.2s;
+  display: inline-block;
+}
+
+.dark-mode .rarity-label {
+  border: 1.5px solid #444b55;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+}
+
 </style>
 
 <style scoped src="../assets/styles/button-styles.css"></style>
