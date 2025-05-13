@@ -124,3 +124,14 @@
   background-color: #7340c3;
   border-color: #6930bb;
 }
+
+.navigation-buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+.navigation-buttons .nexo-button-primary {
+  min-width: 100px;
+  text-align: center;
+}

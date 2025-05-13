@@ -17,20 +17,20 @@
               {{ showCosmic ? 'Show Regular' : 'Show Cosmic' }}
             </button>
           </div>
+          <div class="navigation-buttons">
+            <button class="nexo-button nexo-button-primary" @click="goToNexomon(parseInt(nexomon.Number) - 1)"
+              :disabled="!hasPrevious">Previous</button>
+            <button class="nexo-button nexo-button-danger details-back-btn" @click="goBack">{{ backButtonText }}</button>
+            <button class="nexo-button nexo-button-primary" @click="goToNexomon(parseInt(nexomon.Number) + 1)"
+              :disabled="!hasNext">Next</button>
+          </div>
           <div class="description-container">
             <p>{{ description.Description }}</p>
           </div>
-        </div>
-
           <h3 >
             Rarity: <span :style="{ backgroundColor: getRarityColor(nexomon.Rarity), color: 'white', borderRadius: '5px', padding: '3px'}" >{{ nexomon.Rarity }}</span>
-          </h3>        <div class="navigation-buttons">
-          <button class="nexo-button nexo-button-primary" @click="goToNexomon(parseInt(nexomon.Number) - 1)"
-            :disabled="!hasPrevious">Previous</button>
-          <button class="nexo-button nexo-button-primary" @click="goToNexomon(parseInt(nexomon.Number) + 1)"
-            :disabled="!hasNext">Next</button>
-        </div>      
-        <button class="nexo-button nexo-button-danger details-back-btn" @click="goBack">{{ backButtonText }}</button>
+          </h3>
+        </div>
       </div>
     </div>
 
@@ -765,41 +765,6 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.description-container {
-  margin: 18px auto 18px auto;
-  max-width: 600px;
-  width: fit-content;
-  min-width: 220px;
-  background: #f8f9fa;
-  color: #333;
-  border: 1.5px solid #d1d5db;
-  border-radius: 10px;
-  padding: 18px 22px;
-  text-align: center;
-  font-size: 1.08rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-  font-style: italic;
-  display: block; /* Remove flex for perfect padding centering */
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 90vw;
-  padding-top: 18px;
-  padding-bottom: 18px;
-}
-.description-container p {
-  margin: 0;
-  margin-bottom: -10px;
-  padding: 0;
-  width: 100%;
-}
-
-.dark-mode .description-container {
-  background: #23272e;
-  color: #e0e0e0;
-  border: 1.5px solid #444b55;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
 }
 
 .nexomon-maininfo-container {
