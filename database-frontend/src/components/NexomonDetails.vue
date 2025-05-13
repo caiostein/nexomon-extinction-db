@@ -145,45 +145,47 @@
         <transition name="collapse">
           <div v-show="!skillTreeCollapsed" class="section-content">
             <template v-if="skillTree.length">
-              <table class="skill-tree-table">
-                <thead>
-                  <tr>
-                    <th>Level</th>
-                    <th>Skill</th>
-                    <th>Type</th>
-                    <th>Power</th>
-                    <th>Acc</th>
-                    <th>STA</th>
-                    <th>Speed</th>
-                    <th>Crit %</th>
-                    <th>Effect</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="(skill, idx) in skillTree" :key="idx" @click="goToSkill(skill._db?.Name)" style="cursor:pointer;">
-                    <td>{{ skill.Level || skill.level || '-' }}</td>
-                    <td>
-                      <img v-if="skill._db && skill._db.Image" :src="require(`@/assets/${skill._db.Image}`)" :alt="skill._db.Name" style="height:28px;vertical-align:middle;margin-right:6px;" />
-                      {{ skill._db?.Name || skill.Skill?.text || skill.Skill || '-' }}
-                    </td>
-                    <td>
-                      <img v-if="skill._db && skill._db.Type && skill._db.Type.image" :src="require(`@/assets/${skill._db.Type.image}`)" :alt="skill._db.Type.text" style="height:22px;vertical-align:middle;margin-right:4px;" />
-                      {{ skill._db?.Type?.text || '-' }}
-                    </td>
-                    <td>{{ skill._db?.Power || '-' }}</td>
-                    <td>{{ skill._db?.Acc || '-' }}</td>
-                    <td>{{ skill._db?.STA || '-' }}</td>
-                    <td>{{ skill._db?.Speed || '-' }}</td>
-                    <td>{{ skill._db?.['Crit %'] || '-' }}</td>
-                    <td>
-                      <span v-if="skill._db && skill._db.Effect && skill._db.Effect.image">
-                        <img :src="require(`@/assets/${skill._db.Effect.image}`)" :alt="skill._db.Effect.text" style="height:22px;vertical-align:middle;margin-right:4px;" />
-                      </span>
-                      {{ skill._db?.Effect?.text || skill._db?.Effect || '-' }}
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+              <div class="skill-tree-table-container">
+                <table class="skill-tree-table">
+                  <thead>
+                    <tr>
+                      <th>Level</th>
+                      <th>Skill</th>
+                      <th>Type</th>
+                      <th>Power</th>
+                      <th>Acc</th>
+                      <th>STA</th>
+                      <th>Speed</th>
+                      <th>Crit %</th>
+                      <th>Effect</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="(skill, idx) in skillTree" :key="idx" @click="goToSkill(skill._db?.Name)" style="cursor:pointer;">
+                      <td>{{ skill.Level || skill.level || '-' }}</td>
+                      <td style="text-align:left;">
+                        <img v-if="skill._db && skill._db.Image" :src="require(`@/assets/${skill._db.Image}`)" :alt="skill._db.Name" style="height:28px;vertical-align:middle;margin-right:6px;" />
+                        {{ skill._db?.Name || skill.Skill?.text || skill.Skill || '-' }}
+                      </td>
+                      <td>
+                        <img v-if="skill._db && skill._db.Type && skill._db.Type.image" :src="require(`@/assets/${skill._db.Type.image}`)" :alt="skill._db.Type.text.replace(' Type', '')" class="skill-type-icon" />
+                        <span>{{ skill._db?.Type?.text ? skill._db.Type.text.replace(' Type', '') : '-' }}</span>
+                      </td>
+                      <td>{{ skill._db?.Power || '-' }}</td>
+                      <td>{{ skill._db?.Acc || '-' }}</td>
+                      <td>{{ skill._db?.STA || '-' }}</td>
+                      <td>{{ skill._db?.Speed || '-' }}</td>
+                      <td>{{ skill._db?.['Crit %'] || '-' }}</td>
+                      <td>
+                        <span v-if="skill._db && skill._db.Effect && skill._db.Effect.image">
+                          <img :src="require(`@/assets/${skill._db.Effect.image}`)" :alt="skill._db.Effect.text" style="height:22px;vertical-align:middle;margin-right:4px;" />
+                        </span>
+                        {{ skill._db?.Effect?.text ? skill._db.Effect.text.replace(' (Status)', '') : (skill._db?.Effect ? skill._db.Effect.replace(' (Status)', '') : '-') }}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </template>
             <template v-else>
               <div>No skill tree data available.</div>
@@ -826,6 +828,7 @@ export default {
   margin-top: 18px;
   align-self: flex-end;
 }
+
 </style>
 
 <style scoped src="../assets/styles/basic-info.css"></style>
