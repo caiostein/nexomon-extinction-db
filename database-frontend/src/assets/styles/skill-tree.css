@@ -1,0 +1,112 @@
+/* Skill tree table styles for NexomonDetails.vue */
+
+.skill-tree-section {
+  margin: 10px auto 30px auto;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 0;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  background-color: #f9f9f9;
+  max-width: 1100px;
+  width: 100%;
+}
+
+.skill-tree-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 auto;
+  background: none;
+  max-width: 900px; /* Increased from 660px to 900px for a wider table */
+}
+
+@media (max-width: 1200px) {
+  .skill-tree-table {
+    max-width: 98vw;
+  }
+}
+.skill-tree-table th, .skill-tree-table td {
+  border: 1px solid #ccc;
+  padding: 6px 10px;
+  text-align: center;
+  font-size: 1em;
+}
+.skill-tree-table th {
+  background: #f2f2f2;
+}
+.skill-icon, .type-icon, .effect-icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  vertical-align: middle;
+  margin-right: 4px;
+}
+.no-skills {
+  text-align: center;
+  color: #888;
+  padding: 18px 0;
+}
+.dark-mode .skill-tree-section {
+  border-color: #444;
+  background-color: #2a2a2a;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+.dark-mode .skill-tree-table th {
+  background: #23272e;
+  color: #e0e0e0;
+}
+.dark-mode .skill-tree-table td {
+  background: #23272e;
+  color: #e0e0e0;
+}
+.skill-tree-table td {
+  transition: background 0.18s, box-shadow 0.18s;
+  cursor: pointer;
+}
+.skill-tree-table tbody tr:hover td {
+  background: #eaf3ff;
+  box-shadow: 0 2px 8px rgba(38, 75, 163, 0.08);
+  z-index: 1;
+}
+.dark-mode .skill-tree-table tbody tr:hover td {
+  background: #232c3a;
+  box-shadow: 0 2px 8px rgba(38, 75, 163, 0.18);
+}
+@media (max-width: 600px) {
+  .skill-tree-table {
+    font-size: 0.78em;
+    max-width: 99vw;
+    min-width: 0;
+    table-layout: fixed;
+    word-break: break-word;
+    overflow-x: auto;
+    display: block;
+  }
+  .skill-tree-table th,
+  .skill-tree-table td {
+    padding: 4px 2px;
+    font-size: 0.78em;
+    min-width: 36px;
+    max-width: 70px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .skill-tree-table th:nth-child(2),
+  .skill-tree-table td:nth-child(2) {
+    min-width: 60px;
+    max-width: 90px;
+  }
+  .skill-tree-table th:nth-child(9),
+  .skill-tree-table td:nth-child(9) {
+    min-width: 50px;
+    max-width: 70px;
+  }
+}
+@media (max-width: 400px) {
+  .skill-tree-table th,
+  .skill-tree-table td {
+    font-size: 0.7em;
+    padding: 2px 1px;
+  }
+}

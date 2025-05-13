@@ -1,0 +1,49 @@
+/* Common section styles for NexomonDetails.vue */
+
+.section-header {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  padding: 12px;
+  transition: background-color 0.3s ease;
+  border-radius: 0;
+}
+.section-header:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+.section-header h2 {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+}
+.toggle-icon {
+  margin-left: 10px;
+  font-size: 0.8rem;
+}
+.section-content {
+  padding: 10px 10px 15px;
+  overflow: hidden;
+  background-color: #f9f9f9;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+.dark-mode .section-content {
+  background-color: #2a2a2a;
+}
+
+.collapse-enter-active,
+.collapse-leave-active {
+  transition: all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+  max-height: 2000px;
+  opacity: 1;
+  overflow: hidden;
+  will-change: max-height, opacity;
+}
+.collapse-enter-from,
+.collapse-leave-to {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding: 0;
+}
