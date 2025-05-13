@@ -32,16 +32,22 @@
         </div>
       </div>
       <div class="custom-select">
-        <div class="selected-option" @click="toggleRarityDropdown">
+        <div @click.stop="toggleRarityDropdown" class="selected-option">
           <span v-if="selectedRarity">
             <span class="rarity-label" :style="{ backgroundColor: getRarityColor(selectedRarity), color: 'white' }">{{ selectedRarity }}</span>
           </span>
-          <span v-else>All Rarities</span>
+          <span v-else>
+            <span class="element-icon" style="font-size: 1.2em; margin-left: -4px; margin-right: 8px;">✨</span>
+            All Rarities
+          </span>
           <span class="dropdown-arrow">▼</span>
         </div>
-        <div v-if="showRarityDropdown" class="dropdown-menu">
-          <div class="dropdown-item" @click="selectRarity('')">All Rarities</div>
-          <div class="dropdown-item" v-for="rarity in rarities" :key="rarity" @click="selectRarity(rarity)">
+        <div class="dropdown-menu" v-if="showRarityDropdown">
+          <div class="dropdown-item" @click.stop="selectRarity('')">
+            <span class="element-icon" style="font-size: 1.2em; margin-left: -4px; margin-right: 8px;">✨</span>
+            All Rarities
+          </div>
+          <div class="dropdown-item" v-for="rarity in rarities" :key="rarity" @click.stop="selectRarity(rarity)">
             <span class="rarity-label" :style="{ backgroundColor: getRarityColor(rarity), color: 'white' }">{{ rarity }}</span>
           </div>
         </div>
@@ -183,15 +189,28 @@ export default {
     },
     toggleRarityDropdown() {
       this.showRarityDropdown = !this.showRarityDropdown;
+      if (this.showRarityDropdown) {
+        setTimeout(() => {
+          document.addEventListener('click', this.closeRarityDropdownOutside);
+        }, 10);
+      }
+    },
+    closeRarityDropdownOutside(e) {
+      if (!e.target.closest('.custom-select')) {
+        this.showRarityDropdown = false;
+        document.removeEventListener('click', this.closeRarityDropdownOutside);
+      }
     },
     selectRarity(rarity) {
       this.selectedRarity = rarity;
       this.showRarityDropdown = false;
+      document.removeEventListener('click', this.closeRarityDropdownOutside);
     },
   },
   beforeUnmount() {
     // Clean up event listener when component is unmounted
     document.removeEventListener('click', this.closeDropdownOutside);
+    document.removeEventListener('click', this.closeRarityDropdownOutside);
   },
 };
 </script>
