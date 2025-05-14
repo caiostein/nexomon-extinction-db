@@ -1,8 +1,9 @@
 <template>
   <div class="nexomon-list-wrapper">
     <!-- Removed the extra inner div -->
-    <div class="filters-container">      <!-- Search Input -->
-      <input type="text" v-model="searchQuery" placeholder="Search for a Nexomon" class="search-box" />
+    <div class="filters-container">      
+
+        <input type="text" v-model="searchQuery" placeholder="Search for a Nexomon" class="search-box" />
       
       <!-- Custom Element Filter Dropdown -->
       <div class="custom-select">        <div @click.stop="toggleDropdown" class="selected-option">
@@ -32,6 +33,7 @@
         </div>
       </div>
       <div class="custom-select">
+      <div class="caught-row">
         <div @click.stop="toggleRarityDropdown" class="selected-option">
           <span v-if="selectedRarity">
             <span class="rarity-label" :style="{ backgroundColor: getRarityColor(selectedRarity), color: 'white' }">{{ selectedRarity }}</span>
@@ -51,19 +53,52 @@
             <span class="rarity-label" :style="{ backgroundColor: getRarityColor(rarity), color: 'white' }">{{ rarity }}</span>
           </div>
         </div>
+        <button 
+          class="caught-toggle-btn" 
+          :class="{ active: caughtMode }" 
+          @click="toggleCaughtMode"
+          title="Toggle Caught Mode"
+          aria-label="Toggle Caught Mode"
+        >
+          <span class="switch-slider"></span>
+        </button>
+        </div>
       </div>
     </div>
 
     <div class="grid-scroll-container"> <!-- Container for scrolling -->
       <div class="nexomon-grid">
-        <router-link v-for="nexomon in filteredNexomons" :key="nexomon.Number" :to="`/nexomon/${nexomon.Number}`"
-          class="nexomon-card">
-          <div class="nexomon-info">
-            <div class="nexomon-number">{{ nexomon.Number }}</div>
-            <div class="nexomon-name">{{ nexomon.Name }}</div>
+        <template v-for="nexomon in filteredNexomons" :key="nexomon.Number">
+          <div
+            v-if="caughtMode"
+            class="nexomon-card"
+            :class="{ 'caught-glow': isCaught(nexomon.Number) }"
+            @click="toggleCaught(nexomon.Number, $event)"
+            :style="{ cursor: 'pointer' }"
+          >
+            <!-- Caught Checkbox (only in caught mode) -->
+            <div class="caught-checkbox" @click.stop="toggleCaught(nexomon.Number, $event)">
+              <input type="checkbox" :checked="isCaught(nexomon.Number)" readonly />
+              <span class="checkmark" :class="{ checked: isCaught(nexomon.Number) }"></span>
+            </div>
+            <div class="nexomon-info">
+              <div class="nexomon-number">{{ nexomon.Number }}</div>
+              <div class="nexomon-name">{{ nexomon.Name }}</div>
+            </div>
+            <img :src="getThumbnail(nexomon.Name)" alt="Sprite" class="nexomon-thumb" />
           </div>
-          <img :src="getThumbnail(nexomon.Name)" alt="Sprite" class="nexomon-thumb" />
-        </router-link>
+          <router-link
+            v-else
+            :to="`/nexomon/${nexomon.Number}`"
+            class="nexomon-card"
+          >
+            <div class="nexomon-info">
+              <div class="nexomon-number">{{ nexomon.Number }}</div>
+              <div class="nexomon-name">{{ nexomon.Name }}</div>
+            </div>
+            <img :src="getThumbnail(nexomon.Name)" alt="Sprite" class="nexomon-thumb" />
+          </router-link>
+        </template>
       </div>
     </div>
   </div>
@@ -72,6 +107,7 @@
 <script>
 import data from '../../../python-scripts/assets/nexomon_extinction_database.json';
 import typeChart from '../assets/type_chart.json';
+import { useCaughtMode } from './useCaughtMode.js';''
 
 const RARITY_ORDER = [
   'Common',
@@ -84,6 +120,22 @@ const RARITY_ORDER = [
 ];
 
 export default {
+  setup() {
+    const {
+      caughtMode,
+      caughtNexomons,
+      toggleCaughtMode,
+      isCaught,
+      toggleCaught,
+    } = useCaughtMode();
+    return {
+      caughtMode,
+      caughtNexomons,
+      toggleCaughtMode,
+      isCaught,
+      toggleCaught,
+    };
+  },
   data() {
     return {
       nexomons: data,
@@ -124,6 +176,17 @@ export default {
 
       return filtered;
     },
+  },
+  mounted() {
+    // Load caught Nexomons from localStorage
+    const saved = localStorage.getItem('caughtNexomons');
+    if (saved) {
+      try {
+        this.caughtNexomons = JSON.parse(saved);
+      } catch (e) {
+        this.caughtNexomons = [];
+      }
+    }
   },
   methods: {
     getThumbnail(nexomonName) {
@@ -206,6 +269,9 @@ export default {
       this.showRarityDropdown = false;
       document.removeEventListener('click', this.closeRarityDropdownOutside);
     },
+    goToNexomon(number) {
+      this.$router.push(`/nexomon/${number}`);
+    },
   },
   beforeUnmount() {
     // Clean up event listener when component is unmounted
@@ -238,8 +304,14 @@ export default {
   z-index: 10;
 }
 
+.caught-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
 @media (max-width: 900px) {
-  
   .filters-container {
     flex-direction: column;
     height: auto;
@@ -247,11 +319,33 @@ export default {
     align-items: center;
     justify-content: center;
   }
+  .caught-row {
+    width: 90vw;
+    max-width: 320px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+  }
+  .caught-row > .selected-option {
+    flex: 1 1 0%;
+    min-width: 0;
+    width: 100%;
+    margin-right: 8px;
+  }
+  .caught-toggle-btn {
+    margin-bottom: 0;
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+  }
   .search-box {
     width: 90vw;
     max-width: 320px;
     margin: 0 auto 10px auto;
     display: block;
+    margin-bottom: 0;
   }
   .custom-select {
     width: 90vw;
@@ -697,7 +791,7 @@ export default {
   border: 1.5px solid #444b55;
   box-shadow: 0 2px 8px rgba(0,0,0,0.18);
 }
-
 </style>
 
 <style scoped src="../assets/styles/button-styles.css"></style>
+<style scoped src="../assets/styles/caught-mode.css"></style>

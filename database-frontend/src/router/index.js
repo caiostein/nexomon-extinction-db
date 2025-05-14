@@ -44,6 +44,11 @@ const routes = [
     props: true
   },
   {
+    path: '/collection',
+    name: 'My Collection',
+    component: () => import('../components/CollectionList.vue')
+  },
+  {
     path: '/about',
     name: 'About',
     component: () => import('../views/AboutView.vue')

@@ -30,36 +30,87 @@
     
     <!-- Nexomon section - now displayed after Maps -->
     <div v-if="nexomons.length" class="nexomon-section">
-      <h2>Nexomon found here</h2>
-      <div class="nexomon-grid">
-        <router-link 
-          v-for="nexomon in nexomons" 
-          :key="nexomon.Number" 
-          :to="`/nexomon/${nexomon.Number}`"
-          class="nexomon-item"
-          :class="exceptionClass(nexomon)"
-          @mouseenter="showTooltip($event, nexomon)"
-          @mouseleave="hideTooltip"
-        >
-          <img :src="getThumbnail(nexomon.Name)" :alt="nexomon.Name" class="nexomon-thumb" />
-          <div class="nexomon-info">
-            <div class="nexomon-number">
-              {{ nexomon.Number }}
-              <span v-if="nexomon._regionException && selectedMap" class="exception-icon">
-                ⚠️
-              </span>
-            </div>
-            <div class="nexomon-name">{{ nexomon.Name }}</div>
-          </div>
-          <!-- Tooltip rendered inside the card, absolutely positioned -->
-          <div
-            v-if="tooltipNexomon === nexomon.Number && tooltipPos.visible"
-            class="custom-tooltip"
-            :style="{ position: 'absolute', left: '50%', top: '-44px', transform: 'translateX(-50%)', zIndex: 2147483647, pointerEvents: 'none' }"
+      <div>
+        <div class="section-header">
+          <h2>Nexomon found here</h2>
+          <button 
+            class="caught-toggle-btn" 
+            :class="{ active: caughtMode }" 
+            @click="toggleCaughtMode"
+            title="Toggle Caught Mode"
+            aria-label="Toggle Caught Mode"
           >
-            {{ tooltipText }}
+          <span class="switch-slider"></span>
+          </button>
+        </div>
+      </div>
+      <div class="nexomon-grid">
+        <template v-if="caughtMode">
+          <div
+            v-for="nexomon in nexomons"
+            :key="nexomon.Number"
+            class="nexomon-item"
+            :class="[exceptionClass(nexomon), { 'caught-glow': isCaught(nexomon.Number) } ]"
+            @click="toggleCaught(nexomon.Number)"
+            @mouseenter="showTooltip($event, nexomon)"
+            @mouseleave="hideTooltip"
+            style="cursor: pointer;"
+            tabindex="0"
+            @keydown.enter.space="toggleCaught(nexomon.Number)"
+          >
+            <!-- Caught Checkbox (styled like NexomonList.vue) -->
+            <div class="caught-checkbox" @click.stop="toggleCaught(nexomon.Number, $event)">
+              <input type="checkbox" :checked="isCaught(nexomon.Number)" readonly />
+              <span class="checkmark" :class="{ checked: isCaught(nexomon.Number) }"></span>
+            </div>
+            <img :src="getThumbnail(nexomon.Name)" :alt="nexomon.Name" class="nexomon-thumb" />
+            <div class="nexomon-info">
+              <div class="nexomon-number">
+                {{ nexomon.Number }}
+                <span v-if="nexomon._regionException && selectedMap" class="exception-icon">
+                  ⚠️
+                </span>
+              </div>
+              <div class="nexomon-name">{{ nexomon.Name }}</div>
+            </div>
+            <div
+              v-if="tooltipNexomon === nexomon.Number && tooltipPos.visible"
+              class="custom-tooltip"
+              :style="{ position: 'absolute', left: '50%', top: '-44px', transform: 'translateX(-50%)', zIndex: 2147483647, pointerEvents: 'none' }"
+            >
+              {{ tooltipText }}
+            </div>
           </div>
-        </router-link>
+        </template>
+        <template v-else>
+          <router-link 
+            v-for="nexomon in nexomons" 
+            :key="nexomon.Number" 
+            :to="`/nexomon/${nexomon.Number}`"
+            class="nexomon-item"
+            :class="exceptionClass(nexomon)"
+            @mouseenter="showTooltip($event, nexomon)"
+            @mouseleave="hideTooltip"
+          >
+            <img :src="getThumbnail(nexomon.Name)" :alt="nexomon.Name" class="nexomon-thumb" />
+            <div class="nexomon-info">
+              <div class="nexomon-number">
+                {{ nexomon.Number }}
+                <span v-if="nexomon._regionException && selectedMap" class="exception-icon">
+                  ⚠️
+                </span>
+              </div>
+              <div class="nexomon-name">{{ nexomon.Name }}</div>
+            </div>
+            <div
+              v-if="tooltipNexomon === nexomon.Number && tooltipPos.visible"
+              class="custom-tooltip"
+              :style="{ position: 'absolute', left: '50%', top: '-44px', transform: 'translateX(-50%)', zIndex: 2147483647, pointerEvents: 'none' }"
+            >
+              {{ tooltipText }}
+            </div>
+          </router-link>
+        </template>
       </div>
     </div>
     <div v-else>
@@ -71,9 +122,27 @@
 <script>
 import data from '../../../python-scripts/assets/nexomon_extinction_database.json';
 import locationExceptions from '../assets/location_exceptions.json';
+import { useCaughtMode } from './useCaughtMode.js';
 
 export default {
-  props: ['location'],  data() {
+  setup() {
+    const {
+      caughtMode,
+      caughtNexomons,
+      toggleCaughtMode,
+      isCaught,
+      toggleCaught,
+    } = useCaughtMode();
+    return {
+      caughtMode,
+      caughtNexomons,
+      toggleCaughtMode,
+      isCaught,
+      toggleCaught,
+    };
+  },
+  props: ['location'],  
+  data() {
     return {
       questLocations: locationExceptions.quest_locations || {},
       selectedMap: null,
@@ -96,7 +165,8 @@ export default {
   computed: {
     locationName() {
       return this.$route.params.location;
-    },    maps() {
+    },    
+    maps() {
       // Find all maps for this region
       const maps = new Set();
       data.forEach(n => {
@@ -118,7 +188,8 @@ export default {
         }
       });
       return Array.from(maps).sort();
-    },    nexomons() {
+    },    
+    nexomons() {
       // Find all Nexomon found in this region, including those with exceptions
       return data
         .map(n => {
@@ -155,7 +226,8 @@ export default {
       } catch {
         return '';
       }
-    },    getThumbnail(nexomonName) {
+    },    
+    getThumbnail(nexomonName) {
       try {
         return require(`@/assets/downloaded_images/${nexomonName}-menu.png`);
       } catch (error) {
@@ -412,7 +484,7 @@ export default {
   margin: 0;
   display: flex;
   align-items: center;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
 }
 
 .toggle-icon {
@@ -676,3 +748,4 @@ export default {
 
 <style scoped src="../assets/styles/button-styles.css"></style>
 <style scoped src="../assets/styles/maps-section.css"></style>
+<style scoped src="../assets/styles/caught-mode.css"></style>

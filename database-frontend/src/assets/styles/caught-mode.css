@@ -1,0 +1,211 @@
+.caught-toggle-btn {
+  width: 48px;
+  height: 28px;
+  border: none;
+  border-radius: 14px;
+  background: #eee;
+  position: relative;
+  margin-left: 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  padding: 0;
+}
+.caught-toggle-btn .switch-slider {
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  width: 24px;
+  height: 24px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+  transition: left 0.2s, background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2em;
+  color: #bbb;
+}
+.caught-toggle-btn.active {
+  background: #39d63e;
+  box-shadow: 0 0 12px 2px #6be39c44, 0 1px 3px rgba(0,0,0,0.08);
+}
+.caught-toggle-btn.active .switch-slider {
+  left: 22px;
+  background: #fff;
+  color: #39d63e;
+}
+.caught-toggle-btn .switch-slider:after {
+  content: '\2714';
+  color: inherit;
+  font-size: 1.1em;
+  margin-top: 3px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.caught-toggle-btn.active .switch-slider:after {
+  opacity: 1;
+}
+.caught-toggle-btn:not(.active) .switch-slider:after {
+  content: '';
+}
+
+.caught-checkbox {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  background: rgba(255,255,255,0.85);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  justify-content: center;
+}
+.caught-checkbox input[type="checkbox"] {
+  display: none;
+}
+.caught-checkbox .checkmark {
+  width: 22.5px;
+  height: 22.5px;
+  border-radius: 50%;
+  border: 2px solid #bbb;
+  background: #fff;
+  display: inline-block;
+  position: relative;
+}
+.caught-checkbox .checkmark.checked {
+  background: #39d63e;
+  border-color: #388e3c;
+}
+.caught-checkbox .checkmark.checked:after {
+  content: '\2714';
+  color: #fff;
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 2px;
+  align-items: center;
+  font-size: 1em;
+  line-height: 1;
+}
+
+.caught-checkbox input[type="checkbox"]:checked + .checkmark,
+.caught-checkbox .checkmark.checked {
+  background: #6be39c;
+  border-color: #59c586;
+}
+
+/* Add a green glow to the card when caught in caught mode */
+.nexomon-card.caught-glow,
+.nexomon-item.caught-glow {
+  box-shadow: 0 0 12px 2px #6be39c44;
+  border-color: #6be39c !important;
+  z-index: 1;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+/* Add a red glow to the card when in remove mode */
+.nexomon-card.remove-glow,
+.nexomon-item.remove-glow {
+  box-shadow: 0 0 12px 2px #e36b6b44;
+  border-color: #e53935 !important;
+  z-index: 1;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.caught-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+@media (max-width: 900px) {
+
+  .caught-row {
+    width: 90vw;
+    max-width: 320px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+  }
+  .caught-row > .selected-option {
+    flex: 1 1 0%;
+    min-width: 0;
+    width: 100%;
+    margin-right: 8px;
+  }
+}
+
+/* Responsive styles for caught-toggle-btn on mobile */
+@media (max-width: 900px) {
+  .caught-toggle-btn {
+    width: 42px;
+    height: 24px;
+    min-width: 36px;
+    min-height: 22px;
+    border-radius: 11px;
+  }
+  .caught-toggle-btn .switch-slider {
+    width: 20px;
+    height: 20px;
+    left: 2px;
+    top: 2px;
+    font-size: 1em;
+  }
+  .caught-toggle-btn.active .switch-slider {
+    left: 19px;
+  }
+
+  .caught-toggle-btn .switch-slider:after {
+  font-size: 0.9em;
+  margin-top: 1px;
+}
+}
+
+/* Dark mode styles for caught-toggle-btn using .dark-mode class */
+.dark-mode .caught-toggle-btn {
+  background: #333 !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.32);
+}
+.dark-mode .caught-toggle-btn .switch-slider {
+  background: #222;
+  color: #666;
+}
+.dark-mode .caught-toggle-btn.active {
+  background: #2e7d32 !important;
+  box-shadow: 0 0 16px 2px #39d63e55, 0 1px 3px rgba(0,0,0,0.32);
+}
+.dark-mode .caught-toggle-btn.active .switch-slider {
+  background: #222;
+  color: #39d63e;
+}
+
+/* Dark mode styles for caught-checkbox to match toggle slider */
+.dark-mode .caught-checkbox {
+  background: rgba(34,34,34,0.85);
+}
+.dark-mode .caught-checkbox .checkmark {
+  background: #222;
+  border-color: #444;
+}
+.dark-mode .caught-checkbox .checkmark.checked {
+  background: #2e7d32;
+  border-color: #39d63e;
+}
+.dark-mode .caught-checkbox .checkmark.checked:after {
+  color: #39d63e;
+}
+.dark-mode .caught-checkbox input[type="checkbox"]:checked + .checkmark,
+.dark-mode .caught-checkbox .checkmark.checked {
+  background: #2e7d32;
+  border-color: #39d63e;
+}

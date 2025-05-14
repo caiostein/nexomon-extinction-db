@@ -10,10 +10,13 @@
             <router-link class="nav-link" to="/nexomons" @click="handleNavClick">Nexomon Database</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/skills" @click="handleNavClick">Skill Database</router-link>
+            <router-link class="nav-link" to="/locations" @click="handleNavClick">Location Database</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/locations" @click="handleNavClick">Location Database</router-link>
+            <router-link class="nav-link" to="/collection" @click="handleNavClick">Collection</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/skills" @click="handleNavClick">Skill Database</router-link>
           </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/about" @click="handleNavClick">About</router-link>
@@ -122,10 +125,13 @@ html, body {
 }
 
 .navbar {
-  padding: 0.5rem 1rem; /* Use Bootstrap's standard padding */
+  padding: 0.5rem 1rem;
   width: 100%;
-  position: relative; 
-  z-index: 40;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background-color: #212529;
 }
 
 .navbar-brand {
