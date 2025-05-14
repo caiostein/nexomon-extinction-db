@@ -402,6 +402,9 @@ export default {
         if (previousRoute && previousRoute.name === 'Location Details') {
           return `Back to ${previousRoute.params.location}`;
         }
+        if (previousRoute && previousRoute.name === 'My Collection') {
+          return 'Back to Collection';
+        }
       } catch (e) {
         // If there's an error parsing, fall back to default text
       }
@@ -498,7 +501,7 @@ export default {
       this.clickedMap = null;
       this.showZoom = false;
     },    goBack() {
-      // Check if we came from a location details page or a skill details page
+      // Check if we came from a location details page, skill details page, or collection page
       const previousRouteString = localStorage.getItem('previousRoute');
       let previousRoute = null;
       try {
@@ -515,6 +518,8 @@ export default {
         });
       } else if (previousRoute && previousRoute.name === 'Skill Details' && previousRoute.params.name) {
         this.$router.push(`/skill/${encodeURIComponent(previousRoute.params.name)}`);
+      } else if (previousRoute && previousRoute.name === 'My Collection') {
+        this.$router.push({ name: 'My Collection' });
       } else {
         this.$router.push({ name: 'Nexomon Database', params: {} });
       }

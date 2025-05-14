@@ -3,6 +3,14 @@
 
 export default [
   { 
+    version: '1.5.0',
+    date: 'May 14, 2025',
+    changes: [
+      'Added My Collection page',
+      'Added Nexomon collection functionality (you can now mark Nexomon as caught and view them in the My Collection page)',
+    ]
+  },
+  { 
     version: '1.4.0',
     date: 'May 12, 2025',
     changes: [
