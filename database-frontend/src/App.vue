@@ -126,12 +126,8 @@ html, body {
 
 .navbar {
   padding: 0.5rem 1rem;
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 100;
-  background-color: #212529;
+  position: relative; 
+  z-index: 40;
 }
 
 .navbar-brand {

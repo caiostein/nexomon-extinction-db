@@ -1,7 +1,7 @@
 const { defineConfig } = require('@vue/cli-service')
 module.exports = defineConfig({
   transpileDependencies: true,
-  publicPath: process.env.NODE_ENV === "production" ? "/nexomon-extinction-db/" : "/",
+  publicPath: './',
   devServer: {
     allowedHosts: 'all',
     host: '0.0.0.0',
