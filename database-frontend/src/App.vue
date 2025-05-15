@@ -116,9 +116,6 @@ export default {
   height: fit-content;
   color: #000000;
   position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 
 html, body {
@@ -138,7 +135,7 @@ html, body {
 }
 
 .navbar-brand {
-  margin-left: 0 !important;
+  margin-left: 0 !important; /* Remove any inline margin that could cause shifting */
   padding-left: 0;
 }
 
@@ -162,6 +159,13 @@ html, body {
 
 .maps-list {
   background-color: #f0f0f0;
+}
+
+#app {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 /* Style the expanded dropdown menu background */

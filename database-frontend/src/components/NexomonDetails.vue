@@ -686,6 +686,43 @@ export default {
   text-align: center;
 }
 
+.nexomon-info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 0 !important;
+}
+
+.nexomon-number {
+  font-size: 1.3rem;
+  color: #666;
+  margin-bottom: 4px;
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 4px 14px;
+  border-radius: 10px;
+  display: inline-block;
+  font-weight: 600;
+  margin-top: 20px
+}
+
+.dark-mode .nexomon-number {
+  color: #aaa;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nexomon-name {
+  font-size: 2rem;
+  text-align: center;
+  width: 100%;
+  min-height: 2.8em;
+  line-height: 1.4em;
+  word-wrap: break-word;
+  hyphens: auto;
+  font-weight: 700;
+  margin-bottom: -20px;
+}
+
 .navigation-buttons {
   margin: 20px 0;
   display: flex;
@@ -705,9 +742,25 @@ export default {
 }
 
 @media (max-width: 1024px) {
+  .nexomon-number {
+    font-size: 1.2rem;
+    padding: 3px 10px;
+  }
+  .nexomon-name {
+    font-size: 1.5rem;
+  }
   html, body, .nexomon-details-wrapper, .regions-grid, .region-card, .skill-tree-section, .skill-tree-table {
     max-width: 100vw !important;
     overflow-x: hidden !important;
+  }
+}
+@media (max-width: 600px) {
+  .nexomon-number {
+    font-size: 1.2rem;
+    padding: 2px 8px;
+  }
+  .nexomon-name {
+    font-size: 1.5rem;
   }
 }
 

@@ -275,6 +275,35 @@ export default {
 .dark-mode .nexomon-item:hover {
   background-color: rgba(255,255,255,0.05);
 }
+.nexomon-thumb {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  margin-bottom: 8px;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 5px;
+}
+.nexomon-info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.nexomon-number {
+  font-size: 0.8rem;
+  color: #666;
+  margin-bottom: 2px;
+}
+.nexomon-name {
+  font-size: 0.9rem;
+  text-align: center;
+  width: 100%;
+  min-height: 2.8em;
+  line-height: 1.4em;
+  word-wrap: break-word;
+  hyphens: auto;
+}
 .clear-collection-btn {
   /* Remove all positioning so it flows naturally below the grid */
   position: relative !important;

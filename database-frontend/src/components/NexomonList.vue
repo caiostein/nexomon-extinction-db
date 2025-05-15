@@ -36,7 +36,7 @@
       <div class="caught-row">
         <div @click.stop="toggleRarityDropdown" class="selected-option">
           <span v-if="selectedRarity">
-            <span class="small-rarity-label" :style="{ backgroundColor: getRarityColor(selectedRarity), color: 'white' }">{{ selectedRarity }}</span>
+            <span class="rarity-label" :style="{ backgroundColor: getRarityColor(selectedRarity), color: 'white' }">{{ selectedRarity }}</span>
           </span>
           <span v-else>
             <span class="element-icon" style="font-size: 1.2em; margin-left: -4px; margin-right: 8px;">✨</span>
@@ -50,7 +50,7 @@
             All Rarities
           </div>
           <div class="dropdown-item" v-for="rarity in rarities" :key="rarity" @click.stop="selectRarity(rarity)">
-            <span class="small-rarity-label" :style="{ backgroundColor: getRarityColor(rarity), color: 'white' }">{{ rarity }}</span>
+            <span class="rarity-label" :style="{ backgroundColor: getRarityColor(rarity), color: 'white' }">{{ rarity }}</span>
           </div>
         </div>
         <button 
@@ -400,6 +400,14 @@ export default {
   background-color: rgba(0, 0, 0, 0.05);
   padding: 5px;
   transition: transform 0.2s ease-in-out;
+}
+
+.nexomon-info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 0 !important; /* Remove extra space below number/name for all screens */
 }
 
 .nexomon-number {
@@ -761,5 +769,26 @@ export default {
   .nexomon-card:hover .nexomon-thumb {
     transform: scale(1.15);
   }
+}
+
+.rarity-label {
+  min-width: 0;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  border: 1.5px solid #ddd;
+  margin-left: 8px;
+  vertical-align: middle;
+  text-align: left;
+  transition: background 0.2s, color 0.2s;
+  display: inline-block;
+}
+
+.dark-mode .rarity-label {
+  border: 1.5px solid #444b55;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
 }
 </style>
