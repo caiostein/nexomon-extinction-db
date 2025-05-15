@@ -84,6 +84,18 @@
   border-color: #58329d;
 }
 
+/* Confirm button - green */
+.nexo-button-confirm {
+  background-color: #28a745;
+  color: white !important;
+  border-color: #28a745;
+}
+
+.nexo-button-confirm:hover:not(:disabled) {
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
 /* Dark mode adjustments */
 .dark-mode .nexo-button-primary {
   background-color: #375a7f;
@@ -123,6 +135,16 @@
 .dark-mode .nexo-button-toggle:hover:not(:disabled) {
   background-color: #7340c3;
   border-color: #6930bb;
+}
+
+.dark-mode .nexo-button-confirm {
+  background-color: #43b581;
+  border-color: #43b581;
+}
+
+.dark-mode .nexo-button-confirm:hover:not(:disabled) {
+  background-color: #329d6d;
+  border-color: #28875a;
 }
 
 .navigation-buttons {

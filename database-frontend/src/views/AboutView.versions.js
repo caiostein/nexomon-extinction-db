@@ -3,6 +3,13 @@
 
 export default [
   { 
+    version: '1.5.1',
+    date: 'May 15, 2025',
+    changes: [
+      'Added Import/Export feature for Nexomon collection',
+    ]
+  },
+  { 
     version: '1.5.0',
     date: 'May 14, 2025',
     changes: [
