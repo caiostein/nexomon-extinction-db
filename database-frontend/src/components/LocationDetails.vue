@@ -745,3 +745,7 @@ export default {
   z-index: 2147483647;
 }
 </style>
+
+<style scoped src="../assets/styles/button-styles.css"></style>
+<style scoped src="../assets/styles/maps-section.css"></style>
+<style scoped src="../assets/styles/caught-mode.css"></style>

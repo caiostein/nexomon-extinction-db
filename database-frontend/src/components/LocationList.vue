@@ -302,3 +302,5 @@ export default {
   }
 }
 </style>
+
+<style scoped src="../assets/styles/button-styles.css"></style>
