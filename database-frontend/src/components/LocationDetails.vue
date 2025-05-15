@@ -44,7 +44,7 @@
           </button>
         </div>
       </div>
-      <div class="nexomon-grid">
+      <div class="small-nexomon-grid">
         <template v-if="caughtMode">
           <div
             v-for="nexomon in nexomons"
@@ -63,7 +63,7 @@
               <input type="checkbox" :checked="isCaught(nexomon.Number)" readonly />
               <span class="checkmark" :class="{ checked: isCaught(nexomon.Number) }"></span>
             </div>
-            <img :src="getThumbnail(nexomon.Name)" :alt="nexomon.Name" class="nexomon-thumb" />
+            <img :src="getThumbnail(nexomon.Name)" :alt="nexomon.Name" class="small-grid-nexomon-thumb" />
             <div class="nexomon-info">
               <div class="nexomon-number">
                 {{ nexomon.Number }}
@@ -92,7 +92,7 @@
             @mouseenter="showTooltip($event, nexomon)"
             @mouseleave="hideTooltip"
           >
-            <img :src="getThumbnail(nexomon.Name)" :alt="nexomon.Name" class="nexomon-thumb" />
+            <img :src="getThumbnail(nexomon.Name)" :alt="nexomon.Name" class="small-grid-nexomon-thumb" />
             <div class="nexomon-info">
               <div class="nexomon-number">
                 {{ nexomon.Number }}
@@ -364,16 +364,6 @@ export default {
   margin: 20px 0 30px 0;
 }
 
-.nexomon-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 0;
-  margin: 0 auto;
-  max-width: 1200px;
-  gap: 2px; /* Tighter gap between grid items */
-}
-
 .nexomon-item {
   width: calc(16.666% - 8px); /* Reduced margin for tighter layout */
   margin: 4px;
@@ -428,23 +418,6 @@ export default {
 
 .dark-mode .nexomon-item:hover {
   background-color: rgba(255, 255, 255, 0.05);
-}
-
-.nexomon-thumb {
-  width: 64px;
-  height: 64px;
-  object-fit: contain;
-  margin-bottom: 8px;
-  border-radius: 10px;
-  background-color: rgba(0, 0, 0, 0.05);
-  padding: 5px;
-}
-
-.nexomon-info {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .nexomon-number {
@@ -520,78 +493,6 @@ export default {
   padding: 0;
 }
 
-/* Media Queries for Responsiveness */
-@media (max-width: 3840px) {
-  .nexomon-item {
-    width: calc(16.666% - 8px);
-    margin: 4px;
-    max-height: 310px;
-  }
-}
-
-@media (max-width: 1925px) {
-  .nexomon-item {
-    width: calc(16.666% - 8px);
-    margin: 4px;
-    max-height: 300px;
-  }
-}
-
-@media (max-width: 1280px) {
-  .nexomon-item {
-    width: calc(20% - 6px);
-    margin: 3px;
-    max-height: 290px;
-  }
-}
-
-@media (max-width: 1024px) {
-  .nexomon-item {
-    width: calc(25% - 6px);
-    margin: 3px;
-    max-height: 280px;
-  }
-}
-
-@media (max-width: 768px) {
-  .nexomon-grid {
-    gap: 0;
-    justify-content: space-evenly;
-  }
-  
-  .nexomon-item {
-    width: calc(33.333% - 4px);
-    margin: 2px;
-    max-height: 260px;
-  }
-}
-
-@media (max-width: 600px) {
-  .nexomon-grid {
-    gap: 0;
-    justify-content: space-evenly;
-  }
-  
-  .nexomon-item {
-    width: calc(33.333% - 4px); /* 3 per row with minimal spacing */
-    margin: 2px;
-    max-height: 220px;
-  }
-  
-  .nexomon-thumb {
-    width: 56px;
-    height: 56px;
-  }
-  
-  .nexomon-name {
-    font-size: 0.85em;
-  }
-  
-  .nexomon-number {
-    font-size: 0.77em;
-  }
-}
-
 @media (max-width: 480px) {
   .location-details-wrapper {
     padding: 15px 10px;
@@ -600,34 +501,6 @@ export default {
   .region-image {
     width: 320px;
     height: 200px;
-  }
-
-  .nexomon-grid {
-    gap: 0;
-    justify-content: space-evenly;
-  }
-
-  .nexomon-item {
-    width: calc(33.333% - 2px); /* 3 per row with minimal spacing */
-    margin: 1px;
-    max-height: 160px;
-    padding: 6px 4px 8px;
-  }
-
-  .nexomon-name {
-    font-size: 0.75em;
-    min-height: 2.6em;
-    line-height: 1.2em;
-  }
-  
-  .nexomon-number {
-    font-size: 0.7em;
-  }
-  
-  .nexomon-thumb {
-    width: 40px;
-    height: 40px;
-    margin-bottom: 4px;
   }
 
   h1 {
@@ -647,11 +520,6 @@ export default {
     padding: 10px 6px;
   }
 
-  .nexomon-grid {
-    gap: 0;
-    justify-content: space-evenly;
-  }
-
   .nexomon-item {
     width: calc(33.333% - 1px); /* Maintain 3 per row with minimal spacing */
     margin: 0.5px;
@@ -659,7 +527,7 @@ export default {
     padding: 4px 1px 6px;
   }
 
-  .nexomon-thumb {
+  .small-grid-nexomon-thumb {
     width: 36px;
     height: 36px;
   }
@@ -692,7 +560,7 @@ export default {
     min-height: 2.4em;
   }
 
-  .nexomon-thumb {
+  .small-grid-nexomon-thumb {
     width: 32px;
     height: 32px;
   }

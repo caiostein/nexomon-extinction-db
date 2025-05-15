@@ -31,7 +31,7 @@
     <h2 class="learned-by-title">Learned By</h2>
     <div class="nexomon-learners-grid">
       <router-link v-for="nexomon in learners" :key="nexomon.Number" :to="`/nexomon/${nexomon.Number}`" class="nexomon-learner-card">
-        <img :src="getThumbnail(nexomon.Name)" :alt="nexomon.Name" class="nexomon-thumb" />
+        <img :src="getThumbnail(nexomon.Name)" :alt="nexomon.Name" class="small-grid-nexomon-thumb" />
         <div class="nexomon-info">
           <div class="nexomon-number">{{ nexomon.Number }}</div>
           <div class="nexomon-name">{{ nexomon.Name }}</div>
@@ -239,24 +239,6 @@ export default {
 .dark-mode .nexomon-learner-card:hover {
   background-color: rgba(255,255,255,0.05);
 }
-.nexomon-thumb {
-  width: 64px;
-  height: 64px;
-  object-fit: contain;
-  margin-bottom: 8px;
-  border-radius: 10px;
-  background-color: rgba(0, 0, 0, 0.05);
-  padding: 5px;
-}
-.dark-mode .nexomon-thumb {
-  background-color: rgba(255,255,255,0.04);
-}
-.nexomon-info {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 .nexomon-number {
   font-size: 0.8rem;
   color: #666;
@@ -352,11 +334,6 @@ export default {
     width: calc(33.333% - 4px); /* 3 per row with minimal spacing */
     margin: 2px;
     max-height: 220px;
-  }
-  
-  .nexomon-thumb {
-    width: 56px;
-    height: 56px;
   }
   
   .nexomon-name {

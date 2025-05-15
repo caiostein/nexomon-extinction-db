@@ -17,6 +17,7 @@ import './assets/styles/evolution-info.css';
 import './assets/styles/extra-info.css';
 import './assets/styles/skill-tree.css';
 import './assets/styles/maps-section.css';
+import './assets/styles/grid-styles.css';
 
 const app = createApp(App);
 

@@ -93,6 +93,23 @@
   transition: background 0.2s, color 0.2s;
 }
 
+.small-rarity-label {
+  min-width: 0;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  border: 1.5px solid #ddd;
+  margin-left: 8px;
+  vertical-align: middle;
+  text-align: left;
+  transition: background 0.2s, color 0.2s;
+  display: inline-block;
+}
+
+.dark-mode .small-rarity-label,
 .dark-mode .rarity-label {
   border: 1.5px solid #444b55;
   box-shadow: 0 2px 8px rgba(0,0,0,0.18);
