@@ -792,6 +792,3 @@ export default {
   box-shadow: 0 2px 8px rgba(0,0,0,0.18);
 }
 </style>
-
-<style scoped src="../assets/styles/button-styles.css"></style>
-<style scoped src="../assets/styles/caught-mode.css"></style>

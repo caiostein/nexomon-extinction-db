@@ -825,11 +825,3 @@ export default {
 }
 
 </style>
-
-<style scoped src="../assets/styles/basic-info.css"></style>
-<style scoped src="../assets/styles/location-info.css"></style>
-<style scoped src="../assets/styles/evolution-info.css"></style>
-<style scoped src="../assets/styles/extra-info.css"></style>
-<style scoped src="../assets/styles/button-styles.css"></style>
-<style scoped src="../assets/styles/section-common.css"></style>
-<style scoped src="../assets/styles/skill-tree.css"></style>
