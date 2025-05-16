@@ -1,7 +1,9 @@
 <template>
-  <div class="nexomon-list-wrapper">
+  <div class="nexomon-list-wrapper"
+    :class="{ 'filters-collapsed': filtersCollapsed }"
+>
     <!-- Removed the extra inner div -->
-    <div class="filters-container">      
+    <div class="filters-container" :class="{ collapsed: filtersCollapsed }">      
 
         <input type="text" v-model="searchQuery" placeholder="Search for a Nexomon" class="search-box" />
       
@@ -33,7 +35,6 @@
         </div>
       </div>
       <div class="custom-select">
-      <div class="caught-row">
         <div @click.stop="toggleRarityDropdown" class="selected-option">
           <span v-if="selectedRarity">
             <span class="rarity-label" :style="{ backgroundColor: getRarityColor(selectedRarity), color: 'white' }">{{ selectedRarity }}</span>
@@ -53,6 +54,7 @@
             <span class="rarity-label" :style="{ backgroundColor: getRarityColor(rarity), color: 'white' }">{{ rarity }}</span>
           </div>
         </div>
+      </div>
         <button 
           class="caught-toggle-btn" 
           :class="{ active: caughtMode }" 
@@ -62,8 +64,9 @@
         >
           <span class="switch-slider"></span>
         </button>
-        </div>
-      </div>
+        <button class="collapse-arrow" aria-label="Collapse Filters" @click="toggleFiltersCollapse" :aria-expanded="!filtersCollapsed">
+          <svg :style="filtersCollapsed ? 'transform: rotate(180deg);' : ''" viewBox="0 0 24 24"><path d="M7.41 15.59L12 11l4.59 4.59L18 14.17l-6-6-6 6z"/></svg>
+        </button>
     </div>
 
     <div class="grid-scroll-container"> <!-- Container for scrolling -->
@@ -145,6 +148,7 @@ export default {
       elementIcons: {},
       selectedRarity: '',
       showRarityDropdown: false,
+      filtersCollapsed: false, // NEW: collapsed state
     };
   },
   computed: {
@@ -187,6 +191,9 @@ export default {
         this.caughtNexomons = [];
       }
     }
+    
+    window.addEventListener('resize', this.handleResizeExpandFilters);
+
   },
   methods: {
     getThumbnail(nexomonName) {
@@ -272,11 +279,24 @@ export default {
     goToNexomon(number) {
       this.$router.push(`/nexomon/${number}`);
     },
+    toggleFiltersCollapse() {
+      // Only allow collapse on mobile (≤480px)
+      if (window.innerWidth <= 480) {
+        this.filtersCollapsed = !this.filtersCollapsed;
+      }
+    },
+    handleResizeExpandFilters() {
+      if (this.filtersCollapsed && window.innerWidth > 480) {
+        this.filtersCollapsed = false;
+      }
+    },
   },
   beforeUnmount() {
     // Clean up event listener when component is unmounted
     document.removeEventListener('click', this.closeDropdownOutside);
     document.removeEventListener('click', this.closeRarityDropdownOutside);
+    window.removeEventListener('resize', this.handleResizeExpandFilters);
+
   },
 };
 </script>
@@ -284,7 +304,7 @@ export default {
 <style scoped>
 .nexomon-list-wrapper {
   --header-height: 60px; /* Adjust to your actual header height */
-  --filter-container-height: 150px; /* Adjust based on actual filter height */
+  --filter-container-height: 92px; /* Adjust based on actual filter height */
 }
 
 .filters-container {
@@ -292,87 +312,146 @@ export default {
   top: var(--header-height);
   left: 0;
   width: 100%;
-  padding: 20px 0;
+  max-width: 100vw;
+  background: var(--filter-bg, #f8f9fb);
+  color: var(--filter-fg, #222);
+  box-shadow: 0 4px 18px rgba(0,0,0,0.08), 0 1.5px 0 #e0e0e0;
+  border-radius: 0 0 18px 18px;
+  padding: 18px 18px 10px 18px;
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
-  height: var(--filter-container-height);
-  box-sizing: border-box;
-  gap: 16px;
+  gap: 18px 24px;
   z-index: 10;
+  transition: box-shadow 0.25s, background 0.25s;
+  transition: max-height 0.35s cubic-bezier(.4,0,.2,1), opacity 0.25s;
+  overflow: visible; /* Allow dropdowns to overflow. If you use a collapsed animation, apply overflow: hidden; only when collapsed. */
 }
 
-.caught-row {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 8px;
+.filters-container.collapsed {
+  max-height: 0 !important;
+  opacity: 0;
+  pointer-events: none;
+  overflow: hidden !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  transition: max-height 0.35s cubic-bezier(.4,0,.2,1), opacity 0.25s, padding 0.25s;
 }
 
+.dark-mode .filters-container {
+  background: var(--filter-bg-dark, #23242a);
+  color: var(--filter-fg-dark, #f3f3f3);
+  box-shadow: 0 4px 18px rgba(0,0,0,0.22), 0 1.5px 0 #23242a;
+}
+
+.filters-container .search-box,
+.filters-container .custom-select {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.filters-container .search-box {
+  flex: 1 1 220px;
+  min-width: 140px;
+  max-width: 320px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1.5px solid #d0d0d0;
+  font-size: 0.98rem;
+  background: #fff;
+  color: #222;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  transition: border 0.2s, box-shadow 0.2s;
+}
+.dark-mode .filters-container .search-box {
+  background: #23242a;
+  color: #f3f3f3;
+  border: 1.5px solid #444b55;
+}
+
+.filters-container .custom-select {
+  flex: 1 1 180px;
+  min-width: 140px;
+  max-width: 220px;
+  margin: 0;
+}
+
+/* Card effect for filter controls */
+.filters-container .search-box,
+.filters-container .custom-select {
+  background: rgba(255,255,255,0.92);
+  box-shadow: 0 1.5px 6px rgba(0,0,0,0.06);
+  border-radius: 8px;
+}
+.dark-mode .filters-container .search-box,
+.dark-mode .filters-container .custom-select {
+  background: rgba(35,36,42,0.98);
+  box-shadow: 0 1.5px 6px rgba(0,0,0,0.18);
+}
+
+/* Responsive stacking for mobile */
 @media (max-width: 900px) {
   .filters-container {
-    flex-direction: column;
-    height: auto;
-    gap: 0;
-    align-items: center;
-    justify-content: center;
-  }
-  .caught-row {
-    width: 90vw;
-    max-width: 320px;
     display: flex;
-    flex-direction: row;
     align-items: center;
-    justify-content: center;
-    gap: 0;
+    gap: 12px 0;
+    padding: 10px 2vw 8px 2vw;
+    border-radius: 0 0 12px 12px;
   }
-  .caught-row > .selected-option {
-    flex: 1 1 0%;
-    min-width: 0;
-    width: 100%;
-    margin-right: 8px;
+  .filters-container .search-box,
+  .filters-container .custom-select {
+    justify-self: center;
+    max-width: 42%;
+    margin: 0 10px 10px 10px;
+    box-shadow: 0 1.5px 6px rgba(0,0,0,0.08);
   }
-  .caught-toggle-btn {
-    margin-bottom: 0;
-    flex-shrink: 0;
-    width: 36px;
+  .filters-container .search-box {
+    padding: 5px 9px;
+    font-size: 0.93rem;
+    min-width: 100px;
+    max-width: 100vw;
     height: 36px;
   }
-  .search-box {
-    width: 90vw;
-    max-width: 320px;
-    margin: 0 auto 10px auto;
-    display: block;
-    margin-bottom: 0;
+
+  .filters-container .caught-toggle-btn {
+    margin-bottom: 5px;
   }
-  .custom-select {
-    width: 90vw;
-    max-width: 320px;
-    margin: 0 auto 10px auto;
-    display: block;
-    
-  }
+}
+
+/* Make sure dropdowns and toggle are visually unified */
+.filters-container .custom-select .selected-option,
+.filters-container .custom-select .dropdown-menu {
+  border-radius: 7px;
+  font-size: 1rem;
+}
+
+/* Accessibility: focus states */
+.filters-container .search-box:focus,
+.filters-container .custom-select .selected-option:focus,
+.filters-container .caught-toggle-btn:focus {
+  outline: 2px solid #6c63ff;
+  outline-offset: 2px;
 }
 
 .grid-scroll-container {
-  padding-top: var(--filter-container-height);
+  padding-top: 10px;
   height: calc(100vh - var(--filter-container-height) - var(--header-height));
   overflow-y: auto;
   box-sizing: border-box;
 }
 
 .nexomon-grid {
-  margin: -100px 45px 45px; /* Adjust top margin */
+  margin: 0 60px 45px 45px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 5px; /* Consistent with LocationDetails */
+  gap: 5px;
 }
 
 .nexomon-card {
-  width: calc(16.666% - 8px); /* Match LocationDetails sizing */
+  width: calc(16.666% - 8px);
   margin: 4px;
   padding: 10px 6px 15px;
   border: 1px solid #ccc;
@@ -481,6 +560,15 @@ export default {
 
 .dark-mode .nexomon-card:hover {
   background-color: rgba(255, 255, 255, 0.05);
+}
+
+.filters-container .collapse-arrow {
+  display: none;
+}
+
+.dark-mode .filters-container .collapse-arrow svg {
+  fill: #969191;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.55));
 }
 
 /* Media Queries for Responsiveness */
@@ -599,10 +687,11 @@ export default {
 }
 
 @media (max-width: 480px) {
+
   .nexomon-grid {
     gap: 0;
     justify-content: space-evenly;
-    margin: -150px 20px 20px;
+    margin: -90px 20px 20px;
   }
 
   .nexomon-card {
@@ -628,9 +717,83 @@ export default {
     margin-bottom: 4px;
   }
 
+  .nexomon-list-wrapper {
+  --filter-container-height: 145px; /* Adjust based on actual filter height */
+  --total-height: calc(var(--header-height) + var(--filter-container-height));
+  }
+
+  .nexomon-list-wrapper.filters-collapsed {
+  --filter-container-height: 75px;
+}
+
   .grid-scroll-container {
-     padding-top: var(--filter-container-height); /* Ensure padding is applied */
-     height: calc(100vh - 350px); /* Ensure height is calculated */
+     padding-top: var(--total-height); /* Ensure padding is applied */
+     height: calc(100vh - var(--total-height)); /* Ensure height is calculated */
+  }
+  .filters-container .collapse-arrow {
+    display: block;
+    position: absolute;
+    right: 12px;
+    bottom: 8px;
+    width: 32px;
+    height: 32px;
+    background: none;
+    border: none;
+    z-index: 20;
+    cursor: pointer;
+    padding: 0;
+    transition: transform 0.25s;
+  }
+
+    .filters-container {
+    transition: max-height 0.35s cubic-bezier(.4,0,.2,1), opacity 0.25s, padding 0.25s;
+    will-change: max-height, opacity, padding;
+  }
+
+  .filters-container.collapsed {
+    max-height: 0 !important;
+    opacity: 0;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    overflow: hidden !important;
+    pointer-events: none;
+  }
+  .filters-container .collapse-arrow svg {
+    transition: transform 0.35s cubic-bezier(.4,0,.2,1);
+  }
+  .filters-container.collapsed {
+    max-height: 38px !important; /* Show just enough for the arrow */
+    min-height: 38px !important;
+    opacity: 1;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    overflow: hidden !important;
+    pointer-events: auto;
+    background: #23242a; /* Ensure background is visible */
+  }
+  .filters-container.collapsed > *:not(.collapse-arrow) {
+    display: none !important;
+  }
+  .filters-container .collapse-arrow {
+    display: block;
+    position: absolute;
+    right: 12px;
+    bottom: 4px;
+    width: 32px;
+    height: 32px;
+    background: none;
+    border: none;
+    z-index: 20;
+    cursor: pointer;
+    padding: 0;
+    transition: transform 0.25s;
+  }
+  .filters-container .collapse-arrow svg {
+    transition: transform 0.35s cubic-bezier(.4,0,.2,1);
   }
 }
 

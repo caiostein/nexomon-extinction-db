@@ -52,6 +52,9 @@
 .caught-toggle-btn:not(.active) .switch-slider:after {
   content: '';
 }
+.caught-toggle-btn:focus {
+  outline: none !important;
+}
 
 .caught-checkbox {
   position: absolute;

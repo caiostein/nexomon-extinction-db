@@ -235,7 +235,7 @@ html, body {
   color: #f0f0f0;
 }
 
-@media (max-width: 991.98px) {
+@media (max-width: 992px) {
   .toggle-button {
     margin: 10px 0;
     width: 150px;
