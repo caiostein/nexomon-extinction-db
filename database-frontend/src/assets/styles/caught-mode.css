@@ -212,3 +212,24 @@
   background: #2e7d32;
   border-color: #39d63e;
 }
+
+.caught-checkmark-overlay {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 10;
+  pointer-events: none;
+}
+.caught-checkmark {
+  display: inline-block;
+  color: #39d63e;
+  font-size: 2.2em;
+  text-shadow: 0 0 12px #6be39c44, 0 1px 3px rgba(0,0,0,0.08);
+  background: #fff;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+}

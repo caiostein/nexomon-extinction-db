@@ -2,6 +2,9 @@
 <template>
   <div class="nexomon-details-wrapper"> <!-- Add this wrapping div -->
     <div class="nexomon-maininfo-container">
+      <div v-if="isCaught(nexomon.Number)" class="caught-checkmark-overlay">
+        <span class="caught-checkmark">✔</span>
+      </div>
       <div class="main-infos">
         <!-- Consistent Nexomon name/number display -->
         <div class="nexomon-info">
@@ -837,6 +840,27 @@ export default {
 .details-back-btn {
   margin-top: 18px;
   align-self: flex-end;
+}
+
+/* Caught checkmark overlay */
+.caught-checkmark-overlay {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 128, 0, 0.8);
+  border-radius: 50%;
+  z-index: 3;
+}
+
+.caught-checkmark {
+  color: white;
+  font-size: 30px;
+  line-height: 1;
 }
 
 </style>
