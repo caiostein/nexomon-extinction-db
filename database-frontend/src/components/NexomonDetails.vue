@@ -1,12 +1,15 @@
 <!-- src/components/NexomonDetails.vue -->
 <template>
-  <div class="nexomon-details-wrapper"> <!-- Add this wrapping div -->
+  <div class="nexomon-details-wrapper">
     <div 
       class="nexomon-maininfo-container"
       :class="{ 'caught-glow': isCaught(nexomon.Number) }"
+      @touchstart="handleTouchStart"
+      @touchend="handleTouchEnd"
     >
-      <div v-if="isCaught(nexomon.Number)" class="caught-checkmark-overlay">
-        <span class="caught-checkmark">✔</span>
+      <div v-if="isCaught(nexomon.Number)" class="caught-checkbox details-caught-checkbox" style="position: absolute; top: 10px; right: 10px; z-index: 3;">
+        <input type="checkbox" checked readonly tabindex="-1" />
+        <span class="checkmark checked"></span>
       </div>
       <div class="main-infos">
         <!-- Consistent Nexomon name/number display -->
@@ -425,7 +428,7 @@ export default {
   },
 
   mounted() {
-    this.preloadImages(); // Preload battle and food images on page load
+    this.preloadImages();
     window.addEventListener('keydown', this.handleArrowNavigation);
     window.addEventListener('keydown', this.handleSpacebarCaught);
   },
@@ -698,6 +701,23 @@ export default {
         e.preventDefault();
       }
     },
+    handleTouchStart(e) {
+      if (e.touches && e.touches.length === 1) {
+        this._touchStartX = e.touches[0].clientX;
+      }
+    },
+    handleTouchEnd(e) {
+      if (typeof this._touchStartX !== 'number') return;
+      const endX = (e.changedTouches && e.changedTouches[0].clientX) || 0;
+      const deltaX = endX - this._touchStartX;
+      const threshold = 50; // Minimum px to consider a swipe
+      if (deltaX > threshold && this.hasPrevious) {
+        this.goToPreviousNexomon();
+      } else if (deltaX < -threshold && this.hasNext) {
+        this.goToNextNexomon();
+      }
+      this._touchStartX = null;
+    },
   }
 };
 </script>
@@ -852,28 +872,15 @@ export default {
 }
 
 /* Caught checkmark overlay */
-.caught-checkmark-overlay {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 128, 0, 0.8);
-  border-radius: 50%;
-  z-index: 3;
+.details-caught-checkbox {
+  /* Match NexomonList position and size, but keep overlay position */
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  min-height: 28px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
 }
-
-.caught-checkmark {
-  color: white;
-  font-size: 30px;
-  line-height: 1;
-}
-
 </style>
-
 <style scoped src="../assets/styles/basic-info.css"></style>
 <style scoped src="../assets/styles/location-info.css"></style>
 <style scoped src="../assets/styles/evolution-info.css"></style>
@@ -881,3 +888,4 @@ export default {
 <style scoped src="../assets/styles/button-styles.css"></style>
 <style scoped src="../assets/styles/section-common.css"></style>
 <style scoped src="../assets/styles/skill-tree.css"></style>
+<style scoped src="../assets/styles/caught-mode.css"></style>
