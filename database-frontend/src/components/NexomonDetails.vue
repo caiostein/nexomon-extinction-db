@@ -285,9 +285,15 @@ import descriptionData from '../../../python-scripts/assets/nexomon_description_
 import locationExceptions from '../assets/location_exceptions.json';
 import typeChart from '../assets/type_chart.json'
 import skillDatabase from '../assets/skill_database.json';
+import { useCaughtMode } from './useCaughtMode.js';
 
 export default {
-  props: ['number'],  data() {
+  props: ['number'],
+  setup() {
+    const { caughtMode, toggleCaught, isCaught } = useCaughtMode();
+    return { caughtMode, toggleCaught, isCaught };
+  },
+  data() {
       return {
         database: data,
         description_database: descriptionData,
@@ -415,9 +421,11 @@ export default {
   mounted() {
     this.preloadImages(); // Preload battle and food images on page load
     window.addEventListener('keydown', this.handleArrowNavigation);
+    window.addEventListener('keydown', this.handleSpacebarCaught);
   },
   beforeUnmount() {
     window.removeEventListener('keydown', this.handleArrowNavigation);
+    window.removeEventListener('keydown', this.handleSpacebarCaught);
   },
   methods: {
     // Quest location related methods
@@ -675,6 +683,13 @@ export default {
         this.goToPreviousNexomon();
       } else if (e.key === 'ArrowRight') {
         this.goToNextNexomon();
+      }
+    },
+
+    handleSpacebarCaught(e) {
+      if (e.code === 'Space') {
+          this.toggleCaught(this.nexomon.Number);
+        e.preventDefault();
       }
     },
   }
