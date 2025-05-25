@@ -122,6 +122,13 @@
   transition: box-shadow 0.2s, border-color 0.2s;
 }
 
+.nexomon-maininfo-container.caught-glow {
+  box-shadow: 0 0 12px 2px #6be39c44;
+  border-color: #6be39c !important;
+  z-index: 1;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
 .caught-row {
   display: flex;
   flex-direction: row;

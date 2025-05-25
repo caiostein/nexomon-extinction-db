@@ -1,22 +1,25 @@
 <!-- src/components/NexomonDetails.vue -->
 <template>
   <div class="nexomon-details-wrapper"> <!-- Add this wrapping div -->
-    <div class="nexomon-maininfo-container">
+    <div 
+      class="nexomon-maininfo-container"
+      :class="{ 'caught-glow': isCaught(nexomon.Number) }"
+    >
       <div v-if="isCaught(nexomon.Number)" class="caught-checkmark-overlay">
         <span class="caught-checkmark">✔</span>
       </div>
       <div class="main-infos">
         <!-- Consistent Nexomon name/number display -->
         <div class="nexomon-info">
-          <div class="nexomon-number">{{ nexomon.Number }}</div>
-          <div class="nexomon-name">{{ nexomon.Name }}</div>
+          <div class="nexomon-number" @click="toggleCaught(nexomon.Number)">{{ nexomon.Number }}</div>
+          <div class="nexomon-name" @click="toggleCaught(nexomon.Number)">{{ nexomon.Name }}</div>
         </div>
         <div class="sprite-container">
-          <img class="nexomon-sprite" :src="getImage(nexomon.Name, showCosmic)" alt="Nexomon Sprite" />
+          <img class="nexomon-sprite" :src="getImage(nexomon.Name, showCosmic)" alt="Nexomon Sprite" @click="toggleCaught(nexomon.Number)" />
           <div class="element-info">
             <h3 style="margin-top: 7px;">Element:</h3>
             <img :src="getImage(nexomon.Element + '_Type_Icon')" alt="Element Image" class="element-label" />            <span>{{ nexomon.Element }}</span>
-            <button v-if="nexomon.Sprites && nexomon.Sprites.Cosmic" class="nexo-button nexo-button-toggle" @click="toggleSprite">
+            <button v-if="nexomon.Sprites && nexomon.Sprites.Cosmic" class="nexo-button nexo-button-toggle" @click.stop="toggleSprite">
               {{ showCosmic ? 'Show Regular' : 'Show Cosmic' }}
             </button>
           </div>
@@ -826,11 +829,17 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: none;
+  border: 2px solid transparent;
   position: relative;
   z-index: 2;
-  transition: background 0.3s, box-shadow 0.3s;
+  transition: background 0.3s, box-shadow 0.3s, border-color 0.2s;
   margin-top: 20px;
+}
+.nexomon-maininfo-container.caught-glow {
+  box-shadow: 0 0 12px 2px #6be39c44 !important;
+  border-color: #6be39c !important;
+  z-index: 2;
+  transition: box-shadow 0.2s, border-color 0.2s;
 }
 .dark-mode .nexomon-maininfo-container {
   background: #23272b;
